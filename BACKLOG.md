@@ -57,3 +57,12 @@ location: "acm/BACKLOG.md"
 | B4 | Review scoring — diminishing returns | 2026-01-29 | Updated all 6 review prompts + KB entry. Severity: Critical/High/Low. Stop at zero C+H. Min 2, max 10. |
 | B3 | Phase boundary protocol | 2026-01-29 | Added to ACM-DEVELOP-SPEC.md v1.2.0. Agent-driven /clear + re-read + confirm. |
 | B1 | Harden start-develop prompt | 2026-01-29 | start-develop-prompt.md v2.0.0. Explicit STOP language, registry query, phase boundary protocol. |
+| B2 | Extract capability registry | 2026-01-29 | 21 capabilities migrated from agent-harness. Pushed to github.com/jessepike/capabilities-registry. capability.yaml as source of truth. |
+| B5 | Prompt output — resolved paths | 2026-01-29 | All prompts emit ready-to-copy commands with resolved paths. |
+| B6 | Ralph Loop command reliability | 2026-01-29 | Usage sections added, run scripts created. |
+| B7 | Full prompt audit | 2026-01-29 | Fixed stale registry paths and bare spec references. |
+| B8 | Commands → skills terminology | 2026-01-29 | Updated across specs, brief, experiments. |
+| B9 | REGISTRY-SPEC.md | 2026-01-29 | Part of B2. 4 types, tags, capability.yaml schema, lifecycle, data flow. |
+| B10 | Wire acm-env → capabilities-registry | 2026-01-29 | start-develop-prompt.md points to INVENTORY.md for capability assessment. |
+| B11 | Inventory generation script | 2026-01-29 | Part of B2. capability.yaml → inventory.json → INVENTORY.md. |
+| B16 | Archive agent-harness | 2026-01-29 | Registry extraction complete, agent-harness disconnected from workspace. |
