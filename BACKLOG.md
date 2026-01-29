@@ -30,7 +30,7 @@ location: "acm/BACKLOG.md"
 | B5 | Prompt output — emit ready-to-copy commands with resolved paths | Prompt improvement | ACM/prompts | Done |
 | B6 | Ralph Loop command reliability — audit for path issues | Prompt fix | ACM/prompts | Done |
 | B7 | Full prompt audit — all develop-stage prompts for stale paths and assumptions | Maintenance | ACM/prompts | Done |
-| B8 | Update "commands" terminology → "skills" across all specs (per Claude Code 2.1.3) | Spec update | ACM | Pending |
+| B8 | Update "commands" terminology → "skills" across all specs (per Claude Code 2.1.3) | Spec update | ACM | Done |
 | B15 | Deliver stage spec | New spec | ACM | Pending |
 | B18 | Design memory layer spec (MEMORY-SPEC.md) | New spec | memory | Pending |
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | Pending |

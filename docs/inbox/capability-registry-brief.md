@@ -43,7 +43,7 @@ Agents need to know what capabilities are available when planning and executing 
 │   │   └── ...
 │   ├── agents/                   # Sub-agent definitions
 │   │   └── ...
-│   └── plugins/                  # Composite packages (skills + hooks + commands)
+│   └── plugins/                  # Composite packages (skills + hooks)
 │       ├── acm-env/
 │       └── ...
 ├── staging/                      # Capabilities not yet promoted
@@ -63,7 +63,7 @@ Agents need to know what capabilities are available when planning and executing 
    - **Skills** — SKILL.md with instructions and supporting files (primary unit per Claude Code 2.1.3)
    - **Tools** — MCP servers or deterministic scripts
    - **Agents** — Sub-agent definitions with specialized domain expertise
-   - **Plugins** — Composite packages that bundle skills, hooks, and commands (e.g., acm-env)
+   - **Plugins** — Composite packages that bundle skills and hooks (e.g., acm-env)
 
 3. **Tags for queryability.** Agents search by need ("Do I have Supabase capabilities?"), not by folder. Tags in `capability.yaml`.
 

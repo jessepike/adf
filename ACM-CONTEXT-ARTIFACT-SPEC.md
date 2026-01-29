@@ -251,7 +251,7 @@ Artifact validation and context pruning are handled by the **acm-env** plugin (`
 
 acm-env absorbs the previously deferred `acm-validate` and `acm-prune` concepts into a single environment management plugin:
 
-| Capability | acm-env Command | Description |
+| Capability | acm-env Skill | Description |
 |------------|-----------------|-------------|
 | **Validation** | `/acm-env:audit` | Check artifacts against specs — frontmatter, structure, lifecycle compliance, drift detection |
 | **Pruning** | `/acm-env:audit` + `/acm-env:reset` | Identify stale context, clean CLAUDE.md dynamic sections, archive ephemeral artifacts |

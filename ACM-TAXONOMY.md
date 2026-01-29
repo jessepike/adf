@@ -292,7 +292,7 @@ Decisions made during ACM development that should not be revisited without expli
 | Wrapper/delegation over internalization of Anthropic plugins | Leverage upstream improvements; YAGNI; ACM adds spec/orchestration layer | 2026-01-29 |
 | Graceful degradation with loud warnings (never silent failure) | User must always know what's missing or broken | 2026-01-29 |
 | Absorb deferred acm-validate and acm-prune into acm-env | Single plugin with multiple skills; modular growth | 2026-01-29 |
-| Smart mode detection over separate commands | One /acm-env:setup handles first-time, new project, existing project | 2026-01-29 |
+| Smart mode detection over separate skills | One /acm-env:setup handles first-time, new project, existing project | 2026-01-29 |
 | Codified baseline spec (machine-parseable YAML) over prose guidelines | Enables automated drift detection and comparison | 2026-01-29 |
 | Rename consideration: "Agentic Development Environment" | Under consideration; deferred to validation after acm-env proves concept | 2026-01-29 |
 

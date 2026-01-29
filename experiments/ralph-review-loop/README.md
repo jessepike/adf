@@ -48,10 +48,10 @@ Place in this directory: `test-brief.md`
 
 ---
 
-## Command Reference
+## Skill Reference
 
-| Command | Purpose |
-|---------|---------|
+| Skill | Purpose |
+|-------|---------|
 | `/ralph-loop:ralph-loop "<prompt>"` | Start a loop |
 | `/ralph-loop:cancel-ralph` | Cancel active loop |
 | `/ralph-loop:help` | Show help |

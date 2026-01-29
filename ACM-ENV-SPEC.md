@@ -12,7 +12,7 @@ location: "acm/ACM-ENV-SPEC.md"
 
 ## Summary
 
-acm-env is a user-level Claude Code plugin that manages the development environment across user and project layers. It codifies baselines, detects drift, and provides setup/audit/maintenance commands. It wraps and delegates to Anthropic plugins for execution, with built-in fallbacks.
+acm-env is a user-level Claude Code plugin that manages the development environment across user and project layers. It codifies baselines, detects drift, and provides setup/audit/maintenance skills. It wraps and delegates to Anthropic plugins for execution, with built-in fallbacks.
 
 ## Taxonomy
 
@@ -41,10 +41,10 @@ acm-env defines expected state at two levels:
 | `rules/` | Optional. Project-specific constraints only. |
 | MCP servers | Project-specific only. |
 
-## Commands
+## Skills
 
-| Command | Purpose |
-|---------|---------|
+| Skill | Purpose |
+|-------|---------|
 | `/acm-env:status` | Quick health dashboard — PASS/WARN/FAIL per check |
 | `/acm-env:setup` | Smart setup — detects mode (first-time, new project, existing project) |
 | `/acm-env:audit` | Deep environment audit with plugin delegation |

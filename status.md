@@ -61,6 +61,12 @@ updated: "2026-01-29"
 - [x] KB/REVIEW-CYCLE-GUIDANCE.md updated to v2.0.0
 - [x] Capability registry extraction brief created (`docs/inbox/capabilities-registry-brief.md`)
 
+### Prompt & Terminology Cleanup (2026-01-29)
+- [x] B5: All prompts emit ready-to-copy commands with resolved paths — ralph-review uses `~/code/_shared/acm/`, external review prompts have `sed | pbcopy` assembly commands
+- [x] B6: Ralph Loop command audit — added Usage sections to design-ralph and develop-ralph prompts, created `run-discover-review.sh` and `run-develop-review.sh` scripts, fixed experiment placeholder paths
+- [x] B7: Full prompt audit — fixed stale registry path in develop-artifact-correction-prompt, resolved bare spec reference in start-design-prompt
+- [x] B8: Updated "commands" → "skills" terminology across ACM-ENV-SPEC, ACM-CONTEXT-ARTIFACT-SPEC, ACM-TAXONOMY, capability-registry brief, experiment docs
+
 ### Infrastructure
 - [x] Stubs folder for init script
 - [x] Init script updated
@@ -73,13 +79,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 ### In Progress (separate agent)
 - [ ] B2: Extract capability registry → `~/code/_shared/capabilities-registry/` (brief at `docs/inbox/capabilities-registry-brief.md`)
 
-### Next Up (medium priority — start here)
-- [ ] B5: Prompt output — emit ready-to-copy commands with resolved paths
-- [ ] B6: Ralph Loop command reliability — audit for path issues
-- [ ] B7: Full prompt audit — all develop-stage prompts for stale paths and assumptions
-- [ ] B8: Update "commands" → "skills" terminology across all specs (per Claude Code 2.1.3)
-
-### After That
+### Next Up
 - [ ] B10: Wire acm-env → capabilities-registry (blocked by B2)
 - [ ] B15: Deliver stage spec
 - [ ] B18-B19: Memory layer spec and scaffold
@@ -100,18 +100,18 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-28 | Design and Develop stage specs complete. Supporting specs updated. |
 | 2026-01-29 | Brainstormed and implemented acm-env plugin. Created ACM-ENV-SPEC.md. Built full plugin scaffold with 4 commands, SessionStart hook, env-auditor skill, baseline.yaml, and dependency checker. Updated ACM-TAXONOMY.md (environment terms + 8 design decisions), ACM-CONTEXT-ARTIFACT-SPEC.md (replaced deferred acm-validate/acm-prune with acm-env reference), ACM-STAGES-SPEC.md (added acm-env as meta layer manager). |
 | 2026-01-29 | Develop stage debrief session. Defined environment layer architecture (six primitives: orchestration, capabilities, knowledge, memory, maintenance, validation). Created ACM-ENVIRONMENT-SPEC.md, BACKLOG.md. Completed B1 (hardened start-develop prompt v2.0.0), B3 (phase boundary protocol in develop spec v1.2.0), B4 (review scoring across all 6 prompts — Critical/High/Low, min 2 max 10 cycles). Created capabilities-registry extraction brief for separate agent. Researched Claude Code 2.1.3 (commands folded into skills). Analyzed agent-harness sync system. Key decisions: registry as peer repo, memory as own repo, knowledge stays in ACM, workers are skills not separate repo, vendor is metadata not folder structure. |
+| 2026-01-29 | Completed B5-B8 (prompt and terminology cleanup). All prompts now emit ready-to-copy commands with resolved paths. Ralph Loop usage sections added to all 3 stage prompts with matching run scripts. Stale registry paths and bare spec references fixed. "Commands" → "skills" terminology updated across ACM-ENV-SPEC, ACM-CONTEXT-ARTIFACT-SPEC, ACM-TAXONOMY, capability-registry brief, and experiment docs. |
 
 ---
 
 ## Notes for Next Session
 
-B1/B3/B4/B17 are done. B2 (capability registry extraction) is being worked by a separate agent using the brief at `docs/inbox/capabilities-registry-brief.md`.
+B1/B3/B4/B5-B8/B17 are done. B2 (capability registry extraction) is being worked by a separate agent.
 
-**Start with B5-B8** (medium priority prompt and terminology updates):
-1. B5: Review all prompts — ensure they emit ready-to-copy commands with resolved paths (no `[PLACEHOLDER]` that forces manual editing)
-2. B6: Audit Ralph Loop command invocations across all prompts for path reliability
-3. B7: Full audit of all develop-stage prompts for stale paths, assumptions, outdated references
-4. B8: Update "commands" → "skills" terminology across all ACM specs and prompts (Claude Code 2.1.3 merged commands into skills)
+**Next priorities:**
+- B10: Wire acm-env → capabilities-registry (blocked by B2)
+- B15: Deliver stage spec
+- B18-B19: Memory layer spec and scaffold
 
 Reference files:
 - `BACKLOG.md` — full backlog with status
