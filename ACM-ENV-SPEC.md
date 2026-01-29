@@ -94,8 +94,12 @@ acm-env (wrapper/orchestrator)
 
 acm-env is the **management layer for the meta layer itself**. It ensures skills, tools, rules, and context artifacts are properly configured, available, current, and not stale.
 
+### Capabilities Registry
+
+The source of truth for available capabilities is the **capabilities registry** at `~/code/_shared/capabilities-registry/`. acm-env references the registry's `INVENTORY.md` to validate that expected capabilities are present and current. See `REGISTRY-SPEC.md` in that repo for the full specification.
+
 ### What acm-env manages in v1
-- Capabilities (installed, configured, not stale)
+- Capabilities (installed, configured, not stale — validated against capabilities-registry)
 - Configuration (matches baseline)
 - Context (structure/quality per ACM specs)
 - Artifact structure validation (frontmatter, lifecycle, progressive disclosure)
@@ -113,3 +117,4 @@ acm-env is the **management layer for the meta layer itself**. It ensures skills
 - ACM-STAGES-SPEC.md
 - ACM-CONTEXT-ARTIFACT-SPEC.md
 - ACM-TAXONOMY.md
+- `~/code/_shared/capabilities-registry/REGISTRY-SPEC.md`

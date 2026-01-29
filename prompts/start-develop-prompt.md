@@ -132,7 +132,7 @@ Only after human confirms understanding:
 
 1. Update status.md phase to: capability-assessment
 2. Draft manifest.md (dependencies)
-3. Draft capabilities.md (skills/tools/agents) — **query the capability registry** at `~/code/_shared/capabilities-registry/INVENTORY.md` (if it exists) to identify available capabilities that match project needs. If the registry is not yet available, identify capabilities manually. Document gaps where needed capabilities are not in the registry.
+3. Draft capabilities.md (skills/tools/agents) — **query the capability registry** at `~/code/_shared/capabilities-registry/INVENTORY.md` to identify available capabilities that match project needs. Document gaps where needed capabilities are not in the registry.
 4. Present capability assessment for approval
 5. Then proceed to Planning phase (plan.md + tasks.md)
 

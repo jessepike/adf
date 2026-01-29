@@ -76,11 +76,12 @@ updated: "2026-01-29"
 
 See `BACKLOG.md` for full backlog. Immediate priorities:
 
-### In Progress (separate agent)
-- [ ] B2: Extract capability registry → `~/code/_shared/capabilities-registry/` (brief at `docs/inbox/capabilities-registry-brief.md`)
+### Recently Completed
+- [x] B2: Capabilities registry extracted → `~/code/_shared/capabilities-registry/` (21 capabilities)
+- [x] B10: acm-env and develop spec wired to capabilities-registry INVENTORY.md
 
 ### Next Up
-- [ ] B10: Wire acm-env → capabilities-registry (blocked by B2)
+- [ ] B16: Archive agent-harness (B2 complete)
 - [ ] B15: Deliver stage spec
 - [ ] B18-B19: Memory layer spec and scaffold
 
@@ -101,17 +102,23 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-29 | Brainstormed and implemented acm-env plugin. Created ACM-ENV-SPEC.md. Built full plugin scaffold with 4 commands, SessionStart hook, env-auditor skill, baseline.yaml, and dependency checker. Updated ACM-TAXONOMY.md (environment terms + 8 design decisions), ACM-CONTEXT-ARTIFACT-SPEC.md (replaced deferred acm-validate/acm-prune with acm-env reference), ACM-STAGES-SPEC.md (added acm-env as meta layer manager). |
 | 2026-01-29 | Develop stage debrief session. Defined environment layer architecture (six primitives: orchestration, capabilities, knowledge, memory, maintenance, validation). Created ACM-ENVIRONMENT-SPEC.md, BACKLOG.md. Completed B1 (hardened start-develop prompt v2.0.0), B3 (phase boundary protocol in develop spec v1.2.0), B4 (review scoring across all 6 prompts — Critical/High/Low, min 2 max 10 cycles). Created capabilities-registry extraction brief for separate agent. Researched Claude Code 2.1.3 (commands folded into skills). Analyzed agent-harness sync system. Key decisions: registry as peer repo, memory as own repo, knowledge stays in ACM, workers are skills not separate repo, vendor is metadata not folder structure. |
 | 2026-01-29 | Completed B5-B8 (prompt and terminology cleanup). All prompts now emit ready-to-copy commands with resolved paths. Ralph Loop usage sections added to all 3 stage prompts with matching run scripts. Stale registry paths and bare spec references fixed. "Commands" → "skills" terminology updated across ACM-ENV-SPEC, ACM-CONTEXT-ARTIFACT-SPEC, ACM-TAXONOMY, capability-registry brief, and experiment docs. |
+| 2026-01-29 | Built acm-env plugin (all 8 phases) and capabilities registry. acm-env: plugin scaffold, 4 commands (status/setup/audit/reset), SessionStart hook, env-auditor skill, check-deps.sh with git freshness. Capabilities registry: migrated 20 capabilities from agent-harness (16 skills + 4 tools) + acm-env plugin = 21 total. capability.yaml as source of truth, generate-inventory.sh pipeline, REGISTRY-SPEC.md. Both repos pushed to GitHub (jessepike/acm, jessepike/capabilities-registry). Renamed capability-registry → capabilities-registry everywhere. Key decisions: plugins as 4th capability type, registry consumed by all stages, capability.yaml → inventory.json → INVENTORY.md data flow. Agent-harness ready to archive (B16). |
 
 ---
 
 ## Notes for Next Session
 
-B1/B3/B4/B5-B8/B17 are done. B2 (capability registry extraction) is being worked by a separate agent.
+B2 (capabilities registry extraction) is DONE. Agent-harness ready to archive (B16).
 
 **Next priorities:**
-- B10: Wire acm-env → capabilities-registry (blocked by B2)
+- B16: Archive agent-harness
 - B15: Deliver stage spec
 - B18-B19: Memory layer spec and scaffold
+
+**Repos:**
+- ACM: https://github.com/jessepike/acm.git → `~/code/_shared/acm/`
+- Capabilities Registry: https://github.com/jessepike/capabilities-registry.git → `~/code/_shared/capabilities-registry/`
+- acm-env plugin: `~/.claude/plugins/acm-env/`
 
 Reference files:
 - `BACKLOG.md` — full backlog with status

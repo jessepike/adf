@@ -15,12 +15,12 @@ location: "acm/BACKLOG.md"
 | ID | Item | Type | Component | Status |
 |----|------|------|-----------|--------|
 | B1 | Harden start-develop prompt — enforce STOP gate after planning phases | Prompt fix | ACM/prompts | Done |
-| B2 | Extract capability registry from agent-harness → `~/code/_shared/capabilities-registry/` | Mini-project | capabilities-registry | Scoping complete |
+| B2 | Extract capability registry from agent-harness → `~/code/_shared/capabilities-registry/` | Mini-project | capabilities-registry | Done ✅ |
 | B3 | Phase boundary protocol — agent-driven `/clear` + re-read artifacts + confirm transition | Spec update | ACM-DEVELOP-SPEC | Done |
 | B4 | Review scoring — diminishing returns detection (Critical/High/Low, min 2, max 10 cycles) | Spec + prompt | All stages | Done |
-| B9 | Create REGISTRY-SPEC.md (types, tags taxonomy, .meta.yaml schema, lifecycle) | Spec | capabilities-registry | Part of B2 |
-| B10 | Wire acm-env → capabilities-registry (develop spec Phase 2 points to INVENTORY.md) | Spec + prompt | ACM + registry | Blocked by B2 |
-| B11 | Inventory generation script (inventory.json → INVENTORY.md, single source of truth) | Script | capabilities-registry | Part of B2 |
+| B9 | Create REGISTRY-SPEC.md (types, tags taxonomy, capability.yaml schema, lifecycle) | Spec | capabilities-registry | Done ✅ (part of B2) |
+| B10 | Wire acm-env → capabilities-registry (develop spec Phase 2 points to INVENTORY.md) | Spec + prompt | ACM + registry | Done ✅ |
+| B11 | Inventory generation script (capability.yaml → inventory.json → INVENTORY.md) | Script | capabilities-registry | Done ✅ (part of B2) |
 | B17 | Document environment layer architecture (six primitives, two layers) | Spec | ACM | Done (ACM-ENVIRONMENT-SPEC.md) |
 
 ## Active — Medium Priority
@@ -42,7 +42,7 @@ location: "acm/BACKLOG.md"
 | B12 | Auto-update from upstream sources (maintenance automation for registry) | Enhancement | capabilities-registry | Future |
 | B13 | Add 2-3 community sources to registry sync | Enhancement | capabilities-registry | Future |
 | B14 | Automated multi-model review orchestration | Architecture | ACM | Future |
-| B16 | Archive agent-harness (after registry extraction complete) | Cleanup | agent-harness | After B2 |
+| B16 | Archive agent-harness (after registry extraction complete) | Cleanup | agent-harness | Done |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture review | ACM/kb | Future |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | Future |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | Future |

@@ -179,7 +179,7 @@ What the agent team needs to execute. **Required sections:**
 
 Before documenting capabilities, query available resources:
 
-1. **Check registry inventory** — What skills/tools are available? (INVENTORY.md or equivalent)
+1. **Check registry inventory** — Read `~/code/_shared/capabilities-registry/INVENTORY.md` for available skills/tools
 2. **Match to requirements** — Which available capabilities apply to this project?
 3. **Identify gaps** — What's needed but not in registry? (manual specification required)
 4. **Document source** — For each capability, note: registry path OR manual specification

@@ -108,12 +108,12 @@ This validates that the agent has what it needs for each task.
 
 ---
 
-## Registry Reference (if available)
+## Registry Reference
 
-If you have access to a capabilities registry, query it first:
-- Check INVENTORY.md or equivalent
+Query the capabilities registry at `~/code/_shared/capabilities-registry/`:
+- Read `INVENTORY.md` for available skills, tools, and plugins
 - Match available capabilities to project requirements
-- Note registry paths for sourced capabilities
+- Note registry paths for sourced capabilities (e.g., `capabilities/skills/frontend-design`)
 - Flag gaps that need manual specification
 
 ---
