@@ -42,7 +42,7 @@ ACM (Agentic Context Management) is the framework that defines how agentic proje
 | Repo | Location | Purpose |
 |------|----------|---------|
 | capabilities-registry | `~/code/_shared/capabilities-registry/` | Capability catalog (skills, tools, agents, plugins) |
-| acm-env plugin | `~/.claude/plugins/acm-env/` | Environment management plugin |
+| acm-env plugin | `~/.claude/plugins/acm-plugins/plugins/acm-env/` | Environment management plugin |
 
 ## Constraints
 

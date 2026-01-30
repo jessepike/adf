@@ -103,6 +103,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-29 | Develop stage debrief session. Defined environment layer architecture (six primitives: orchestration, capabilities, knowledge, memory, maintenance, validation). Created ACM-ENVIRONMENT-SPEC.md, BACKLOG.md. Completed B1 (hardened start-develop prompt v2.0.0), B3 (phase boundary protocol in develop spec v1.2.0), B4 (review scoring across all 6 prompts — Critical/High/Low, min 2 max 10 cycles). Created capabilities-registry extraction brief for separate agent. Researched Claude Code 2.1.3 (commands folded into skills). Analyzed agent-harness sync system. Key decisions: registry as peer repo, memory as own repo, knowledge stays in ACM, workers are skills not separate repo, vendor is metadata not folder structure. |
 | 2026-01-29 | Completed B5-B8 (prompt and terminology cleanup). All prompts now emit ready-to-copy commands with resolved paths. Ralph Loop usage sections added to all 3 stage prompts with matching run scripts. Stale registry paths and bare spec references fixed. "Commands" → "skills" terminology updated across ACM-ENV-SPEC, ACM-CONTEXT-ARTIFACT-SPEC, ACM-TAXONOMY, capability-registry brief, and experiment docs. |
 | 2026-01-29 | Built acm-env plugin (all 8 phases) and capabilities registry. acm-env: plugin scaffold, 4 commands (status/setup/audit/reset), SessionStart hook, env-auditor skill, check-deps.sh with git freshness. Capabilities registry: migrated 20 capabilities from agent-harness (16 skills + 4 tools) + acm-env plugin = 21 total. capability.yaml as source of truth, generate-inventory.sh pipeline, REGISTRY-SPEC.md. Both repos pushed to GitHub (jessepike/acm, jessepike/capabilities-registry). Renamed capability-registry → capabilities-registry everywhere. Key decisions: plugins as 4th capability type, registry consumed by all stages, capability.yaml → inventory.json → INVENTORY.md data flow. Agent-harness ready to archive (B16). |
+| 2026-01-30 | Fixed and installed acm-env plugin via local marketplace. Plugin had 3 issues: plugin.json had invalid fields (author as string, commands array), hooks.json used array instead of record, plugin was never registered through marketplace system. Created `acm-plugins` local marketplace at `~/.claude/plugins/acm-plugins/`, moved plugin source inside, registered and installed. Fixed check-deps.sh to query installed_plugins.json instead of filesystem paths. Fixed hardcoded paths in all 4 commands. Rewrote audit.md with explicit delegation to claude-md-management (CLAUDE.md quality scoring) and claude-code-setup (automation recommendations) — "You MUST delegate" pattern replacing vague "if available, delegate". Added capabilities registry validation to audit (cross-references INVENTORY.md against installed plugins). Assessed spec vs intent alignment — spec is sound, implementation had gaps in delegation and registry integration. Created KB articles: CUSTOM-PLUGIN-INSTALLATION.md, PLUGIN-DEVELOPMENT-PATTERNS.md. |
 
 ---
 
@@ -110,17 +111,24 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 
 B2 (capabilities registry extraction) is DONE. Agent-harness ready to archive (B16).
 
+acm-env plugin is installed and functional at `~/.claude/plugins/acm-plugins/plugins/acm-env/`. Audit command now delegates to dependency plugins and validates against capabilities registry.
+
 **Next priorities:**
 - B16: Archive agent-harness
 - B15: Deliver stage spec
 - B18-B19: Memory layer spec and scaffold
+- Test `/acm-env:audit` with delegation — verify claude-md-management and claude-code-setup are actually invoked (not fallbacks)
+- Clean inbox: `docs/inbox/capability-registry-brief.md` is stale (B2 done)
+- Trim `~/.claude/CLAUDE.md` to under 55 lines
 
 **Repos:**
 - ACM: https://github.com/jessepike/acm.git → `~/code/_shared/acm/`
 - Capabilities Registry: https://github.com/jessepike/capabilities-registry.git → `~/code/_shared/capabilities-registry/`
-- acm-env plugin: `~/.claude/plugins/acm-env/`
+- acm-env plugin: `~/.claude/plugins/acm-plugins/plugins/acm-env/`
+- acm-plugins marketplace: `~/.claude/plugins/acm-plugins/`
 
 Reference files:
 - `BACKLOG.md` — full backlog with status
 - `ACM-ENVIRONMENT-SPEC.md` — environment layer architecture
-- `kb/README.md` — recently addressed items from debrief
+- `kb/CUSTOM-PLUGIN-INSTALLATION.md` — plugin install guide
+- `kb/PLUGIN-DEVELOPMENT-PATTERNS.md` — plugin dev patterns and lessons

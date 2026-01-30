@@ -5,7 +5,7 @@ version: "1.0.1"
 updated: "2026-01-24"
 scope: "acm"
 lifecycle: "reference"
-location: "ack-src/acm/ACM-INTENT-SPEC.md"
+location: "acm/ACM-INTENT-SPEC.md"
 ---
 
 # ACM Intent Specification

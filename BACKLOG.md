@@ -43,6 +43,11 @@ location: "acm/BACKLOG.md"
 | B13 | Add 2-3 community sources to registry sync | Enhancement | capabilities-registry | Future |
 | B14 | Automated multi-model review orchestration | Architecture | ACM | Future |
 | B16 | Archive agent-harness (after registry extraction complete) | Cleanup | agent-harness | Done |
+| B23 | Registry sync — register 7 untracked marketplace plugins (commit-commands, claude-md-management, claude-code-setup, context7, playwright, plugin-dev, frontend-design) | Maintenance | capabilities-registry | Pending |
+| B24 | Registry model — clarify "installed" for skills (Anthropic-provided) vs plugins vs MCP tools. 16 skills show as "not installed" but are built-in. | Spec fix | capabilities-registry | Pending |
+| B25 | Audit action workflow — add post-audit prompt: offer to add recommendations to backlog, then offer to act on items. Partial automation toward full self-maintenance. | Enhancement | acm-env | Done |
+| B26 | Trim ~/.claude/CLAUDE.md to ≤55 lines — remove Key Artifacts table (duplicates Orientation), compress Artifact Lifecycle callouts | Maintenance | ACM | Done |
+| B27 | Delete docs/inbox/capability-registry-brief.md — B2 complete, ephemeral lifecycle | Cleanup | ACM | Done |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture review | ACM/kb | Future |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | Future |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | Future |

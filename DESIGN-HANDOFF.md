@@ -1,3 +1,13 @@
+---
+type: "handoff"
+description: "Design stage handoff — summarizes Discover outputs for Design intake"
+version: "1.0.0"
+updated: "2026-01-27"
+scope: "acm"
+lifecycle: "reference"
+location: "acm/DESIGN-HANDOFF.md"
+---
+
 # Design Stage Handoff
 
 ## Context

@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-24"
 scope: "acm"
 lifecycle: "reference"
-location: "ack-src/acm/ACM-CONTEXT-ARTIFACT-SPEC.md"
+location: "acm/ACM-CONTEXT-ARTIFACT-SPEC.md"
 ---
 
 # ACM Context Artifact Specification

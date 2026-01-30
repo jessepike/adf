@@ -5,7 +5,7 @@ version: "1.1.0"
 updated: "2026-01-24"
 scope: "acm"
 lifecycle: "reference"
-location: "ack-src/acm/ACM-FOLDER-STRUCTURE-SPEC.md"
+location: "acm/ACM-FOLDER-STRUCTURE-SPEC.md"
 ---
 
 # ACM Folder Structure Specification
