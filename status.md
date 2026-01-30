@@ -39,6 +39,7 @@ updated: "2026-01-30"
 - [x] ACM-ENV-PLUGIN-SPEC.md (v1.0.0)
 - [x] ACM-ENVIRONMENT-SPEC.md (v1.0.0) — environment layer architecture (six primitives, two layers)
 - [x] ACM-RULES-SPEC.md (v1.0.0) — `.claude/rules/` enforcement layer, governance model
+- [x] ACM-REVIEW-SPEC.md (v1.0.0) — two-phase review mechanism, cycle rules, severity, YAGNI enforcement
 
 ### acm-env Plugin (v1.1.0)
 - [x] Plugin scaffold (`~/.claude/plugins/acm-env/`)
@@ -92,7 +93,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 ### Next Up
 - [ ] B35: Deep dive — agents capability type (P1, L)
 - [ ] B36: Deep dive — skills catalog leverage (P1, L)
-- [ ] B34: Evaluate MCP tools for environment (P1, M)
+- [ ] B34: MCP Server Registry — Design review pending (brief signed off, design drafted)
 - [ ] B15: Deliver stage spec
 - [ ] B18-B19: Memory layer spec and scaffold
 
@@ -118,7 +119,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-30 | Ran `/acm-env:audit` end-to-end with delegation. Both dependency plugins (claude-md-management, claude-code-setup) successfully invoked — no fallbacks needed. Audit found 7 recommendations: fixed acm-env path in .claude/CLAUDE.md, trimmed global CLAUDE.md from 73→60 lines (B26), fixed 4 stale `ack-src/acm/` location paths in spec frontmatter, added frontmatter to DESIGN-HANDOFF.md, deleted stale inbox item (B27). Registry validation confirmed 7 untracked plugins (B23) and built-in skills model issue (B24). No automation recommendations for this spec/docs project. |
 | 2026-01-30 | Massive capabilities registry and environment governance session. Registered 19 plugins total across 3 batches (registry grew 21→39). Added `install_id`/`install_level` to REGISTRY-SPEC.md schema. Defined plugin baseline v2.0.0 (6 required user-level, 15 available project-level, 3 to remove). Cleaned environment: removed superpowers/example-skills/serena, deleted 3 legacy commands (claude-mem, remember, save), disabled frontend-design/context7/playwright at user level. Created 2 new acm-env commands: `/acm-env:refresh` (upstream sync orchestrator) and `/acm-env:capabilities` (registry lookup). Fixed 4 registry scripts: check-freshness.sh (URL parsing + macOS timeout), sync.sh (skip active + declined), promote.sh (pipefail), and 6 upstream URLs. Implemented `declined.yaml` blocklist (15 entries: 3 MCP tools, 3 cruft plugins, 9 unused LSP plugins) integrated into sync pipeline. Researched all Anthropic marketplace plugins and 3 MCP tools. Plugin bumped to v1.1.0. |
 | 2026-01-30 | Environment audit and registry cleanup session. Ran full `/acm-env:audit` with both delegations (claude-md-management, claude-code-setup). Found global CLAUDE.md at 60 lines (5 over limit), serena still installed (CLI uninstall failing), no MCP servers configured. Committed all uncommitted capabilities-registry work from prior session (27 files, 18 plugins, declined.yaml, spec fixes). Bumped REGISTRY-SPEC.md to v1.1.0 — fixed directory name typo, added declined section, updated Anthropic source to include plugins, removed stale brief reference. Updated README with declined.yaml and sources. Added B34 (MCP tools eval, P1), B35 (agents deep dive, P1/L), B36 (skills deep dive, P1/L) to backlog. Both repos pushed to GitHub. |
-| 2026-01-30 | B34 MCP Server Registry — Discover complete. Drafted brief (brief-b34-mcp-servers.md), 2 internal review cycles, signed off at v1.0. Key decisions: MCP servers as first-class capability type, separate registry entries for plugin-bundled MCPs, extend baseline.yaml, manual scan/triage against 3 community sources, decline all 4 current standalone MCPs. Moving to Design. |
+| 2026-01-30 | B34 MCP Server Registry — Discover complete, Design draft complete. Discover: drafted brief (brief-b34-mcp-servers.md), 2 internal review cycles, signed off at v1.0. Design: intake clarification (orchestration, interface, scan scope, triage filtering), drafted design-b34-mcp-servers.md v0.1. 7 work packages, extends refresh+setup commands, 3 new capability.yaml fields (install_vector, parent_plugin, transport), 4 plugin-bundled MCP extractions, baseline v3.0.0 schema. **Next: Design internal review (Ralph Loop), then external review, then Develop.** |
 | 2026-01-30 | Rules enforcement layer session. Reviewed Claude Code `.claude/rules/` capability and integrated into ACM. Created `.claude/rules/constraints.md` (security, governance, safety, session discipline, architectural boundaries). Created ACM-RULES-SPEC.md (v1.0.0) — two-layer governance model (rules=policy, CLAUDE.md=guidance), five content categories, file organization, lifecycle. Added rules stub for init script. Updated environment spec (governance model section), taxonomy (rules term + design decision), folder structure spec, global/project CLAUDE.md specs, init script. Added session discipline enforcement: rule requiring auto-commit and status.md updates (no asking), plus acm-env Stop hook (`stop-check.sh`) that blocks session end when uncommitted changes or stale status.md detected. Added hooks governance to baseline.yaml (declared hooks inventory), status dashboard (hooks section with drift detection), and audit command (section 5: hooks governance — scans for undeclared user-level hooks). Updated ACM-ENV-PLUGIN-SPEC.md with Stop hook, hooks governance section, and hooks in user-level baseline. |
 
 ---
@@ -128,9 +129,9 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 acm-env v1.1.0 with 6 commands fully operational. Capabilities registry at 39 capabilities with full governance: baseline.yaml v2.0.0, declined.yaml blocklist, upstream sync with staging/promote/decline workflow.
 
 **Next priorities:**
+- B34: MCP Server Registry — run Design internal review (Ralph Loop) on design-b34-mcp-servers.md, then external review, then Develop
 - B35: Deep dive — agents capability type (research, populate capabilities/agents/)
 - B36: Deep dive — skills catalog leverage for ACM workflows
-- B34: Evaluate MCP tools for environment
 - B15: Deliver stage spec
 
 **Repos:**
