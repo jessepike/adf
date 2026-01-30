@@ -152,7 +152,8 @@ project-root/
 
 | Folder | Purpose | Lifecycle | Who writes |
 |--------|---------|-----------|------------|
-| `.claude/` | Agent context and rules | Reference | Agent + Human |
+| `.claude/` | Agent context and governance | Reference | Agent + Human |
+| `.claude/rules/` | Hard constraints (policy) | Reference (protected) | Human only |
 | `docs/` | Main context/reference folder | Reference | Human + Agent |
 | `docs/inbox/` | Triage zone | Ephemeral | Human + Agent |
 | `docs/intent.md` | North Star | Reference (protected) | Human |

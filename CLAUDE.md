@@ -44,9 +44,10 @@ project/
 
 | Artifact | Location | Purpose |
 |----------|----------|---------|
+| rules/ | `.claude/rules/` | Hard constraints — non-negotiable policy (human-controlled) |
 | intent.md | `docs/intent.md` | North Star — what and why (human-controlled) |
 | brief.md | `docs/brief.md` | Scope, success criteria, constraints |
-| CLAUDE.md | `.claude/CLAUDE.md` | Project context and current state |
+| CLAUDE.md | `.claude/CLAUDE.md` | Project context and working norms |
 
 ## Artifact Lifecycle
 

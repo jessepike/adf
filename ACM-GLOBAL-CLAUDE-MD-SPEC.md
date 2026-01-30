@@ -62,6 +62,20 @@ Governance boundary between human and agent authority.
 |------|-----------|
 | Never modify `.claude/rules/` without explicit human approval | Governance — rules are human-controlled |
 
+## Relationship to `.claude/rules/`
+
+Global CLAUDE.md and project-level `.claude/rules/` serve complementary purposes:
+
+| Layer | Scope | Purpose | Precedence |
+|-------|-------|---------|------------|
+| Global `<constraints>` | All projects | Universal safety constraints | Baseline |
+| `.claude/rules/` | Per-project | Project-specific hard constraints | Extends global |
+| `CLAUDE.md` | Per-project | Context, norms, working guidance | Defers to rules |
+
+Global constraints (in `<constraints>` block) apply everywhere. Project rules in `.claude/rules/` add project-specific policy on top. `CLAUDE.md` provides context and norms that help Claude work effectively but are not enforcement boundaries.
+
+If a rule in `.claude/rules/` conflicts with guidance in `CLAUDE.md`, the rule wins.
+
 ## Out of Scope (Project-Level)
 
 The following belong in `.claude/CLAUDE.md` or `.claude/rules/`, NOT global:

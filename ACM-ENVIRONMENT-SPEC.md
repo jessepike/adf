@@ -238,11 +238,34 @@ The environment feeds stages differently as projects gain clarity:
 
 ---
 
+## Governance Model: Rules vs Context
+
+The environment layer distinguishes **policy** from **guidance** using two complementary mechanisms:
+
+| Layer | Location | Purpose | Who Controls | Precedence |
+|-------|----------|---------|--------------|------------|
+| **Rules** | `.claude/rules/` | Hard constraints — non-negotiable behavior | Human only | Wins on conflict |
+| **Context** | `CLAUDE.md` | Working norms, orientation, project understanding | Human + Agent | Defers to rules |
+
+**Rules** are enforcement. Claude must not creatively reinterpret or work around them. They cover security, governance, safety, and architectural boundaries.
+
+**Context** is guidance. It helps Claude understand *how we work here* — project goals, terminology, workflow norms, related repos. It is flexible and evolves frequently.
+
+Every ACM project gets both. Rules are created at project init (`.claude/rules/` directory) and are human-controlled. Context is maintained in `CLAUDE.md` and can be updated by agents within normal workflow.
+
+**Global rules** live at `~/.claude/CLAUDE.md` in the `<constraints>` block (Claude Code's native mechanism). Project rules in `.claude/rules/` extend these with project-specific policy.
+
+---
+
 ## Physical Layout
 
 ```
 ~/code/_shared/
 ├── acm/                          # Orchestration + Knowledge
+│   ├── .claude/
+│   │   ├── CLAUDE.md             # Project context (agent-writable)
+│   │   └── rules/                # Hard constraints (human-controlled)
+│   │       └── constraints.md    # Non-negotiable rules
 │   ├── ACM-*-SPEC.md             # Process specs (orchestration contracts)
 │   ├── ACM-ENVIRONMENT-SPEC.md   # This spec (architecture vision)
 │   ├── prompts/                  # Stage prompts

@@ -193,7 +193,8 @@ Define the classification system, terminology, and design decisions for ACM. Ens
 | **Environment** | Umbrella term for everything managed by acm-env — capabilities, configuration, and context |
 | **Capabilities** | Plugins, MCP servers, hooks, skills, agents, tools — the functional extensions |
 | **Configuration** | settings.json, keybindings — the behavioral settings |
-| **Context** | CLAUDE.md files, rules/ — the knowledge artifacts that inform agent behavior |
+| **Context** | CLAUDE.md files — the knowledge artifacts that inform agent behavior |
+| **Rules** | `.claude/rules/` — hard constraints that enforce non-negotiable behavior (human-controlled) |
 | **Baseline** | Machine-parseable definition of expected environment state at each level |
 | **Drift** | Deviation from baseline — detected by session hook or audit |
 | **User level** | `~/.claude/` — cross-project configuration |
@@ -294,6 +295,7 @@ Decisions made during ACM development that should not be revisited without expli
 | Absorb deferred acm-validate and acm-prune into acm-env | Single plugin with multiple skills; modular growth | 2026-01-29 |
 | Smart mode detection over separate skills | One /acm-env:setup handles first-time, new project, existing project | 2026-01-29 |
 | Codified baseline spec (machine-parseable YAML) over prose guidelines | Enables automated drift detection and comparison | 2026-01-29 |
+| `.claude/rules/` for hard constraints, `CLAUDE.md` for context | Separates enforcement (policy) from guidance (norms); rules win on conflict; human-controlled | 2026-01-30 |
 | Rename consideration: "Agentic Development Environment" | Under consideration; deferred to validation after acm-env proves concept | 2026-01-29 |
 
 ---

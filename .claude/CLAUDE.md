@@ -16,15 +16,17 @@ ACM (Agentic Context Management) is the framework that defines how agentic proje
 
 ## Orientation
 
-1. `status.md` — Current state, session log, next steps
-2. `BACKLOG.md` — All tracked work items
-3. `ACM-ENVIRONMENT-SPEC.md` — Environment layer architecture (six primitives)
-4. `ACM-STAGES-SPEC.md` — Stage workflow (Discover → Design → Develop → Deliver)
+1. `.claude/rules/` — Hard constraints (read first, always enforced)
+2. `status.md` — Current state, session log, next steps
+3. `BACKLOG.md` — All tracked work items
+4. `ACM-ENVIRONMENT-SPEC.md` — Environment layer architecture (six primitives)
+5. `ACM-STAGES-SPEC.md` — Stage workflow (Discover → Design → Develop → Deliver)
 
 ## Context Map
 
 | Artifact | Purpose |
 |----------|---------|
+| `.claude/rules/` | Hard constraints — non-negotiable policy |
 | `ACM-*-SPEC.md` | Process and artifact specifications |
 | `ACM-TAXONOMY.md` | Classification system and design decisions |
 | `prompts/` | Stage transition and review prompts |
@@ -44,9 +46,7 @@ ACM (Agentic Context Management) is the framework that defines how agentic proje
 | capabilities-registry | `~/code/_shared/capabilities-registry/` | Capability catalog (skills, tools, agents, plugins) |
 | acm-env plugin | `~/.claude/plugins/acm-plugins/plugins/acm-env/` | Environment management plugin |
 
-## Constraints
+## Working Norms
 
-- Specs define "good" before building (spec-driven)
-- YAGNI — build only what's needed now
 - Token-efficient — every artifact earns its context cost
 - Progressive disclosure — summary first, details on demand
