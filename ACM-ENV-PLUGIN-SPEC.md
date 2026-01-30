@@ -32,6 +32,7 @@ acm-env defines expected state at two levels:
 | `CLAUDE.md` | Required. <50 lines. Has `<constraints>` block. No project-specific content. |
 | `settings.json` | Required. Has permissions block. |
 | Plugins/MCP servers | Only cross-project items at this level. |
+| Hooks | All user-level hooks declared in `baseline.yaml`. Undeclared hooks = drift. |
 
 ### Project Level (`.claude/`)
 
@@ -70,13 +71,32 @@ acm-env (wrapper/orchestrator)
 - When a dependency is missing: surface explicit warning, run built-in fallback, suggest installation
 - Never silently fail — always inform the user
 
-## SessionStart Hook
+## Hooks
+
+### SessionStart Hook
 
 `session-check.sh` — must complete in <100ms:
 - File existence checks only (no network, no plugin invocation, no LLM calls)
 - Checks: CLAUDE.md at both levels, settings.json, critical baseline markers
 - **Silent when clean** — zero output, zero tokens
 - **Single warning line when drift detected**
+
+### Stop Hook
+
+`stop-check.sh` — enforces session discipline:
+- Checks for uncommitted changes (staged or unstaged)
+- Checks if `status.md` was modified recently (within 5 minutes)
+- **Blocks session end** if either check fails — Claude resumes to commit and update
+- Enforces the Session Discipline rule from `.claude/rules/`
+
+### Hooks Governance
+
+All user-level hooks must be declared in `baseline.yaml` under `user_level.checks.hooks.declared`. This prevents drift where a hook gets installed during one project and silently affects all future projects.
+
+The `/acm-env:audit` command validates:
+- All declared hooks are present and functional
+- No undeclared hooks exist at user level
+- Each hook has a documented source and purpose
 
 ## Skill
 
