@@ -355,5 +355,6 @@ This loop is the mechanism by which the system gets better over time. It is not 
 ## References
 
 - ACM-STAGES-SPEC.md (project layer)
+- ACM-RULES-SPEC.md (enforcement layer — rules governance model)
 - ACM-ENV-PLUGIN-SPEC.md (acm-env plugin — narrower scope)
 - ACM-TAXONOMY.md (terminology)

@@ -10,6 +10,7 @@ Minimal starter files for `init-project.sh`. These are NOT templates — they're
 | brief.md | Brief stub | ACM-BRIEF-SPEC.md |
 | status.md | Status stub | ACM-STATUS-SPEC.md |
 | claude-md/ | CLAUDE.md stubs by type | ACM-PROJECT-CLAUDE-MD-SPEC.md |
+| rules-constraints.md | Rules stub (→ `.claude/rules/constraints.md`) | ACM-RULES-SPEC.md |
 
 ## Usage
 

@@ -191,20 +191,18 @@ Use HTML comments to mark sections:
 
 ## Rules Directory
 
-`.claude/rules/` contains human-controlled governing rules:
+`.claude/rules/` contains human-controlled hard constraints. See **ACM-RULES-SPEC.md** for the full specification.
 
 ```
 .claude/
 ├── CLAUDE.md              # Project context (agent-writable)
-└── rules/                 # Governing rules (human-controlled)
-    ├── architecture.md    # Structural decisions
-    ├── stack.md           # Technology-specific rules
-    └── domain.md          # Domain terminology, business rules
+└── rules/                 # Hard constraints (human-controlled)
+    └── constraints.md     # Single file default; split when needed
 ```
 
 **Key distinction:**
-- `CLAUDE.md` = context that evolves
-- `rules/` = constraints that persist
+- `CLAUDE.md` = context that evolves (guidance)
+- `rules/` = constraints that persist (policy — wins on conflict)
 
 ---
 
@@ -321,6 +319,7 @@ Workflow
 ## References
 
 - ACM-GLOBAL-CLAUDE-MD-SPEC.md (global counterpart)
+- ACM-RULES-SPEC.md (enforcement layer that complements CLAUDE.md)
 - ACM-PROJECT-TYPES-SPEC.md (type determines content)
 - ACM-FOLDER-STRUCTURE-SPEC.md (location in structure)
 - TIER1_KIT_SPEC.md (detailed templates)

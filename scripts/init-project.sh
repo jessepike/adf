@@ -170,6 +170,10 @@ mkdir -p "$TARGET_PATH/docs"
 mkdir -p "$TARGET_PATH/_archive"
 
 # Copy stubs and populate project name/date
+echo "Creating .claude/rules/constraints.md..."
+sed -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
+    "$ACM_DIR/stubs/rules-constraints.md" > "$TARGET_PATH/.claude/rules/constraints.md"
+
 echo "Creating docs/intent.md..."
 sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
@@ -258,6 +262,7 @@ echo "Type: $PROJECT_TYPE"
 echo "Scale: $SCALE"
 echo ""
 echo "Files created:"
+echo "  .claude/rules/        - Hard constraints (human-controlled)"
 echo "  .claude/CLAUDE.md     - Project context (agents read this first)"
 echo "  docs/intent.md        - North Star (define your why)"
 echo "  docs/discover-brief.md - Project contract (define what)"
