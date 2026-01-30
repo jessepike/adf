@@ -2,7 +2,7 @@
 type: "tracking"
 description: "ACM backlog — improvements, enhancements, and future work"
 version: "1.0.0"
-updated: "2026-01-29"
+updated: "2026-01-30"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/BACKLOG.md"
@@ -39,15 +39,21 @@ location: "acm/BACKLOG.md"
 
 | ID | Item | Type | Component | Status |
 |----|------|------|-----------|--------|
-| B12 | Auto-update from upstream sources (maintenance automation for registry) | Enhancement | capabilities-registry | Future |
+| B12 | Auto-update from upstream sources (maintenance automation for registry) | Enhancement | capabilities-registry | Done |
 | B13 | Add 2-3 community sources to registry sync | Enhancement | capabilities-registry | Future |
 | B14 | Automated multi-model review orchestration | Architecture | ACM | Future |
 | B16 | Archive agent-harness (after registry extraction complete) | Cleanup | agent-harness | Done |
-| B23 | Registry sync — register 7 untracked marketplace plugins (commit-commands, claude-md-management, claude-code-setup, context7, playwright, plugin-dev, frontend-design) | Maintenance | capabilities-registry | Pending |
-| B24 | Registry model — clarify "installed" for skills (Anthropic-provided) vs plugins vs MCP tools. 16 skills show as "not installed" but are built-in. | Spec fix | capabilities-registry | Pending |
+| B23 | Register untracked marketplace plugins in capabilities-registry | Maintenance | capabilities-registry | Done |
+| B24 | Registry model — clarify install levels and plugin scoping (user vs project vs local) | Spec fix | capabilities-registry | Done |
 | B25 | Audit action workflow — add post-audit prompt: offer to add recommendations to backlog, then offer to act on items. Partial automation toward full self-maintenance. | Enhancement | acm-env | Done |
 | B26 | Trim ~/.claude/CLAUDE.md to ≤55 lines — remove Key Artifacts table (duplicates Orientation), compress Artifact Lifecycle callouts | Maintenance | ACM | Done |
 | B27 | Delete docs/inbox/capability-registry-brief.md — B2 complete, ephemeral lifecycle | Cleanup | ACM | Done |
+| B28 | `/acm-env:refresh` command — upstream sync orchestrator with declined workflow | New command | acm-env | Done |
+| B29 | `/acm-env:capabilities` command — registry lookup for agents/users | New command | acm-env | Done |
+| B30 | Fix 4 registry scripts (check-freshness, sync, promote, generate-inventory) | Bug fix | capabilities-registry | Done |
+| B31 | `declined.yaml` — blocklist for evaluated-and-rejected capabilities | Enhancement | capabilities-registry | Done |
+| B32 | Plugin baseline governance — baseline.yaml v2.0.0 with required/available/remove lists | Enhancement | acm-env | Done |
+| B33 | Environment cleanup — remove cruft plugins, legacy commands, fix upstream URLs | Maintenance | acm-env + registry | Done |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture review | ACM/kb | Future |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | Future |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | Future |
@@ -71,3 +77,13 @@ location: "acm/BACKLOG.md"
 | B10 | Wire acm-env → capabilities-registry | 2026-01-29 | start-develop-prompt.md points to INVENTORY.md for capability assessment. |
 | B11 | Inventory generation script | 2026-01-29 | Part of B2. capability.yaml → inventory.json → INVENTORY.md. |
 | B16 | Archive agent-harness | 2026-01-29 | Registry extraction complete, agent-harness disconnected from workspace. |
+| B12 | Auto-update from upstream | 2026-01-30 | `/acm-env:refresh` command orchestrates sync → freshness → staging → promote workflow. |
+| B23 | Register untracked plugins | 2026-01-30 | Registered 19 plugins total (original 7 + 5 cleanup batch + 7 marketplace batch). Registry grew from 21→39 capabilities. |
+| B24 | Registry model — install levels | 2026-01-30 | Added `install_id` and `install_level` fields to REGISTRY-SPEC.md and all plugin capability.yaml files. User-level for cross-project, project-level for task-specific. |
+| B25 | Audit action workflow | 2026-01-30 | Post-audit prompt with option to add to backlog or take action. |
+| B28 | `/acm-env:refresh` command | 2026-01-30 | 10-step orchestration: snapshot → sync → declined → freshness → staging → summary → promote → decline → regenerate. |
+| B29 | `/acm-env:capabilities` command | 2026-01-30 | Registry lookup showing install level, status, and install-level guidance. |
+| B30 | Fix 4 registry scripts | 2026-01-30 | check-freshness: URL parsing + macOS timeout. sync: skip active + declined. promote: pipefail fix. 6 upstream URLs corrected. |
+| B31 | `declined.yaml` | 2026-01-30 | 15 entries (3 MCP tools, 3 removed plugins, 9 unused LSP plugins). Integrated into sync pipeline. |
+| B32 | Plugin baseline governance | 2026-01-30 | baseline.yaml v2.0.0 with required (6), available (15), remove (3) plugin lists. Reset command extended with plugin checking. |
+| B33 | Environment cleanup | 2026-01-30 | Removed superpowers/example-skills/serena. Deleted 3 legacy commands. Disabled frontend-design/context7/playwright at user level. |
