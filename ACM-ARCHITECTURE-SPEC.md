@@ -1,7 +1,7 @@
 ---
 type: "specification"
 description: "Defines the ACM framework architecture — the two-layer model, six environment primitives, and component relationships"
-version: "1.2.0"
+version: "1.3.0"
 updated: "2026-01-31"
 scope: "acm"
 lifecycle: "reference"
@@ -79,13 +79,15 @@ These are not sequential — they are ambient. They are always available, and th
 
 **Owns:** Stage workflow, phase models, gates, prompts, context management rules.
 
-**Implemented by:** ACM specs and prompts. The process definitions that govern how stages work.
+**Implemented by:** ACM specs and prompts, exposed to consumer projects via the ACM MCP server.
 
 **Key behaviors:**
 - Defines stage entry/exit criteria
 - Enforces phase boundaries (hard gates, context clearing)
 - Provides prompts for stage transitions and reviews
 - Manages context loading rules (progressive disclosure)
+
+**MCP tools:** `get_stage`, `get_review_prompt`, `get_transition_prompt`
 
 **Location:** `~/code/_shared/acm/` — specs, prompts, stubs.
 
@@ -95,13 +97,15 @@ These are not sequential — they are ambient. They are always available, and th
 
 **Owns:** Inventory of skills, tools, and agents available for use across projects.
 
-**Implemented by:** Capability Registry — a standalone, self-maintaining catalog.
+**Implemented by:** Capability Registry — a standalone, self-maintaining catalog. Queryable from consumer projects via the ACM MCP server.
 
 **Key behaviors:**
 - Catalogs available skills, tools, and agents
 - Tracks status lifecycle: staging → active → archive
 - Provides agent-queryable inventory (by category, by tags)
 - Syncs from upstream sources (Anthropic official, curated community)
+
+**MCP tools:** `query_capabilities`, `get_capability_detail`
 
 **Location:** `~/code/_shared/capabilities-registry/` — own repo, own spec.
 
@@ -123,13 +127,15 @@ These are not sequential — they are ambient. They are always available, and th
 
 **Owns:** Curated learnings, validated patterns, reusable best practices.
 
-**Implemented by:** Knowledge base within ACM (`acm/kb/`).
+**Implemented by:** Knowledge base within ACM (`acm/kb/`). Searchable from consumer projects via the ACM MCP server.
 
 **Key behaviors:**
 - Stores distilled, evergreen findings
 - Referenced by agents during stage work ("Based on similar projects...")
 - Grows from project experience, community sources, and research
 - Each entry follows a structured format: summary, finding, rationale, application
+
+**MCP tools:** `query_knowledge`
 
 **Location:** `~/code/_shared/acm/kb/` — within ACM for now. Tightly coupled to process learnings.
 
@@ -196,13 +202,15 @@ These are not sequential — they are ambient. They are always available, and th
 
 **Owns:** Drift detection, spec compliance, correctness checks.
 
-**Implemented by:** Skills that run checks against specs. Validation is a behavior, not a component.
+**Implemented by:** Skills that run checks against specs. Validation is a behavior, not a component. Structural checks are also exposed via the ACM MCP server.
 
 **Key behaviors:**
 - Project health checks: "Is this project aligned with its intent?"
 - Spec compliance: "Does this artifact match its spec requirements?"
 - Drift detection: "Has the project diverged from its design?"
 - Environment checks: "Is the environment baseline met?" (acm-env)
+
+**MCP tools:** `check_project_structure`, `check_project_health`
 
 **Principle:** Every spec is implicitly a validation contract. Validation skills read specs, read project state, and report alignment or drift.
 
@@ -320,6 +328,60 @@ maintenance (scripts) ──lives in──→ each component
 
 ---
 
+## MCP Server Interface Layer
+
+The ACM MCP server (`acm/acm-server/`) is the **read-only interface** between the environment layer and consumer projects. It exposes four of the six primitives as tools that any agent can call without the ACM repo being open:
+
+```
+┌─────────────────────────────────┐
+│  Consumer Project               │
+│  (e.g., link-triage-pipeline)   │
+│                                 │         ┌──────────────────────┐
+│  Claude Code ──stdio──► ACM     │         │  ~/code/_shared/acm/ │
+│  Agent                  MCP  ───┼── reads ─► specs, prompts,    │
+│                         Server  │         │  stubs, kb/          │
+│                                 │         ├──────────────────────┤
+│  .mcp.json wires up server      │         │  capabilities-       │
+│  CLAUDE.md references ACM skill │         │  registry/           │
+└─────────────────────────────────┘         └──────────────────────┘
+```
+
+### Tool Coverage by Primitive
+
+| Primitive | MCP Tools | What's Exposed |
+|-----------|-----------|----------------|
+| **Orchestration** | `get_stage`, `get_review_prompt`, `get_transition_prompt` | Stage specs, review prompts, transition guidance with validation |
+| **Capabilities** | `query_capabilities`, `get_capability_detail` | Registry search and capability details |
+| **Knowledge** | `query_knowledge` | KB article search by topic |
+| **Validation** | `check_project_structure`, `check_project_health` | Structural and health checks against ACM spec |
+| **Memory** | — | Not yet built (future: memory layer) |
+| **Maintenance** | — | Handled by acm-env plugin, not the MCP server |
+
+### Supporting Tools
+
+| Tool | Purpose |
+|------|---------|
+| `get_artifact_spec` | Spec for any artifact type (brief, intent, status, etc.) |
+| `get_artifact_stub` | Starter template for any artifact |
+| `get_project_type_guidance` | What a project type requires |
+| `get_rules_spec` | Rules governance specification |
+| `get_context_spec` | CLAUDE.md specification (global/project) |
+
+### Companion Skill
+
+The ACM Workflow skill (`acm/skills/acm-workflow/`) teaches agents **when and how** to use the tools. The MCP server provides data access; the skill provides narrative workflow instructions. Consumer projects reference the skill in their CLAUDE.md.
+
+### Consumer Wiring
+
+A consumer project needs two things:
+
+1. **`.mcp.json`** — wires the server (one-time setup)
+2. **`CLAUDE.md` reference** — points to the companion skill (optional but recommended)
+
+The server is read-only, has no network access, and reads all data from disk at request time (no caching, always reflects current spec state).
+
+---
+
 ## Self-Improvement Loop
 
 The environment layer enables continuous improvement across projects:
@@ -362,3 +424,6 @@ This loop is the mechanism by which the system gets better over time. It is not 
 - ACM-RULES-SPEC.md (enforcement layer — rules governance model)
 - ACM-ENV-PLUGIN-SPEC.md (acm-env plugin — narrower scope)
 - ACM-TAXONOMY.md (terminology)
+- acm-server/README.md (MCP server — installation, tools, consumer wiring)
+- skills/acm-workflow/skill.md (companion skill — workflow instructions)
+- docs/design.md (MCP server design spec — full tool schemas and architecture)
