@@ -132,6 +132,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-30 | Rules enforcement layer session. Reviewed Claude Code `.claude/rules/` capability and integrated into ACM. Created `.claude/rules/constraints.md` (security, governance, safety, session discipline, architectural boundaries). Created ACM-RULES-SPEC.md (v1.0.0) — two-layer governance model (rules=policy, CLAUDE.md=guidance), five content categories, file organization, lifecycle. Added rules stub for init script. Updated environment spec (governance model section), taxonomy (rules term + design decision), folder structure spec, global/project CLAUDE.md specs, init script. Added session discipline enforcement: rule requiring auto-commit and status.md updates (no asking), plus acm-env Stop hook (`stop-check.sh`) that blocks session end when uncommitted changes or stale status.md detected. Added hooks governance to baseline.yaml (declared hooks inventory), status dashboard (hooks section with drift detection), and audit command (section 5: hooks governance — scans for undeclared user-level hooks). Updated ACM-ENV-PLUGIN-SPEC.md with Stop hook, hooks governance section, and hooks in user-level baseline. |
 
 | 2026-01-31 | B34 MCP Server Registry — Develop complete. All 7 WPs implemented. REGISTRY-SPEC.md v1.2.0 (3 MCP fields, 3 community sources, inbox). 4 legacy MCPs deleted+declined, 4 plugin-bundled MCPs created. baseline.yaml v2.1.0 (mcp_servers governance). refresh.md extended (community scan + triage). setup.md extended (MCP server checks). Inventory regenerated (39 caps). First triage: 500+ servers scanned, 0 high-relevance. Note: 4 plugin-bundled MCP upstream URLs unreachable (anthropics/claude-code-plugins likely private). |
+| 2026-01-31 | Project separation — capabilities registry bootstrapped as independent project (BACKLOG.md, status.md, .claude/CLAUDE.md). Migrated B35→CR-1, B36→CR-2, B13→CR-3 to registry backlog. Archived processed B34 inbox docs. ACM backlog now ACM-scoped only. |
 | 2026-01-31 | Scope-aware status command + environment cleanup. Updated `/acm-env:status` with `--scope` flag (project default, user). Project scope shows user-level foundation + project specifics + capabilities (plugins, MCP servers). User scope shows cross-project config, plugins, MCP servers, hooks. Updated ACM-ENV-PLUGIN-SPEC.md with status command docs. Ran status check — found global CLAUDE.md at 61 lines (removed frontmatter → 52, PASS). Audited MCP server state: 0 standalone user-level, 13 plugin-bundled, 0 project-level for ACM. Identified 6 unwanted plugins with bundled MCP servers (asana, firebase, gitlab, laravel-boost, linear, slack) — added to baseline remove list + declined.yaml (21→27 declined). Clarified status vs inventory separation: status=validation (PASS/FAIL), capabilities=discovery (what's available). |
 
 ## Decisions
@@ -158,10 +159,12 @@ Scope-aware status command complete. Environment cleanup done — 6 unwanted plu
 - `~/.claude/CLAUDE.md` — frontmatter removed (61→52 lines)
 
 **Next priorities:**
-- B35: Deep dive — agents capability type
-- B36: Deep dive — skills catalog leverage
-- Link Triage Pipeline: Design stage (new session, run from `~/code/_shared/link-triage-pipeline/`)
+- B34: MCP Server Registry — Develop stage (moved to Done, was blocking)
 - B15: Deliver stage spec
+- B18-B19: Memory layer spec and scaffold
+- Link Triage Pipeline: Design stage (new session, run from `~/code/_shared/link-triage-pipeline/`)
+
+**Project separation:** Capabilities registry now has its own BACKLOG.md, status.md, and .claude/CLAUDE.md. B35, B36, B13 migrated to capabilities-registry as CR-1, CR-2, CR-3.
 
 **Repos:**
 - ACM: https://github.com/jessepike/acm.git → `~/code/_shared/acm/`
