@@ -9,7 +9,7 @@ updated: "2026-01-31"
 ## Current State
 
 - **Stage:** Develop (ACM framework itself)
-- **Focus:** External Review Skill + MCP Server (B14) — entering Develop
+- **Focus:** External Review Skill + MCP Server (B14) — Develop Phase 4 (Review) complete, ready for Phase 5 (Environment Setup) + Phase 6 (Build)
 - **Sub-project:** ACM MCP Server — complete (13 tools, 59 tests, archived)
 
 ## What's Complete
@@ -137,6 +137,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-31 | Scope-aware status command + environment cleanup. Updated `/acm-env:status` with `--scope` flag (project default, user). Project scope shows user-level foundation + project specifics + capabilities (plugins, MCP servers). User scope shows cross-project config, plugins, MCP servers, hooks. Updated ACM-ENV-PLUGIN-SPEC.md with status command docs. Ran status check — found global CLAUDE.md at 61 lines (removed frontmatter → 52, PASS). Audited MCP server state: 0 standalone user-level, 13 plugin-bundled, 0 project-level for ACM. Identified 6 unwanted plugins with bundled MCP servers (asana, firebase, gitlab, laravel-boost, linear, slack) — added to baseline remove list + declined.yaml (21→27 declined). Clarified status vs inventory separation: status=validation (PASS/FAIL), capabilities=discovery (what's available). |
 | 2026-01-31 | ACM MCP Server build complete — all phases. Phase D: companion skill (skills/acm-workflow/). Phase E: consumer wiring (.mcp.json), README, all 9 success criteria verified. Manual testing via MCP Inspector + Claude in Chrome — 4 tools tested across all categories, all passing. KB article: MCP-SERVER-MANUAL-TESTING.md. Architecture spec updated to v1.3.0 — new MCP Server Interface Layer section, MCP tool references on Orchestration/Capabilities/Knowledge/Validation primitives. Archived experiments/, cleaned up transient build docs. |
 | 2026-01-31 | B14 External Review Skill — Design complete. Reviewed external review spec against ACM Architecture Spec and MCP Server Brief for alignment (all clean). Updated ACM-ARCHITECTURE-SPEC v1.2.0 (added skills/ and acm-server/ to physical layout). Added Stage column to BACKLOG.md for pipeline tracking. Archived ACM MCP server docs to _archive/. Moved spec from docs/inbox/ to docs/design.md, created discover-brief.md. Phase 1 internal review: 2 Ralph Loop cycles, 3C + 3H resolved (frontmatter, artifact paths, Phase 2 min cycles, ACM MCP server integration, moonshot→openai_compat collapse). Phase 2 external review (Gemini + GPT): 1 cycle, 1C + 3H resolved (provider ID mapping, artifact_content→artifact_path, extra_params pass-through, retry policy). Design v1.3.0 complete. Added B44 (frontmatter stage tracking), B45 (stage transition cleanup). |
+| 2026-01-31 | B14 Develop Phases 1-4 complete. Phase 1 (Intake): resolved 6 design questions (path validation→project root+home, partial load, no cost metadata, project .mcp.json, venv, official mcp SDK). Phase 2 (Capability Assessment): manifest.md + capabilities.md. Phase 3 (Planning): plan.md + tasks.md (11 tasks, 6 phases). HARD GATE approved. Phase 4 (Review): Ralph Loop internal review — 3 cycles, 1C + 4H resolved (TDD co-location, venv task, server entry point, requirements.txt sequencing). Plan v1.1.0 ready for build. |
 
 ## Decisions
 
@@ -152,55 +153,43 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 
 ## Notes for Next Session
 
-### B14: External Review Skill — Design → Develop Handoff (2026-01-31)
+### B14: External Review Skill — Ready to Build (2026-01-31)
 
-**Where we are:** Design complete. Entering Develop Phase 1 (Intake & Validation).
+**Where we are:** Develop Phases 1-4 complete. Ready for Phase 5 (Environment Setup) + Phase 6 (Build).
 
 **Read order for next session:**
-1. `docs/design.md` — Design v1.3.0 (both reviews complete)
-2. `docs/discover-brief.md` — Brief v0.1 (scope, success criteria, constraints)
-3. `intent.md` — ACM North Star
+1. `docs/plan.md` — Plan v1.1.0 (internal review complete, 6 phases, decision log)
+2. `docs/tasks.md` — 11 tasks across 6 phases, all pending
+3. `docs/design.md` — Design v1.3.0 (reference during build)
+4. `docs/manifest.md` — Dependencies (Python 3.11+, mcp, httpx, pyyaml)
+5. `docs/capabilities.md` — Agent infrastructure needed
 
-**What's done:**
-- Design v1.3.0: Phase 1 internal review (2 cycles, 3C + 3H fixed), Phase 2 external review (Gemini + GPT, 1C + 3H fixed)
-- ACM-ARCHITECTURE-SPEC v1.2.0 updated (skills/ and acm-server/ in physical layout)
-- ACM MCP server docs archived to `_archive/acm-mcp-server/`
-- Backlog: Stage column added, B14 bumped to P1, B44 (frontmatter stage tracking), B45 (stage transition cleanup)
+**What's done (this session):**
+- Phase 1 (Intake): Design understood, 6 questions resolved (path validation, partial load, no cost metadata, project .mcp.json, venv, official mcp SDK)
+- Phase 2 (Capability Assessment): manifest.md + capabilities.md created
+- Phase 3 (Planning): plan.md + tasks.md created, HARD GATE approved by human
+- Phase 4 (Review): Internal review via Ralph Loop — 3 cycles, 1 Critical + 4 High resolved (TDD co-location, venv task, server entry point, requirements.txt sequencing)
 
-**Key design decisions:**
-- Python MCP server with provider abstraction (openai_compat + google)
-- `artifact_path` not `artifact_content` — server reads files from disk
-- Consumer of ACM MCP server's `get_review_prompt()`
-- Skill at `acm/skills/external-review/`, credentials at `~/.claude/models.yaml`
-- `extra_params` for provider-specific settings pass-through
-- Retry: exponential backoff with jitter for 429/5xx/timeouts only
+**Key decisions (in plan.md Decision Log):**
+- D1: Path validation restricts to project root + home directory
+- D2: Invalid models.yaml → partial load (skip broken entries)
+- D3: No cost metadata in list_models (YAGNI)
+- D4: Register in project .mcp.json (ACM-scoped)
+- D5: venv inside server/ directory
+- D6: Official `mcp` Python SDK
 
-**What's next (per ACM-DEVELOP-SPEC):**
-- Phase 1: Intake & Validation — read design, confirm understanding, close loose ends
-- Phase 2: Capability Assessment — manifest.md + capabilities.md
-- Phase 3: Planning — plan.md + tasks.md
-- HARD GATE: human approves all planning artifacts
-- Phase 4-6: Review, Environment Setup, Build
+**What's next:**
+- Phase 5: Environment Setup — scaffold dirs, create venv, install deps (task A1)
+- Phase 6: Build — tasks A2→A5→B1→B2→C1→D1→D2→E1→F1→F2 (TDD, tests co-located)
+- No external review needed for planning artifacts (internal review was clean)
 
-**Questions from external reviewers to resolve in Develop:**
-1. Path validation on `artifact_path` — prevent ingesting sensitive files
-2. Behavior on invalid `models.yaml` — fail fast vs partial load
-3. Whether `list_models` should surface cost metadata
-
----
-
-**Key files changed this session:**
-- `acm-env/commands/status.md` — scope flag, capabilities sections, MCP reporting
-- `ACM-ENV-PLUGIN-SPEC.md` — status command documentation
-- `acm-env/skills/env-auditor/references/baseline.yaml` — 6 new remove entries
-- `capabilities-registry/declined.yaml` — 6 new declined entries
-- `~/.claude/CLAUDE.md` — frontmatter removed (61→52 lines)
-
-**Next priorities:**
-- B34: MCP Server Registry — Develop stage (moved to Done, was blocking)
-- B15: Deliver stage spec
-- B18-B19: Memory layer spec and scaffold
-- Link Triage Pipeline: Design stage (new session, run from `~/code/_shared/link-triage-pipeline/`)
+**Task summary (11 tasks):**
+- Phase A (5): Scaffold + venv, config loading, path validation, provider base, MCP server entry point
+- Phase B (2): OpenAI-compat provider, Google provider (both with tests)
+- Phase C (1): Review tool with parallel execution + tests
+- Phase D (2): config.yaml, SKILL.md
+- Phase E (1): Integration test (server startup + full flow)
+- Phase F (2): .mcp.json registration, end-to-end verification
 
 **Project separation:** Capabilities registry now has its own BACKLOG.md, status.md, and .claude/CLAUDE.md. B35, B36, B13 migrated to capabilities-registry as CR-1, CR-2, CR-3.
 
