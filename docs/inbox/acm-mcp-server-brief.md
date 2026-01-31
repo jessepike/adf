@@ -1,8 +1,8 @@
 ---
 type: "brief"
 project: "ACM MCP Server"
-version: "0.4"
-status: "internal-review-complete"
+version: "0.5"
+status: "complete"
 review_cycle: 2
 created: "2026-01-31"
 updated: "2026-01-31"
@@ -56,7 +56,7 @@ This directly serves ACM's intent: stages that guide work, specs as contracts, a
 ## Success Criteria
 
 - [ ] Agent in a consumer project (e.g., link-triage-pipeline) can query stage requirements without ACM repo being open
-- [ ] Agent can retrieve the correct review prompt for any stage + phase combination
+- [ ] Agent can retrieve the correct review prompt for any supported stage + phase combination (discover, design, develop)
 - [ ] Agent can validate a project's folder structure against ACM-FOLDER-STRUCTURE-SPEC
 - [ ] Agent can query capabilities registry by tags, type, or keyword
 - [ ] Agent can retrieve KB entries by topic
@@ -97,7 +97,7 @@ None — all resolved during Discover. See Decisions table.
 |----------|-------|---------|
 | **Orchestration** (3) | `get_stage`, `get_review_prompt`, `get_transition_prompt` | Query stage requirements, review prompts, transition guidance |
 | **Artifacts** (2) | `get_artifact_spec`, `get_artifact_stub` | Retrieve artifact specifications and starter templates |
-| **Project** (3) | `get_project_type_guidance`, `check_project_structure`, `check_project_health` | Project classification guidance, structure validation, health checks |
+| **Project** (3) | `get_project_type_guidance`, `check_project_structure`, `check_project_health` | Project classification guidance, structure validation, structural health checks (file presence, frontmatter, required sections — not semantic alignment) |
 | **Governance** (2) | `get_rules_spec`, `get_context_spec` | Query rules governance model and CLAUDE.md specs |
 | **Capabilities** (2) | `query_capabilities`, `get_capability_detail` | Search and inspect capabilities registry entries |
 | **Knowledge** (1) | `query_knowledge` | Search ACM knowledge base entries by topic (interim — KB MCP server will supersede for rich search) |
@@ -155,6 +155,11 @@ The architecture spec defines a self-improvement loop: capture → distill → a
 | 5 | Tool naming inconsistency between architecture decisions doc and brief | Ralph-Design | High | Low | Resolved | Standardized to `get_context_spec` |
 | 6 | Architecture decisions doc heading says "Three-Server" but body says two | Ralph-Design | Low | N/A | Open | Minor — in ephemeral doc |
 | 7 | Phase 1 review complete | Ralph-Design | - | - | Complete | 2 cycles: 3 Critical, 2 High resolved |
+| 8 | `check_project_health` claims "alignment" checking — infeasible without LLM under no-external-LLM constraint | External-Gemini | High | Low | Resolved | Scoped tool description to structural checks only (file presence, frontmatter, required sections) |
+| 9 | Success criteria says "any stage + phase" but `deliver` has no spec/prompt | External-GPT | High | Low | Resolved | Scoped success criterion to supported stages (discover, design, develop); known gap already documented |
+| 10 | Hardcoded path assumption vs "installable" success criterion tension | External-GPT | Medium | Low | Open | Brief already states "config override for portability later"; MVP default acceptable |
+| 11 | Missing ACM Skill (narrative instructions) scope | External-Gemini | Low | N/A | Open | Filtered — scope expansion; skill is a separate deliverable, not server scope |
+| 12 | Phase 2 review complete | External-Gemini, External-GPT | - | - | Complete | 2 reviewers: 2 High resolved, 1 Medium logged, 1 Low logged |
 
 ## Review Log
 
@@ -174,7 +179,36 @@ The architecture spec defines a self-improvement loop: capture → distill → a
 - **Logged only (1 issue):**
   - Architecture decisions heading mismatch (Low/N/A) — Ephemeral doc, minor
 
-**Outcome:** Phase 1 complete — 2 cycles, zero Critical/High in final cycle. Brief ready for Design.
+**Outcome:** Phase 1 complete — 2 cycles, zero Critical/High in final cycle. Brief ready for Phase 2.
+
+### Phase 2: External Review
+
+**Date:** 2026-01-31
+**Reviewers:** External-Gemini, External-GPT
+**Issues Found:** 0 Critical, 2 High, 1 Medium, 1 Low
+**Complexity Assessment:** 2 Low (for High issues)
+**Actions Taken:**
+- **Auto-fixed (2 issues):**
+  - `check_project_health` alignment claim infeasible (High/Low) — Scoped tool description to structural checks only
+  - Success criteria "any stage" includes unsupported `deliver` (High/Low) — Scoped to supported stages (discover, design, develop)
+- **Logged only (2 issues):**
+  - Hardcoded path vs installable tension (Medium/Low) — Brief already addresses with "config override for portability later"
+  - Missing ACM Skill scope (Low/N/A) — Scope expansion; skill is a separate deliverable
+
+**Cross-Reviewer Consensus:**
+- Both reviewers praised bounded-context separation as architecturally sound
+- No overlapping issues between reviewers; each found distinct gaps
+- Gemini focused on implementation feasibility; GPT focused on contract consistency
+
+**Outcome:** Phase 2 complete — 2 High issues resolved, brief ready for Design stage.
+
+**Questions forwarded to Design:**
+- What specific structural checks does `check_project_health` perform? (file existence, frontmatter validation, required sections)
+- Source files/locations for `get_project_type_guidance` and `get_rules_spec`
+- Does `get_transition_prompt` read project state or return static guidance?
+- Error/response schema for missing spec cases (e.g., `deliver`)
+- Path resolution strategy across shells/OS
+- Caching policy (per-request memoization vs none)
 
 ## Revision History
 
@@ -184,3 +218,4 @@ The architecture spec defines a self-improvement loop: capture → distill → a
 | 0.2 | 2026-01-31 | Resolved open questions (server location, path args, KB search). Added decisions table. Added external review alignment. Expanded tool descriptions with when-to-use/when-not. Added error response format. Added path configuration details. Added relationship to external review and Ralph Loop. |
 | 0.3 | 2026-01-31 | Internal review fixes: added maintenance primitive exclusion note, standardized "environment layer" terminology, added self-improvement loop connection, added deliver stage known gap. Updated ACM-ENVIRONMENT-SPEC.md references to ACM-ARCHITECTURE-SPEC.md. Added backlog items B36-B40. |
 | 0.4 | 2026-01-31 | Ralph-Design review cycle 1: Added missing Open Questions and Review Log sections. Fixed Issue Log columns to match ACM-REVIEW-SPEC. Moved implementation details (tool schemas, code samples, directory structure, consumer wiring) to design.md scope — replaced with tool surface summary table. Standardized tool naming. |
+| 0.5 | 2026-01-31 | Phase 2 external review (Gemini + GPT): Scoped `check_project_health` to structural checks only. Scoped success criteria to supported stages. Logged path portability tension. Forwarded design questions. Brief complete. |
