@@ -125,3 +125,19 @@ This is a read-only MCP server with no external dependencies. Testing focuses on
 | 5 | Plan missing parallelization opportunities section | Ralph-Develop | Low | Open | Build is largely sequential; limited parallelization opportunity |
 | 6 | Manifest uses "latest" for MCP SDK version | Ralph-Develop | Low | Open | Acceptable for MVP personal project |
 | 7 | Phase 1 internal review complete | Ralph-Develop | - | Complete | 2 cycles: 3 High resolved in cycle 1, zero Critical/High in cycle 2 |
+| 8 | `validatePathWithinBase()` can crash on missing paths — `fs.realpath()` throws if target doesn't exist; also naive prefix check has edge cases (`/base/foo2` matching `/base/foo`) | External-GPT | High | Resolved | Updated A4 acceptance criteria: use `path.relative(base, candidate)` check (no `..`, not absolute) + `fs.realpath()` only for existing paths + handle non-existent gracefully with `isError` |
+| 9 | Task dependencies incomplete — A8/A9 need A3 (SDK install) as dependency | External-GPT | Medium | Resolved | Added A3 as dependency for A8 |
+| 10 | `get_transition_prompt` brief glob fallback is non-deterministic — `*-brief.md` glob order is arbitrary | External-Gemini | Medium | Resolved | Updated B1: sort glob results by mtime desc (newest first), or error if multiple candidates |
+| 11 | `check_project_health` section verification method unspecified — `content.includes()` is prone to false positives | External-Gemini | Medium | Resolved | Updated B3: use regex header check (`/^#+\s+SectionName/m`) not string inclusion |
+| 12 | Strict capability_id regex may block legacy IDs with underscores/uppercase | External-Gemini | Medium | Closed | Verified: all 39 IDs in inventory.json match strict `^[a-z0-9][a-z0-9-]*$` pattern. No change needed. |
+| 13 | Phase 2 external review complete | External-Gemini, External-GPT | - | Complete | 2 reviewers: 1 High resolved, 3 Medium resolved, 1 Medium closed (no risk). Questions answered. |
+
+## Questions Answered for Build
+
+**GPT Q1 — Sandbox vs existence check ordering:** Sandbox checks run first (validate path is within allowed base), then existence checks. If a path is within bounds but doesn't exist, return `isError` with "file not found" message. If a path escapes bounds, return `isError` with "path not allowed" message. Never throw.
+
+**GPT Q2 — Relative `project_path`:** Relative paths are allowed. Resolve against `process.cwd()` via `path.resolve()`, then sandbox-check the resolved absolute path. This matches the design spec.
+
+**Gemini Q1 — Capability ID format:** Verified — all 39 IDs in `inventory.json` match strict `^[a-z0-9][a-z0-9-]*$`. No relaxation needed.
+
+**Gemini Q2 — Preventing console.log stdout pollution:** Add a lint-level check during build: redirect `console.log` to `console.error` in `src/index.ts` before server starts (`console.log = console.error`). This is a one-line safety net. No lint rule needed for MVP.
