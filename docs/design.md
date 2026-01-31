@@ -1,15 +1,17 @@
 ---
-type: "specification"
-description: "Defines the external-review skill — automated Phase 2 review via external LLM APIs"
-version: "1.0.0"
+type: "design"
+description: "Design for the external-review skill + MCP server — automated Phase 2 review via external LLM APIs"
+version: "1.1.0"
 updated: "2026-01-31"
 scope: "acm"
 lifecycle: "draft"
-location: "acm/ACM-EXTERNAL-REVIEW-SKILL-SPEC.md"
+location: "acm/docs/design.md"
 implements: "ACM-REVIEW-SPEC v1.2.0"
+brief_ref: "docs/discover-brief.md"
+backlog_ref: "B14"
 ---
 
-# ACM External Review Skill Specification
+# External Review Skill + MCP Server — Design
 
 ## Purpose
 
@@ -101,9 +103,8 @@ acm/skills/external-review/
     ├── providers/
     │   ├── __init__.py
     │   ├── base.py                   # Abstract provider interface
-    │   ├── openai_compat.py          # OpenAI-compatible (DeepSeek, Together, etc.)
-    │   ├── google.py                 # Gemini
-    │   └── moonshot.py               # Kimi K2 (OpenAI-compatible but may need specifics)
+    │   ├── openai_compat.py          # OpenAI-compatible (Kimi K2, DeepSeek, Together, etc.)
+    │   └── google.py                 # Gemini (non-OpenAI API)
     └── requirements.txt
 
 ~/.claude/
@@ -167,9 +168,9 @@ prompts:
 
 # Stage → default artifact path (relative to project root)
 artifacts:
-  discover: "docs/brief.md"
-  design: "docs/design-brief.md"
-  develop: "docs/implementation-spec.md"
+  discover: "docs/discover-brief.md"
+  design: "docs/design.md"
+  develop: "docs/design.md"
 
 # Default models if --models not specified
 default_models:
@@ -178,7 +179,7 @@ default_models:
 
 # Cycle rules (embedded from ACM-REVIEW-SPEC v1.2.0)
 cycles:
-  min: 2
+  min: 1                            # Per reviewer, per ACM-REVIEW-SPEC v1.2.0
   max: 10
   structural_problem_signal: 4    # If past N cycles and still finding Critical
   stuck_signal: 3                 # If same issue persists for N iterations
@@ -404,9 +405,23 @@ Done.
 
 ---
 
+## Integration with ACM MCP Server
+
+The external review skill is a **consumer** of the ACM MCP server. Before executing a review cycle, it retrieves the correct prompt via:
+
+```
+acm-server.get_review_prompt(stage: "design", phase: "external")
+```
+
+This ensures prompts are always current without hardcoding file paths in the skill. The `config.yaml` stage→prompt mapping serves as a fallback if the ACM MCP server is unavailable (direct file read).
+
+**Prompt resolution order:**
+1. ACM MCP server `get_review_prompt()` (preferred)
+2. `config.yaml` relative path mapping (fallback)
+
 ## Integration with Ralph Loop
 
-The skill invokes Ralph Loop with the external review prompt. The prompt instructs Claude Code to:
+The skill invokes Ralph Loop with the resolved external review prompt. The prompt instructs Claude Code to:
 
 1. Call the MCP `review` tool with configured models
 2. Process aggregated responses
@@ -417,25 +432,23 @@ The skill invokes Ralph Loop with the external review prompt. The prompt instruc
 **Ralph Loop invocation pattern:**
 
 ```bash
-/ralph-loop:ralph-loop "$(cat acm/skills/external-review/assembled-prompt.md)" \
+/ralph-loop:ralph-loop "$(cat ~/code/_shared/acm/prompts/{stage}-external-review-prompt.md)" \
   --max-iterations 10 \
   --completion-promise "EXTERNAL_REVIEW_COMPLETE"
 ```
 
-The assembled prompt includes:
-- Stage context
-- Artifact content
-- External review instructions
-- MCP tool usage instructions
-- Synthesis rules
-- Stop conditions
+The SKILL.md assembles context before invocation:
+- Stage detection (from project status.md or --stage override)
+- Prompt retrieval (via ACM MCP server or config fallback)
+- Model resolution (from --models override or config defaults)
+- Confirmation display
 
 ---
 
 ## Cycle Rules (from ACM-REVIEW-SPEC v1.2.0)
 
 ### Minimum Cycles
-- **Phase 2 (External):** Minimum 2 cycles. Always.
+- **Phase 2 (External):** Minimum 1 cycle per reviewer (if Phase 2 is conducted). Per ACM-REVIEW-SPEC v1.2.0.
 
 ### Stop Conditions
 After each cycle:
@@ -692,8 +705,48 @@ updated: "2026-01-31"
 
 ---
 
+## Issue Log
+
+| # | Issue | Source | Severity | Complexity | Status | Resolution |
+|---|-------|--------|----------|------------|--------|------------|
+| 1 | Frontmatter says "specification" with wrong location path | Ralph-Design | Critical | Low | Resolved | Updated to type: "design", correct location, added brief_ref and backlog_ref |
+| 2 | Default artifact paths in config.yaml don't match ACM conventions | Ralph-Design | Critical | Low | Resolved | Fixed to discover-brief.md, design.md |
+| 3 | Missing Issue Log and Review Log sections | Ralph-Design | Critical | Low | Resolved | Added both sections |
+| 4 | Phase 2 minimum cycles says 2 but ACM-REVIEW-SPEC says 1 per reviewer | Ralph-Design | High | Low | Resolved | Fixed to match ACM-REVIEW-SPEC v1.2.0 |
+| 5 | No consumer relationship with ACM MCP server documented | Ralph-Design | High | Medium | Resolved | Added Integration with ACM MCP Server section, prompt resolution order |
+| 6 | Separate moonshot.py provider unnecessary — Kimi K2 is OpenAI-compatible | Ralph-Design | High | Low | Resolved | Collapsed into openai_compat.py, removed moonshot.py |
+| 7 | assembled-prompt.md referenced but not defined in Skill Structure | Ralph-Design | Low | N/A | Open | — |
+| 8 | Capability registry entry has install_level: user but skill lives in ACM repo | Ralph-Design | Low | N/A | Open | — |
+
+---
+
+## Review Log
+
+### Phase 1: Internal Review
+
+**Date:** 2026-01-31
+**Mechanism:** Ralph Loop (cycle 1 of 10)
+**Issues Found:** 3 Critical, 3 High, 2 Low
+**Complexity Assessment:** 4 Low, 1 Medium (for Critical/High issues)
+**Actions Taken:**
+- **Auto-fixed (6 issues):**
+  - Frontmatter type/location wrong (Critical/Low) — Updated to design type
+  - Artifact paths don't match ACM conventions (Critical/Low) — Fixed paths
+  - Missing Issue Log and Review Log (Critical/Low) — Added sections
+  - Phase 2 min cycles contradicts ACM-REVIEW-SPEC (High/Low) — Fixed to 1 per reviewer
+  - No ACM MCP server consumer relationship (High/Medium) — Added integration section
+  - Unnecessary moonshot.py provider (High/Low) — Collapsed into openai_compat
+- **Logged only (2 issues):**
+  - assembled-prompt.md not defined (Low/N/A)
+  - Registry install_level mismatch (Low/N/A)
+
+**Outcome:** Cycle 1 complete — 3 Critical + 3 High resolved. Proceeding to cycle 2.
+
+---
+
 ## Revision History
 
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0.0 | 2026-01-31 | Initial spec — architecture, MCP tools, UX flow, configuration |
+| 1.1.0 | 2026-01-31 | Design review cycle 1: Fixed frontmatter, artifact paths, Phase 2 min cycles. Added ACM MCP server integration, Issue Log, Review Log. Collapsed moonshot provider into openai_compat. |
