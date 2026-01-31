@@ -1,7 +1,7 @@
 ---
 type: "design"
 project: "ACM MCP Server"
-version: "0.2"
+version: "0.3"
 status: "internal-review-complete"
 created: "2026-01-31"
 updated: "2026-01-31"
@@ -117,6 +117,8 @@ All tools follow the same pattern:
 
 ## Tool Schemas
 
+**Note on schema syntax:** All tool schemas use `z.object({...})` as required by the MCP SDK's `registerTool`. The pattern below applies to all 13 tools.
+
 ### Orchestration (3 tools)
 
 #### `get_stage`
@@ -126,9 +128,9 @@ Returns stage requirements, phases, entry/exit criteria, and review dimensions.
 ```typescript
 server.registerTool("get_stage", {
   description: "Get ACM stage requirements and workflow. Use when an agent needs to understand what a stage involves, its phases, entry/exit criteria, and expected outputs. Do NOT use for transition guidance (use get_transition_prompt instead).",
-  inputSchema: {
+  inputSchema: z.object({
     stage: z.enum(["discover", "design", "develop"]).describe("ACM stage name"),
-  },
+  }),
 }, handler);
 ```
 
@@ -146,10 +148,10 @@ Returns the review prompt for a given stage and phase.
 ```typescript
 server.registerTool("get_review_prompt", {
   description: "Get the review prompt for a stage and review phase. Use when preparing to run an internal (Ralph Loop) or external review. Returns the full prompt text ready for use.",
-  inputSchema: {
+  inputSchema: z.object({
     stage: z.enum(["discover", "design", "develop"]).describe("ACM stage"),
     phase: z.enum(["internal", "external"]).describe("Review phase"),
-  },
+  }),
 }, handler);
 ```
 
@@ -170,11 +172,11 @@ Returns the transition prompt for moving between stages, with optional prerequis
 ```typescript
 server.registerTool("get_transition_prompt", {
   description: "Get guidance for transitioning between ACM stages. Returns the transition prompt content. Set validate=true to also check prerequisites against the project's current state (reads status.md and brief).",
-  inputSchema: {
+  inputSchema: z.object({
     transition: z.enum(["discover_to_design", "design_to_develop"]).describe("Stage transition"),
     project_path: z.string().optional().describe("Project root path. Defaults to cwd."),
     validate: z.boolean().optional().describe("If true, reads project status.md and brief to check prerequisites. Default: false."),
-  },
+  }),
 }, handler);
 ```
 
@@ -193,13 +195,13 @@ Returns the specification for a named ACM artifact type.
 ```typescript
 server.registerTool("get_artifact_spec", {
   description: "Get the ACM specification for an artifact type. Use when you need to understand what a valid artifact looks like — required sections, frontmatter, formatting rules.",
-  inputSchema: {
+  inputSchema: z.object({
     artifact: z.enum([
       "brief", "intent", "status", "readme", "context",
       "rules", "design", "backlog", "folder_structure",
       "project_types", "stages", "review"
     ]).describe("Artifact type"),
-  },
+  }),
 }, handler);
 ```
 
@@ -229,15 +231,16 @@ Returns a starter template for a named artifact.
 ```typescript
 server.registerTool("get_artifact_stub", {
   description: "Get a starter template for an ACM artifact. Use when initializing a new project or creating a new artifact. Returns the template with placeholder values ready to fill in.",
-  inputSchema: {
+  inputSchema: z.object({
     artifact: z.enum([
       "brief", "intent", "status", "rules_constraints", "claude_md"
     ]).describe("Artifact to get stub for"),
-  },
+    project_type: z.enum(["app", "workflow", "artifact"]).optional().describe("Project type — used to select the correct claude_md stub. Defaults to 'app'. Ignored for non-claude_md artifacts."),
+  }),
 }, handler);
 ```
 
-**Source files:** `stubs/{artifact}.md` — direct file mapping (`brief` → `stubs/brief.md`, etc.). Note: `rules_constraints` maps to `stubs/rules-constraints.md` (underscore → hyphen conversion). The `claude_md` stub maps to `stubs/claude-md/` directory — returns the file matching the project type (`app.md`, `workflow.md`, or `artifact.md`). If no project type context is available, returns `app.md` as the default.
+**Source files:** `stubs/{artifact}.md` — direct file mapping (`brief` → `stubs/brief.md`, etc.). Note: `rules_constraints` maps to `stubs/rules-constraints.md` (underscore → hyphen conversion). The `claude_md` stub maps to `stubs/claude-md/` directory — returns the file matching the `project_type` input (`app.md`, `workflow.md`, or `artifact.md`). Defaults to `app.md` when `project_type` is omitted.
 
 ### Project (3 tools)
 
@@ -248,11 +251,11 @@ Returns guidance for a project classification.
 ```typescript
 server.registerTool("get_project_type_guidance", {
   description: "Get ACM guidance for a project type classification. Use during Discover or Design to understand what outputs, review focus, and structure a project type requires.",
-  inputSchema: {
+  inputSchema: z.object({
     type: z.enum(["app", "workflow", "artifact"]).describe("Project type"),
     scale: z.enum(["personal", "commercial"]).optional().describe("Project scale modifier"),
     scope: z.enum(["mvp", "full"]).optional().describe("Project scope modifier"),
-  },
+  }),
 }, handler);
 ```
 
@@ -265,9 +268,9 @@ Validates a project's folder structure against ACM-FOLDER-STRUCTURE-SPEC.
 ```typescript
 server.registerTool("check_project_structure", {
   description: "Validate a project's folder structure against ACM spec. Checks for required directories and files. Use when auditing a project or after scaffolding.",
-  inputSchema: {
+  inputSchema: z.object({
     project_path: z.string().optional().describe("Project root path. Defaults to cwd."),
-  },
+  }),
 }, handler);
 ```
 
@@ -298,9 +301,9 @@ Structural health checks — file presence, frontmatter validation, required sec
 ```typescript
 server.registerTool("check_project_health", {
   description: "Run structural health checks on an ACM project. Checks file presence, frontmatter validity, and required sections in key artifacts. Does NOT perform semantic analysis. Use for project audits or pre-review validation.",
-  inputSchema: {
+  inputSchema: z.object({
     project_path: z.string().optional().describe("Project root path. Defaults to cwd."),
-  },
+  }),
 }, handler);
 ```
 
@@ -318,7 +321,7 @@ server.registerTool("check_project_health", {
 ```typescript
 server.registerTool("get_rules_spec", {
   description: "Get the ACM rules governance specification. Use when setting up or auditing a project's .claude/rules/ directory — covers what rules are, categories, file organization, and lifecycle.",
-  inputSchema: {},
+  inputSchema: z.object({}),
 }, handler);
 ```
 
@@ -329,9 +332,9 @@ server.registerTool("get_rules_spec", {
 ```typescript
 server.registerTool("get_context_spec", {
   description: "Get the ACM specification for CLAUDE.md context artifacts. Use when creating or auditing CLAUDE.md files — covers required sections, what belongs in global vs project level.",
-  inputSchema: {
+  inputSchema: z.object({
     level: z.enum(["global", "project"]).describe("Which CLAUDE.md spec to return"),
-  },
+  }),
 }, handler);
 ```
 
@@ -346,11 +349,11 @@ server.registerTool("get_context_spec", {
 ```typescript
 server.registerTool("query_capabilities", {
   description: "Search the capabilities registry by keyword, type, or tags. Use when an agent needs to find available tools, skills, agents, or plugins for a task. Returns matching capability summaries.",
-  inputSchema: {
+  inputSchema: z.object({
     query: z.string().optional().describe("Keyword search across name, description, tags"),
     type: z.enum(["skill", "tool", "agent", "plugin"]).optional().describe("Filter by capability type"),
     tags: z.array(z.string()).optional().describe("Filter by tags (AND logic)"),
-  },
+  }),
 }, handler);
 ```
 
@@ -363,9 +366,9 @@ server.registerTool("query_capabilities", {
 ```typescript
 server.registerTool("get_capability_detail", {
   description: "Get full details for a specific capability by ID. Use when you need installation instructions, configuration, or complete metadata for a capability found via query_capabilities.",
-  inputSchema: {
-    capability_id: z.string().describe("Capability ID (e.g., 'acm-env', 'claude-md-management')"),
-  },
+  inputSchema: z.object({
+    capability_id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/).describe("Capability ID (e.g., 'acm-env', 'claude-md-management'). Must match pattern: lowercase alphanumeric with hyphens."),
+  }),
 }, handler);
 ```
 
@@ -378,9 +381,9 @@ server.registerTool("get_capability_detail", {
 ```typescript
 server.registerTool("query_knowledge", {
   description: "Search ACM knowledge base entries by topic. Simple text match across KB article titles and content. Use for finding process learnings and design patterns. For rich semantic search, use the Knowledge Base MCP server (when available).",
-  inputSchema: {
+  inputSchema: z.object({
     query: z.string().describe("Search term or topic"),
-  },
+  }),
 }, handler);
 ```
 
@@ -404,16 +407,45 @@ Two environment variables control path resolution, with hardcoded defaults for M
 | `ACM_ROOT` | `~/code/_shared/acm` | Root of ACM repository |
 | `ACM_REGISTRY_ROOT` | `~/code/_shared/capabilities-registry` | Root of capabilities registry |
 
+### Path Normalization
+
+All path inputs — env vars, tool arguments, and internal defaults — are normalized before use:
+
+1. **Tilde expansion:** Replace leading `~/` with `os.homedir() + '/'` (Node.js does not expand `~` automatically)
+2. **Resolution:** Apply `path.resolve()` to produce absolute paths
+3. **Validation:** Verify resolved path is within its expected base directory (see Path Sandboxing below)
+
 ### Resolution Order
 
 ```typescript
 // lib/paths.ts
-const ACM_ROOT = process.env.ACM_ROOT
-  || path.join(os.homedir(), 'code', '_shared', 'acm');
+function normalizePath(p: string): string {
+  if (p.startsWith('~/')) {
+    p = path.join(os.homedir(), p.slice(2));
+  }
+  return path.resolve(p);
+}
 
-const REGISTRY_ROOT = process.env.ACM_REGISTRY_ROOT
-  || path.join(os.homedir(), 'code', '_shared', 'capabilities-registry');
+const ACM_ROOT = normalizePath(
+  process.env.ACM_ROOT || '~/code/_shared/acm'
+);
+
+const REGISTRY_ROOT = normalizePath(
+  process.env.ACM_REGISTRY_ROOT || '~/code/_shared/capabilities-registry'
+);
 ```
+
+### Path Sandboxing
+
+Every file read is validated against allowed base directories before execution:
+
+| Tool Category | Allowed Base(s) |
+|---------------|----------------|
+| Orchestration, Artifacts, Governance, Knowledge | `ACM_ROOT` only |
+| Capabilities | `REGISTRY_ROOT` only |
+| Project (`check_project_structure`, `check_project_health`, `get_transition_prompt` with validate) | Resolved `project_path` only |
+
+**Enforcement:** After resolving a file path, call `fs.realpath()` and verify the result starts with the expected base directory. Reject with `isError` and actionable message if path escapes bounds. Constrain `capability_id` to pattern `^[a-z0-9][a-z0-9-]*$` before path construction.
 
 ### Consumer Wiring
 
@@ -653,6 +685,12 @@ None — all resolved during intake.
 | 4 | `get_artifact_stub` enum value `rules_constraints` doesn't match filename `rules-constraints.md` (underscore vs hyphen) | Ralph-Design | High | Low | Resolved | Added explicit filename mapping note clarifying underscore-to-hyphen conversion |
 | 5 | `get_transition_prompt` validate mode doesn't specify how to locate the project's brief file (could be `docs/brief.md` or `docs/inbox/*-brief.md`) | Ralph-Design | High | Low | Resolved | Added brief resolution logic: check `docs/brief.md` first, fall back to `docs/inbox/*-brief.md` |
 | 6 | Phase 1 internal review complete | Ralph-Design | - | - | Complete | 2 cycles: 5 High resolved in cycle 1, zero Critical/High in cycle 2 |
+| 7 | Missing tilde expansion for path inputs — Node.js doesn't expand `~` automatically | External-Gemini, External-GPT | High | Low | Resolved | Added normalizePath() with tilde expansion to lib/paths.ts spec |
+| 8 | Path sandboxing underspecified — free-form path inputs could read arbitrary files | External-GPT | High | Medium | Resolved | Added Path Sandboxing section with per-category base directory enforcement via realpath prefix checks |
+| 9 | Zod schema syntax wrong — `inputSchema: {...}` should be `inputSchema: z.object({...})` | External-GPT | High | Low | Resolved | Corrected all 13 tool schemas to use z.object() |
+| 10 | `get_artifact_stub(claude_md)` has no input to select project type — stub selection not deterministic | External-GPT | Medium | Low | Resolved | Added optional `project_type` param to schema, defaults to 'app' |
+| 11 | Validation logic in `check_project_health` is coupled to spec heading names — spec changes break code | External-Gemini | Medium | Low | Open | Valid concern; acceptable for MVP. Add code comment linking to spec versions during Develop. |
+| 12 | Phase 2 external review complete | External-Gemini, External-GPT | - | - | Complete | 2 reviewers: 3 High resolved, 1 Medium resolved, 1 Medium logged |
 
 ---
 
@@ -703,6 +741,11 @@ None.
 - Intent required sections corrected to match ACM-INTENT-SPEC
 - Brief resolution logic specified for transition validation
 - Stub filename mapping edge case (underscore → hyphen) documented
+- Path normalization (tilde expansion) specified for all path inputs
+- Path sandboxing enforcement specified per tool category
+- All zod schemas corrected to `z.object({...})` syntax
+- `capability_id` input constrained to safe pattern `^[a-z0-9][a-z0-9-]*$`
+- `get_artifact_stub` now has explicit `project_type` discriminator for claude_md stubs
 
 ### Implementation Guidance
 
@@ -758,6 +801,33 @@ Read in this order:
 
 **Outcome:** Phase 1 complete — 2 cycles, zero Critical/High in cycle 2. Design ready for Phase 2 or Develop.
 
+### Phase 2: External Review
+
+**Date:** 2026-01-31
+**Reviewers:** External-Gemini, External-GPT
+**Issues Found:** 0 Critical, 3 High, 2 Medium
+**Actions Taken:**
+- **Auto-fixed (4 issues):**
+  - Missing tilde expansion in path resolution (High/Low) — Added normalizePath() with `~/` → `os.homedir()` expansion
+  - Path sandboxing underspecified (High/Medium) — Added per-category base directory enforcement with realpath prefix checks
+  - Zod schema syntax incorrect (High/Low) — Corrected all 13 schemas to `z.object({...})`
+  - `claude_md` stub selection not deterministic (Medium/Low) — Added optional `project_type` input param
+- **Logged only (1 issue):**
+  - Health check validation coupled to spec headings (Medium/Low) — Valid concern, acceptable for MVP with code comments
+
+**Cross-Reviewer Consensus:**
+- Both flagged tilde expansion independently (Gemini High, GPT Medium)
+- GPT focused on security (path traversal, input sanitization); Gemini focused on runtime correctness
+- Both praised bounded-context separation and no-caching strategy
+
+**Questions Answered for Develop:**
+- `process.cwd()`: MCP servers spawned by Claude Code inherit the consumer project's cwd — this is the expected behavior
+- Relative `project_path` inputs: resolved via `path.resolve()` against `process.cwd()`, then sandboxed against the resolved base
+- `capability_id`: constrained to `^[a-z0-9][a-z0-9-]*$` pattern — no path traversal possible
+- Env var `~` usage: now explicitly handled via normalizePath()
+
+**Outcome:** Phase 2 complete — 3 High and 1 Medium resolved. Design ready for Develop.
+
 ---
 
 ## Revision History
@@ -766,3 +836,4 @@ Read in this order:
 |---------|------|---------|
 | 0.1 | 2026-01-31 | Initial draft — all 13 tool schemas, architecture, tech stack, companion skill, path config, health checks, develop handoff |
 | 0.2 | 2026-01-31 | Ralph-Design cycle 1: Fixed intent_ref path, corrected health check required sections for intent, added claude_md stub selection logic, clarified rules_constraints filename mapping, added brief resolution logic for transition validation |
+| 0.3 | 2026-01-31 | Phase 2 external review (Gemini + GPT): Added tilde expansion and path sandboxing, corrected all zod schemas to z.object(), added project_type param to get_artifact_stub, constrained capability_id input pattern |
