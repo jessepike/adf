@@ -2,7 +2,7 @@
 type: "tracking"
 description: "ACM backlog — prioritized queue of potential work items"
 version: "2.0.0"
-updated: "2026-01-30"
+updated: "2026-01-31"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/BACKLOG.md"
@@ -15,10 +15,16 @@ spec: "ACM-BACKLOG-SPEC.md"
 
 | ID | Item | Type | Component | Pri | Size | Status |
 |----|------|------|-----------|-----|------|--------|
+| B35 | Agents not consulting capabilities-registry before installing capabilities — review process and diagnose why | Bug | acm-env | P1 | M | Pending |
 | B34 | Evaluate MCP tools for environment — memory-mcp, filesystem-mcp, sequentialthinking-mcp, everything-mcp | Enhancement | acm-env | P1 | M | Pending |
 | B15 | Deliver stage spec | New spec | ACM | P2 | M | Pending |
 | B18 | Design memory layer spec (MEMORY-SPEC.md) | New spec | memory | P2 | L | Pending |
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | P2 | S | Pending |
+| B36 | ACM MCP server — maintenance primitive not addressed in tool surface | Enhancement | acm-server | P3 | S | Pending |
+| B37 | Align "meta layer" → "environment layer" terminology across all specs and prompts | Terminology | ACM | P2 | M | Pending |
+| B38 | Connect self-improvement loop to MCP server brief — document which steps are covered vs deferred to memory/KB | Docs | ACM | P3 | S | Pending |
+| B39 | Add `deliver` enum support to ACM MCP server once ACM-DELIVER-SPEC.md is created | Enhancement | acm-server | P2 | S | Blocked by B15 |
+| B40 | Update ACM-STAGES-SPEC.md environment layer references to include ACM MCP server alongside acm-env | Docs | ACM | P2 | S | Done |
 | B14 | Automated multi-model review orchestration | Architecture | ACM | P3 | L | Pending |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture | ACM/kb | P3 | M | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | Pending |
@@ -42,7 +48,7 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B24 | Registry model — install levels and plugin scoping | 2026-01-30 | Added `install_id` and `install_level` to REGISTRY-SPEC.md and all plugin capability.yaml files. |
 | B23 | Register untracked marketplace plugins | 2026-01-30 | 19 plugins total. Registry grew from 21→39 capabilities. |
 | B12 | Auto-update from upstream | 2026-01-30 | `/acm-env:refresh` orchestrates sync → freshness → staging → promote workflow. |
-| B17 | Document environment layer architecture | 2026-01-29 | ACM-ENVIRONMENT-SPEC.md created. |
+| B17 | Document environment layer architecture | 2026-01-29 | ACM-ARCHITECTURE-SPEC.md created (originally ACM-ENVIRONMENT-SPEC.md, renamed 2026-01-31). |
 | B4 | Review scoring — diminishing returns | 2026-01-29 | Severity: Critical/High/Low. Stop at zero C+H. Min 2, max 10. |
 | B3 | Phase boundary protocol | 2026-01-29 | ACM-DEVELOP-SPEC.md v1.2.0. Agent-driven /clear + re-read + confirm. |
 | B1 | Harden start-develop prompt | 2026-01-29 | start-develop-prompt.md v2.0.0. Explicit STOP language, registry query, phase boundary protocol. |

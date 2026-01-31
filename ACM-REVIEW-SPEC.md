@@ -345,7 +345,7 @@ Modules are appended to the base prompt, not separate files.
 |------|-------------|
 | ACM-STAGES-SPEC.md | Defines the stages; this spec defines the review mechanism within stages |
 | ACM-BRIEF-SPEC.md | Defines the Brief artifact; this spec defines how Briefs are reviewed |
-| ACM-ENVIRONMENT-SPEC.md | Validation primitive; reviews are one form of validation |
+| ACM-ARCHITECTURE-SPEC.md | Validation primitive; reviews are one form of validation |
 
 ---
 

@@ -92,7 +92,7 @@ Known improvements identified but not yet implemented:
 | Review diminishing returns | B4: Simple scoring — Critical/High/Low tags. Stop when zero C+H. Min 2, max 10 cycles. |
 | Prompt path friction | B5-B7: Audit prompts for stale paths, emit ready-to-copy commands. |
 | Commands vs Skills terminology | B8: Claude Code 2.1.3 folded commands into skills. Update all specs. |
-| Environment layer undefined | Created ACM-ENVIRONMENT-SPEC.md — six primitives (orchestration, capabilities, knowledge, memory, maintenance, validation). Two layers (project + environment). |
+| Environment layer undefined | Created ACM-ARCHITECTURE-SPEC.md (formerly ACM-ENVIRONMENT-SPEC.md) — six primitives (orchestration, capabilities, knowledge, memory, maintenance, validation). Two layers (project + environment). |
 | Knowledge vs Memory distinction | Knowledge = curated/evergreen/read-heavy. Memory = raw/temporal/write-heavy. Separate repos. |
 | Registry organization | By capability name, not vendor. Three types: skills, tools, agents. Tags for queryability. |
 

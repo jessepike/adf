@@ -18,7 +18,7 @@ Define the minimal stage workflow for agentic projects — applicable to softwar
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  META LAYER (Ambient Capabilities)                  │
+│  ENVIRONMENT LAYER (Ambient Capabilities)            │
 │  Skills, Tools, Templates, Rules, Prompts           │
 │                                                     │
 │  ┌──────────┐  ┌────────┐  ┌─────────┐  ┌─────────┐│
@@ -32,9 +32,9 @@ Define the minimal stage workflow for agentic projects — applicable to softwar
 
 ---
 
-## Meta Layer
+## Environment Layer
 
-The ambient capability set that wraps around all stages. Stages pull what they need on demand.
+The persistent, cross-cutting infrastructure that wraps around all stages. Stages pull what they need on demand. See `ACM-ARCHITECTURE-SPEC.md` for full architecture.
 
 ### Contents
 - **Skills** — Reusable capabilities (research, review, creation)
@@ -43,9 +43,10 @@ The ambient capability set that wraps around all stages. Stages pull what they n
 - **Rules** — Governing constraints (from Global CLAUDE.md)
 - **Prompts** — Pre-built prompts for common operations
 
-### Meta Layer Manager: acm-env
+### Environment Layer Interfaces
 
-The **acm-env** plugin (`~/.claude/plugins/acm-env/`) is the management layer for the meta layer itself. It ensures skills, tools, rules, and context artifacts are properly configured, available, current, and not stale. See `ACM-ENV-PLUGIN-SPEC.md`.
+- **acm-env plugin** — Environment *management*: configuration, baseline validation, hooks, plugin/capability administration. See `ACM-ENV-PLUGIN-SPEC.md`.
+- **ACM MCP server** — Environment *knowledge*: queryable access to specs, prompts, stubs, project validation, capability queries. Consumed by agents in any project via `.mcp.json`.
 
 ### Cross-Stage Artifacts
 

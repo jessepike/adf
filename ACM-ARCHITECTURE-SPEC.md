@@ -1,18 +1,18 @@
 ---
 type: "specification"
-description: "Defines the ACM environment layer — the cross-cutting infrastructure that wraps around all projects and stages"
-version: "1.0.0"
-updated: "2026-01-29"
+description: "Defines the ACM framework architecture — the two-layer model, six environment primitives, and component relationships"
+version: "1.1.0"
+updated: "2026-01-31"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-ENVIRONMENT-SPEC.md"
+location: "acm/ACM-ARCHITECTURE-SPEC.md"
 ---
 
-# ACM Environment Layer Specification
+# ACM Architecture Specification
 
 ## Purpose
 
-Define the environment layer — the persistent, cross-cutting infrastructure that wraps around all projects and all stages. The environment layer sets the conditions for agentic work to succeed.
+Define the ACM framework architecture — the two-layer model (project layer and environment layer), the six environment primitives, component relationships, and design principles. This is the master architecture document for the ACM framework.
 
 ---
 
@@ -267,7 +267,7 @@ Every ACM project gets both. Rules are created at project init (`.claude/rules/`
 │   │   └── rules/                # Hard constraints (human-controlled)
 │   │       └── constraints.md    # Non-negotiable rules
 │   ├── ACM-*-SPEC.md             # Process specs (orchestration contracts)
-│   ├── ACM-ENVIRONMENT-SPEC.md   # This spec (architecture vision)
+│   ├── ACM-ARCHITECTURE-SPEC.md   # This spec (architecture vision)
 │   ├── prompts/                  # Stage prompts
 │   ├── kb/                       # Knowledge base (curated learnings)
 │   ├── scripts/                  # Init, orchestration scripts
@@ -333,10 +333,10 @@ This loop is the mechanism by which the system gets better over time. It is not 
 
 | Spec | Relationship |
 |------|-------------|
-| ACM-ENV-PLUGIN-SPEC.md | Narrower — defines the acm-env plugin specifically. This spec supersedes it architecturally. |
+| ACM-ENV-PLUGIN-SPEC.md | Narrower — defines the acm-env plugin specifically (environment management). |
 | ACM-STAGES-SPEC.md | Defines the project layer. This spec defines the environment layer that wraps it. |
 | ACM-TAXONOMY.md | Terminology. Environment terms section should be updated to reflect six primitives. |
-| REGISTRY-SPEC.md | To be created — self-documenting spec for the capability registry. |
+| REGISTRY-SPEC.md | Self-documenting spec for the capability registry (in capabilities-registry repo). |
 | MEMORY-SPEC.md | To be created — defines how memory works. |
 
 ---

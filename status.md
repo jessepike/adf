@@ -9,7 +9,7 @@ updated: "2026-01-31"
 ## Current State
 
 - **Stage:** Develop (ACM framework itself)
-- **Focus:** B34 MCP Server Registry — registry schema, plugin-bundled MCPs, baseline governance, community scanning
+- **Focus:** ACM MCP server design brief — architecture decisions, tool surface, component alignment
 
 ## What's Complete
 
@@ -37,7 +37,7 @@ updated: "2026-01-31"
 - [x] ACM-CONTEXT-ARTIFACT-SPEC.md (v1.0.0)
 - [x] ACM-STAGES-SPEC.md (v1.1.0)
 - [x] ACM-ENV-PLUGIN-SPEC.md (v1.0.0)
-- [x] ACM-ENVIRONMENT-SPEC.md (v1.0.0) — environment layer architecture (six primitives, two layers)
+- [x] ACM-ARCHITECTURE-SPEC.md (v1.1.0) — framework architecture (six primitives, two layers). Renamed from ACM-ENVIRONMENT-SPEC.md.
 - [x] ACM-RULES-SPEC.md (v1.0.0) — `.claude/rules/` enforcement layer, governance model
 - [x] ACM-REVIEW-SPEC.md (v1.0.0) — two-phase review mechanism, cycle rules, severity, YAGNI enforcement
 

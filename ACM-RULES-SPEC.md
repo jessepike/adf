@@ -253,7 +253,7 @@ A well-formed rules directory:
 | ACM-PROJECT-CLAUDE-MD-SPEC.md | Context layer that rules complement and override |
 | ACM-FOLDER-STRUCTURE-SPEC.md | Defines `.claude/rules/` in project structure |
 | ACM-CONTEXT-ARTIFACT-SPEC.md | Defines `rule` type in artifact vocabulary |
-| ACM-ENVIRONMENT-SPEC.md | Rules are part of the governance model in the environment layer |
+| ACM-ARCHITECTURE-SPEC.md | Rules are part of the governance model in the environment layer |
 
 ---
 
@@ -261,6 +261,6 @@ A well-formed rules directory:
 
 - ACM-GLOBAL-CLAUDE-MD-SPEC.md
 - ACM-PROJECT-CLAUDE-MD-SPEC.md
-- ACM-ENVIRONMENT-SPEC.md
+- ACM-ARCHITECTURE-SPEC.md
 - ACM-CONTEXT-ARTIFACT-SPEC.md
 - ACM-FOLDER-STRUCTURE-SPEC.md

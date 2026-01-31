@@ -19,7 +19,7 @@ ACM (Agentic Context Management) is the framework that defines how agentic proje
 1. `.claude/rules/` — Hard constraints (read first, always enforced)
 2. `status.md` — Current state, session log, next steps
 3. `BACKLOG.md` — All tracked work items
-4. `ACM-ENVIRONMENT-SPEC.md` — Environment layer architecture (six primitives)
+4. `ACM-ARCHITECTURE-SPEC.md` — Environment layer architecture (six primitives)
 5. `ACM-STAGES-SPEC.md` — Stage workflow (Discover → Design → Develop → Deliver)
 
 ## Context Map
