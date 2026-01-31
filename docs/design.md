@@ -1,10 +1,10 @@
 ---
 type: "design"
 description: "Design for the external-review skill + MCP server — automated Phase 2 review via external LLM APIs"
-version: "1.2.0"
+version: "1.3.0"
 updated: "2026-01-31"
-status: "internal-review-complete"
-review_cycle: 2
+status: "complete"
+review_cycle: 3
 scope: "acm"
 lifecycle: "draft"
 location: "acm/docs/design.md"
@@ -125,7 +125,7 @@ acm/skills/external-review/
 
 models:
   kimi-k2:
-    provider: moonshot
+    provider: openai_compat
     endpoint: https://api.moonshot.cn/v1
     model: kimi-k2-0905
     api_key_env: MOONSHOT_API_KEY      # Or inline: api_key: "sk-..."
@@ -191,6 +191,9 @@ execution:
   parallel: true                  # Call models in parallel
   timeout_seconds: 120            # Per-model timeout
   retry_attempts: 2               # Retry on transient failure
+  # Retry policy: exponential backoff with jitter for 429/5xx/timeouts only.
+  # Never retry non-transient failures (4xx other than 429).
+  # Max total retry time per model: 60s. Retries are per-model, not global.
 ```
 
 ---
@@ -211,7 +214,7 @@ Returns available models from `models.yaml`.
   "models": [
     {
       "id": "kimi-k2",
-      "provider": "moonshot",
+      "provider": "openai_compat",
       "model": "kimi-k2-0905",
       "available": true
     },
@@ -227,13 +230,13 @@ Returns available models from `models.yaml`.
 
 #### `review`
 
-Sends artifact + prompt to specified models in parallel, returns aggregated responses.
+Sends artifact + prompt to specified models in parallel, returns aggregated responses. The server reads artifact content from disk to avoid doubling context usage in the orchestrator.
 
 **Parameters:**
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `models` | string[] | Yes | Model IDs from models.yaml |
-| `artifact_content` | string | Yes | Full text of artifact being reviewed |
+| `artifact_path` | string | Yes | Absolute path to artifact file — server reads content from disk |
 | `prompt` | string | Yes | Review prompt with instructions |
 | `timeout` | number | No | Override default timeout (seconds) |
 
@@ -302,9 +305,14 @@ class BaseProvider(ABC):
         artifact_content: str,
         prompt: str,
         model: str,
-        settings: dict
+        settings: dict,
+        extra_params: dict | None = None
     ) -> ReviewResponse:
-        """Send review request to provider."""
+        """Send review request to provider.
+
+        extra_params: provider-specific settings from models.yaml settings block
+        (e.g., min_p, top_k) — merged into API call parameters.
+        """
         pass
     
     @abstractmethod
@@ -585,7 +593,7 @@ Create `~/.claude/models.yaml`:
 ```yaml
 models:
   kimi-k2:
-    provider: moonshot
+    provider: openai_compat
     endpoint: https://api.moonshot.cn/v1
     model: kimi-k2-0905
     api_key: "your-moonshot-api-key"
@@ -721,6 +729,13 @@ updated: "2026-01-31"
 | 8 | Capability registry entry has install_level: user but skill lives in ACM repo | Ralph-Design | Low | N/A | Open | — |
 | 9 | UX example still showed "min 2" after cycle rules fix | Ralph-Design | Low | N/A | Resolved | Fixed confirmation flow and cycle progression examples |
 | 10 | Phase 1 review complete | Ralph-Design | - | - | Complete | 2 cycles: 3 Critical, 3 High resolved |
+| 11 | Provider ID "moonshot" doesn't map to implementation after moonshot.py removal | External-GPT | Critical | Low | Resolved | Changed provider to openai_compat in models.yaml examples |
+| 12 | artifact_content as string doubles context usage, risks payload limits | External-Gemini, External-GPT | High | Medium | Resolved | Changed to artifact_path — server reads file from disk |
+| 13 | Provider-specific params (min_p, etc.) have no pass-through mechanism | External-Gemini | High | Low | Resolved | Added extra_params to BaseProvider.review interface |
+| 14 | Retry policy underspecified — no backoff, no retriable error definition | External-GPT | High | Low | Resolved | Added retry policy to execution settings |
+| 15 | Hardcoded ~/.claude/ config path brittle in containers | External-Gemini | Low | N/A | Open | MVP personal-scale — env var override deferred |
+| 16 | Secret redaction only covers error messages, not logs/traces | External-GPT | Low | N/A | Open | Implementation detail, not design-blocking |
+| 17 | Phase 2 review complete | External-Gemini, External-GPT | - | - | Complete | 1 cycle: 1 Critical, 3 High resolved |
 
 ---
 
@@ -755,6 +770,29 @@ updated: "2026-01-31"
 
 **Outcome:** Phase 1 complete — 2 cycles, zero Critical/High in final cycle. Design ready for Phase 2 external review.
 
+### Phase 2: External Review
+
+**Date:** 2026-01-31
+**Mechanism/Reviewers:** External-Gemini, External-GPT (parallel, 1 cycle)
+**Issues Found:** 1 Critical, 3 High, 2 Low
+**Complexity Assessment:** 2 Low, 1 Medium (for Critical/High issues)
+**Actions Taken:**
+- **Auto-fixed (4 issues):**
+  - Provider ID "moonshot" unmapped after moonshot.py removal (Critical/Low) — Changed to openai_compat
+  - artifact_content doubles context (High/Medium) — Changed to artifact_path, server reads from disk
+  - Provider-specific params no pass-through (High/Low) — Added extra_params to BaseProvider
+  - Retry policy underspecified (High/Low) — Added backoff/jitter policy for 429/5xx/timeouts
+- **Logged only (2 issues):**
+  - Hardcoded config path (Low/N/A) — MVP personal-scale, deferred
+  - Incomplete secret redaction (Low/N/A) — Implementation detail
+
+**Cross-Reviewer Consensus:**
+- artifact_content/oversized artifact issue flagged by both reviewers (high confidence)
+- Provider ID mapping flagged by GPT only but clearly blocking (auto-fix)
+- Config path and redaction flagged by single reviewers, not blocking (Low)
+
+**Outcome:** Phase 2 complete — 1 cycle, 1 Critical + 3 High resolved. Design approved for Develop.
+
 ---
 
 ## Revision History
@@ -764,3 +802,4 @@ updated: "2026-01-31"
 | 1.0.0 | 2026-01-31 | Initial spec — architecture, MCP tools, UX flow, configuration |
 | 1.1.0 | 2026-01-31 | Design review cycle 1: Fixed frontmatter, artifact paths, Phase 2 min cycles. Added ACM MCP server integration, Issue Log, Review Log. Collapsed moonshot provider into openai_compat. |
 | 1.2.0 | 2026-01-31 | Design review cycle 2: Fixed stale UX examples. Phase 1 internal review complete — 2 cycles, 3 Critical + 3 High resolved. |
+| 1.3.0 | 2026-01-31 | Phase 2 external review (Gemini + GPT): Fixed provider ID mapping, changed artifact_content to artifact_path, added extra_params pass-through, defined retry policy. Design complete. |
