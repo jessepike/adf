@@ -15,6 +15,8 @@ spec: "ACM-BACKLOG-SPEC.md"
 
 | ID | Item | Type | Component | Pri | Size | Status |
 |----|------|------|-----------|-----|------|--------|
+| B42 | Structured session handoff spec — define a parseable handoff format that agents produce at phase boundaries so next session can auto-orient (read order, what's done, build notes, remaining work) | Enhancement | ACM | P1 | M | Pending |
+| B43 | Automated phase transitions — agent completes phase → commit → produce handoff → `/clear` → next session auto-resumes from handoff without human prompting. Extends Phase Boundary Protocol in ACM-DEVELOP-SPEC.md | Enhancement | ACM | P1 | L | Pending |
 | B35 | Agents not consulting capabilities-registry before installing capabilities — review process and diagnose why | Bug | acm-env | P1 | M | Pending |
 | B34 | Evaluate MCP tools for environment — memory-mcp, filesystem-mcp, sequentialthinking-mcp, everything-mcp | Enhancement | acm-env | P1 | M | Pending |
 | B15 | Deliver stage spec | New spec | ACM | P2 | M | Pending |
