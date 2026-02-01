@@ -38,7 +38,7 @@ updated: "2026-02-01"
 - [x] ACM-CONTEXT-ARTIFACT-SPEC.md (v1.0.0)
 - [x] ACM-STAGES-SPEC.md (v1.1.0)
 - [x] ACM-ENV-PLUGIN-SPEC.md (v1.0.0)
-- [x] ACM-ARCHITECTURE-SPEC.md (v1.1.0) — framework architecture (six primitives, two layers). Renamed from ACM-ENVIRONMENT-SPEC.md.
+- [x] ACM-ARCHITECTURE-SPEC.md (v2.0.0) — master framework spec (six primitives, two layers, spec map, stage overview, artifact flow, interface map, spec index). Renamed from ACM-ENVIRONMENT-SPEC.md.
 - [x] ACM-RULES-SPEC.md (v1.0.0) — `.claude/rules/` enforcement layer, governance model
 - [x] ACM-REVIEW-SPEC.md (v1.0.0) — two-phase review mechanism, cycle rules, severity, YAGNI enforcement
 
@@ -103,6 +103,9 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 ### Recently Completed
 - [x] B14: External Review Skill + MCP Server — Build complete (34 tests, 6 phases)
 
+### Recently Completed (cont.)
+- [x] B54: ACM-ARCHITECTURE-SPEC.md elevated to master framework spec v2.0.0 — spec map, framework diagram, stages overview, artifact flow, interface map, spec index, revision history
+
 ### Next Up
 - [ ] B15: Deliver stage spec
 - [ ] B18-B19: Memory layer spec and scaffold
@@ -142,6 +145,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-01-31 | B14 Develop Phases 1-4 complete. Phase 1 (Intake): resolved 6 design questions (path validation→project root+home, partial load, no cost metadata, project .mcp.json, venv, official mcp SDK). Phase 2 (Capability Assessment): manifest.md + capabilities.md. Phase 3 (Planning): plan.md + tasks.md (11 tasks, 6 phases). HARD GATE approved. Phase 4 (Review): Ralph Loop internal review — 3 cycles, 1C + 4H resolved (TDD co-location, venv task, server entry point, requirements.txt sequencing). Plan v1.1.0 ready for build. |
 | 2026-02-01 | ACM-DEVELOP-SPEC.md v2.0.0 — major revision. Added Phase 7 (Documentation) + Phase 8 (Closeout). Two-tier testing model (automated + real-world). Progressive disclosure in tasks.md. Build-to-design verification in Phase 6. Commit cadence section. Universal + type-specific exit criteria. Removed registration from Develop (→ Deliver). ACM-STAGES-SPEC.md v1.2.0 — universal exit criteria + stage boundary handoff protocol. ACM-FOLDER-STRUCTURE-SPEC.md v1.2.0 — docs/acm/ convention for stage planning artifacts. Moved B14 artifacts to docs/acm/. Added B46-B51 to backlog. |
 | 2026-01-31 | B14 Develop Phases 5-6 complete — full build. Phase A: scaffold, venv, config loading (9 tests), path validation (7 tests), provider base, MCP entry point + list_models. Phase B: OpenAI-compat provider (5 tests), Google provider (5 tests) — both with retry/backoff/extra_params. Phase C: review tool with parallel asyncio.gather, partial failures (5 tests). Phase D: config.yaml + SKILL.md. Phase E: integration tests (3 tests). Phase F: .mcp.json registration. Total: 34 tests passing, all 11 tasks done. |
+| 2026-02-01 | B54: Elevated ACM-ARCHITECTURE-SPEC.md to master framework spec v2.0.0. Added spec map (reading guide), framework workflow diagram, stages overview, artifact flow model, interface map, complete spec index (19 specs with verified versions), revision history. Corrected plan version discrepancies (INTENT 1.0.1, REVIEW 1.2.0) and included 3 specs plan missed (BACKLOG, GLOBAL-CLAUDE-MD, PROJECT-CLAUDE-MD). |
 
 ## Decisions
 
