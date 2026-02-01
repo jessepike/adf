@@ -1,8 +1,8 @@
 ---
 type: "design"
 description: "Design for the external-review skill + MCP server — automated Phase 2 review via external LLM APIs"
-version: "1.3.0"
-updated: "2026-01-31"
+version: "1.4.0"
+updated: "2026-02-01"
 status: "complete"
 review_cycle: 3
 scope: "acm"
@@ -267,7 +267,9 @@ Sends artifact + prompt to specified models in parallel, returns aggregated resp
 }
 ```
 
-**Error Response:**
+`tokens_used` per model is taken directly from the LLM provider API response. `total_latency_ms` is wall-clock time from first request to last response (parallel execution).
+
+**Partial Failure Response (mixed success/error):**
 ```json
 {
   "reviews": [
@@ -275,9 +277,22 @@ Sends artifact + prompt to specified models in parallel, returns aggregated resp
       "model": "kimi-k2",
       "status": "error",
       "error": "API rate limit exceeded",
-      "retries_attempted": 2
+      "retries_attempted": 2,
+      "tokens_used": null,
+      "latency_ms": 5200
+    },
+    {
+      "model": "gemini",
+      "status": "success",
+      "response": "## Review Feedback\n\n...",
+      "tokens_used": { "input": 2341, "output": 756 },
+      "latency_ms": 3892,
+      "timestamp": "2026-01-31T14:23:44Z"
     }
-  ]
+  ],
+  "models_called": ["kimi-k2", "gemini"],
+  "parallel": true,
+  "total_latency_ms": 5200
 }
 ```
 
@@ -736,6 +751,10 @@ updated: "2026-01-31"
 | 15 | Hardcoded ~/.claude/ config path brittle in containers | External-Gemini | Low | N/A | Open | MVP personal-scale — env var override deferred |
 | 16 | Secret redaction only covers error messages, not logs/traces | External-GPT | Low | N/A | Open | Implementation detail, not design-blocking |
 | 17 | Phase 2 review complete | External-Gemini, External-GPT | - | - | Complete | 1 cycle: 1 Critical, 3 High resolved |
+| 18 | tokens_used output calculation unspecified — unclear how per-model token counts are derived | External-Gemini | High | Low | Resolved | Added clarification that tokens_used comes directly from LLM API response |
+| 19 | Error response doesn't show mixed success/error across models | External-Gemini | High | Low | Resolved | Replaced error example with partial failure response showing mixed statuses |
+| 20 | requirements.txt contents not specified | External-Gemini | Low | N/A | Open | Implementation detail — dependencies determined during Develop |
+| 21 | extra_params merge behavior with provider settings unspecified | External-Gemini | Low | N/A | Open | Implementation detail — merge strategy determined during Develop |
 
 ---
 
@@ -793,6 +812,28 @@ updated: "2026-01-31"
 
 **Outcome:** Phase 2 complete — 1 cycle, 1 Critical + 3 High resolved. Design approved for Develop.
 
+### Phase 2b: External Review (Gemini re-review)
+
+**Date:** 2026-02-01
+**Mechanism/Reviewers:** External-Gemini (1 cycle)
+**Issues Found:** 0 Critical, 2 High, 2 Low
+**Complexity Assessment:** 2 Low (for High issues)
+**Actions Taken:**
+- **Auto-fixed (2 issues):**
+  - tokens_used output calculation unspecified (High/Low) — Added clarification that values come from LLM API
+  - Error response doesn't show mixed success/error (High/Low) — Replaced with partial failure response example
+- **Logged only (2 issues):**
+  - requirements.txt contents not specified (Low/N/A) — Implementation detail
+  - extra_params merge behavior unspecified (Low/N/A) — Implementation detail
+- **Discarded (1 issue):**
+  - Claimed artifact_path redundant in response — false positive (artifact_path not in response JSON)
+
+**Cross-Reviewer Consensus:** N/A (single model)
+
+**Cost:** $0.0015 | Tokens: 8,196 in / 1,587 out
+
+**Outcome:** Phase 2b complete — 0 Critical, 0 High remaining after fixes. Design validated.
+
 ---
 
 ## Revision History
@@ -803,3 +844,4 @@ updated: "2026-01-31"
 | 1.1.0 | 2026-01-31 | Design review cycle 1: Fixed frontmatter, artifact paths, Phase 2 min cycles. Added ACM MCP server integration, Issue Log, Review Log. Collapsed moonshot provider into openai_compat. |
 | 1.2.0 | 2026-01-31 | Design review cycle 2: Fixed stale UX examples. Phase 1 internal review complete — 2 cycles, 3 Critical + 3 High resolved. |
 | 1.3.0 | 2026-01-31 | Phase 2 external review (Gemini + GPT): Fixed provider ID mapping, changed artifact_content to artifact_path, added extra_params pass-through, defined retry policy. Design complete. |
+| 1.4.0 | 2026-02-01 | Phase 2b external review (Gemini): Clarified tokens_used sourcing, replaced error response with partial failure example showing mixed statuses. |
