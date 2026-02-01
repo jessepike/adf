@@ -1,8 +1,8 @@
 ---
 type: "specification"
-description: "Defines the ACM framework architecture — the two-layer model, six environment primitives, and component relationships"
-version: "1.3.0"
-updated: "2026-01-31"
+description: "Master framework specification — defines ACM's architecture, stage pipeline, artifact flow, six environment primitives, interface map, and spec index. The single entry point for understanding ACM."
+version: "2.0.0"
+updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/ACM-ARCHITECTURE-SPEC.md"
@@ -12,7 +12,28 @@ location: "acm/ACM-ARCHITECTURE-SPEC.md"
 
 ## Purpose
 
-Define the ACM framework architecture — the two-layer model (project layer and environment layer), the six environment primitives, component relationships, and design principles. This is the master architecture document for the ACM framework.
+This is the **master framework specification** for ACM (Agentic Context Management). It is the single entry point for understanding how ACM works — the two-layer model, the six environment primitives, the stage pipeline, artifact flow, interface map, and the complete spec index.
+
+All other ACM specs define narrower slices. This spec defines the whole.
+
+---
+
+## How to Read ACM
+
+| Want to understand... | Read |
+|---|---|
+| The whole framework | This spec (ACM-ARCHITECTURE-SPEC.md) |
+| Stage workflow model | ACM-STAGES-SPEC.md |
+| A specific stage | ACM-DISCOVER-SPEC / DESIGN-SPEC / DEVELOP-SPEC |
+| Project classification | ACM-PROJECT-TYPES-SPEC.md |
+| Artifact formats | ACM-BRIEF-SPEC / INTENT-SPEC / STATUS-SPEC / README-SPEC |
+| Review process | ACM-REVIEW-SPEC.md |
+| Rules governance | ACM-RULES-SPEC.md |
+| Context artifacts | ACM-CONTEXT-ARTIFACT-SPEC.md / GLOBAL-CLAUDE-MD-SPEC / PROJECT-CLAUDE-MD-SPEC |
+| Environment plugin | ACM-ENV-PLUGIN-SPEC.md |
+| Folder conventions | ACM-FOLDER-STRUCTURE-SPEC.md |
+| Backlog management | ACM-BACKLOG-SPEC.md |
+| Terminology | ACM-TAXONOMY.md |
 
 ---
 
@@ -53,6 +74,84 @@ The stages live *inside* the environment. The environment sets the conditions fo
 │                                                           │
 └──────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## Framework Workflow Diagram
+
+How the full framework fits together — environment as outer boundary, primitives as ambient services, stage pipeline in the center, artifacts flowing between stages:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        ENVIRONMENT LAYER                                │
+│                                                                         │
+│  Orchestration ◄─── ACM Specs + Prompts                                │
+│  Capabilities  ◄─── capabilities-registry/                              │
+│  Knowledge     ◄─── acm/kb/                                            │
+│  Memory        ◄─── memory/                                             │
+│  Maintenance   ◄─── distributed (each component)                        │
+│  Validation    ◄─── distributed (skills + MCP health checks)            │
+│                                                                         │
+│  ┌────────────────────── STAGE PIPELINE ──────────────────────────┐     │
+│  │                                                                 │     │
+│  │  Discover ──────► Design ──────► Develop ──────► Deliver        │     │
+│  │     │                │              │               │           │     │
+│  │  intent.md       design.md      deliverable     deployed/       │     │
+│  │  brief.md                       tests           distributed     │     │
+│  │                                 README                          │     │
+│  │                                 plan/tasks/                     │     │
+│  │                                 manifest/caps                   │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                         │
+│  Cross-stage: status.md (every session) │ CLAUDE.md (evolves)           │
+│  Cross-stage: docs/acm/ (planning artifacts)                            │
+│                                                                         │
+│  ┌── INTERFACES ──────────────────────────────────────────────────┐     │
+│  │  ACM MCP server ─── read-only spec/prompt/capability/KB access │     │
+│  │  acm-env plugin ─── environment management, health, hooks      │     │
+│  │  .claude/rules/ ─── policy enforcement (human-controlled)      │     │
+│  │  CLAUDE.md ──────── context and orientation (agent-writable)   │     │
+│  └────────────────────────────────────────────────────────────────┘     │
+│                                                                         │
+│  Governing specs: STAGES-SPEC │ DISCOVER-SPEC │ DESIGN-SPEC │          │
+│                   DEVELOP-SPEC │ REVIEW-SPEC │ PROJECT-TYPES-SPEC      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Stages Overview
+
+The project layer is a four-stage pipeline. Each stage produces artifacts that persist forward.
+
+| Stage | Produces | Key Spec |
+|---|---|---|
+| Discover | intent.md, brief.md | ACM-DISCOVER-SPEC.md |
+| Design | design.md | ACM-DESIGN-SPEC.md |
+| Develop | deliverable, docs, planning artifacts | ACM-DEVELOP-SPEC.md |
+| Deliver | deployed/distributed deliverable | (B15 — pending) |
+
+- Universal exit criteria exist for each stage — see ACM-STAGES-SPEC.md
+- Stage boundary handoff protocol: verify exit criteria → update status.md → commit → clear context
+- Cross-stage artifacts that persist through all stages: status.md, CLAUDE.md, docs/acm/
+
+---
+
+## Artifact Flow Model
+
+How artifacts flow through the framework — what each stage produces and what persists:
+
+```
+Discover: intent.md, brief.md ──────────────────────────────→ (persist all stages)
+Design:   design.md ─────────────────────────────────────────→ (persist all stages)
+Develop:  docs/acm/{plan,tasks,manifest,capabilities}.md ───→ (archive at stage end)
+          deliverable, tests, README ────────────────────────→ (persist)
+Deliver:  deployed artifact ─────────────────────────────────→ (final)
+```
+
+Cross-stage: status.md (updated every session), CLAUDE.md (evolves with project understanding)
 
 ---
 
@@ -265,6 +364,20 @@ Every ACM project gets both. Rules are created at project init (`.claude/rules/`
 
 ---
 
+## Interface Map
+
+Unified view of how external consumers and internal components interact with ACM:
+
+| Interface | What | Scope | Spec |
+|---|---|---|---|
+| ACM MCP server | Read-only spec/prompt/capability/KB access | Consumer projects | acm-server/README.md |
+| acm-env plugin | Environment management, health, hooks | All projects | ACM-ENV-PLUGIN-SPEC.md |
+| .claude/rules/ | Policy enforcement (human-controlled) | Per project | ACM-RULES-SPEC.md |
+| CLAUDE.md | Context and orientation (agent-writable) | Per project | ACM-CONTEXT-ARTIFACT-SPEC.md |
+| Companion skill | Workflow instructions for agents | Consumer projects | skills/acm-workflow/skill.md |
+
+---
+
 ## Physical Layout
 
 ```
@@ -275,7 +388,7 @@ Every ACM project gets both. Rules are created at project init (`.claude/rules/`
 │   │   └── rules/                # Hard constraints (human-controlled)
 │   │       └── constraints.md    # Non-negotiable rules
 │   ├── ACM-*-SPEC.md             # Process specs (orchestration contracts)
-│   ├── ACM-ARCHITECTURE-SPEC.md   # This spec (architecture vision)
+│   ├── ACM-ARCHITECTURE-SPEC.md   # This spec (master framework spec)
 │   ├── acm-server/               # ACM MCP server (read-only tool interface)
 │   ├── skills/                   # ACM-process skills (review automation, workflow)
 │   ├── prompts/                  # Stage prompts
@@ -395,15 +508,31 @@ This loop is the mechanism by which the system gets better over time. It is not 
 
 ---
 
-## Relationship to Existing Specs
+## Spec Index
 
-| Spec | Relationship |
-|------|-------------|
-| ACM-ENV-PLUGIN-SPEC.md | Narrower — defines the acm-env plugin specifically (environment management). |
-| ACM-STAGES-SPEC.md | Defines the project layer. This spec defines the environment layer that wraps it. |
-| ACM-TAXONOMY.md | Terminology. Environment terms section should be updated to reflect six primitives. |
-| REGISTRY-SPEC.md | Self-documenting spec for the capability registry (in capabilities-registry repo). |
-| MEMORY-SPEC.md | To be created — defines how memory works. |
+Complete table of all ACM specifications:
+
+| Spec | Version | Governs | Primitive |
+|---|---|---|---|
+| ACM-ARCHITECTURE-SPEC.md | 2.0.0 | Framework architecture (this doc) | All |
+| ACM-STAGES-SPEC.md | 1.2.0 | Stage workflow, exit criteria, handoff | Orchestration |
+| ACM-DISCOVER-SPEC.md | 1.2.0 | Discover stage | Orchestration |
+| ACM-DESIGN-SPEC.md | 1.0.0 | Design stage | Orchestration |
+| ACM-DEVELOP-SPEC.md | 2.0.0 | Develop stage | Orchestration |
+| ACM-REVIEW-SPEC.md | 1.2.0 | Two-phase review mechanism | Validation |
+| ACM-PROJECT-TYPES-SPEC.md | 2.0.0 | Project classification | Orchestration |
+| ACM-BRIEF-SPEC.md | 2.1.0 | Brief artifact format | Orchestration |
+| ACM-INTENT-SPEC.md | 1.0.1 | Intent artifact format | Orchestration |
+| ACM-STATUS-SPEC.md | 1.1.0 | Status artifact format | Memory |
+| ACM-README-SPEC.md | 1.0.0 | README artifact format | Knowledge |
+| ACM-CONTEXT-ARTIFACT-SPEC.md | 1.0.0 | CLAUDE.md format (shared) | Orchestration |
+| ACM-GLOBAL-CLAUDE-MD-SPEC.md | 1.1.0 | Global CLAUDE.md format | Orchestration |
+| ACM-PROJECT-CLAUDE-MD-SPEC.md | 1.1.0 | Project CLAUDE.md format | Orchestration |
+| ACM-FOLDER-STRUCTURE-SPEC.md | 1.2.0 | Folder conventions | Orchestration |
+| ACM-RULES-SPEC.md | 1.0.0 | Rules governance | Validation |
+| ACM-BACKLOG-SPEC.md | 1.0.0 | Backlog management | Orchestration |
+| ACM-ENV-PLUGIN-SPEC.md | 1.0.0 | acm-env plugin | Maintenance |
+| ACM-TAXONOMY.md | 1.4.0 | Terminology | All |
 
 ---
 
@@ -418,11 +547,23 @@ This loop is the mechanism by which the system gets better over time. It is not 
 
 ---
 
+## Revision History
+
+| Version | Date | Changes |
+|---|---|---|
+| 1.0.0 | 2026-01-29 | Initial — six primitives, two-layer model |
+| 1.1.0 | 2026-01-30 | Physical layout, governance model |
+| 1.2.0 | 2026-01-31 | Skills/ and acm-server/ in physical layout |
+| 1.3.0 | 2026-01-31 | MCP server interface layer section |
+| 2.0.0 | 2026-02-01 | Elevated to master framework spec — added spec map, framework diagram, stages overview, artifact flow, interface map, spec index |
+
+---
+
 ## References
 
-- ACM-STAGES-SPEC.md (project layer)
+- ACM-STAGES-SPEC.md (project layer — stage workflow model)
 - ACM-RULES-SPEC.md (enforcement layer — rules governance model)
-- ACM-ENV-PLUGIN-SPEC.md (acm-env plugin — narrower scope)
+- ACM-ENV-PLUGIN-SPEC.md (acm-env plugin — environment management)
 - ACM-TAXONOMY.md (terminology)
 - acm-server/README.md (MCP server — installation, tools, consumer wiring)
 - skills/acm-workflow/skill.md (companion skill — workflow instructions)
