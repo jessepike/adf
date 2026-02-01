@@ -32,9 +32,14 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B46 | Update start-develop-prompt.md for Phase 7-8 + testing emphasis | Enhancement | Prompts | P2 | S | — | Pending |
 | B47 | Update develop-ralph-review-prompt.md to check testing strategy in plan | Enhancement | Prompts | P2 | S | — | Pending |
 | B48 | Create hooks for phase boundary commit + tasks.md enforcement | Enhancement | acm-env | P2 | M | — | Pending |
-| B49 | Update ACM-DESIGN-SPEC.md with stage boundary handoff pattern | Enhancement | ACM | P2 | S | — | Pending |
-| B50 | Update ACM-DISCOVER-SPEC.md with stage boundary handoff pattern | Enhancement | ACM | P2 | S | — | Pending |
+| B49 | Update ACM-DESIGN-SPEC.md with stage boundary handoff pattern | Enhancement | ACM | P2 | S | — | Superseded by B56 |
+| B50 | Update ACM-DISCOVER-SPEC.md with stage boundary handoff pattern | Enhancement | ACM | P2 | S | — | Superseded by B55 |
 | B51 | Update ACM MCP server get_stage enum to include 'deliver' once spec exists | Enhancement | acm-server | P2 | S | — | Blocked by B15 |
+| B54 | Elevate ACM-ARCHITECTURE-SPEC.md to master framework spec — add framework-level workflow diagram, macro coverage of all areas (stages, orchestration, capabilities, knowledge, memory, maintenance, validation), how specs/rules/skills/MCP connect | Enhancement | ACM | P1 | L | — | Pending |
+| B55 | Add universal exit criteria reference + stage boundary handoff to ACM-DISCOVER-SPEC.md (align with DEVELOP pattern) | Enhancement | ACM | P2 | S | — | Pending |
+| B56 | Add universal exit criteria reference + stage boundary handoff to ACM-DESIGN-SPEC.md (align with DEVELOP pattern) | Enhancement | ACM | P2 | S | — | Pending |
+| B57 | Add docs/acm/ convention acknowledgment to ACM-DISCOVER-SPEC.md and ACM-DESIGN-SPEC.md | Enhancement | ACM | P2 | S | — | Pending |
+| B58 | Add revision history section to all stage specs (DISCOVER, DESIGN, STAGES, ARCHITECTURE) for consistency with DEVELOP | Enhancement | ACM | P3 | S | — | Pending |
 | B52 | Unified review skill — single skill wrapping internal (Ralph Loop) + external (MCP server) as two phases. Replaces separate external-review skill. | Enhancement | ACM | P1 | M | — | Pending |
 | B53 | Slim rules/review-process.md to enforcement-only (~10 lines) — move mechanism details (prompt map, invocation syntax, cycle counts) into review skill | Enhancement | ACM | P1 | S | — | Blocked by B52 |
 | B54 | Create start-discover-prompt.md — entry-point prompt for Discover stage, parallel to Design/Develop | Enhancement | Prompts | P3 | S | — | Pending |
