@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines content and purpose of Global CLAUDE.md"
-version: "1.0.1"
-updated: "2026-01-24"
+version: "1.1.0"
+updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/ACM-GLOBAL-CLAUDE-MD-SPEC.md"
@@ -61,6 +61,18 @@ Governance boundary between human and agent authority.
 | Rule | Rationale |
 |------|-----------|
 | Never modify `.claude/rules/` without explicit human approval | Governance — rules are human-controlled |
+
+### 5. Available Resources (optional)
+
+Cross-project resources agents should know about. Keep to a brief list — not detailed usage instructions.
+
+| Resource | Rationale |
+|----------|-----------|
+| MCP servers (e.g., ACM MCP server) | Agents need to know what tools are available for on-demand queries |
+| Plugins (e.g., acm-env) | Agents need to know what environment management is available |
+| Shared repos (e.g., capabilities registry) | Agents need to know where to look up capabilities |
+
+**Keep this lean.** List the resource and its purpose in one line. Detailed usage belongs in skills or documentation, not global context.
 
 ## Relationship to `.claude/rules/`
 

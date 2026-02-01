@@ -1,8 +1,8 @@
 ---
 type: "context"
 description: "ACM project context — the agentic context management framework"
-version: "1.0.0"
-updated: "2026-01-29"
+version: "2.0.0"
+updated: "2026-02-01"
 scope: "project"
 lifecycle: "reference"
 location: ".claude/CLAUDE.md"
@@ -14,40 +14,46 @@ location: ".claude/CLAUDE.md"
 
 ACM (Agentic Context Management) is the framework that defines how agentic projects are structured, managed, and maintained. It owns orchestration, knowledge, and the specs that govern all stages.
 
+## Current Stage
+
+**Develop** — building out the ACM framework itself and its environment layer.
+
 ## Orientation
 
 1. `.claude/rules/` — Hard constraints (read first, always enforced)
 2. `status.md` — Current state, session log, next steps
 3. `BACKLOG.md` — All tracked work items
-4. `ACM-ARCHITECTURE-SPEC.md` — Environment layer architecture (six primitives)
-5. `ACM-STAGES-SPEC.md` — Stage workflow (Discover → Design → Develop → Deliver)
 
-## Context Map
+## Stage Flow
 
-| Artifact | Purpose |
-|----------|---------|
-| `.claude/rules/` | Hard constraints — non-negotiable policy |
-| `ACM-*-SPEC.md` | Process and artifact specifications |
-| `ACM-TAXONOMY.md` | Classification system and design decisions |
-| `prompts/` | Stage transition and review prompts |
-| `kb/` | Knowledge base — curated learnings |
-| `stubs/` | Project scaffolding templates |
-| `scripts/` | Init and review runner scripts |
-| `experiments/` | Validation experiments (Ralph Loop) |
+Stages: Discover → Design → Develop → Deliver
 
-## Current Stage
+Each stage follows: **Work → Review → Update → Validate → Close out → Transition**
 
-**Develop** — building out the ACM framework itself and its environment layer.
+- Query `get_stage()` from ACM MCP for phase details at each stage
+- Review is an orchestration-layer service — invoke the review skill when needed
+- At phase boundaries: update handoff block in tasks.md, commit, `/clear`
+- At stage boundaries: verify exit criteria via `check_project_health()`, update status.md
+
+## Available Resources
+
+| Resource | Type | Use For |
+|----------|------|---------|
+| ACM MCP server | MCP | Stage details, artifact specs, review prompts, project health |
+| acm-env plugin | Plugin | Environment management, status, audit |
+| external-review | Skill | Phase 2 external model review |
+| ralph-loop | Skill | Phase 1 internal review |
+| capabilities-registry | Repo | `~/code/_shared/capabilities-registry/INVENTORY.md` |
 
 ## Related Repos
 
-| Repo | Location | Purpose |
-|------|----------|---------|
-| capabilities-registry | `~/code/_shared/capabilities-registry/` | Capability catalog (skills, tools, agents, plugins) |
-| link-triage-pipeline | `~/code/_shared/link-triage-pipeline/` | Link processing pipeline (Discover complete, entering Design) |
-| acm-env plugin | `~/.claude/plugins/acm-plugins/plugins/acm-env/` | Environment management plugin |
+| Repo | Location |
+|------|----------|
+| capabilities-registry | `~/code/_shared/capabilities-registry/` |
+| link-triage-pipeline | `~/code/_shared/link-triage-pipeline/` |
+| acm-env plugin | `~/.claude/plugins/acm-plugins/plugins/acm-env/` |
 
 ## Working Norms
 
 - Token-efficient — every artifact earns its context cost
-- Progressive disclosure — summary first, details on demand
+- Progressive disclosure — summary first, details on demand via MCP
