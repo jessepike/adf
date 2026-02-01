@@ -117,11 +117,14 @@ async def review(
         settings["_retry_attempts"] = retry_attempts
         settings["_timeout_seconds"] = effective_timeout
 
+        pricing = model_cfg.get("pricing")
+
         result = await provider.review(
             artifact_content=artifact_content,
             prompt=prompt,
             model=model_cfg["model"],
             settings=settings,
+            pricing=pricing,
         )
 
         entry = {
@@ -132,7 +135,9 @@ async def review(
         if result.status == "success":
             entry["response"] = result.response
             entry["tokens_used"] = result.tokens_used
+            entry["cost_usd"] = result.cost_usd
             entry["latency_ms"] = result.latency_ms
+            entry["cycle"] = 1
         else:
             entry["error"] = result.error
             entry["retries_attempted"] = result.retries_attempted
@@ -159,11 +164,19 @@ async def review(
 
     total_latency = int((time.monotonic() - start) * 1000)
 
+    # Aggregate tokens and cost
+    total_input = sum(r.get("tokens_used", {}).get("input", 0) for r in processed if r.get("tokens_used"))
+    total_output = sum(r.get("tokens_used", {}).get("output", 0) for r in processed if r.get("tokens_used"))
+    costs = [r["cost_usd"] for r in processed if r.get("cost_usd") is not None]
+    total_cost = round(sum(costs), 6) if costs else None
+
     return {
         "reviews": processed,
         "models_called": models,
         "parallel": True,
         "total_latency_ms": total_latency,
+        "total_tokens": {"input": total_input, "output": total_output},
+        "total_cost_usd": total_cost,
     }
 
 

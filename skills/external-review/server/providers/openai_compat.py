@@ -22,6 +22,7 @@ class OpenAICompatProvider(BaseProvider):
         model: str,
         settings: dict | None = None,
         extra_params: dict | None = None,
+        pricing: dict | None = None,
     ) -> ReviewResponse:
         settings = settings or {}
         extra_params = extra_params or {}
@@ -63,15 +64,17 @@ class OpenAICompatProvider(BaseProvider):
                 if resp.status_code == 200:
                     data = resp.json()
                     usage = data.get("usage", {})
+                    tokens = {
+                        "input": usage.get("prompt_tokens", 0),
+                        "output": usage.get("completion_tokens", 0),
+                    }
                     return ReviewResponse(
                         status="success",
                         response=data["choices"][0]["message"]["content"],
-                        tokens_used={
-                            "input": usage.get("prompt_tokens", 0),
-                            "output": usage.get("completion_tokens", 0),
-                        },
+                        tokens_used=tokens,
                         latency_ms=int((time.monotonic() - start) * 1000),
                         retries_attempted=attempt,
+                        cost_usd=ReviewResponse.calculate_cost(tokens, pricing),
                     )
 
                 if resp.status_code in RETRYABLE_STATUS_CODES:

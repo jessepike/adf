@@ -22,6 +22,7 @@ class GoogleProvider(BaseProvider):
         model: str,
         settings: dict | None = None,
         extra_params: dict | None = None,
+        pricing: dict | None = None,
     ) -> ReviewResponse:
         settings = settings or {}
         extra_params = extra_params or {}
@@ -72,15 +73,17 @@ class GoogleProvider(BaseProvider):
                         text = "".join(p.get("text", "") for p in parts)
 
                     usage = data.get("usageMetadata", {})
+                    tokens = {
+                        "input": usage.get("promptTokenCount", 0),
+                        "output": usage.get("candidatesTokenCount", 0),
+                    }
                     return ReviewResponse(
                         status="success",
                         response=text,
-                        tokens_used={
-                            "input": usage.get("promptTokenCount", 0),
-                            "output": usage.get("candidatesTokenCount", 0),
-                        },
+                        tokens_used=tokens,
                         latency_ms=int((time.monotonic() - start) * 1000),
                         retries_attempted=attempt,
+                        cost_usd=ReviewResponse.calculate_cost(tokens, pricing),
                     )
 
                 if resp.status_code in RETRYABLE_STATUS_CODES:
