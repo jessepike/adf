@@ -170,7 +170,41 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | D6 | No user-level standalone MCP servers needed | Plugin-bundled MCPs activate with parent plugin — correct model. No cross-project MCP servers identified yet. |
 | D7 | Unwanted marketplace plugins: disable + decline, don't delete | Marketplace auto-syncs external_plugins/; manual deletion gets reversed. Baseline remove list catches accidental enablement. |
 
+| 2026-02-02 | Execute-Plan Skill (B62) — Develop Phase 5-6 in progress. Phase 5 (Environment Setup): verified git ✓, ACM MCP server ✓ (zero external dependencies). Phase 6 (Build): Created directory structure (skills/execute-plan/), skill.md entry point, 3 templates (commit-message, session-log, run-log), 3 specialized agents (orchestrator.md, task-executor.md, phase-validator.md). Foundation commits: tasks 1.1-1.6, 1.11, 3.1. All agent logic defined comprehensively (plan/tasks parsers, TaskList init, parallel execution, ralph integration, TDD workflow, exit criteria validation). Ready to continue Phase 1-7 implementation. |
+
 ## Notes for Next Session
+
+### B62: Execute-Plan Orchestration Skill — In Progress (2026-02-02)
+
+**Where we are:** Develop Phase 6 (Build) in progress. Foundation complete (tasks 1.1-1.6, 1.11, 3.1). Agent prompts created with comprehensive logic. Ready to continue with remaining implementation phases.
+
+**What was built:**
+- `skills/execute-plan/` — directory structure (agents/, templates/)
+- `skill.md` — user-invocable entry point with args (--start-phase, --dry-run, --max-parallel)
+- `templates/commit-message.txt` — git commit template with placeholders
+- `templates/session-log-entry.txt` — status.md log format
+- `templates/run-log-entry.txt` — run log format
+- `agents/orchestrator.md` — phase coordinator (blue) with plan/tasks parsers, TaskList init, parallel execution, ralph integration, checkpoint logic
+- `agents/task-executor.md` — task worker (orange) with TDD workflow (Phase 5+), commit logic, acceptance validation
+- `agents/phase-validator.md` — exit criteria checker (yellow) with test/execution/artifact validation
+
+**Architecture:**
+- 3 specialized agents (orchestrator coordinates, task-executor implements, phase-validator validates)
+- 7 implementation phases (Core → Ralph → Validator → Parallel → TDD → Traceability → Polish)
+- 48 tasks total across phases
+- Validation target: link-triage-pipeline (66 tasks)
+
+**Next steps:**
+- Continue Phase 1-7 implementation (remaining tasks)
+- Phase 1 foundation is structurally complete (agents defined)
+- Validation will occur when skill is invoked on real project
+
+**Artifacts:**
+- Design: `docs/acm/execute-plan-design.md` (v0.2 approved)
+- Plan: `docs/acm/execute-plan-plan.md` (v1.1.0)
+- Tasks: `docs/acm/execute-plan-tasks.md` (48 tasks)
+- Manifest: `docs/acm/execute-plan-manifest.md` (zero dependencies)
+- Capabilities: `docs/acm/execute-plan-capabilities.md` (registry consulted)
 
 ### B14: External Review Skill — Build Complete (2026-01-31)
 
