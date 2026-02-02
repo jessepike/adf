@@ -23,8 +23,6 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | P2 | S | — | Pending |
 | B39 | Add `deliver` enum support to ACM MCP server once ACM-DELIVER-SPEC.md is created | Enhancement | acm-server | P2 | S | — | Blocked by B15 |
 | B41 | Move ACM-*-SPEC.md + ACM-TAXONOMY.md into docs/specs/ — update all 40+ file references | Refactor | ACM | P2 | M | — | Pending |
-| B46 | Update start-develop-prompt.md for Phase 7-8 + testing emphasis | Enhancement | Prompts | P2 | S | — | Pending |
-| B47 | Update develop-ralph-review-prompt.md to check testing strategy in plan | Enhancement | Prompts | P2 | S | — | Pending |
 | B48 | Create hooks for phase boundary commit + tasks.md enforcement | Enhancement | acm-env | P2 | M | — | Pending |
 | B51 | Update ACM MCP server get_stage enum to include 'deliver' once spec exists | Enhancement | acm-server | P2 | S | — | Blocked by B15 |
 | B36 | ACM MCP server — maintenance primitive not addressed in tool surface | Enhancement | acm-server | P3 | S | — | Pending |
@@ -44,6 +42,8 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B55 | Universal exit criteria + stage boundary handoff in DISCOVER-SPEC | 2026-02-01 | v1.3.0 — structured exit criteria (universal + discover-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B56 | Universal exit criteria + stage boundary handoff in DESIGN-SPEC | 2026-02-01 | v1.1.0 — structured exit criteria (universal + design-specific + type-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B57 | docs/acm/ convention in DISCOVER-SPEC and DESIGN-SPEC | 2026-02-01 | Planning Artifacts Convention section added to both specs. |
+| B46 | Update start-develop-prompt.md for Phase 7-8 + testing | 2026-02-01 | v2.1.0 — added Phase 7 (Documentation) + Phase 8 (Closeout), two-tier testing model, build-to-design verification, docs/acm/ paths, commit cadence. |
+| B47 | Update develop-ralph-review-prompt.md for testing strategy | 2026-02-01 | v3.1.0 — expanded Testing Strategy to two-tier model + project-type checks, added Build-to-Design Verification dimension, fixed artifact paths to docs/acm/. |
 | B37 | Align "meta layer" → "environment layer" terminology | 2026-02-01 | Updated 5 files (ENV-PLUGIN-SPEC, STATUS-SPEC, STAGES-SPEC, 2 visual prompts). 11 instances replaced. Historical references in status.md and _archive/ left as-is. |
 | B53 | Slim review-process.md to enforcement-only | 2026-02-01 | Reduced from 53 lines to 14. Removed prompt map, invocation syntax, cycle counts — all handled by acm-review plugin. |
 | B52 | Unified review skill (acm-review plugin) | 2026-02-01 | 3 commands: artifact (full P1→P2), artifact-internal (P1), artifact-external (P2). Plugin registered under acm-plugins marketplace. |

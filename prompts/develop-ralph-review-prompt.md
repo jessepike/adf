@@ -1,8 +1,8 @@
 ---
 type: "prompt"
 description: "Ralph Loop prompt for Phase 1 internal review in Develop stage"
-version: "3.0.0"
-updated: "2026-01-30"
+version: "3.1.0"
+updated: "2026-02-01"
 scope: "develop"
 mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
 usage: "Use with Ralph Loop plugin for automated plan review"
@@ -44,11 +44,11 @@ This is Phase 1 of the two-phase review process:
 
 ## Files
 
-- Plan: docs/plan.md (in project root)
-- Tasks: docs/tasks.md (in project root)
-- Manifest: docs/manifest.md (in project root)
-- Capabilities: docs/capabilities.md (in project root)
-- Design: docs/design.md (in project root)
+- Plan: docs/acm/plan.md
+- Tasks: docs/acm/tasks.md
+- Manifest: docs/acm/manifest.md
+- Capabilities: docs/acm/capabilities.md
+- Design: docs/design.md (cross-stage, stays in docs/)
 
 ## Your Task
 
@@ -94,11 +94,18 @@ This is Phase 1 of the two-phase review process:
 - Are there hidden complexities not addressed?
 - Are risk areas identified with mitigation?
 
-**Testing Strategy**
+**Testing Strategy (Two-Tier Model)**
 - Is TDD approach clear?
 - Are critical paths covered by tests?
 - Will 95%+ pass rate be achievable?
 - Are E2E tests planned for key flows?
+- Does the plan specify Tier 1 (automated) testing approach?
+- Does the plan address Tier 2 (real-world/interactive) testing where applicable?
+- Is testing-by-project-type appropriate? (Apps need browser testing, MCP servers need Inspector, etc.)
+
+**Build-to-Design Verification**
+- Does the plan include a verification step after Build?
+- Will every design requirement have a corresponding implementation + test?
 
 ## Issue Logging
 
@@ -115,7 +122,8 @@ Log issues in plan.md Issue Log:
 - [ ] Plan covers all design requirements
 - [ ] Tasks are atomic and executable
 - [ ] Capabilities are sufficient
-- [ ] Testing strategy is adequate
+- [ ] Testing strategy is adequate (two-tier model addressed, project-type appropriate)
+- [ ] Build-to-design verification step included in plan
 
 ## Completion
 

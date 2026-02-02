@@ -1,8 +1,8 @@
 ---
 type: "prompt"
 description: "Stage transition prompt — validates Design completion and initiates Develop stage"
-version: "2.0.0"
-updated: "2026-01-29"
+version: "2.1.0"
+updated: "2026-02-01"
 scope: "develop"
 usage: "Run at start of Develop stage to transition from Design"
 ---
@@ -136,6 +136,8 @@ Only after human confirms understanding:
 4. Present capability assessment for approval
 5. Then proceed to Planning phase (plan.md + tasks.md)
 
+All planning artifacts go in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md.
+
 **After Phase 3 (Planning), STOP. This is a HARD GATE.**
 
 Present all planning artifacts to the human:
@@ -150,7 +152,7 @@ Wait for explicit human approval: "Approved" or equivalent.
 
 If the human has feedback, iterate on planning artifacts. Do not move forward until they approve.
 
-## Step 6: Proceed to Execution Phases (4-6)
+## Step 6: Proceed to Execution Phases (4-8)
 
 **PREREQUISITE: Human has explicitly approved all planning artifacts from Step 5.**
 
@@ -167,7 +169,16 @@ If you do not have explicit human approval, STOP and ask for it.
 Execution phases:
 1. Review Loop — Run internal review (Ralph Loop) on plan, then external review
 2. Environment Setup — Install dependencies, configure capabilities
-3. Build — Implement per tasks.md with TDD
+3. Build — Implement per tasks.md with TDD, then verify build matches design
+4. Documentation — README, API docs, usage guides as appropriate
+5. Closeout — Artifact lifecycle, commit verification, status.md update (THE SEAL)
+
+**Testing model (two-tier):**
+- **Tier 1: Automated** — Unit, integration, E2E via test frameworks. Run during build.
+- **Tier 2: Real-world** — Interactive testing in browser/inspector. Run after automated tests pass.
+- Plan must specify which tier applies per project type (see ACM-DEVELOP-SPEC.md).
+
+**Build-to-design verification:** Before exiting Phase 6, verify every design requirement has a corresponding implementation + test. Document coverage in tasks.md.
 
 ---
 
@@ -182,10 +193,12 @@ Execution phases:
 **DO NOT proceed to execution until human explicitly approves.**
 **This gate exists because agents historically skip it. DO NOT skip it.**
 
-**EXECUTION PHASES (4-6)** — Require explicit human approval of planning artifacts:
+**EXECUTION PHASES (4-8)** — Require explicit human approval of planning artifacts:
 4. Review Loop (internal + external review of plan)
 5. Environment Setup
-6. Build
+6. Build (includes build-to-design verification)
+7. Documentation (README, API docs, usage guides)
+8. Closeout (artifact lifecycle, commit verification, THE SEAL)
 
 Do NOT skip phases. Each phase has an exit gate.
 Planning and execution are separate workflows — complete all planning first.
