@@ -1,13 +1,15 @@
 {
   "mcpServers": {
-    "acm": {
+    "adf": {
       "command": "node",
-      "args": ["/Users/jessepike/code/_shared/acm/acm-server/build/index.js"],
-      "env": {}
+      "args": ["/Users/jessepike/code/_shared/adf/adf-server/build/index.js"],
+      "env": {
+        "ADF_ROOT": "/Users/jessepike/code/_shared/adf"
+      }
     },
     "external-review": {
-      "command": "/Users/jessepike/code/_shared/acm/skills/external-review/server/venv/bin/python",
-      "args": ["/Users/jessepike/code/_shared/acm/skills/external-review/server/external_review_server.py"],
+      "command": "/Users/jessepike/code/_shared/adf/skills/external-review/server/venv/bin/python",
+      "args": ["/Users/jessepike/code/_shared/adf/skills/external-review/server/external_review_server.py"],
       "env": {}
     }
   }
