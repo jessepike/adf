@@ -24,8 +24,8 @@ These commands handle stage detection, prompt resolution, and Ralph Loop invocat
 ## Prompt Usage
 
 - Use the stage-specific review prompt from `~/code/_shared/acm/prompts/` — do not write custom review prompts
-- Internal review: `/ralph-loop:ralph-loop "$(cat ~/code/_shared/acm/prompts/{prompt}.md)" --max-iterations 10 --completion-promise "{PROMISE}"`
-- External review: `/ralph-loop:ralph-loop "$(cat ~/code/_shared/acm/prompts/{external-ralph-prompt}.md)" --max-iterations 10 --completion-promise "EXTERNAL_REVIEW_COMPLETE"`
+- Internal review: `/ralph-loop:ralph-loop --prompt-file ~/code/_shared/acm/prompts/{prompt}.md --max-iterations 10 --completion-promise "{PROMISE}"`
+- External review: `/ralph-loop:ralph-loop --prompt-file ~/code/_shared/acm/prompts/{external-ralph-prompt}.md --max-iterations 10 --completion-promise "EXTERNAL_REVIEW_COMPLETE"`
 
 ### Prompt Map
 
