@@ -9,7 +9,7 @@ import { errorResponse } from "../lib/errors.js";
 export function registerKnowledgeTools(server: McpServer): void {
   server.tool(
     "query_knowledge",
-    "Search ACM knowledge base entries by topic. Simple text match across KB article titles and content. Use for finding process learnings and design patterns. For rich semantic search, use the Knowledge Base MCP server (when available).",
+    "Search ADF knowledge base entries by topic. Simple text match across KB article titles and content. Use for finding process learnings and design patterns. For rich semantic search, use the Knowledge Base MCP server (when available).",
     {
       query: z.string().describe("Search term or topic"),
     },

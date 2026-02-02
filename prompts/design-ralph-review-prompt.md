@@ -4,7 +4,7 @@ description: "Ralph Loop prompt for Phase 1 internal review in Design stage"
 version: "3.0.0"
 updated: "2026-01-30"
 scope: "design"
-mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
+mechanism_ref: "~/code/_shared/acm/ADF-REVIEW-SPEC.md"
 usage: "Use with Ralph Loop plugin for automated design.md iteration"
 ---
 
@@ -27,7 +27,7 @@ You are conducting Phase 1 (Internal) review of design.md as part of ACM's Desig
 
 ## Mechanism
 
-This review follows ACM-REVIEW-SPEC.md. Key rules:
+This review follows ADF-REVIEW-SPEC.md. Key rules:
 - Minimum 2 review cycles, maximum 10
 - Stop when a cycle produces zero Critical and zero High issues
 - If past 4 cycles with Critical issues still appearing, stop and flag for human input

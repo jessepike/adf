@@ -5,7 +5,7 @@ version: "1.3.0"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-DISCOVER-SPEC.md"
+location: "acm/ADF-DISCOVER-SPEC.md"
 ---
 
 # ACM Discover Stage Specification
@@ -223,7 +223,7 @@ The review loop has two phases based on *who* reviews, not *what kind* of review
 
 ### Universal Criteria
 
-Per ACM-STAGES-SPEC.md:
+Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
@@ -246,7 +246,7 @@ Per ACM-STAGES-SPEC.md:
 
 ### Stage Boundary Handoff
 
-Per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol:
+Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
@@ -280,10 +280,10 @@ The agent working through Discover needs context on:
 |------|-----------|---------|
 | intent.md | Always | North Star |
 | discover-brief.md | Discover stage | Working Brief |
-| ACM-DISCOVER-SPEC.md | Discover stage (reference) | Stage workflow |
-| ACM-BRIEF-SPEC.md | Discover stage (reference) | Brief structure |
-| ACM-INTENT-SPEC.md | Discover stage (reference) | Intent structure |
-| ACM-PROJECT-TYPES-SPEC.md | Discover stage (reference) | Classification |
+| ADF-DISCOVER-SPEC.md | Discover stage (reference) | Stage workflow |
+| ADF-BRIEF-SPEC.md | Discover stage (reference) | Brief structure |
+| ADF-INTENT-SPEC.md | Discover stage (reference) | Intent structure |
+| ADF-PROJECT-TYPES-SPEC.md | Discover stage (reference) | Classification |
 ```
 
 Specs are reference documents — load on demand, not into every context.
@@ -441,16 +441,16 @@ The Discover stage diagram shows:
 
 ## Planning Artifacts Convention
 
-When Discover produces working artifacts beyond intent.md and discover-brief.md (e.g., research notes, exploration logs), place them in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+When Discover produces working artifacts beyond intent.md and discover-brief.md (e.g., research notes, exploration logs), place them in `docs/acm/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
 
 ---
 
 ## References
 
-- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
-- ACM-BRIEF-SPEC.md (Brief structure and requirements)
-- ACM-INTENT-SPEC.md (Intent structure and requirements)
-- ACM-PROJECT-TYPES-SPEC.md (Classification system)
-- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
-- ACM-TAXONOMY.md (Terminology definitions)
+- ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-BRIEF-SPEC.md (Brief structure and requirements)
+- ADF-INTENT-SPEC.md (Intent structure and requirements)
+- ADF-PROJECT-TYPES-SPEC.md (Classification system)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
+- ADF-TAXONOMY.md (Terminology definitions)
 - prompts/architecture-visual-discover.md (Diagram prompt)

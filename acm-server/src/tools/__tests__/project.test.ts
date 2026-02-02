@@ -11,7 +11,7 @@ describe("get_project_type_guidance", () => {
 });
 
 describe("check_project_structure", () => {
-  it("checks ACM repo structure", async () => {
+  it("checks ADF repo structure", async () => {
     const result = await callTool("check_project_structure", {
       project_path: ACM_ROOT,
     });
@@ -22,7 +22,7 @@ describe("check_project_structure", () => {
 });
 
 describe("check_project_health", () => {
-  it("runs health check on ACM repo", async () => {
+  it("runs health check on ADF repo", async () => {
     const result = await callTool("check_project_health", {
       project_path: ACM_ROOT,
     });

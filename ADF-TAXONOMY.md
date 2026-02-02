@@ -5,7 +5,7 @@ version: "1.4.0"
 updated: "2026-01-29"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-TAXONOMY.md"
+location: "acm/ADF-TAXONOMY.md"
 ---
 
 # ACM Taxonomy
@@ -302,14 +302,14 @@ Decisions made during ACM development that should not be revisited without expli
 
 ## References
 
-- ACM-BRIEF-SPEC.md
-- ACM-INTENT-SPEC.md
-- ACM-PROJECT-TYPES-SPEC.md
-- ACM-DISCOVER-SPEC.md
-- ACM-DESIGN-SPEC.md
-- ACM-DEVELOP-SPEC.md
-- ACM-STAGES-SPEC.md
-- ACM-RULES-SPEC.md
-- ACM-ENV-PLUGIN-SPEC.md
+- ADF-BRIEF-SPEC.md
+- ADF-INTENT-SPEC.md
+- ADF-PROJECT-TYPES-SPEC.md
+- ADF-DISCOVER-SPEC.md
+- ADF-DESIGN-SPEC.md
+- ADF-DEVELOP-SPEC.md
+- ADF-STAGES-SPEC.md
+- ADF-RULES-SPEC.md
+- ADF-ENV-PLUGIN-SPEC.md
 - kb/DOCUMENT-BREAKOUT-THRESHOLD.md
 - kb/REVIEW-CYCLE-GUIDANCE.md

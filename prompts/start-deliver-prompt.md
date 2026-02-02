@@ -28,7 +28,7 @@ Read and verify:
 - Deliverable — Confirm artifact builds/runs successfully
 
 **CRITICAL — Missing Resources:**
-If any expected file is missing (e.g., ACM-DELIVER-SPEC.md referenced but not found):
+If any expected file is missing (e.g., ADF-DELIVER-SPEC.md referenced but not found):
 - STOP immediately
 - Report exactly what is missing
 - Ask the user to provide it
@@ -169,7 +169,7 @@ Only after human confirms understanding:
 4. Present capability assessment for approval
 5. Then proceed to Delivery Planning phase (plan.md + tasks.md)
 
-All planning artifacts go in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md.
+All planning artifacts go in `docs/acm/` per ADF-FOLDER-STRUCTURE-SPEC.md.
 
 ## Step 6: Proceed to Review & Approval (Phase 4)
 

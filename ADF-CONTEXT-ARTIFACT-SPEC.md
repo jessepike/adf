@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-24"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-CONTEXT-ARTIFACT-SPEC.md"
+location: "acm/ADF-CONTEXT-ARTIFACT-SPEC.md"
 ---
 
 # ACM Context Artifact Specification
@@ -258,12 +258,12 @@ acm-env absorbs the previously deferred `acm-validate` and `acm-prune` concepts 
 | **Drift detection** | SessionStart hook | Lightweight file-existence checks on every session start |
 | **Baseline enforcement** | `/acm-env:status` | Compare current state against machine-parseable baseline |
 
-See: `ACM-ENV-PLUGIN-SPEC.md` for full specification.
+See: `ADF-ENV-PLUGIN-SPEC.md` for full specification.
 
 ---
 
 ## References
 
-- ACM-GLOBAL-PRIMITIVES-v0.1.md
-- ACM-FOLDER-STRUCTURE-SPEC.md
+- ADF-GLOBAL-PRIMITIVES-v0.1.md
+- ADF-FOLDER-STRUCTURE-SPEC.md
 - TIER1_KIT_SPEC.md (frontmatter origin)

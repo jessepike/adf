@@ -5,7 +5,7 @@ version: "2.1.0"
 updated: "2026-01-27"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-BRIEF-SPEC.md"
+location: "acm/ADF-BRIEF-SPEC.md"
 ---
 
 # ACM Brief Specification
@@ -78,7 +78,7 @@ Every Brief contains these seven elements:
 
 #### 1. Project Classification
 
-Type and modifiers from ACM-PROJECT-TYPES-SPEC.
+Type and modifiers from ADF-PROJECT-TYPES-SPEC.
 
 ```markdown
 ## Classification
@@ -235,7 +235,7 @@ Review depth and cycle count scale by project type and complexity.
 
 Session state is tracked in a separate `status.md` file, not embedded in the Brief. This keeps the Brief focused on the project contract while status.md handles dynamic session continuity.
 
-See: ACM-STATUS-SPEC.md for status.md structure and behavior.
+See: ADF-STATUS-SPEC.md for status.md structure and behavior.
 
 ---
 
@@ -421,8 +421,8 @@ Briefs live in the project's `/docs/` directory with stage prefix:
 
 ## References
 
-- ACM-INTENT-SPEC.md (Intent is the North Star, Brief references it)
-- ACM-PROJECT-TYPES-SPEC.md (Classification system)
-- ACM-STAGES-SPEC.md (Discover stage outputs Brief)
-- ACM-DISCOVER-SPEC.md (Detailed Discover workflow)
-- ACM-GLOSSARY.md (Terminology definitions)
+- ADF-INTENT-SPEC.md (Intent is the North Star, Brief references it)
+- ADF-PROJECT-TYPES-SPEC.md (Classification system)
+- ADF-STAGES-SPEC.md (Discover stage outputs Brief)
+- ADF-DISCOVER-SPEC.md (Detailed Discover workflow)
+- ADF-GLOSSARY.md (Terminology definitions)

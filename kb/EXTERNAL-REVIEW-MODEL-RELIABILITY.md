@@ -11,7 +11,7 @@ After each review, log observations below and check whether any of these need ad
 | External model prompts | `prompts/{stage}-external-review-prompt.md` | Prompt clarity, false positive triggers, severity calibration |
 | External ralph prompts | `prompts/{stage}-external-ralph-prompt.md` | Orchestration instructions, synthesis quality, stop conditions |
 | Internal review prompts | `prompts/{stage}-ralph-review-prompt.md` | Coverage, YAGNI enforcement, severity thresholds |
-| Review spec | `ACM-REVIEW-SPEC.md` | Cycle rules, severity definitions, stop conditions |
+| Review spec | `ADF-REVIEW-SPEC.md` | Cycle rules, severity definitions, stop conditions |
 | Model config | `~/.claude/models.yaml` | Model selection, pricing, extra_params tuning |
 | Single-model warning | `acm-review/commands/artifact-external.md` | Threshold for warning, default model count |
 

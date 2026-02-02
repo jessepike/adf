@@ -39,14 +39,14 @@ describe("get_transition_prompt", () => {
     expect(result.isError).toBeFalsy();
   });
 
-  it("validates against ACM project (which has status.md)", async () => {
+  it("validates against ADF project (which has status.md)", async () => {
     const { ACM_ROOT } = await import("../../lib/paths.js");
     const result = await callTool("get_transition_prompt", {
       transition: "design_to_develop",
       project_path: ACM_ROOT,
       validate: true,
     });
-    // ACM project has status.md, should return validation info
+    // ADF project has status.md, should return validation info
     expect(result.content[0].text).toContain("Transition Validation");
   });
 });

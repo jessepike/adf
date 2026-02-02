@@ -5,7 +5,7 @@ version: "1.2.0"
 updated: "2026-01-31"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-REVIEW-SPEC.md"
+location: "acm/ADF-REVIEW-SPEC.md"
 ---
 
 # ACM Review Specification
@@ -343,9 +343,9 @@ Modules are appended to the base prompt, not separate files.
 
 | Spec | Relationship |
 |------|-------------|
-| ACM-STAGES-SPEC.md | Defines the stages; this spec defines the review mechanism within stages |
-| ACM-BRIEF-SPEC.md | Defines the Brief artifact; this spec defines how Briefs are reviewed |
-| ACM-ARCHITECTURE-SPEC.md | Validation primitive; reviews are one form of validation |
+| ADF-STAGES-SPEC.md | Defines the stages; this spec defines the review mechanism within stages |
+| ADF-BRIEF-SPEC.md | Defines the Brief artifact; this spec defines how Briefs are reviewed |
+| ADF-ARCHITECTURE-SPEC.md | Validation primitive; reviews are one form of validation |
 
 ---
 

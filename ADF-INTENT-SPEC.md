@@ -5,7 +5,7 @@ version: "1.0.1"
 updated: "2026-01-24"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-INTENT-SPEC.md"
+location: "acm/ADF-INTENT-SPEC.md"
 ---
 
 # ACM Intent Specification
@@ -97,5 +97,5 @@ A strong intent statement:
 
 ## References
 
-- ACM-STAGES-SPEC.md (Discover stage outputs intent.md)
-- ACM-GLOBAL-PRIMITIVES-v0.1.md
+- ADF-STAGES-SPEC.md (Discover stage outputs intent.md)
+- ADF-GLOBAL-PRIMITIVES-v0.1.md

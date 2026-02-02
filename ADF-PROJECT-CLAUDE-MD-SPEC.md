@@ -5,7 +5,7 @@ version: "1.1.0"
 updated: "2026-01-27"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-PROJECT-CLAUDE-MD-SPEC.md"
+location: "acm/ADF-PROJECT-CLAUDE-MD-SPEC.md"
 ---
 
 # ACM Project CLAUDE.md Specification
@@ -191,7 +191,7 @@ Use HTML comments to mark sections:
 
 ## Rules Directory
 
-`.claude/rules/` contains human-controlled hard constraints. See **ACM-RULES-SPEC.md** for the full specification.
+`.claude/rules/` contains human-controlled hard constraints. See **ADF-RULES-SPEC.md** for the full specification.
 
 ```
 .claude/
@@ -318,8 +318,8 @@ Workflow
 
 ## References
 
-- ACM-GLOBAL-CLAUDE-MD-SPEC.md (global counterpart)
-- ACM-RULES-SPEC.md (enforcement layer that complements CLAUDE.md)
-- ACM-PROJECT-TYPES-SPEC.md (type determines content)
-- ACM-FOLDER-STRUCTURE-SPEC.md (location in structure)
+- ADF-GLOBAL-CLAUDE-MD-SPEC.md (global counterpart)
+- ADF-RULES-SPEC.md (enforcement layer that complements CLAUDE.md)
+- ADF-PROJECT-TYPES-SPEC.md (type determines content)
+- ADF-FOLDER-STRUCTURE-SPEC.md (location in structure)
 - TIER1_KIT_SPEC.md (detailed templates)

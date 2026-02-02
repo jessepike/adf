@@ -4,7 +4,7 @@ description: "Ralph Loop prompt for Phase 1 internal review in Discover stage"
 version: "4.0.0"
 updated: "2026-01-30"
 scope: "discover"
-mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
+mechanism_ref: "~/code/_shared/acm/ADF-REVIEW-SPEC.md"
 usage: "Use with Ralph Loop plugin for automated Brief iteration"
 ---
 
@@ -27,7 +27,7 @@ You are conducting Phase 1 (Internal) review of a project Brief as part of ACM's
 
 ## Mechanism
 
-This review follows ACM-REVIEW-SPEC.md. Key rules:
+This review follows ADF-REVIEW-SPEC.md. Key rules:
 - Minimum 2 review cycles, maximum 10
 - Stop when a cycle produces zero Critical and zero High issues
 - If past 4 cycles with Critical issues still appearing, stop and flag for human input
@@ -48,7 +48,7 @@ Your job is to be a rigorous, critical reviewer. Find real issues, not cosmetic 
 
 - Brief: docs/discover-brief.md (in project root)
 - Intent: docs/intent.md (in project root)
-- Brief Spec (reference): ~/code/_shared/acm/ACM-BRIEF-SPEC.md
+- Brief Spec (reference): ~/code/_shared/acm/ADF-BRIEF-SPEC.md
 
 ## Your Task
 

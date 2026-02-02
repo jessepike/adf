@@ -4,7 +4,7 @@ description: "Ralph Loop orchestrator prompt for Phase 2 external review in Desi
 version: "1.0.0"
 updated: "2026-02-01"
 scope: "design"
-mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
+mechanism_ref: "~/code/_shared/acm/ADF-REVIEW-SPEC.md"
 usage: "Use with Ralph Loop plugin — instructs Claude to call external-review MCP each cycle"
 ---
 
@@ -25,7 +25,7 @@ You are conducting Phase 2 (External) review of design.md as part of ACM's Desig
 
 ## Mechanism
 
-This review follows ACM-REVIEW-SPEC.md. Key rules:
+This review follows ADF-REVIEW-SPEC.md. Key rules:
 - Minimum 1 review cycle, maximum 10
 - Stop when a cycle produces zero Critical and zero High issues
 - If past 4 cycles with Critical issues still appearing, stop and flag for human input
@@ -61,7 +61,7 @@ Process the parallel responses into a unified issue list:
 
 ### 3. Classify Issues
 
-Assign severity and complexity per ACM-REVIEW-SPEC:
+Assign severity and complexity per ADF-REVIEW-SPEC:
 
 **Severity:**
 - Critical: Must resolve. Blocks next stage or fundamentally flawed.

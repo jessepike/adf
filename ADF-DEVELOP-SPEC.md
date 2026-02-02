@@ -5,7 +5,7 @@ version: "2.1.0"
 updated: "2026-02-02"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-DEVELOP-SPEC.md"
+location: "acm/ADF-DEVELOP-SPEC.md"
 ---
 
 # ACM Develop Stage Specification
@@ -99,7 +99,7 @@ Every phase transition requires context clearing to prevent accumulated drift an
 
 **Why:** Multi-phase execution accumulates stale context. Agents carry assumptions forward that may no longer apply. Clearing context and re-reading from artifacts ensures each phase starts from ground truth, not memory.
 
-**Stage boundary** uses the heavier protocol defined in ACM-STAGES-SPEC.md (Stage Boundary Handoff Protocol). Phase boundary is internal to a stage; stage boundary transitions between stages.
+**Stage boundary** uses the heavier protocol defined in ADF-STAGES-SPEC.md (Stage Boundary Handoff Protocol). Phase boundary is internal to a stage; stage boundary transitions between stages.
 
 ### Handoff Block
 
@@ -389,7 +389,7 @@ current_phase: "Phase 1: Core Structure"
 
 #### Step 1: Review Loop
 
-Invoke review per ACM-REVIEW-SPEC.md. Use `get_review_prompt('develop', phase)` from ACM MCP server.
+Invoke review per ADF-REVIEW-SPEC.md. Use `get_review_prompt('develop', phase)` from ACM MCP server.
 
 **What gets reviewed:**
 - manifest.md
@@ -596,7 +596,7 @@ Not a full audit. A structured sanity check: "did we build what we designed?"
 #### 8.5 status.md Update (THE SEAL)
 
 - Mark stage complete
-- Include structured stage handoff (per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol)
+- Include structured stage handoff (per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol)
 - This is the LAST step
 
 ---
@@ -685,7 +685,7 @@ During Develop, these artifacts require ongoing updates:
 
 ### Universal Criteria
 
-Per ACM-STAGES-SPEC.md:
+Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
@@ -741,7 +741,7 @@ Per ACM-STAGES-SPEC.md:
 | design.md | Develop stage | Primary input |
 | docs/acm/plan.md | Develop stage (after created) | Implementation guide |
 | docs/acm/tasks.md | Develop stage (after created) | Task tracking |
-| ACM-DEVELOP-SPEC.md | Develop stage (reference) | Stage workflow |
+| ADF-DEVELOP-SPEC.md | Develop stage (reference) | Stage workflow |
 ```
 
 ---
@@ -818,7 +818,7 @@ Develop makes heavy use of sub-agents for parallelization.
 │         ▼                                                           │
 │  ┌────────────────────────────────────────────────────────┐         │
 │  │                    REVIEW LOOP                          │         │
-│  │  Per ACM-REVIEW-SPEC.md                                 │         │
+│  │  Per ADF-REVIEW-SPEC.md                                 │         │
 │  │  Internal (Ralph Loop) then External (user-driven)      │         │
 │  └────────────────────────────────────────────────────────┘         │
 │         │ "No Critical/High issues"                                 │
@@ -885,11 +885,11 @@ Develop makes heavy use of sub-agents for parallelization.
 
 ## References
 
-- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
-- ACM-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
-- ACM-DESIGN-SPEC.md (Design is primary input)
-- ACM-BRIEF-SPEC.md (Success criteria reference)
-- ACM-INTENT-SPEC.md (North Star reference)
-- ACM-PROJECT-TYPES-SPEC.md (Deliverable shape)
-- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
-- ACM-TAXONOMY.md (Terminology)
+- ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
+- ADF-DESIGN-SPEC.md (Design is primary input)
+- ADF-BRIEF-SPEC.md (Success criteria reference)
+- ADF-INTENT-SPEC.md (North Star reference)
+- ADF-PROJECT-TYPES-SPEC.md (Deliverable shape)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
+- ADF-TAXONOMY.md (Terminology)

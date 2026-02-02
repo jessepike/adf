@@ -5,7 +5,7 @@ version: "1.1.0"
 updated: "2026-01-27"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-STATUS-SPEC.md"
+location: "acm/ADF-STATUS-SPEC.md"
 ---
 
 # ACM Status Specification
@@ -243,6 +243,6 @@ A well-formed status.md:
 
 ## References
 
-- ACM-PROJECT-CLAUDE-MD-SPEC.md (CLAUDE.md references status.md)
-- ACM-DISCOVER-SPEC.md (Discover phase tracking)
-- ACM-TAXONOMY.md (Status definitions)
+- ADF-PROJECT-CLAUDE-MD-SPEC.md (CLAUDE.md references status.md)
+- ADF-DISCOVER-SPEC.md (Discover phase tracking)
+- ADF-TAXONOMY.md (Status definitions)

@@ -81,7 +81,7 @@ Create a clean, modern architecture diagram depicting the high-level structure o
 
 **Example:**
 ```
-[Paste ACM-BRIEF-SPEC.md content]
+[Paste ADF-BRIEF-SPEC.md content]
 
 Create a clean, modern architecture diagram depicting the high-level structure of the attached specification.
 

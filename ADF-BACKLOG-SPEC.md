@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-30"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-BACKLOG-SPEC.md"
+location: "acm/ADF-BACKLOG-SPEC.md"
 ---
 
 # ACM Backlog Specification

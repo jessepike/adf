@@ -12,7 +12,7 @@ location: ".claude/CLAUDE.md"
 
 ## What This Is
 
-ACM (Agentic Context Management) is the framework that defines how agentic projects are structured, managed, and maintained. It owns orchestration, knowledge, and the specs that govern all stages.
+ACM (Agentic Development Framework) is the framework that defines how agentic projects are structured, managed, and maintained. It owns orchestration, knowledge, and the specs that govern all stages.
 
 ## Current Stage
 

@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-29"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-ENV-PLUGIN-SPEC.md"
+location: "acm/ADF-ENV-PLUGIN-SPEC.md"
 ---
 
 # ACM Environment Specification (acm-env)
@@ -145,7 +145,7 @@ The source of truth for available capabilities is the **capabilities registry** 
 
 ## References
 
-- ACM-STAGES-SPEC.md
-- ACM-CONTEXT-ARTIFACT-SPEC.md
-- ACM-TAXONOMY.md
+- ADF-STAGES-SPEC.md
+- ADF-CONTEXT-ARTIFACT-SPEC.md
+- ADF-TAXONOMY.md
 - `~/code/_shared/capabilities-registry/REGISTRY-SPEC.md`

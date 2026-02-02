@@ -26,7 +26,7 @@ const HEALTH_SECTIONS: Record<string, { file: string; sections: string[] }> = {
   },
   intent: {
     file: "docs/intent.md",
-    // Per ACM-INTENT-SPEC
+    // Per ADF-INTENT-SPEC
     sections: ["Problem", "Outcome", "Why It Matters"],
   },
   status: {
@@ -47,18 +47,18 @@ function hasSection(content: string, sectionName: string): boolean {
 export function registerProjectTools(server: McpServer): void {
   server.tool(
     "get_project_type_guidance",
-    "Get ACM guidance for a project type classification. Use during Discover or Design to understand what outputs, review focus, and structure a project type requires.",
+    "Get ADF guidance for a project type classification. Use during Discover or Design to understand what outputs, review focus, and structure a project type requires.",
     {
       type: z.enum(["app", "workflow", "artifact"]).describe("Project type"),
       scale: z.enum(["personal", "commercial"]).optional().describe("Project scale modifier"),
       scope: z.enum(["mvp", "full"]).optional().describe("Project scope modifier"),
     },
     async ({ type, scale, scope }) => {
-      const filePath = path.join(ACM_ROOT, "ACM-PROJECT-TYPES-SPEC.md");
+      const filePath = path.join(ACM_ROOT, "ADF-PROJECT-TYPES-SPEC.md");
       const check = await validatePathWithinBase(filePath, ACM_ROOT);
       if (!check.valid) return errorResponse(check.error);
       if (!(await fileExists(check.resolved)))
-        return errorResponse("ACM-PROJECT-TYPES-SPEC.md not found.");
+        return errorResponse("ADF-PROJECT-TYPES-SPEC.md not found.");
       const content = await readFile(check.resolved);
 
       const lines: string[] = [`## Project Type Guidance: ${type}`];
@@ -73,7 +73,7 @@ export function registerProjectTools(server: McpServer): void {
 
   server.tool(
     "check_project_structure",
-    "Validate a project's folder structure against ACM spec. Checks for required directories and files. Use when auditing a project or after scaffolding.",
+    "Validate a project's folder structure against ADF spec. Checks for required directories and files. Use when auditing a project or after scaffolding.",
     {
       project_path: z.string().optional().describe("Project root path. Defaults to cwd."),
     },
@@ -110,7 +110,7 @@ export function registerProjectTools(server: McpServer): void {
 
   server.tool(
     "check_project_health",
-    "Run structural health checks on an ACM project. Checks file presence, frontmatter validity, and required sections in key artifacts. Does NOT perform semantic analysis. Use for project audits or pre-review validation.",
+    "Run structural health checks on an ADF project. Checks file presence, frontmatter validity, and required sections in key artifacts. Does NOT perform semantic analysis. Use for project audits or pre-review validation.",
     {
       project_path: z.string().optional().describe("Project root path. Defaults to cwd."),
     },
@@ -158,7 +158,7 @@ export function registerProjectTools(server: McpServer): void {
 
       // 3. Required sections
       // Per design.md: regex header check, not string inclusion
-      // Per ACM-*-SPEC versions (add spec version comments during implementation)
+      // Per ADF-*-SPEC versions (add spec version comments during implementation)
       lines.push("### Required Sections");
       for (const [key, config] of Object.entries(HEALTH_SECTIONS)) {
         const filePath = path.join(projectRoot, config.file);

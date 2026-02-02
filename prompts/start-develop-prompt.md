@@ -27,7 +27,7 @@ Read and verify:
 - Any supporting design docs (architecture.md, etc.) if referenced
 
 **CRITICAL — Missing Resources:**
-If any expected file is missing (e.g., ACM-DEVELOP-SPEC.md referenced but not found):
+If any expected file is missing (e.g., ADF-DEVELOP-SPEC.md referenced but not found):
 - STOP immediately
 - Report exactly what is missing
 - Ask the user to provide it
@@ -136,7 +136,7 @@ Only after human confirms understanding:
 4. Present capability assessment for approval
 5. Then proceed to Planning phase (plan.md + tasks.md)
 
-All planning artifacts go in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md.
+All planning artifacts go in `docs/acm/` per ADF-FOLDER-STRUCTURE-SPEC.md.
 
 ## Step 6: Proceed to Review & Approval (Phase 4)
 
@@ -188,7 +188,7 @@ Execution phases:
 - **Tier 1: Automated** — Unit, integration, E2E via test frameworks. Run during build.
 - **Tier 2: Browser/Real-world** — Interactive testing in browser/inspector. Run after Tier 1 passes.
 - **Tier 3: Manual** — User acceptance, edge cases, subjective validation. Run after Tier 2 passes. See `kb/MANUAL-TESTING-GUIDE.md`.
-- All three tiers required for all project types. Plan must specify approach per tier (see ACM-DEVELOP-SPEC.md).
+- All three tiers required for all project types. Plan must specify approach per tier (see ADF-DEVELOP-SPEC.md).
 
 **Build-to-design verification:** Before exiting Phase 6, verify every design requirement has a corresponding implementation + test. Document coverage in tasks.md.
 

@@ -7,7 +7,7 @@ lifecycle: "reference"
 location: "acm/README.md"
 ---
 
-# ACM — Agentic Context Management
+# ACM — Agentic Development Framework
 
 Minimal primitives for managed agentic workflows. A lightweight scaffolding system that applies to any project type: apps, artifacts, or workflows.
 
@@ -51,40 +51,40 @@ cd your-project
 
 | Spec | Purpose |
 |------|---------|
-| [ACM-STAGES-SPEC](ACM-STAGES-SPEC.md) | Discover → Design → Develop → Deliver workflow |
-| [ACM-PROJECT-TYPES-SPEC](ACM-PROJECT-TYPES-SPEC.md) | App / Artifact / Workflow types + modifiers |
-| [ACM-TAXONOMY](ACM-TAXONOMY.md) | Terminology, classification, design decisions |
+| [ADF-STAGES-SPEC](ADF-STAGES-SPEC.md) | Discover → Design → Develop → Deliver workflow |
+| [ADF-PROJECT-TYPES-SPEC](ADF-PROJECT-TYPES-SPEC.md) | App / Artifact / Workflow types + modifiers |
+| [ADF-TAXONOMY](ADF-TAXONOMY.md) | Terminology, classification, design decisions |
 
 ### Artifact Specs
 
 | Spec | Purpose |
 |------|---------|
-| [ACM-INTENT-SPEC](ACM-INTENT-SPEC.md) | intent.md — the North Star |
-| [ACM-BRIEF-SPEC](ACM-BRIEF-SPEC.md) | brief.md — detailed scope and criteria |
-| [ACM-STATUS-SPEC](ACM-STATUS-SPEC.md) | status.md — session state tracking |
-| [ACM-README-SPEC](ACM-README-SPEC.md) | README requirements and maintenance |
+| [ADF-INTENT-SPEC](ADF-INTENT-SPEC.md) | intent.md — the North Star |
+| [ADF-BRIEF-SPEC](ADF-BRIEF-SPEC.md) | brief.md — detailed scope and criteria |
+| [ADF-STATUS-SPEC](ADF-STATUS-SPEC.md) | status.md — session state tracking |
+| [ADF-README-SPEC](ADF-README-SPEC.md) | README requirements and maintenance |
 
 ### Context Specs
 
 | Spec | Purpose |
 |------|---------|
-| [ACM-GLOBAL-CLAUDE-MD-SPEC](ACM-GLOBAL-CLAUDE-MD-SPEC.md) | Global CLAUDE.md content |
-| [ACM-PROJECT-CLAUDE-MD-SPEC](ACM-PROJECT-CLAUDE-MD-SPEC.md) | Project CLAUDE.md by type |
-| [ACM-CONTEXT-ARTIFACT-SPEC](ACM-CONTEXT-ARTIFACT-SPEC.md) | Frontmatter schema, progressive disclosure |
+| [ADF-GLOBAL-CLAUDE-MD-SPEC](ADF-GLOBAL-CLAUDE-MD-SPEC.md) | Global CLAUDE.md content |
+| [ADF-PROJECT-CLAUDE-MD-SPEC](ADF-PROJECT-CLAUDE-MD-SPEC.md) | Project CLAUDE.md by type |
+| [ADF-CONTEXT-ARTIFACT-SPEC](ADF-CONTEXT-ARTIFACT-SPEC.md) | Frontmatter schema, progressive disclosure |
 
 ### Stage Specs
 
 | Spec | Purpose |
 |------|---------|
-| [ACM-DISCOVER-SPEC](ACM-DISCOVER-SPEC.md) | Discover stage workflow and requirements |
-| [ACM-DESIGN-SPEC](ACM-DESIGN-SPEC.md) | Design stage workflow and requirements |
-| [ACM-DEVELOP-SPEC](ACM-DEVELOP-SPEC.md) | Develop stage workflow and requirements |
+| [ADF-DISCOVER-SPEC](ADF-DISCOVER-SPEC.md) | Discover stage workflow and requirements |
+| [ADF-DESIGN-SPEC](ADF-DESIGN-SPEC.md) | Design stage workflow and requirements |
+| [ADF-DEVELOP-SPEC](ADF-DEVELOP-SPEC.md) | Develop stage workflow and requirements |
 
 ### Structure Specs
 
 | Spec | Purpose |
 |------|---------|
-| [ACM-FOLDER-STRUCTURE-SPEC](ACM-FOLDER-STRUCTURE-SPEC.md) | Base + type-specific folder structure |
+| [ADF-FOLDER-STRUCTURE-SPEC](ADF-FOLDER-STRUCTURE-SPEC.md) | Base + type-specific folder structure |
 
 ---
 
@@ -219,4 +219,4 @@ Research and learnings captured for reuse:
 ## References
 
 - [AGENT-INSTRUCTIONS](AGENT-INSTRUCTIONS.md) — Detailed agent guidance
-- [ACM-TAXONOMY](ACM-TAXONOMY.md) — All terminology and design decisions
+- [ADF-TAXONOMY](ADF-TAXONOMY.md) — All terminology and design decisions

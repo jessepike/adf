@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-02-02"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-DELIVER-SPEC.md"
+location: "acm/ADF-DELIVER-SPEC.md"
 ---
 
 # ACM Deliver Stage Specification
@@ -99,7 +99,7 @@ Every phase transition requires context clearing to prevent accumulated drift an
 
 **Why:** Multi-phase execution accumulates stale context. Agents carry assumptions forward that may no longer apply. Clearing context and re-reading from artifacts ensures each phase starts from ground truth, not memory.
 
-**Stage boundary** uses the heavier protocol defined in ACM-STAGES-SPEC.md (Stage Boundary Handoff Protocol). Phase boundary is internal to a stage; stage boundary transitions between stages.
+**Stage boundary** uses the heavier protocol defined in ADF-STAGES-SPEC.md (Stage Boundary Handoff Protocol). Phase boundary is internal to a stage; stage boundary transitions between stages.
 
 ### Handoff Block
 
@@ -398,7 +398,7 @@ current_phase: "Phase 5: Infrastructure Setup"
 
 #### Step 1: Review Loop
 
-Invoke review per ACM-REVIEW-SPEC.md. Use `get_review_prompt('deliver', phase)` from ACM MCP server.
+Invoke review per ADF-REVIEW-SPEC.md. Use `get_review_prompt('deliver', phase)` from ACM MCP server.
 
 **What gets reviewed:**
 - manifest.md
@@ -700,7 +700,7 @@ Update README or create `docs/ACCESS.md` with:
 #### 8.6 status.md Update (THE SEAL)
 
 - Mark milestone complete
-- Include structured stage handoff (per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol)
+- Include structured stage handoff (per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol)
 - Document what was delivered and where
 - This is the LAST step
 
@@ -791,7 +791,7 @@ During Deliver, these artifacts require ongoing updates:
 
 ### Universal Criteria
 
-Per ACM-STAGES-SPEC.md:
+Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
@@ -846,7 +846,7 @@ Per ACM-STAGES-SPEC.md:
 | design.md | Deliver stage (validation) | Technical specification |
 | docs/acm/plan.md | Deliver stage (after created) | Deployment guide |
 | docs/acm/tasks.md | Deliver stage (after created) | Task tracking |
-| ACM-DELIVER-SPEC.md | Deliver stage (reference) | Stage workflow |
+| ADF-DELIVER-SPEC.md | Deliver stage (reference) | Stage workflow |
 ```
 
 ---
@@ -985,12 +985,12 @@ Deliver may use sub-agents for parallelization, though less common than in Devel
 
 ## References
 
-- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
-- ACM-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
-- ACM-DEVELOP-SPEC.md (Develop is primary input)
-- ACM-DESIGN-SPEC.md (Design referenced for validation)
-- ACM-BRIEF-SPEC.md (Success criteria reference)
-- ACM-INTENT-SPEC.md (North Star reference)
-- ACM-PROJECT-TYPES-SPEC.md (Deliverable shape and delivery approach)
-- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
-- ACM-TAXONOMY.md (Terminology)
+- ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
+- ADF-DEVELOP-SPEC.md (Develop is primary input)
+- ADF-DESIGN-SPEC.md (Design referenced for validation)
+- ADF-BRIEF-SPEC.md (Success criteria reference)
+- ADF-INTENT-SPEC.md (North Star reference)
+- ADF-PROJECT-TYPES-SPEC.md (Deliverable shape and delivery approach)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
+- ADF-TAXONOMY.md (Terminology)

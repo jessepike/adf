@@ -92,7 +92,7 @@ Known improvements identified but not yet implemented:
 | Review diminishing returns | B4: Simple scoring — Critical/High/Low tags. Stop when zero C+H. Min 2, max 10 cycles. |
 | Prompt path friction | B5-B7: Audit prompts for stale paths, emit ready-to-copy commands. |
 | Commands vs Skills terminology | B8: Claude Code 2.1.3 folded commands into skills. Update all specs. |
-| Environment layer undefined | Created ACM-ARCHITECTURE-SPEC.md (formerly ACM-ENVIRONMENT-SPEC.md) — six primitives (orchestration, capabilities, knowledge, memory, maintenance, validation). Two layers (project + environment). |
+| Environment layer undefined | Created ADF-ARCHITECTURE-SPEC.md (formerly ADF-ENVIRONMENT-SPEC.md) — six primitives (orchestration, capabilities, knowledge, memory, maintenance, validation). Two layers (project + environment). |
 | Knowledge vs Memory distinction | Knowledge = curated/evergreen/read-heavy. Memory = raw/temporal/write-heavy. Separate repos. |
 | Registry organization | By capability name, not vendor. Three types: skills, tools, agents. Tags for queryability. |
 
@@ -103,8 +103,8 @@ Known improvements identified but not yet implemented:
 | Individual clarification questions | Added explicit instruction in 4b: "Walk through EACH open item individually" with wrong/right examples |
 | Self-validation before proceeding | Added 4d Self-Validation Checkpoint with explicit self-check questions |
 | Planning vs execution gate | Added HARD GATE after Phase 3, split phases into Planning (1-3) and Execution (4-6) workflows |
-| Capabilities.md wrong abstraction | ACM-DEVELOP-SPEC v1.1.0: Restructured with required sections (MCP Servers, Skills, Sub-agents, CLIs, Testing) |
-| Missing registry query | Added registry query step to Capability Assessment phase in ACM-DEVELOP-SPEC |
-| Task status tracking | Added Status column requirement to tasks.md format in ACM-DEVELOP-SPEC |
-| Artifact sequence unclear | Made explicit: Manifest → Capabilities → Plan → Tasks (ACM-DEVELOP-SPEC) |
+| Capabilities.md wrong abstraction | ADF-DEVELOP-SPEC v1.1.0: Restructured with required sections (MCP Servers, Skills, Sub-agents, CLIs, Testing) |
+| Missing registry query | Added registry query step to Capability Assessment phase in ADF-DEVELOP-SPEC |
+| Task status tracking | Added Status column requirement to tasks.md format in ADF-DEVELOP-SPEC |
+| Artifact sequence unclear | Made explicit: Manifest → Capabilities → Plan → Tasks (ADF-DEVELOP-SPEC) |
 | One-off artifact correction | Created develop-artifact-correction-prompt.md for fixing existing artifacts |

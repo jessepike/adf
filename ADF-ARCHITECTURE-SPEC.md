@@ -5,14 +5,14 @@ version: "2.0.1"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-ARCHITECTURE-SPEC.md"
+location: "acm/ADF-ARCHITECTURE-SPEC.md"
 ---
 
 # ACM Architecture Specification
 
 ## Purpose
 
-This is the **master framework specification** for ACM (Agentic Context Management). It is the single entry point for understanding how ACM works — the two-layer model, the six environment primitives, the stage pipeline, artifact flow, interface map, and the complete spec index.
+This is the **master framework specification** for ACM (Agentic Development Framework). It is the single entry point for understanding how ACM works — the two-layer model, the six environment primitives, the stage pipeline, artifact flow, interface map, and the complete spec index.
 
 All other ACM specs define narrower slices. This spec defines the whole.
 
@@ -22,18 +22,18 @@ All other ACM specs define narrower slices. This spec defines the whole.
 
 | Want to understand... | Read |
 |---|---|
-| The whole framework | This spec (ACM-ARCHITECTURE-SPEC.md) |
-| Stage workflow model | ACM-STAGES-SPEC.md |
-| A specific stage | ACM-DISCOVER-SPEC / DESIGN-SPEC / DEVELOP-SPEC |
-| Project classification | ACM-PROJECT-TYPES-SPEC.md |
-| Artifact formats | ACM-BRIEF-SPEC / INTENT-SPEC / STATUS-SPEC / README-SPEC |
-| Review process | ACM-REVIEW-SPEC.md |
-| Rules governance | ACM-RULES-SPEC.md |
-| Context artifacts | ACM-CONTEXT-ARTIFACT-SPEC.md / GLOBAL-CLAUDE-MD-SPEC / PROJECT-CLAUDE-MD-SPEC |
-| Environment plugin | ACM-ENV-PLUGIN-SPEC.md |
-| Folder conventions | ACM-FOLDER-STRUCTURE-SPEC.md |
-| Backlog management | ACM-BACKLOG-SPEC.md |
-| Terminology | ACM-TAXONOMY.md |
+| The whole framework | This spec (ADF-ARCHITECTURE-SPEC.md) |
+| Stage workflow model | ADF-STAGES-SPEC.md |
+| A specific stage | ADF-DISCOVER-SPEC / DESIGN-SPEC / DEVELOP-SPEC |
+| Project classification | ADF-PROJECT-TYPES-SPEC.md |
+| Artifact formats | ADF-BRIEF-SPEC / INTENT-SPEC / STATUS-SPEC / README-SPEC |
+| Review process | ADF-REVIEW-SPEC.md |
+| Rules governance | ADF-RULES-SPEC.md |
+| Context artifacts | ADF-CONTEXT-ARTIFACT-SPEC.md / GLOBAL-CLAUDE-MD-SPEC / PROJECT-CLAUDE-MD-SPEC |
+| Environment plugin | ADF-ENV-PLUGIN-SPEC.md |
+| Folder conventions | ADF-FOLDER-STRUCTURE-SPEC.md |
+| Backlog management | ADF-BACKLOG-SPEC.md |
+| Terminology | ADF-TAXONOMY.md |
 
 ---
 
@@ -128,12 +128,12 @@ The project layer is a four-stage pipeline. Each stage produces artifacts that p
 
 | Stage | Produces | Key Spec |
 |---|---|---|
-| Discover | intent.md, brief.md | ACM-DISCOVER-SPEC.md |
-| Design | design.md | ACM-DESIGN-SPEC.md |
-| Develop | deliverable, docs, planning artifacts | ACM-DEVELOP-SPEC.md |
-| Deliver | deployed/distributed deliverable | ACM-DELIVER-SPEC.md |
+| Discover | intent.md, brief.md | ADF-DISCOVER-SPEC.md |
+| Design | design.md | ADF-DESIGN-SPEC.md |
+| Develop | deliverable, docs, planning artifacts | ADF-DEVELOP-SPEC.md |
+| Deliver | deployed/distributed deliverable | ADF-DELIVER-SPEC.md |
 
-- Universal exit criteria exist for each stage — see ACM-STAGES-SPEC.md
+- Universal exit criteria exist for each stage — see ADF-STAGES-SPEC.md
 - Stage boundary handoff protocol: verify exit criteria → update status.md → commit → clear context
 - Cross-stage artifacts that persist through all stages: status.md, CLAUDE.md, docs/acm/
 
@@ -371,9 +371,9 @@ Unified view of how external consumers and internal components interact with ACM
 | Interface | What | Scope | Spec |
 |---|---|---|---|
 | ACM MCP server | Read-only spec/prompt/capability/KB access | Consumer projects | acm-server/README.md |
-| acm-env plugin | Environment management, health, hooks | All projects | ACM-ENV-PLUGIN-SPEC.md |
-| .claude/rules/ | Policy enforcement (human-controlled) | Per project | ACM-RULES-SPEC.md |
-| CLAUDE.md | Context and orientation (agent-writable) | Per project | ACM-CONTEXT-ARTIFACT-SPEC.md |
+| acm-env plugin | Environment management, health, hooks | All projects | ADF-ENV-PLUGIN-SPEC.md |
+| .claude/rules/ | Policy enforcement (human-controlled) | Per project | ADF-RULES-SPEC.md |
+| CLAUDE.md | Context and orientation (agent-writable) | Per project | ADF-CONTEXT-ARTIFACT-SPEC.md |
 | Companion skill | Workflow instructions for agents | Consumer projects | skills/acm-workflow/skill.md |
 
 ---
@@ -387,10 +387,10 @@ Unified view of how external consumers and internal components interact with ACM
 │   │   ├── CLAUDE.md             # Project context (agent-writable)
 │   │   └── rules/                # Hard constraints (human-controlled)
 │   │       └── constraints.md    # Non-negotiable rules
-│   ├── ACM-*-SPEC.md             # Process specs (orchestration contracts)
-│   ├── ACM-ARCHITECTURE-SPEC.md   # This spec (master framework spec)
+│   ├── ADF-*-SPEC.md             # Process specs (orchestration contracts)
+│   ├── ADF-ARCHITECTURE-SPEC.md   # This spec (master framework spec)
 │   ├── acm-server/               # ACM MCP server (read-only tool interface)
-│   ├── skills/                   # ACM-process skills (review automation, workflow)
+│   ├── skills/                   # ADF-process skills (review automation, workflow)
 │   ├── prompts/                  # Stage prompts
 │   ├── kb/                       # Knowledge base (curated learnings)
 │   ├── scripts/                  # Init, orchestration scripts
@@ -412,7 +412,7 @@ Unified view of how external consumers and internal components interact with ACM
     └── MEMORY-SPEC.md            # How memory works
 ```
 
-**ACM-process skills** (`acm/skills/`) are tightly coupled to ACM orchestration — review automation, workflow tools, stage transitions. They live inside ACM because they implement ACM's own process. General-purpose capabilities (frontend-design, pdf, etc.) live in the capabilities-registry.
+**ADF-process skills** (`acm/skills/`) are tightly coupled to ACM orchestration — review automation, workflow tools, stage transitions. They live inside ACM because they implement ACM's own process. General-purpose capabilities (frontend-design, pdf, etc.) live in the capabilities-registry.
 
 **Maintenance** and **Validation** are distributed — each component owns its own maintenance scripts and validation skills. They don't have separate repos.
 
@@ -516,25 +516,25 @@ Complete table of all ACM specifications:
 
 | Spec | Version | Governs | Primitive |
 |---|---|---|---|
-| ACM-ARCHITECTURE-SPEC.md | 2.0.1 | Framework architecture (this doc) | All |
-| ACM-STAGES-SPEC.md | 1.2.0 | Stage workflow, exit criteria, handoff | Orchestration |
-| ACM-DISCOVER-SPEC.md | 1.3.0 | Discover stage | Orchestration |
-| ACM-DESIGN-SPEC.md | 1.1.0 | Design stage | Orchestration |
-| ACM-DEVELOP-SPEC.md | 2.0.0 | Develop stage | Orchestration |
-| ACM-REVIEW-SPEC.md | 1.2.0 | Two-phase review mechanism | Validation |
-| ACM-PROJECT-TYPES-SPEC.md | 2.0.0 | Project classification | Orchestration |
-| ACM-BRIEF-SPEC.md | 2.1.0 | Brief artifact format | Orchestration |
-| ACM-INTENT-SPEC.md | 1.0.1 | Intent artifact format | Orchestration |
-| ACM-STATUS-SPEC.md | 1.1.0 | Status artifact format | Orchestration |
-| ACM-README-SPEC.md | 1.0.0 | README artifact format | Orchestration |
-| ACM-CONTEXT-ARTIFACT-SPEC.md | 1.0.0 | CLAUDE.md format (shared) | Orchestration |
-| ACM-GLOBAL-CLAUDE-MD-SPEC.md | 1.1.0 | Global CLAUDE.md format | Orchestration |
-| ACM-PROJECT-CLAUDE-MD-SPEC.md | 1.1.0 | Project CLAUDE.md format | Orchestration |
-| ACM-FOLDER-STRUCTURE-SPEC.md | 1.2.0 | Folder conventions | Orchestration |
-| ACM-RULES-SPEC.md | 1.0.0 | Rules governance | Validation |
-| ACM-BACKLOG-SPEC.md | 1.0.0 | Backlog management | Orchestration |
-| ACM-ENV-PLUGIN-SPEC.md | 1.0.0 | acm-env plugin | Maintenance |
-| ACM-TAXONOMY.md | 1.4.0 | Terminology | All |
+| ADF-ARCHITECTURE-SPEC.md | 2.0.1 | Framework architecture (this doc) | All |
+| ADF-STAGES-SPEC.md | 1.2.0 | Stage workflow, exit criteria, handoff | Orchestration |
+| ADF-DISCOVER-SPEC.md | 1.3.0 | Discover stage | Orchestration |
+| ADF-DESIGN-SPEC.md | 1.1.0 | Design stage | Orchestration |
+| ADF-DEVELOP-SPEC.md | 2.0.0 | Develop stage | Orchestration |
+| ADF-REVIEW-SPEC.md | 1.2.0 | Two-phase review mechanism | Validation |
+| ADF-PROJECT-TYPES-SPEC.md | 2.0.0 | Project classification | Orchestration |
+| ADF-BRIEF-SPEC.md | 2.1.0 | Brief artifact format | Orchestration |
+| ADF-INTENT-SPEC.md | 1.0.1 | Intent artifact format | Orchestration |
+| ADF-STATUS-SPEC.md | 1.1.0 | Status artifact format | Orchestration |
+| ADF-README-SPEC.md | 1.0.0 | README artifact format | Orchestration |
+| ADF-CONTEXT-ARTIFACT-SPEC.md | 1.0.0 | CLAUDE.md format (shared) | Orchestration |
+| ADF-GLOBAL-CLAUDE-MD-SPEC.md | 1.1.0 | Global CLAUDE.md format | Orchestration |
+| ADF-PROJECT-CLAUDE-MD-SPEC.md | 1.1.0 | Project CLAUDE.md format | Orchestration |
+| ADF-FOLDER-STRUCTURE-SPEC.md | 1.2.0 | Folder conventions | Orchestration |
+| ADF-RULES-SPEC.md | 1.0.0 | Rules governance | Validation |
+| ADF-BACKLOG-SPEC.md | 1.0.0 | Backlog management | Orchestration |
+| ADF-ENV-PLUGIN-SPEC.md | 1.0.0 | acm-env plugin | Maintenance |
+| ADF-TAXONOMY.md | 1.4.0 | Terminology | All |
 
 ---
 
@@ -564,10 +564,10 @@ Complete table of all ACM specifications:
 
 ## References
 
-- ACM-STAGES-SPEC.md (project layer — stage workflow model)
-- ACM-RULES-SPEC.md (enforcement layer — rules governance model)
-- ACM-ENV-PLUGIN-SPEC.md (acm-env plugin — environment management)
-- ACM-TAXONOMY.md (terminology)
+- ADF-STAGES-SPEC.md (project layer — stage workflow model)
+- ADF-RULES-SPEC.md (enforcement layer — rules governance model)
+- ADF-ENV-PLUGIN-SPEC.md (acm-env plugin — environment management)
+- ADF-TAXONOMY.md (terminology)
 - acm-server/README.md (MCP server — installation, tools, consumer wiring)
 - skills/acm-workflow/skill.md (companion skill — workflow instructions)
 - docs/design.md (MCP server design spec — full tool schemas and architecture)

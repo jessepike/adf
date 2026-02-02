@@ -5,7 +5,7 @@ version: "1.1.0"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-GLOBAL-CLAUDE-MD-SPEC.md"
+location: "acm/ADF-GLOBAL-CLAUDE-MD-SPEC.md"
 ---
 
 # ACM Global CLAUDE.md Specification
@@ -140,4 +140,4 @@ Before deploying Global CLAUDE.md:
 ## References
 
 - Source: TIER1_KIT_SPEC.md (extracted and simplified)
-- Parent: ACM-GLOBAL-PRIMITIVES-v0.1.md
+- Parent: ADF-GLOBAL-PRIMITIVES-v0.1.md

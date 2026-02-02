@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-30"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-RULES-SPEC.md"
+location: "acm/ADF-RULES-SPEC.md"
 ---
 
 # ACM Rules Specification
@@ -249,18 +249,18 @@ A well-formed rules directory:
 
 | Spec | Relationship |
 |------|-------------|
-| ACM-GLOBAL-CLAUDE-MD-SPEC.md | Global constraints (baseline) that project rules extend |
-| ACM-PROJECT-CLAUDE-MD-SPEC.md | Context layer that rules complement and override |
-| ACM-FOLDER-STRUCTURE-SPEC.md | Defines `.claude/rules/` in project structure |
-| ACM-CONTEXT-ARTIFACT-SPEC.md | Defines `rule` type in artifact vocabulary |
-| ACM-ARCHITECTURE-SPEC.md | Rules are part of the governance model in the environment layer |
+| ADF-GLOBAL-CLAUDE-MD-SPEC.md | Global constraints (baseline) that project rules extend |
+| ADF-PROJECT-CLAUDE-MD-SPEC.md | Context layer that rules complement and override |
+| ADF-FOLDER-STRUCTURE-SPEC.md | Defines `.claude/rules/` in project structure |
+| ADF-CONTEXT-ARTIFACT-SPEC.md | Defines `rule` type in artifact vocabulary |
+| ADF-ARCHITECTURE-SPEC.md | Rules are part of the governance model in the environment layer |
 
 ---
 
 ## References
 
-- ACM-GLOBAL-CLAUDE-MD-SPEC.md
-- ACM-PROJECT-CLAUDE-MD-SPEC.md
-- ACM-ARCHITECTURE-SPEC.md
-- ACM-CONTEXT-ARTIFACT-SPEC.md
-- ACM-FOLDER-STRUCTURE-SPEC.md
+- ADF-GLOBAL-CLAUDE-MD-SPEC.md
+- ADF-PROJECT-CLAUDE-MD-SPEC.md
+- ADF-ARCHITECTURE-SPEC.md
+- ADF-CONTEXT-ARTIFACT-SPEC.md
+- ADF-FOLDER-STRUCTURE-SPEC.md

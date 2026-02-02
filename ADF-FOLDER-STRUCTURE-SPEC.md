@@ -5,7 +5,7 @@ version: "1.2.0"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-FOLDER-STRUCTURE-SPEC.md"
+location: "acm/ADF-FOLDER-STRUCTURE-SPEC.md"
 ---
 
 # ACM Folder Structure Specification
@@ -244,6 +244,6 @@ Before exiting Project Init:
 
 ## References
 
-- ACM-CONTEXT-ARTIFACT-SPEC.md (lifecycle classes)
-- ACM-PROJECT-TYPES-SPEC.md (type determines additions)
-- ACM-STAGES-SPEC.md (Project Init creates structure)
+- ADF-CONTEXT-ARTIFACT-SPEC.md (lifecycle classes)
+- ADF-PROJECT-TYPES-SPEC.md (type determines additions)
+- ADF-STAGES-SPEC.md (Project Init creates structure)

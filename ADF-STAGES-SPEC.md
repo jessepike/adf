@@ -5,7 +5,7 @@ version: "1.2.0"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-STAGES-SPEC.md"
+location: "acm/ADF-STAGES-SPEC.md"
 ---
 
 # ACM Stages Specification
@@ -34,7 +34,7 @@ Define the minimal stage workflow for agentic projects — applicable to softwar
 
 ## Environment Layer
 
-The persistent, cross-cutting infrastructure that wraps around all stages. Stages pull what they need on demand. See `ACM-ARCHITECTURE-SPEC.md` for full architecture.
+The persistent, cross-cutting infrastructure that wraps around all stages. Stages pull what they need on demand. See `ADF-ARCHITECTURE-SPEC.md` for full architecture.
 
 ### Contents
 - **Skills** — Reusable capabilities (research, review, creation)
@@ -45,7 +45,7 @@ The persistent, cross-cutting infrastructure that wraps around all stages. Stage
 
 ### Environment Layer Interfaces
 
-- **acm-env plugin** — Environment *management*: configuration, baseline validation, hooks, plugin/capability administration. See `ACM-ENV-PLUGIN-SPEC.md`.
+- **acm-env plugin** — Environment *management*: configuration, baseline validation, hooks, plugin/capability administration. See `ADF-ENV-PLUGIN-SPEC.md`.
 - **ACM MCP server** — Environment *knowledge*: queryable access to specs, prompts, stubs, project validation, capability queries. Consumed by agents in any project via `.mcp.json`.
 
 ### Cross-Stage Artifacts
@@ -204,5 +204,5 @@ The next stage agent starts by reading `CLAUDE.md` → `status.md` (which contai
 
 ## References
 
-- ACM-GLOBAL-PRIMITIVES-v0.1.md
-- ACM-GLOBAL-CLAUDE-MD-SPEC.md
+- ADF-GLOBAL-PRIMITIVES-v0.1.md
+- ADF-GLOBAL-CLAUDE-MD-SPEC.md

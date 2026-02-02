@@ -15,7 +15,7 @@ Use this prompt with an image generation tool or diagramming AI to create an arc
 
 ## Prompt
 
-Create a clean, modern software architecture diagram for "ACM — Agentic Context Management" showing the complete system vision.
+Create a clean, modern software architecture diagram for "ACM — Agentic Development Framework" showing the complete system vision.
 
 **Layout:** Layered architecture, top-to-bottom
 
@@ -206,6 +206,6 @@ project/
 
 ---
 
-**Title:** "ACM — Agentic Context Management: Full Architecture"
+**Title:** "ACM — Agentic Development Framework: Full Architecture"
 
 **Subtitle:** "Managed workflows for agentic software development"

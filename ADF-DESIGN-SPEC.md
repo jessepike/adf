@@ -5,7 +5,7 @@ version: "1.1.0"
 updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-DESIGN-SPEC.md"
+location: "acm/ADF-DESIGN-SPEC.md"
 ---
 
 # ACM Design Stage Specification
@@ -356,7 +356,7 @@ Design outputs vary by project type. Use this as guidance, not rigid requirement
 
 ### Universal Criteria
 
-Per ACM-STAGES-SPEC.md:
+Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
@@ -386,7 +386,7 @@ Per ACM-STAGES-SPEC.md:
 
 ### Stage Boundary Handoff
 
-Per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol:
+Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
@@ -421,8 +421,8 @@ The agent working through Design needs context on:
 | intent.md | Always | North Star |
 | discover-brief.md | Design stage | Primary input — fully consumed |
 | design.md | Design stage (after created) | Working design spec |
-| ACM-DESIGN-SPEC.md | Design stage (reference) | Stage workflow |
-| ACM-PROJECT-TYPES-SPEC.md | Design stage (reference) | Output requirements by type |
+| ADF-DESIGN-SPEC.md | Design stage (reference) | Stage workflow |
+| ADF-PROJECT-TYPES-SPEC.md | Design stage (reference) | Output requirements by type |
 ```
 
 Specs are reference documents — load on demand, not into every context.
@@ -541,16 +541,16 @@ New session workflow:
 
 ## Planning Artifacts Convention
 
-When Design produces working artifacts beyond design.md (e.g., architecture explorations, decision analysis), place them in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+When Design produces working artifacts beyond design.md (e.g., architecture explorations, decision analysis), place them in `docs/acm/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
 
 ---
 
 ## References
 
-- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
-- ACM-BRIEF-SPEC.md (Brief is primary input)
-- ACM-INTENT-SPEC.md (Intent is North Star)
-- ACM-PROJECT-TYPES-SPEC.md (Determines required outputs)
-- ACM-DISCOVER-SPEC.md (Discover stage outputs Brief)
-- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
-- ACM-TAXONOMY.md (Terminology definitions)
+- ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-BRIEF-SPEC.md (Brief is primary input)
+- ADF-INTENT-SPEC.md (Intent is North Star)
+- ADF-PROJECT-TYPES-SPEC.md (Determines required outputs)
+- ADF-DISCOVER-SPEC.md (Discover stage outputs Brief)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
+- ADF-TAXONOMY.md (Terminology definitions)

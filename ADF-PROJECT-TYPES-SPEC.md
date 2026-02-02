@@ -5,7 +5,7 @@ version: "2.0.0"
 updated: "2026-01-27"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-PROJECT-TYPES-SPEC.md"
+location: "acm/ADF-PROJECT-TYPES-SPEC.md"
 ---
 
 # ACM Project Types Specification
@@ -197,6 +197,6 @@ Some projects span types:
 
 ## References
 
-- ACM-BRIEF-SPEC.md (Brief captures type + modifiers)
-- ACM-STAGES-SPEC.md (Project Init identifies type)
-- ACM-FOLDER-STRUCTURE-SPEC.md (scaffolding varies by type)
+- ADF-BRIEF-SPEC.md (Brief captures type + modifiers)
+- ADF-STAGES-SPEC.md (Project Init identifies type)
+- ADF-FOLDER-STRUCTURE-SPEC.md (scaffolding varies by type)

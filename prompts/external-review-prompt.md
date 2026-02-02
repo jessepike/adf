@@ -4,7 +4,7 @@ description: "External model prompt for Phase 2 review in Discover stage"
 version: "5.0.0"
 updated: "2026-02-01"
 scope: "discover"
-mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
+mechanism_ref: "~/code/_shared/acm/ADF-REVIEW-SPEC.md"
 usage: "Sent to external models via external-review MCP server alongside artifact content"
 ---
 

@@ -5,7 +5,7 @@ version: "1.0.0"
 updated: "2026-01-27"
 scope: "acm"
 lifecycle: "reference"
-location: "acm/ACM-README-SPEC.md"
+location: "acm/ADF-README-SPEC.md"
 ---
 
 # ACM README Specification
@@ -104,7 +104,7 @@ version: "X.Y.Z"
 updated: "YYYY-MM-DD"
 ---
 
-# ACM — Agentic Context Management
+# ACM — Agentic Development Framework
 
 [1-2 sentence description]
 
@@ -158,7 +158,7 @@ See [docs/status.md](docs/status.md) for current state.
 
 ## Core Maintainable Artifacts
 
-README is one of several artifacts that must stay current. See ACM-TAXONOMY.md for the full artifact maintenance tiers.
+README is one of several artifacts that must stay current. See ADF-TAXONOMY.md for the full artifact maintenance tiers.
 
 | Tier | Artifacts | Update Frequency |
 |------|-----------|------------------|
@@ -182,6 +182,6 @@ No automated validation currently. Future: `acm-validate` could check README com
 
 ## References
 
-- ACM-TAXONOMY.md (Artifact maintenance tiers)
-- ACM-STATUS-SPEC.md (Status tracking)
-- ACM-PROJECT-CLAUDE-MD-SPEC.md (CLAUDE.md structure)
+- ADF-TAXONOMY.md (Artifact maintenance tiers)
+- ADF-STATUS-SPEC.md (Status tracking)
+- ADF-PROJECT-CLAUDE-MD-SPEC.md (CLAUDE.md structure)

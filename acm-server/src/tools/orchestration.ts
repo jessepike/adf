@@ -7,10 +7,10 @@ import { readFile, readFrontmatter, fileExists } from "../lib/files.js";
 import { errorResponse } from "../lib/errors.js";
 
 const STAGE_FILES: Record<string, string> = {
-  discover: "ACM-DISCOVER-SPEC.md",
-  design: "ACM-DESIGN-SPEC.md",
-  develop: "ACM-DEVELOP-SPEC.md",
-  deliver: "ACM-DELIVER-SPEC.md",
+  discover: "ADF-DISCOVER-SPEC.md",
+  design: "ADF-DESIGN-SPEC.md",
+  develop: "ADF-DEVELOP-SPEC.md",
+  deliver: "ADF-DELIVER-SPEC.md",
 };
 
 const PROMPT_MAP: Record<string, Record<string, string>> = {
@@ -41,9 +41,9 @@ const TRANSITION_FILES: Record<string, string> = {
 export function registerOrchestrationTools(server: McpServer): void {
   server.tool(
     "get_stage",
-    "Get ACM stage requirements and workflow. Use when an agent needs to understand what a stage involves, its phases, entry/exit criteria, and expected outputs. Do NOT use for transition guidance (use get_transition_prompt instead).",
+    "Get ADF stage requirements and workflow. Use when an agent needs to understand what a stage involves, its phases, entry/exit criteria, and expected outputs. Do NOT use for transition guidance (use get_transition_prompt instead).",
     {
-      stage: z.enum(["discover", "design", "develop", "deliver"]).describe("ACM stage name"),
+      stage: z.enum(["discover", "design", "develop", "deliver"]).describe("ADF stage name"),
     },
     async ({ stage }) => {
       const filePath = path.join(ACM_ROOT, STAGE_FILES[stage]);
@@ -60,7 +60,7 @@ export function registerOrchestrationTools(server: McpServer): void {
     "get_review_prompt",
     "Get the review prompt for a stage and review phase. Use when preparing to run an internal (Ralph Loop) or external review. Returns the full prompt text ready for use.",
     {
-      stage: z.enum(["discover", "design", "develop", "deliver"]).describe("ACM stage"),
+      stage: z.enum(["discover", "design", "develop", "deliver"]).describe("ADF stage"),
       phase: z.enum(["internal", "external"]).describe("Review phase"),
     },
     async ({ stage, phase }) => {
@@ -77,7 +77,7 @@ export function registerOrchestrationTools(server: McpServer): void {
 
   server.tool(
     "get_transition_prompt",
-    "Get guidance for transitioning between ACM stages. Returns the transition prompt content. Set validate=true to also check prerequisites against the project's current state (reads status.md and brief).",
+    "Get guidance for transitioning between ADF stages. Returns the transition prompt content. Set validate=true to also check prerequisites against the project's current state (reads status.md and brief).",
     {
       transition: z.enum(["discover_to_design", "design_to_develop", "develop_to_deliver"]).describe("Stage transition"),
       project_path: z.string().optional().describe("Project root path. Defaults to cwd."),

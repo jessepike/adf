@@ -7,18 +7,18 @@ import { errorResponse } from "../lib/errors.js";
 
 // Per design.md Section "Tool Schemas > Artifacts"
 const SPEC_MAP: Record<string, string> = {
-  brief: "ACM-BRIEF-SPEC.md",
-  intent: "ACM-INTENT-SPEC.md",
-  status: "ACM-STATUS-SPEC.md",
-  readme: "ACM-README-SPEC.md",
-  context: "ACM-CONTEXT-ARTIFACT-SPEC.md",
-  rules: "ACM-RULES-SPEC.md",
-  design: "ACM-DESIGN-SPEC.md",
-  backlog: "ACM-BACKLOG-SPEC.md",
-  folder_structure: "ACM-FOLDER-STRUCTURE-SPEC.md",
-  project_types: "ACM-PROJECT-TYPES-SPEC.md",
-  stages: "ACM-STAGES-SPEC.md",
-  review: "ACM-REVIEW-SPEC.md",
+  brief: "ADF-BRIEF-SPEC.md",
+  intent: "ADF-INTENT-SPEC.md",
+  status: "ADF-STATUS-SPEC.md",
+  readme: "ADF-README-SPEC.md",
+  context: "ADF-CONTEXT-ARTIFACT-SPEC.md",
+  rules: "ADF-RULES-SPEC.md",
+  design: "ADF-DESIGN-SPEC.md",
+  backlog: "ADF-BACKLOG-SPEC.md",
+  folder_structure: "ADF-FOLDER-STRUCTURE-SPEC.md",
+  project_types: "ADF-PROJECT-TYPES-SPEC.md",
+  stages: "ADF-STAGES-SPEC.md",
+  review: "ADF-REVIEW-SPEC.md",
 };
 
 const STUB_MAP: Record<string, string> = {
@@ -32,7 +32,7 @@ const STUB_MAP: Record<string, string> = {
 export function registerArtifactTools(server: McpServer): void {
   server.tool(
     "get_artifact_spec",
-    "Get the ACM specification for an artifact type. Use when you need to understand what a valid artifact looks like — required sections, frontmatter, formatting rules.",
+    "Get the ADF specification for an artifact type. Use when you need to understand what a valid artifact looks like — required sections, frontmatter, formatting rules.",
     {
       artifact: z.enum([
         "brief", "intent", "status", "readme", "context",
@@ -54,7 +54,7 @@ export function registerArtifactTools(server: McpServer): void {
 
   server.tool(
     "get_artifact_stub",
-    "Get a starter template for an ACM artifact. Use when initializing a new project or creating a new artifact. Returns the template with placeholder values ready to fill in.",
+    "Get a starter template for an ADF artifact. Use when initializing a new project or creating a new artifact. Returns the template with placeholder values ready to fill in.",
     {
       artifact: z.enum([
         "brief", "intent", "status", "rules_constraints", "claude_md",

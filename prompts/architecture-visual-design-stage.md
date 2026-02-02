@@ -30,7 +30,7 @@ Create a clean, modern architecture diagram for "ACM Design Stage" showing the w
 - status.md (State) — gray, small
 
 **From ACM Environment Layer:**
-- ACM-DESIGN-SPEC.md
+- ADF-DESIGN-SPEC.md
 - Project Type classification
 
 Arrow label: "Validated inputs from Discover"

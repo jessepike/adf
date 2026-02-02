@@ -5,7 +5,7 @@ import { ACM_ROOT } from "../paths.js";
 
 describe("readFile", () => {
   it("reads an existing file", async () => {
-    const content = await readFile(path.join(ACM_ROOT, "ACM-RULES-SPEC.md"));
+    const content = await readFile(path.join(ACM_ROOT, "ADF-RULES-SPEC.md"));
     expect(content).toContain("Rules");
   });
 
@@ -17,7 +17,7 @@ describe("readFile", () => {
 describe("readFrontmatter", () => {
   it("parses YAML frontmatter", async () => {
     const { data, content } = await readFrontmatter(
-      path.join(ACM_ROOT, "ACM-RULES-SPEC.md")
+      path.join(ACM_ROOT, "ADF-RULES-SPEC.md")
     );
     expect(data).toBeDefined();
     expect(typeof content).toBe("string");
@@ -26,7 +26,7 @@ describe("readFrontmatter", () => {
 
 describe("fileExists", () => {
   it("returns true for existing file", async () => {
-    expect(await fileExists(path.join(ACM_ROOT, "ACM-RULES-SPEC.md"))).toBe(true);
+    expect(await fileExists(path.join(ACM_ROOT, "ADF-RULES-SPEC.md"))).toBe(true);
   });
 
   it("returns false for missing file", async () => {

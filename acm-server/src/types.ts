@@ -1,4 +1,4 @@
-// Shared types for ACM MCP Server
+// Shared types for ADF MCP Server
 
 export interface ToolResponse {
   [x: string]: unknown;
