@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Detailed specification for the Design stage workflow"
-version: "1.0.0"
-updated: "2026-01-27"
+version: "1.1.0"
+updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/ACM-DESIGN-SPEC.md"
@@ -53,7 +53,7 @@ What enters the Design stage:
 | `intent.md` | Discover | North Star — loaded for alignment |
 | `discover-brief.md` | Discover | Detailed contract — primary input, fully consumed |
 | Project classification | Brief | Type + modifiers determine required outputs |
-| ACM specs | Meta layer | Design spec, Project Types spec |
+| ACM specs | Environment layer | Design spec, Project Types spec |
 | Current state | `status.md` | Where we left off (if resuming) |
 
 ---
@@ -354,23 +354,48 @@ Design outputs vary by project type. Use this as guidance, not rigid requirement
 
 ## Exit Criteria
 
-Design is complete when:
+### Universal Criteria
+
+Per ACM-STAGES-SPEC.md:
+
+- [ ] Primary deliverable(s) exist with required content
+- [ ] No Critical or High issues open (post-review)
+- [ ] Alignment verified with intent.md and brief.md
+- [ ] All work committed (atomic commits, no uncommitted changes)
+- [ ] Documentation appropriate to deliverable exists
+- [ ] Workspace cleanup complete (no transients, .gitignore current)
+- [ ] status.md updated with stage completion (THE SEAL — last step)
+- [ ] Human sign-off obtained
+
+### Design-Specific Criteria
 
 - [ ] `design.md` exists with all required sections (core + type-specific)
 - [ ] Design aligns with Brief — delivers what was specified
 - [ ] Capabilities inventory complete (tools, skills, agents identified)
 - [ ] Interface/format specified clearly enough for implementation
-- [ ] No P1 issues open in Issue Log
 - [ ] Decision log captures key choices with rationale
 - [ ] Open Questions empty or explicitly deferred to Develop
 - [ ] **Develop Handoff section complete** — summarizes design, decisions, open questions, success criteria, implementation guidance
-- [ ] status.md updated with stage completion
-- [ ] Human sign-off
+
+### Type-Specific Criteria
 
 **For Apps/Workflows (additional):**
 - [ ] Architecture documented (or confirmed unnecessary)
 - [ ] Tech stack specified
 - [ ] Data model defined (if applicable)
+
+### Stage Boundary Handoff
+
+Per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol:
+
+1. Complete all exit criteria above
+2. Update status.md with structured handoff:
+   - **What was produced** — design.md summary + key decisions
+   - **Success criteria status** — from brief.md
+   - **Known limitations / deferred items**
+   - **Read order for next stage agent**
+3. Commit with `chore(design): stage complete — {summary}`
+4. Run `/clear`
 
 ---
 
@@ -514,10 +539,18 @@ New session workflow:
 
 ---
 
+## Planning Artifacts Convention
+
+When Design produces working artifacts beyond design.md (e.g., architecture explorations, decision analysis), place them in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+
+---
+
 ## References
 
+- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
 - ACM-BRIEF-SPEC.md (Brief is primary input)
 - ACM-INTENT-SPEC.md (Intent is North Star)
 - ACM-PROJECT-TYPES-SPEC.md (Determines required outputs)
 - ACM-DISCOVER-SPEC.md (Discover stage outputs Brief)
+- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
 - ACM-TAXONOMY.md (Terminology definitions)

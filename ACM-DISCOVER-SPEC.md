@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Detailed specification for the Discover stage workflow"
-version: "1.2.0"
-updated: "2026-01-27"
+version: "1.3.0"
+updated: "2026-02-01"
 scope: "acm"
 lifecycle: "reference"
 location: "acm/ACM-DISCOVER-SPEC.md"
@@ -48,7 +48,7 @@ What enters the Discover stage:
 | Raw idea | Human | Initial concept — may be vague, incomplete, or ambitious |
 | Project type guess | Human | Initial classification (Artifact, App, Workflow) |
 | Domain context | Human/Research | Relevant background, constraints, prior art |
-| ACM specs | Meta layer | Brief spec, Intent spec, Project Types spec |
+| ACM specs | Environment layer | Brief spec, Intent spec, Project Types spec |
 
 ---
 
@@ -221,18 +221,41 @@ The review loop has two phases based on *who* reviews, not *what kind* of review
 
 ## Exit Criteria
 
-Discover is complete when:
+### Universal Criteria
+
+Per ACM-STAGES-SPEC.md:
+
+- [ ] Primary deliverable(s) exist with required content
+- [ ] No Critical or High issues open (post-review)
+- [ ] Alignment verified with intent.md and brief.md
+- [ ] All work committed (atomic commits, no uncommitted changes)
+- [ ] Documentation appropriate to deliverable exists
+- [ ] Workspace cleanup complete (no transients, .gitignore current)
+- [ ] status.md updated with stage completion (THE SEAL — last step)
+- [ ] Human sign-off obtained
+
+### Discover-Specific Criteria
 
 - [ ] `intent.md` exists and passes Intent spec validation
 - [ ] `discover-brief.md` exists with all required sections (core + type-specific)
 - [ ] Project classification assigned (type + modifiers)
 - [ ] Scope boundaries clear (in/out explicit)
 - [ ] Success criteria are verifiable (not vague)
-- [ ] No P1 issues open in Issue Log
 - [ ] Open Questions empty or deferred to Design with rationale
 - [ ] Constraints documented
-- [ ] Session State shows phase: complete
-- [ ] Human sign-off
+
+### Stage Boundary Handoff
+
+Per ACM-STAGES-SPEC.md Stage Boundary Handoff Protocol:
+
+1. Complete all exit criteria above
+2. Update status.md with structured handoff:
+   - **What was produced** — intent.md + discover-brief.md summary
+   - **Success criteria status** — from brief.md
+   - **Known limitations / deferred items**
+   - **Read order for next stage agent**
+3. Commit with `chore(discover): stage complete — {summary}`
+4. Run `/clear`
 
 ---
 
@@ -416,11 +439,18 @@ The Discover stage diagram shows:
 
 ---
 
+## Planning Artifacts Convention
+
+When Discover produces working artifacts beyond intent.md and discover-brief.md (e.g., research notes, exploration logs), place them in `docs/acm/` per ACM-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+
+---
+
 ## References
 
+- ACM-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
 - ACM-BRIEF-SPEC.md (Brief structure and requirements)
 - ACM-INTENT-SPEC.md (Intent structure and requirements)
 - ACM-PROJECT-TYPES-SPEC.md (Classification system)
-- ACM-STAGES-SPEC.md (Stage overview and meta layer)
+- ACM-FOLDER-STRUCTURE-SPEC.md (docs/acm/ convention)
 - ACM-TAXONOMY.md (Terminology definitions)
 - prompts/architecture-visual-discover.md (Diagram prompt)

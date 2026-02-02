@@ -518,8 +518,8 @@ Complete table of all ACM specifications:
 |---|---|---|---|
 | ACM-ARCHITECTURE-SPEC.md | 2.0.1 | Framework architecture (this doc) | All |
 | ACM-STAGES-SPEC.md | 1.2.0 | Stage workflow, exit criteria, handoff | Orchestration |
-| ACM-DISCOVER-SPEC.md | 1.2.0 | Discover stage | Orchestration |
-| ACM-DESIGN-SPEC.md | 1.0.0 | Design stage | Orchestration |
+| ACM-DISCOVER-SPEC.md | 1.3.0 | Discover stage | Orchestration |
+| ACM-DESIGN-SPEC.md | 1.1.0 | Design stage | Orchestration |
 | ACM-DEVELOP-SPEC.md | 2.0.0 | Develop stage | Orchestration |
 | ACM-REVIEW-SPEC.md | 1.2.0 | Two-phase review mechanism | Validation |
 | ACM-PROJECT-TYPES-SPEC.md | 2.0.0 | Project classification | Orchestration |
