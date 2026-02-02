@@ -1,8 +1,8 @@
 ---
 type: "prompt"
 description: "Prompt for generating Discover stage architecture diagram"
-version: "1.0.0"
-updated: "2026-01-27"
+version: "1.1.0"
+updated: "2026-02-02"
 lifecycle: "reference"
 location: "prompts/architecture-visual-discover.md"
 ---
@@ -97,7 +97,7 @@ This is the most important section. Show as an EXPANDED box within the phase flo
 │  │ • 2-5 iterations │    │ • 1-2 cycles         │   │
 │  └──────────────────┘    └──────────────────────┘   │
 │                                                      │
-│  YAGNI: "Only flag issues that BLOCK Design"        │
+│  PRINCIPLE: "Find real issues, not cosmetic ones"   │
 └─────────────────────────────────────────────────────┘
 ```
 

@@ -1,8 +1,8 @@
 ---
 type: "prompt"
 description: "Prompt for generating full ACM vision architecture diagram"
-version: "1.2.0"
-updated: "2026-01-25"
+version: "2.0.0"
+updated: "2026-02-02"
 lifecycle: "reference"
 location: "prompts/architecture-visual-full-vision.md"
 ---
@@ -23,10 +23,13 @@ Create a clean, modern software architecture diagram for "ACM — Agentic Contex
 
 ### 1. Environment Layer (Top)
 
-- Label: "Environment Layer (Ambient Capabilities)"
-- Contains: Skills, Tools, Templates, Rules, Prompts
-- Visual: Horizontal bar across top, wraps conceptually around everything
-- Note: "Pull from shelf as needed"
+- Label: "Environment Layer (Six Primitives)"
+- Contains six distinct primitives arranged in two rows:
+  - **Row 1:** Orchestration | Capabilities | Knowledge
+  - **Row 2:** Memory | Maintenance | Validation
+- Visual: Horizontal band across top, wraps conceptually around everything below
+- Note: "Ambient services — always available"
+- Show as small labeled boxes within the layer, not just text
 
 ---
 
@@ -75,11 +78,11 @@ Discover → Design → Develop → Deliver
 
 Each stage shows its key question:
 - Discover: "What are we trying to accomplish?"
-- Design: "How will we approach it?"
-- Develop: "Build the solution & validate"
-- Deliver: "Release & gather feedback"
+- Design: "How will we build this?"
+- Develop: "Are we building it correctly?"
+- Deliver: "Is this increment done and usable?"
 
-**Loopback:** Show arrow from Deliver back to Discover. Label: "Stages can loop back"
+**Loopback:** Show arrow from Deliver back to Discover. Label: "Increments can loop back"
 
 **IMPORTANT:** The entire workflow produces outcomes. Individual stages do NOT flow directly into specific Project Types.
 
@@ -115,26 +118,25 @@ Show flow: Inbox → Reference or Delete (after triage)
 
 ---
 
-### 8. Validators (Right Side)
+### 8. Interface Layer (Right Side)
 
-- Label: "Validators (acm-validate)"
-- Description: "Validates against artifact specs"
-- What it checks:
-  - Frontmatter compliance
-  - Progressive disclosure structure
-  - Token optimization
-  - Minimal viable context
-- Connects to: Artifacts and Stage Workflow
-
-**DO NOT** say "checks frontmatter" alone — it validates against the full artifact spec.
+- Label: "Interface Layer"
+- Components shown as small boxes:
+  - **ACM MCP Server** — "Read-only spec/prompt/KB access"
+  - **acm-env plugin** — "Environment management, health"
+  - **.claude/rules/** — "Policy enforcement (human-controlled)"
+  - **CLAUDE.md** — "Context and orientation (agent-writable)"
+- Connects to: Environment Layer and Stage Workflow
+- Note: "How consumers interact with ACM"
 
 ---
 
-### 9. Maintenance (Right Side, Below Validators)
+### 9. Memory Primitive Note (Small Callout)
 
-- Label: "Maintenance (acm-prune)"
-- Description: "Cleans context, processes inbox, manages archive"
-- Connects to: Artifact Lifecycle
+- Label: "Memory (Planned)"
+- Small note: "Session state, cross-agent continuity — planned for future implementation"
+- Visual: Dashed box or grayed out within Environment Layer
+- This distinguishes Memory as planned vs the five operational primitives
 
 ---
 
@@ -186,17 +188,21 @@ project/
 
 ## Common Mistakes to Avoid
 
-1. **Intent.md scope:** Do NOT show intent only feeding Design. It's the North Star for the ENTIRE workflow, especially Develop.
+1. **Intent.md scope:** Do NOT show intent only feeding Design. It's the North Star for the ENTIRE workflow, especially Develop and Deliver.
 
-2. **Brief.md path:** Brief feeds Design only. Develop references it through Design, not directly.
+2. **Brief.md path:** Brief feeds Design only. Develop and Deliver reference it for success criteria, not as primary input.
 
 3. **Project Types flow:** Do NOT draw Develop → Software or Deliver → Workflow. The whole workflow produces outcomes; Project Type shapes them.
 
-4. **Self-improvement origin:** Arrow comes from Deliver/workflow completion, NOT from Design or Validators.
+4. **Self-improvement origin:** Arrow comes from Deliver/workflow completion, NOT from Design or earlier stages.
 
-5. **Inbox vs Archive:** These are SEPARATE. Inbox = triage. Archive = preservation. Do not group as "ephemeral."
+5. **Environment primitives:** Show all six distinctly (Orchestration, Capabilities, Knowledge, Memory [planned], Maintenance, Validation). Don't merge or omit.
 
-6. **Validators description:** They validate against artifact specs (frontmatter, progressive disclosure, token optimization, minimal viable context) — not just "structure and frontmatter."
+6. **Four stages:** Must show Discover → Design → Develop → Deliver. All four are part of the core pipeline.
+
+7. **Interface layer:** ACM MCP Server, acm-env plugin, rules/, CLAUDE.md are distinct interface mechanisms. Show them separately, not as one "interface" blob.
+
+8. **Memory status:** Mark Memory as "planned" (dashed box or grayed) to distinguish from the five operational primitives.
 
 ---
 

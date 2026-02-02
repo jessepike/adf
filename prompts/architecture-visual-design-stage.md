@@ -1,8 +1,8 @@
 ---
 type: "prompt"
 description: "Prompt for generating Design stage architecture diagram"
-version: "1.0.0"
-updated: "2026-01-28"
+version: "1.1.0"
+updated: "2026-02-02"
 scope: "design"
 lifecycle: "reference"
 location: "prompts/architecture-visual-design-stage.md"
@@ -90,10 +90,15 @@ Intake & Clarification → Technical Design → Review Loop → Finalization
 - Show as smaller documents branching from design.md
 
 **Type-Specific Sections (show as badges/tags on design.md):**
-- All Types: Summary, Capabilities, Interface & Format, Decision Log, Backlog
+- All Types: Summary, Capabilities, Interface & Format, Decision Log, Backlog, **Develop Handoff** (stage transition document)
 - App: + Architecture, Tech Stack, Data Model, Security
 - Workflow: + Orchestration, Integration Points, Data Flow, Error Handling
 - Artifact: + Format Specification, Content Outline, Source Materials
+
+**Develop Handoff Section (required):**
+- Small callout box: "Stage transition document"
+- Contains: Design summary, key decisions, capabilities needed, open questions, success criteria, implementation guidance
+- Purpose: Give Develop everything needed to start without re-reading entire design
 
 Arrow label: "Ready for Develop stage"
 
@@ -148,10 +153,11 @@ Show prompt files used:
 
 ## Key Relationships to Show
 
-1. **Brief consumed**: Arrow from brief.md INTO Design (consumed, not just referenced)
-2. **Intent referenced**: Arrow from intent.md spanning all phases (North Star throughout)
+1. **Brief consumed**: THICK arrow from brief.md INTO Design phase. Label: "Fully consumed — transforms into technical decisions"
+2. **Intent referenced**: Thin arrow from intent.md spanning all phases (North Star throughout)
 3. **Two-phase review**: Clear visual split between Internal (fast iteration) and External (diverse perspectives)
 4. **Type determines output**: Project type badge influences which sections appear in design.md
+5. **Develop Handoff**: Small connecting element between Design outputs and arrow to Develop — represents the transition document
 
 ---
 
