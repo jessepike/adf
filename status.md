@@ -1,14 +1,14 @@
 ---
 project: "ADF (Agentic Development Framework)"
 stage: "Develop"
-updated: "2026-02-01"
+updated: "2026-02-02"
 ---
 
 # Status
 
 ## Current State
 
-- **Stage:** Develop (ACM framework itself)
+- **Stage:** Develop (ADF framework itself)
 - **Focus:** Execute-Plan Orchestration Skill (B62) — ✅ **COMPLETE**
 - **Next Action:** Execute Phase 1 on link-triage-pipeline (real-world validation)
 - **Recently Completed:** External Review Skill + MCP Server (B14), ADF MCP Server (13 tools, 59 tests)
@@ -159,6 +159,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-02-02 | B39+B51: ADF MCP server deliver support complete. Updated ADF-ARCHITECTURE-SPEC.md (removed "B15 pending" reference). Updated adf-server/src/tools/orchestration.ts: added "deliver" to all three enums (get_stage, get_review_prompt, get_transition_prompt), added deliver to STAGE_FILES/PROMPT_MAP/TRANSITION_FILES, added develop_to_deliver transition validation. Updated tool-guide.md with deliver references. Rebuilt MCP server successfully (58/59 tests passing, 1 pre-existing failure unrelated to changes). MCP server now serves ADF-DELIVER-SPEC.md, deliver review prompts, and start-deliver-prompt.md. Full deliver stage lifecycle now supported in framework. |
 | 2026-02-02 | B60+B61: Minor polish complete. B60: Created start-discover-prompt.md v1.0.0 — entry-point prompt for Discover stage, parallel to other start prompts. Covers project setup validation, exploration phase initiation. B61: Fixed Develop HARD GATE placement — moved from after Phase 3 to after Phase 4 (Review Loop). Updated ADF-DEVELOP-SPEC.md to v2.1.0, start-develop-prompt.md to v2.2.0. Correct pattern now: Plan → Review → HARD GATE → Execution (matches Deliver). Phase 4 renamed "Review Loop & Approval" combining internal/external review + human approval. All four stages now complete and architecturally aligned. |
 | 2026-02-02 | Execute-Plan Orchestration Skill — Design complete. Created comprehensive design for autonomous development orchestrator (narrow skill, not general ACM orchestrator). Architecture: 3 agents (orchestrator, task-executor, phase-validator), research-backed patterns (LangGraph centralized orchestration, Airflow/Bazel DAG resolution, Temporal.io phase checkpointing, GitHub Actions parallel groups). Design review: Cycle 1 found 3 High issues (task grouping algorithm, stuck detection, ralph parsing), all fixed with ~280 lines of implementation logic. Cycle 2 validation confirmed 0 Critical/High issues remaining (2 Medium non-blocking, 1 Low). Design v0.2 APPROVED via HARD GATE. Artifacts in docs/adf/: execute-plan-design.md (970 lines), architecture.md, flow-diagram.md, implementation-roadmap.md (7 phases), review cycles 1+2, approval summary. Total ~8000 lines documentation. Ready for Develop Phase 5 (Environment Setup) + Phase 6 (Build). |
+| 2026-02-02 | ACM → ADF content rename complete. Added backlog items B64-B66 for plugin renames (acm-env, acm-review) and consumer updates. Replaced 250+ ACM references across 76 files: file/section headings, path references (acm/ → adf/), prose ("the ACM" → "the ADF"), frontmatter (scope: "acm" → scope: "adf"). Preserved plugin names acm-env and acm-review for separate rename. 3 commits: infrastructure (9288e28), original content (3c44689), final content (cd9a324). Framework now consistently named ADF (Agentic Development Framework) throughout. |
 
 ## Decisions
 
