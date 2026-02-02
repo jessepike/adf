@@ -1,6 +1,6 @@
 ---
 type: "specification"
-description: "Defines the ACM stage workflow model and meta layer"
+description: "Defines the ACM stage workflow model and environment layer"
 version: "1.2.0"
 updated: "2026-02-01"
 scope: "acm"
@@ -196,7 +196,7 @@ The next stage agent starts by reading `CLAUDE.md` → `status.md` (which contai
 
 **Intent-aligned:** Every stage references back to `intent.md` as the source of truth.
 
-**Pull-based:** Capabilities exist in the meta layer; stages pull what they need.
+**Pull-based:** Capabilities exist in the environment layer; stages pull what they need.
 
 **Minimal gates:** Exit criteria are clarity checks, not bureaucratic approvals.
 

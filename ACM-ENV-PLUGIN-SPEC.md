@@ -121,9 +121,9 @@ The `/acm-env:audit` command validates:
 - Token-efficient — every artifact earns its context cost
 - Graceful degradation — never silently fail
 
-## Relationship to ACM Meta Layer
+## Relationship to ACM Environment Layer
 
-acm-env is the **management layer for the meta layer itself**. It ensures skills, tools, rules, and context artifacts are properly configured, available, current, and not stale.
+acm-env is the **management layer for the environment layer itself**. It ensures skills, tools, rules, and context artifacts are properly configured, available, current, and not stale.
 
 ### Capabilities Registry
 

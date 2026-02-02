@@ -12,7 +12,7 @@ location: "acm/ACM-STATUS-SPEC.md"
 
 ## Purpose
 
-Define `status.md` — a lightweight document that captures session state for continuity across agent sessions. This is a **meta-layer artifact** that persists across all stages.
+Define `status.md` — a lightweight document that captures session state for continuity across agent sessions. This is an **environment-layer artifact** that persists across all stages.
 
 ---
 
@@ -32,10 +32,10 @@ Define `status.md` — a lightweight document that captures session state for co
 | Artifact | Role | Stage Relevance |
 |----------|------|-----------------|
 | **CLAUDE.md** | Context manifest — points to status.md | All stages |
-| **status.md** | Lightweight session state | All stages (meta-layer) |
+| **status.md** | Lightweight session state | All stages (environment-layer) |
 | **tasks.md** | Comprehensive task planning with milestones | Develop, Deliver (supplements status.md) |
 
-**Meta-layer artifact:** Status.md is always present, always loaded, always updated. It tracks session continuity regardless of stage.
+**Environment-layer artifact:** Status.md is always present, always loaded, always updated. It tracks session continuity regardless of stage.
 
 **Progression:** In early stages (Discover, Design), status.md is the primary state tracker. In later stages (Develop, Deliver), `tasks.md` handles detailed task management while status.md continues tracking session-level state.
 

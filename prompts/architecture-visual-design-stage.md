@@ -29,7 +29,7 @@ Create a clean, modern architecture diagram for "ACM Design Stage" showing the w
 - discover-brief.md (Contract) — green, document icon
 - status.md (State) — gray, small
 
-**From ACM Meta Layer:**
+**From ACM Environment Layer:**
 - ACM-DESIGN-SPEC.md
 - Project Type classification
 

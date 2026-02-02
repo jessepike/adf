@@ -21,7 +21,6 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B15 | Deliver stage spec | New spec | ACM | P2 | M | — | Pending |
 | B18 | Design memory layer spec (MEMORY-SPEC.md) | New spec | memory | P2 | L | — | Pending |
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | P2 | S | — | Pending |
-| B37 | Align "meta layer" → "environment layer" terminology across all specs and prompts | Terminology | ACM | P2 | M | — | Pending |
 | B39 | Add `deliver` enum support to ACM MCP server once ACM-DELIVER-SPEC.md is created | Enhancement | acm-server | P2 | S | — | Blocked by B15 |
 | B41 | Move ACM-*-SPEC.md + ACM-TAXONOMY.md into docs/specs/ — update all 40+ file references | Refactor | ACM | P2 | M | — | Pending |
 | B46 | Update start-develop-prompt.md for Phase 7-8 + testing emphasis | Enhancement | Prompts | P2 | S | — | Pending |
@@ -45,6 +44,7 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B55 | Universal exit criteria + stage boundary handoff in DISCOVER-SPEC | 2026-02-01 | v1.3.0 — structured exit criteria (universal + discover-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B56 | Universal exit criteria + stage boundary handoff in DESIGN-SPEC | 2026-02-01 | v1.1.0 — structured exit criteria (universal + design-specific + type-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B57 | docs/acm/ convention in DISCOVER-SPEC and DESIGN-SPEC | 2026-02-01 | Planning Artifacts Convention section added to both specs. |
+| B37 | Align "meta layer" → "environment layer" terminology | 2026-02-01 | Updated 5 files (ENV-PLUGIN-SPEC, STATUS-SPEC, STAGES-SPEC, 2 visual prompts). 11 instances replaced. Historical references in status.md and _archive/ left as-is. |
 | B53 | Slim review-process.md to enforcement-only | 2026-02-01 | Reduced from 53 lines to 14. Removed prompt map, invocation syntax, cycle counts — all handled by acm-review plugin. |
 | B52 | Unified review skill (acm-review plugin) | 2026-02-01 | 3 commands: artifact (full P1→P2), artifact-internal (P1), artifact-external (P2). Plugin registered under acm-plugins marketplace. |
 | B54 | Elevate ACM-ARCHITECTURE-SPEC.md to master framework spec v2.0.0 | 2026-02-01 | Spec map, framework diagram, stages overview, artifact flow, interface map, spec index. Reviewed to v2.0.1 (memory marked planned, primitive assignments corrected). |

@@ -21,16 +21,16 @@ Create a clean, modern software architecture diagram for "ACM — Agentic Contex
 
 ---
 
-### 1. Meta Layer (Top)
+### 1. Environment Layer (Top)
 
-- Label: "Meta Layer (Ambient Capabilities)"
+- Label: "Environment Layer (Ambient Capabilities)"
 - Contains: Skills, Tools, Templates, Rules, Prompts
 - Visual: Horizontal bar across top, wraps conceptually around everything
 - Note: "Pull from shelf as needed"
 
 ---
 
-### 2. Context Layer — Tier-1 Memory (Below Meta Layer)
+### 2. Context Layer — Tier-1 Memory (Below Environment Layer)
 
 Two components side by side:
 
@@ -141,7 +141,7 @@ Show flow: Inbox → Reference or Delete (after triage)
 ### 10. Self-Improvement Loop (Right Side)
 
 - Arrow originates from **Deliver stage** (or the entire Stage Workflow box)
-- Flows back UP to Meta Layer
+- Flows back UP to Environment Layer
 - Label: "Learnings feed back into capabilities"
 
 **CRITICAL:** Arrow must clearly come from Deliver/workflow completion, NOT from Design or Validators.
@@ -176,7 +176,7 @@ project/
   - Green for intent.md and brief.md (use star icons)
   - Light blue for CLAUDE.md files / Context Layer
   - Orange for Validators/Maintenance
-  - Gray for Meta Layer
+  - Gray for Environment Layer
   - Muted tones for Artifact Lifecycle
 - White or light background
 - Clear arrows showing flow direction
