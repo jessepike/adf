@@ -43,6 +43,7 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B52 | Unified review skill — single skill wrapping internal (Ralph Loop) + external (MCP server) as two phases. Replaces separate external-review skill. | Enhancement | ACM | P1 | M | — | Pending |
 | B53 | Slim rules/review-process.md to enforcement-only (~10 lines) — move mechanism details (prompt map, invocation syntax, cycle counts) into review skill | Enhancement | ACM | P1 | S | — | Blocked by B52 |
 | B54 | Create start-discover-prompt.md — entry-point prompt for Discover stage, parallel to Design/Develop | Enhancement | Prompts | P3 | S | — | Pending |
+| B59 | Review function tuning sprint — run 10-20 reviews, log observations in KB, tune prompts/config. Tracking: `kb/EXTERNAL-REVIEW-MODEL-RELIABILITY.md` | Enhancement | Review | P1 | M | Develop | In Progress |
 | B14 | Automated multi-model review orchestration (external-review skill + MCP server) | Architecture | ACM | P1 | L | Develop | In Progress |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture | ACM/kb | P3 | M | — | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | Pending |
