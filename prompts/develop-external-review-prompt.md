@@ -1,28 +1,26 @@
 ---
 type: "prompt"
 description: "External model prompt for Phase 2 review in Develop stage"
-version: "3.0.0"
-updated: "2026-01-30"
+version: "4.0.0"
+updated: "2026-02-01"
 scope: "develop"
 mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
-usage: "Submit to GPT, Gemini, or other external models along with plan artifacts"
+usage: "Sent to external models via external-review MCP server alongside artifact content"
 ---
 
 # Develop External Review (Phase 2)
 
 ## Usage
 
-Copy the prompt below and submit to external models (GPT, Gemini, etc.) along with the project documents.
+This prompt is sent to external LLM models via the `external-review` MCP server. The server reads the artifact from disk and appends it to this prompt automatically.
 
-To assemble the full prompt with documents included, run from the project root:
+**Automated (MCP):** Invoked by the external-review skill — no manual assembly needed.
+
+**Manual fallback:** If the MCP server is unavailable, assemble with:
 
 ```bash
 sed \
-  -e '/\[PASTE DESIGN.MD CONTENT HERE\]/{r docs/design.md' -e 'd;}' \
-  -e '/\[PASTE MANIFEST.MD CONTENT HERE\]/{r docs/manifest.md' -e 'd;}' \
-  -e '/\[PASTE CAPABILITIES.MD CONTENT HERE\]/{r docs/capabilities.md' -e 'd;}' \
-  -e '/\[PASTE PLAN.MD CONTENT HERE\]/{r docs/plan.md' -e 'd;}' \
-  -e '/\[PASTE TASKS.MD CONTENT HERE\]/{r docs/tasks.md' -e 'd;}' \
+  -e '/\[ARTIFACT CONTENT INJECTED BY MCP SERVER\]/{r docs/design.md' -e 'd;}' \
   ~/code/_shared/acm/prompts/develop-external-review-prompt.md | pbcopy
 ```
 
@@ -30,33 +28,26 @@ sed \
 
 ## Prompt
 
-```
-You are reviewing an implementation plan that has already passed internal review. Your job is to catch what the internal reviewer missed — particularly feasibility issues and blind spots.
+You are reviewing an implementation plan/design that has already passed internal review. Your job is to catch what the internal reviewer missed — particularly feasibility issues and blind spots.
 
 ## Context
 
-This plan has passed Phase 1 (internal) review:
+This artifact has passed Phase 1 (internal) review:
 - All design requirements are addressed
 - Dependencies and capabilities are identified
-- Tasks are atomic and have acceptance criteria
+- Architecture decisions are documented
 - Testing strategy is defined
 
 You are Phase 2: a fresh perspective to catch blind spots.
 
-## Documents Provided
+## Document Provided
 
-1. design.md — What we're building (technical specification)
-2. manifest.md — Software dependencies to install
-3. capabilities.md — Skills, tools, sub-agents needed
-4. plan.md — Implementation phases and milestones
-5. tasks.md — Atomic task breakdown
-
-Your job is to validate that this plan will successfully implement the design.
+The artifact is provided below. Your job is to validate that it is technically sound and implementable.
 
 ## Rules
 
 - YAGNI: Only flag issues that would block or significantly harm implementation
-- Do NOT suggest features or capabilities beyond the design
+- Do NOT suggest features or capabilities beyond what's described
 - Do NOT recommend over-engineering
 - Do NOT add "nice to have" tooling or testing
 - If something is out of scope, respect that decision
@@ -64,16 +55,16 @@ Your job is to validate that this plan will successfully implement the design.
 
 ## Your Task
 
-Review all artifacts together. Look for:
+Review the artifact for technical soundness. Look for:
 
-1. **Design/Plan Misalignment** — Does the plan actually implement everything in the design?
+1. **Architectural Weaknesses** — Technical decisions that seem unsound or risky?
 2. **Dependency Gaps** — Missing dependencies that will block implementation?
 3. **Capability Gaps** — Skills/tools/sub-agents sufficient?
-4. **Task Coverage** — All design elements have corresponding tasks?
-5. **Task Feasibility** — Any tasks too large or vague for single-agent execution?
-6. **Sequencing Issues** — Dependency problems in task ordering?
-7. **Testing Gaps** — Testing strategy catch real issues?
-8. **Integration Risks** — Integration points fragile or under-planned?
+4. **Task Feasibility** — Any components too large or vague for implementation?
+5. **Sequencing Issues** — Dependency problems in ordering?
+6. **Testing Gaps** — Testing strategy catch real issues?
+7. **Integration Risks** — Integration points fragile or under-planned?
+8. **Internal Consistency** — Does the artifact contradict itself anywhere?
 
 ## Output Format
 
@@ -97,47 +88,16 @@ Questions for implementation — NOT suggestions for scope expansion.
 
 Rules:
 - Only include questions where the answer affects implementation
-- Each question must relate to something already in the plan
+- Each question must relate to something already in the artifact
 - If no questions meet criteria, leave empty
 
 ## What NOT To Do
 
-- Do NOT suggest adding features or capabilities beyond design
+- Do NOT suggest adding features or capabilities beyond scope
 - Do NOT flag cosmetic issues
 - Do NOT report issues just to have something to report
 - Do NOT over-engineer — this is MVP-focused
 - Do NOT second-guess explicit design decisions
-
----
-
-## Design Document
-
-[PASTE DESIGN.MD CONTENT HERE]
-
----
-
-## Manifest Document
-
-[PASTE MANIFEST.MD CONTENT HERE]
-
----
-
-## Capabilities Document
-
-[PASTE CAPABILITIES.MD CONTENT HERE]
-
----
-
-## Plan Document
-
-[PASTE PLAN.MD CONTENT HERE]
-
----
-
-## Tasks Document
-
-[PASTE TASKS.MD CONTENT HERE]
-```
 
 ---
 

@@ -1,35 +1,33 @@
 ---
 type: "prompt"
 description: "External model prompt for Phase 2 review in Discover stage"
-version: "4.0.0"
-updated: "2026-01-30"
+version: "5.0.0"
+updated: "2026-02-01"
 scope: "discover"
 mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
-usage: "Submit to GPT, Gemini, or other external models along with Brief and Intent"
+usage: "Sent to external models via external-review MCP server alongside artifact content"
 ---
 
 # Discover External Review (Phase 2)
 
 ## Usage
 
-Copy the prompt below and submit to external models (GPT, Gemini, etc.) along with the project documents.
+This prompt is sent to external LLM models via the `external-review` MCP server. The server reads the artifact from disk and appends it to this prompt automatically.
 
-To assemble the full prompt with documents included, run from the project root:
+**Automated (MCP):** Invoked by the external-review skill — no manual assembly needed.
+
+**Manual fallback:** If the MCP server is unavailable, assemble with:
 
 ```bash
 sed \
-  -e '/\[PASTE INTENT.MD CONTENT HERE\]/{r docs/intent.md' -e 'd;}' \
-  -e '/\[PASTE DISCOVER-BRIEF.MD CONTENT HERE\]/{r docs/discover-brief.md' -e 'd;}' \
+  -e '/\[ARTIFACT CONTENT INJECTED BY MCP SERVER\]/{r docs/discover-brief.md' -e 'd;}' \
   ~/code/_shared/acm/prompts/external-review-prompt.md | pbcopy
 ```
-
-This copies the complete prompt (with documents inlined) to your clipboard.
 
 ---
 
 ## Prompt
 
-```
 You are reviewing a project Brief that has already passed internal review. Your job is to catch what the internal reviewer missed — not to find everything that could possibly be improved.
 
 ## Context
@@ -41,6 +39,10 @@ This Brief has passed Phase 1 (internal) review:
 - No major contradictions
 
 You are Phase 2: a fresh perspective to catch blind spots.
+
+## Document Provided
+
+The Brief document is provided below. It contains the project contract — what is being built, success criteria, scope boundaries, constraints, and assumptions.
 
 ## Rules
 
@@ -54,13 +56,13 @@ You are Phase 2: a fresh perspective to catch blind spots.
 
 ## Your Task
 
-Review the Brief AND Intent together. Look for:
+Review the Brief for completeness and soundness. Look for:
 
-1. **Intent/Brief Misalignment** — Are there Intent goals that the Brief doesn't address? Are there Brief features that don't trace to Intent?
-2. **Constraint Conflicts** — Do technical decisions violate stated constraints?
-3. **Blocking Gaps** — Is there anything missing that would prevent Design from starting work?
-4. **Risky Assumptions** — Are there assumptions that, if wrong, would derail the project?
-5. **Scope Contradictions** — Does anything in-scope conflict with something out-of-scope?
+1. **Constraint Conflicts** — Do technical decisions violate stated constraints?
+2. **Blocking Gaps** — Is there anything missing that would prevent Design from starting work?
+3. **Risky Assumptions** — Are there assumptions that, if wrong, would derail the project?
+4. **Scope Contradictions** — Does anything in-scope conflict with something out-of-scope?
+5. **Internal Consistency** — Does the Brief contradict itself anywhere?
 
 ## Output Format
 
@@ -96,19 +98,6 @@ Rules:
 - Do NOT treat "Questions" as a backdoor for suggestions
 - Do NOT second-guess explicit scope decisions
 - Do NOT pad your response with low-value observations
-
----
-
-## Intent Document
-
-[PASTE INTENT.MD CONTENT HERE]
-
----
-
-## Brief Document
-
-[PASTE DISCOVER-BRIEF.MD CONTENT HERE]
-```
 
 ---
 

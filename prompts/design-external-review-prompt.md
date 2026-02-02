@@ -1,26 +1,26 @@
 ---
 type: "prompt"
 description: "External model prompt for Phase 2 review in Design stage"
-version: "3.0.0"
-updated: "2026-01-30"
+version: "4.0.0"
+updated: "2026-02-01"
 scope: "design"
 mechanism_ref: "~/code/_shared/acm/ACM-REVIEW-SPEC.md"
-usage: "Submit to GPT, Gemini, or other external models along with design.md, Brief, and Intent"
+usage: "Sent to external models via external-review MCP server alongside artifact content"
 ---
 
 # Design External Review (Phase 2)
 
 ## Usage
 
-Copy the prompt below and submit to external models (GPT, Gemini, etc.) along with the project documents.
+This prompt is sent to external LLM models via the `external-review` MCP server. The server reads the artifact from disk and appends it to this prompt automatically.
 
-To assemble the full prompt with documents included, run from the project root:
+**Automated (MCP):** Invoked by the external-review skill — no manual assembly needed.
+
+**Manual fallback:** If the MCP server is unavailable, assemble with:
 
 ```bash
 sed \
-  -e '/\[PASTE INTENT.MD CONTENT HERE\]/{r docs/intent.md' -e 'd;}' \
-  -e '/\[PASTE DISCOVER-BRIEF.MD CONTENT HERE\]/{r docs/discover-brief.md' -e 'd;}' \
-  -e '/\[PASTE DESIGN.MD CONTENT HERE\]/{r docs/design.md' -e 'd;}' \
+  -e '/\[ARTIFACT CONTENT INJECTED BY MCP SERVER\]/{r docs/design.md' -e 'd;}' \
   ~/code/_shared/acm/prompts/design-external-review-prompt.md | pbcopy
 ```
 
@@ -28,7 +28,6 @@ sed \
 
 ## Prompt
 
-```
 You are reviewing a Design specification that has already passed internal review. Your job is to catch what the internal reviewer missed — particularly technical blind spots and architectural weaknesses.
 
 ## Context
@@ -41,19 +40,20 @@ This design has passed Phase 1 (internal) review:
 
 You are Phase 2: a fresh technical perspective to catch blind spots.
 
-## Documents Provided
+## Document Provided
 
-1. **Intent** — The project's North Star (why we're doing this)
-2. **Brief** — The detailed contract (what we're building)
-3. **Design** — The technical specification (how we're building it)
+The Design document is provided below. It contains:
+- The technical specification (architecture, interfaces, data model)
+- Issue Log and Review Log from prior review phases
+- Revision history
 
-Your job is to validate that the Design soundly delivers what the Brief requires.
+Your job is to validate that the Design is technically sound and implementable.
 
 ## Rules
 
 - YAGNI: Only flag issues that would **block or significantly harm** implementation
 - Do NOT suggest features, components, or additions
-- Do NOT ask "what about X?" unless X is critical to Brief requirements
+- Do NOT ask "what about X?" unless X is critical to stated goals
 - If something is explicitly out of scope, respect that decision
 - Do NOT backdoor scope expansion as "architectural considerations"
 - Low-impact issues should not be reported at all
@@ -61,16 +61,16 @@ Your job is to validate that the Design soundly delivers what the Brief requires
 
 ## Your Task
 
-Review the Design against the Brief and Intent. Look for:
+Review the Design for technical soundness. Look for:
 
-1. **Brief/Design Misalignment** — Does the design actually deliver what the Brief requires?
-2. **Architectural Weaknesses** — Technical decisions that seem unsound or risky?
-3. **Tech Stack Fit** — Technologies appropriate for constraints and requirements?
-4. **Interface Gaps** — Would a developer know what to build?
-5. **Data Model Issues** — Data structures support the requirements?
-6. **Capability Gaps** — Tools/skills/agents sufficient?
-7. **Integration Risks** — Integration points fragile or underspecified?
-8. **Security Concerns** — Obvious security issues? (Don't audit exhaustively)
+1. **Architectural Weaknesses** — Technical decisions that seem unsound or risky?
+2. **Tech Stack Fit** — Technologies appropriate for constraints and requirements?
+3. **Interface Gaps** — Would a developer know what to build?
+4. **Data Model Issues** — Data structures support the requirements?
+5. **Capability Gaps** — Tools/skills/agents sufficient?
+6. **Integration Risks** — Integration points fragile or underspecified?
+7. **Security Concerns** — Obvious security issues? (Don't audit exhaustively)
+8. **Internal Consistency** — Does the design contradict itself anywhere?
 
 ## Output Format
 
@@ -99,30 +99,11 @@ Rules:
 
 ## What NOT To Do
 
-- Do NOT suggest adding features, components, or capabilities beyond Brief scope
+- Do NOT suggest adding features, components, or capabilities beyond scope
 - Do NOT flag cosmetic issues
 - Do NOT report issues just to have something to report
 - Do NOT recommend "enterprise" patterns for personal/MVP projects
 - Do NOT suggest over-engineering
-
----
-
-## Intent Document
-
-[PASTE INTENT.MD CONTENT HERE]
-
----
-
-## Brief Document
-
-[PASTE DISCOVER-BRIEF.MD CONTENT HERE]
-
----
-
-## Design Document
-
-[PASTE DESIGN.MD CONTENT HERE]
-```
 
 ---
 

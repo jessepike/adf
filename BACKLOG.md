@@ -18,7 +18,6 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B59 | Review function tuning sprint — run 10-20 reviews, log observations in KB, tune prompts/config. Tracking: `kb/EXTERNAL-REVIEW-MODEL-RELIABILITY.md` | Enhancement | Review | P1 | M | Develop | In Progress |
 | B44 | Standardize brief frontmatter `status` field to use stage-based values (`discover-complete`, `design-in-progress`, etc.) — let ACM MCP server surface pipeline position via `check_project_health` | Enhancement | ACM | P2 | M | — | Pending |
 | B45 | Stage transition cleanup process — when a sub-project completes a stage or the docs/ workspace shifts to a new sub-project, archive previous stage artifacts to `_archive/{project-name}/`. Define convention in ACM-STAGES-SPEC or ACM-FOLDER-STRUCTURE-SPEC. | Enhancement | ACM | P2 | S | — | Pending |
-| B15 | Deliver stage spec | New spec | ACM | P2 | M | — | Pending |
 | B18 | Design memory layer spec (MEMORY-SPEC.md) | New spec | memory | P2 | L | — | Pending |
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | P2 | S | — | Pending |
 | B39 | Add `deliver` enum support to ACM MCP server once ACM-DELIVER-SPEC.md is created | Enhancement | acm-server | P2 | S | — | Blocked by B15 |
@@ -29,6 +28,7 @@ spec: "ACM-BACKLOG-SPEC.md"
 | B38 | Connect self-improvement loop to MCP server brief — document which steps are covered vs deferred to memory/KB | Docs | ACM | P3 | S | — | Pending |
 | B58 | Add revision history section to all stage specs (DISCOVER, DESIGN, STAGES, ARCHITECTURE) for consistency with DEVELOP | Enhancement | ACM | P3 | S | — | Pending |
 | B60 | Create start-discover-prompt.md — entry-point prompt for Discover stage, parallel to Design/Develop | Enhancement | Prompts | P3 | S | — | Pending |
+| B61 | Reorder Develop HARD GATE — move after Review Loop (Phase 4). Current: Plan → HARD GATE → Review → Execution. Correct: Plan → Review → HARD GATE → Execution. Rationale: Don't waste human time on unreviewed work. Impact: ACM-DEVELOP-SPEC phases 3-4, start-develop-prompt | Enhancement | ACM | P2 | S | — | Pending |
 | B20 | Evaluate extracting Knowledge (kb/) from ACM into own repo | Architecture | ACM/kb | P3 | M | — | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | Pending |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | P3 | L | — | Pending |
@@ -39,6 +39,7 @@ spec: "ACM-BACKLOG-SPEC.md"
 
 | ID | Item | Completed | Notes |
 |----|------|-----------|-------|
+| B15 | Deliver stage spec | 2026-02-02 | ACM-DELIVER-SPEC.md v1.0.0 — 8 phases with Review → HARD GATE → Execution pattern (corrected from Develop), 3-tier testing model (automated, browser, manual), project-type specific guidance, deployment focus. Created 3 prompts: start-deliver-prompt.md, deliver-ralph-review-prompt.md, deliver-external-review-prompt.md. Also added B61 (fix Develop HARD GATE placement). Unblocks B39 + B51 (ACM MCP server deliver enum support). |
 | B55 | Universal exit criteria + stage boundary handoff in DISCOVER-SPEC | 2026-02-01 | v1.3.0 — structured exit criteria (universal + discover-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B56 | Universal exit criteria + stage boundary handoff in DESIGN-SPEC | 2026-02-01 | v1.1.0 — structured exit criteria (universal + design-specific + type-specific), handoff protocol, docs/acm/ convention, updated references. |
 | B57 | docs/acm/ convention in DISCOVER-SPEC and DESIGN-SPEC | 2026-02-01 | Planning Artifacts Convention section added to both specs. |
