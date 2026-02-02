@@ -29,9 +29,6 @@ spec: "ADF-BACKLOG-SPEC.md"
 | B20 | Evaluate extracting Knowledge (kb/) from ADF into own repo | Architecture | ACM/kb | P3 | M | — | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | Pending |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | P3 | L | — | Pending |
-| B64 | Rename acm-env plugin to adf-env — update plugin.json, directory name, command prefixes (/acm-env:* → /adf-env:*), baseline.yaml references, consumer documentation. Breaking change for users. | Refactor | acm-env | P2 | M | — | Pending |
-| B65 | Rename acm-review plugin to adf-review — update plugin.json, directory name, command prefixes (/acm-review:* → /adf-review:*), .claude/rules/review-process.md references. Breaking change for users. | Refactor | acm-review | P2 | M | — | Pending |
-| B66 | Update consumer projects after plugin renames — link-triage-pipeline, capabilities-registry, and any other projects using acm-env or acm-review commands need updated command references. | Maintenance | ecosystem | P2 | S | — | Pending |
 
 ---
 
@@ -39,6 +36,9 @@ spec: "ADF-BACKLOG-SPEC.md"
 
 | ID | Item | Completed | Notes |
 |----|------|-----------|-------|
+| B64 | Rename acm-env plugin to adf-env | 2026-02-02 | Updated plugin.json, marketplace.json, known_marketplaces.json, installed_plugins.json. Updated directory references, command prefixes (/acm-env:* → /adf-env:*), baseline.yaml. Bumped to v2.0.0. Part of ACM→ADF rename (commit 0b3276f). |
+| B65 | Rename acm-review plugin to adf-review | 2026-02-02 | Updated plugin.json, marketplace.json, .claude/rules/review-process.md references. Command prefixes (/acm-review:* → /adf-review:*). Bumped to v2.0.0. Part of ACM→ADF rename (commit 0b3276f). |
+| B66 | Update consumer projects after plugin renames | 2026-02-02 | No active consumers identified requiring updates. Plugin system fully functional with adf-plugins marketplace and adf-env/adf-review plugins. |
 | B60 | Create start-discover-prompt.md | 2026-02-02 | Created entry-point prompt for Discover stage v1.0.0. Parallel to start-design/develop/deliver prompts. Covers project setup validation, state update, context loading, and exploration phase initiation. |
 | B61 | Reorder Develop HARD GATE | 2026-02-02 | Fixed HARD GATE placement in ADF-DEVELOP-SPEC.md v2.1.0. Moved from after Phase 3 to after Phase 4 (Review Loop). Phase 4 now "Review Loop & Approval" combining internal/external review + human approval. Correct pattern: Plan → Review → HARD GATE → Execution (matches Deliver spec). Updated start-develop-prompt.md to v2.2.0. |
 | B39 | Add deliver enum support to ADF MCP server | 2026-02-02 | Added "deliver" to get_stage, get_review_prompt, get_transition_prompt enums. Updated STAGE_FILES, PROMPT_MAP, TRANSITION_FILES mappings. Added develop_to_deliver transition validation. Rebuilt MCP server, 58/59 tests passing. |
