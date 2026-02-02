@@ -159,7 +159,7 @@ Get full details for a specific capability.
 
 ### query_knowledge
 
-Search ACM knowledge base entries.
+Search ADF knowledge base entries.
 
 | Parameter | Type | Required |
 |-----------|------|----------|

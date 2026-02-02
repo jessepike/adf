@@ -8,7 +8,7 @@ import { registerKnowledgeTools } from "./tools/knowledge.js";
 
 export function createServer(): McpServer {
   const server = new McpServer({
-    name: "acm",
+    name: "adf",
     version: "1.0.0",
   });
 

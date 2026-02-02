@@ -7,7 +7,7 @@ import { registerCapabilitiesTools } from "./tools/capabilities.js";
 import { registerKnowledgeTools } from "./tools/knowledge.js";
 export function createServer() {
     const server = new McpServer({
-        name: "acm",
+        name: "adf",
         version: "1.0.0",
     });
     registerOrchestrationTools(server);

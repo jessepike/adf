@@ -5,7 +5,7 @@ MCP server providing read-only access to ADF framework data — stage specs, rev
 ## Installation
 
 ```bash
-cd acm-server
+cd adf-server
 npm install
 npm run build
 ```
@@ -19,9 +19,9 @@ Add to your project's `.mcp.json`:
 ```json
 {
   "mcpServers": {
-    "acm": {
+    "adf": {
       "command": "node",
-      "args": ["/path/to/acm/adf-server/build/index.js"],
+      "args": ["/path/to/adf/adf-server/build/index.js"],
       "env": {}
     }
   }
@@ -32,14 +32,14 @@ Optionally reference the companion skill in your `.claude/CLAUDE.md`:
 
 ```markdown
 ## ADF Integration
-See: ~/code/_shared/adf/skills/acm-workflow/skill.md
+See: ~/code/_shared/adf/skills/adf-workflow/skill.md
 ```
 
 ## Environment Variables
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `ACM_ROOT` | `~/code/_shared/acm` | Path to ADF framework root |
+| `ADF_ROOT` | `~/code/_shared/adf` | Path to ADF framework root |
 | `CAPABILITIES_REGISTRY_ROOT` | `~/code/_shared/capabilities-registry` | Path to capabilities registry |
 
 ## Tools (13)
