@@ -15,7 +15,6 @@ spec: "ADF-BACKLOG-SPEC.md"
 
 | ID | Item | Type | Component | Pri | Size | Stage | Status |
 |----|------|------|-----------|-----|------|-------|--------|
-| B62 | Execute-plan orchestration skill — implementation (7 phases: Core Orchestrator → Ralph Loop Integration → Phase Validator → Parallelization → TDD → Traceability → CLI). Design v0.2 approved (docs/adf/execute-plan-design.md). Validation target: link-triage-pipeline Phase 1 (13 tasks → 13 commits). | New skill | orchestration | P1 | L | Develop | Pending |
 | B59 | Review function tuning sprint — run 10-20 reviews, log observations in KB, tune prompts/config. Tracking: `kb/EXTERNAL-REVIEW-MODEL-RELIABILITY.md` | Enhancement | Review | P1 | M | Develop | In Progress |
 | B44 | Standardize brief frontmatter `status` field to use stage-based values (`discover-complete`, `design-in-progress`, etc.) — let ADF MCP server surface pipeline position via `check_project_health` | Enhancement | ACM | P2 | M | — | Pending |
 | B45 | Stage transition cleanup process — when a sub-project completes a stage or the docs/ workspace shifts to a new sub-project, archive previous stage artifacts to `_archive/{project-name}/`. Define convention in ADF-STAGES-SPEC or ADF-FOLDER-STRUCTURE-SPEC. | Enhancement | ACM | P2 | S | — | Pending |

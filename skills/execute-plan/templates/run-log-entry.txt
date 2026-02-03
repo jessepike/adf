@@ -1,1 +1,0 @@
-[{{TIMESTAMP}}] {{LOG_LEVEL}}: {{MESSAGE}}
