@@ -9,8 +9,8 @@ updated: "2026-02-02"
 ## Current State
 
 - **Stage:** Develop (ADF framework itself)
-- **Focus:** ACM → ADF Rename (B64-B66) — ✅ **COMPLETE**
-- **Next Action:** Execute Phase 1 on link-triage-pipeline (real-world validation)
+- **Focus:** Project initialization automation
+- **Next Action:** Test `/adf-env:init` on real projects (pike-ace, others)
 - **Recently Completed:** Execute-Plan Orchestration Skill (B62), External Review Skill + MCP Server (B14), ADF MCP Server (13 tools, 59 tests), ACM → ADF framework rename (infrastructure + content + plugins + GitHub)
 
 ## What's Complete
@@ -161,6 +161,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-02-02 | Execute-Plan Orchestration Skill — Design complete. Created comprehensive design for autonomous development orchestrator (narrow skill, not general ACM orchestrator). Architecture: 3 agents (orchestrator, task-executor, phase-validator), research-backed patterns (LangGraph centralized orchestration, Airflow/Bazel DAG resolution, Temporal.io phase checkpointing, GitHub Actions parallel groups). Design review: Cycle 1 found 3 High issues (task grouping algorithm, stuck detection, ralph parsing), all fixed with ~280 lines of implementation logic. Cycle 2 validation confirmed 0 Critical/High issues remaining (2 Medium non-blocking, 1 Low). Design v0.2 APPROVED via HARD GATE. Artifacts in docs/adf/: execute-plan-design.md (970 lines), architecture.md, flow-diagram.md, implementation-roadmap.md (7 phases), review cycles 1+2, approval summary. Total ~8000 lines documentation. Ready for Develop Phase 5 (Environment Setup) + Phase 6 (Build). |
 | 2026-02-02 | ACM → ADF content rename complete. Added backlog items B64-B66 for plugin renames (acm-env, acm-review) and consumer updates. Replaced 250+ ACM references across 76 files: file/section headings, path references (acm/ → adf/), prose ("the ACM" → "the ADF"), frontmatter (scope: "acm" → scope: "adf"). Preserved plugin names acm-env and acm-review for separate rename. 3 commits: infrastructure (9288e28), original content (3c44689), final content (cd9a324). Framework now consistently named ADF (Agentic Development Framework) throughout. |
 | 2026-02-02 | ACM → ADF rename COMPLETE. Infrastructure: renamed directories acm-server → adf-server, acm-plugins → adf-plugins, acm/ → adf/. MCP server: updated server name "acm" → "adf", environment variables ACM_ROOT → ADF_ROOT, README paths. Skills: updated adf-workflow skill references. Plugins (B64-B66): marketplace ID acm-plugins → adf-plugins, plugin names acm-env → adf-env + acm-review → adf-review, all configuration files (marketplace.json, known_marketplaces.json, installed_plugins.json), version bumps to 2.0.0. GitHub: renamed repository anthropics/acm → anthropics/adf. All commits pushed (4 commits across 2 repos). Plugin system fully functional. Rename project complete. |
+| 2026-02-02 | adf-env plugin v2.1.0 — added `/adf-env:init` command for project scaffolding. Built command orchestrator (commands/init.md) and specialized project-init agent (agents/project-init.md, 7 phases). Agent handles brief-first initialization: ingests concept brief, minimal classification (2 questions), creates full ADF structure, git init + .mcp.json config, validation via ADF MCP server, handoff to Discover. Infrastructure-only — no Discover work (parsing/reviews/research). Committed to adf-env plugin. Added B67 to backlog (research phase in Discover). Ready for user testing on real projects. |
 
 ## Decisions
 
