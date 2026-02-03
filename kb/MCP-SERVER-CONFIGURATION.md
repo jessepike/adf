@@ -94,6 +94,48 @@ for k,v in sorted(data.get('enabledPlugins', {}).items()):
     print(f'{k}: {\"enabled\" if v else \"disabled\"}')"
 ```
 
+## Subagent Visibility Issue
+
+**Problem:** MCP servers configured at project level (`.mcp.json`) may not be visible to subagents launched via the Task tool.
+
+**Symptom:** Main session can access MCP tools, but subagents (e.g., ralph-loop, external-review agents) report "MCP server not available."
+
+**Root cause:** Subagents don't inherit project-level MCP server connections when launched via Task tool.
+
+**Solution:** Configure MCP servers at **user level** in `~/.claude.json` → `mcpServers` instead of project-level `.mcp.json`.
+
+### Configuration Format
+
+User-level MCP servers in `~/.claude.json`:
+
+```json
+{
+  "mcpServers": {
+    "adf": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/username/code/_shared/adf/adf-server/build/index.js"],
+      "env": {
+        "ADF_ROOT": "/Users/username/code/_shared/adf"
+      }
+    },
+    "external-review": {
+      "type": "stdio",
+      "command": "/path/to/venv/bin/python",
+      "args": ["/path/to/external_review_server.py"],
+      "env": {}
+    }
+  }
+}
+```
+
+**After making changes:** Restart Claude Code completely (quit and relaunch) for user-level MCP config to take effect.
+
+**Verification:** Run `/mcp` command. You should see:
+- **Project MCPs** section (from `.mcp.json`)
+- **User MCPs** section (from `~/.claude.json` → `mcpServers`) ← should include your servers
+- **Built-in MCPs** section
+
 ## Implications for acm-env Status
 
 The status check should report:
@@ -106,4 +148,5 @@ The status check should report:
 ---
 
 *Created: 2026-01-31*
-*Source: Research during B34 implementation*
+*Updated: 2026-02-02 — Added subagent visibility troubleshooting*
+*Source: Research during B34 implementation + troubleshooting session*
