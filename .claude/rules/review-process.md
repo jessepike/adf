@@ -11,18 +11,22 @@ These are non-negotiable rules for conducting reviews in ADF projects.
 
 ## Default Review Type
 
-**The default is FULL REVIEW (internal + external) unless explicitly specified otherwise.**
+**The default is FULL REVIEW (internal + external).**
 
-When the user requests a review (e.g., "run it through ADF review", "review this design"), the agent MUST:
+When the user requests a review, use these rules:
 
-1. **Ask the user to confirm review type** using AskUserQuestion with these options:
-   - **Full review (internal + external)** — Recommended (default)
-   - Internal review only
-   - External review only
+**Immediate execution (no confirmation):**
+- "do a review" / "run review" / "review this" → `/adf-review:artifact` (Full Review)
+- "do internal review" / "run internal review" → `/adf-review:artifact-internal`
+- "do external review" / "run external review" → `/adf-review:artifact-external`
 
-2. **Trigger the adf-review skill** which will orchestrate the selected review type
-   - The skill handles execution of both internal (Ralph Loop) and external (multi-model) phases
-   - No need to invoke Ralph Loop or external-review MCP directly
+**Ask only if ambiguous:**
+- If the user says "review" without context or specifiers, use AskUserQuestion with:
+  - Full review (internal + external) — Recommended (default)
+  - Internal review only
+  - External review only
+
+The skill handles execution of both internal (Ralph Loop) and external (multi-model) phases automatically.
 
 ## Review Phases
 
@@ -55,6 +59,5 @@ Both phases run automatically when full review is selected (default).
 
 - Do NOT manually invoke `/ralph-loop:ralph-loop` directly — use the adf-review skill orchestrator
 - Do NOT assume user wants internal-only review by default
-- Do NOT skip asking the user for review type preference
 - Do NOT improvise review mechanisms that bypass the adf-review skill
 - Do NOT call ADF MCP tools directly for reviews — let adf-review skill handle orchestration
