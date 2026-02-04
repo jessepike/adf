@@ -21,8 +21,9 @@ After each review, log observations below and check whether any of these need ad
 - ~20% false positive rate (1/5 issues, hallucinated nonexistent field) — sample size: 1 review
 - Hallucination type: referencing artifact sections/fields that don't exist
 - Review 2: Re-raised already-tracked OQs as High issues (3 of 5 items in Round 5 were re-raises). Tends to ignore "already deferred to Develop" status.
-- Good at finding real structural issues (URL normalization, dedup logic)
-- Sample size: 2 reviews (4 cycles total)
+- Review 4: Clean review - 0 false positives, 4 valid issues (1 High, 3 Medium). Good architectural insights (Task tool invocation clarity, degraded mode specification).
+- Good at finding real structural issues (URL normalization, dedup logic, implementation gaps)
+- Sample size: 3 reviews (5 cycles total)
 
 ### GPT
 - 2 true High issues in Round 4 (URL PK, API call count) — good signal, different from Gemini's findings
@@ -43,7 +44,7 @@ Patterns that emerge across multiple reviews. Update as data accumulates.
 | Single-model false positives | 1 | Added single-model warning to artifact-external command |
 | Shell pipe corruption in prompts | 1 | Added --prompt-file to ralph-loop |
 | Models re-raise already-tracked OQs despite "deferred to Develop" | 2 | Convergence prompt explicitly says "Do NOT re-flag items tracked as OQs" — helps but doesn't eliminate |
-| Kimi-K2 timeout | 1 | Investigate timeout config |
+| Kimi-K2 errors (timeout or unknown model) | 2 | Review 3: timeout. Review 4: unknown model error. Check model availability and config. |
 | GPT enterprise-grade over-engineering for MVP | 1 | Monitor — may need MVP-scale emphasis in prompt |
 
 ## Review Iteration Log
@@ -55,6 +56,7 @@ Log every review here. One row per review invocation.
 | 1 | 2026-02-01 | ACM | Design | External | Gemini | 1 | 5 | 1 (hallucinated field) | 4 | Added single-model warning, --prompt-file |
 | 2 | 2026-02-01 | link-triage-pipeline | Design | Internal | claude | 2 | 0 | 0 | 0 | none |
 | 3 | 2026-02-01 | link-triage-pipeline | Design | External | Gemini, GPT (Kimi timeout) | 3 | 9 | 3 (re-raised tracked OQs) | 3 High + 6 Low | URL PK→raindrop_id, API call clarification, dedup logic |
+| 4 | 2026-02-03 | pike-ace | Design | External | Gemini (Kimi-K2 unknown model error) | 1 | 4 | 0 | 1 High + 3 Medium | Task tool invocation clarified, open questions resolved, degraded mode defined, progressive disclosure deferred to Develop |
 
 ## Recommendations (living)
 
