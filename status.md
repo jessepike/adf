@@ -1,7 +1,7 @@
 ---
 project: "ADF (Agentic Development Framework)"
 stage: "Develop"
-updated: "2026-02-03"
+updated: "2026-02-04"
 ---
 
 # Status
@@ -9,9 +9,9 @@ updated: "2026-02-03"
 ## Current State
 
 - **Stage:** Develop (ADF framework itself)
-- **Focus:** Framework quality and governance improvements
-- **Next Action:** B18-B19 Memory layer spec and scaffold (deferred - focusing on KB project)
-- **Recently Completed:** HARD GATE requirements added to Design spec (v1.2.0), Execute-plan orchestrator removed (failed validation), External Review Skill + MCP Server (B14), ADF MCP Server (13 tools, 59 tests)
+- **Focus:** Session discipline enforcement and registry integration
+- **Next Action:** B18-B19 Memory layer spec and scaffold (deferred)
+- **Recently Completed:** Session discipline fixes (Agent Session Protocol in CLAUDE.md files, status.md validation in adf-env), ADF-ARCHITECTURE-SPEC v2.1.0 (ADF Components and Capabilities Registry section), Registry updates (44 capabilities, all ADF components registered)
 
 ## What's Complete
 
@@ -164,6 +164,7 @@ See `BACKLOG.md` for full backlog. Immediate priorities:
 | 2026-02-02 | Plugin troubleshooting + prompt improvements. Fixed adf-review plugin (v2.0.1) — updated all ACM → ADF paths in commands (acm/prompts → adf/prompts, acm/kb → adf/kb). Fixed marketplace registration issues for adf-env/adf-review. Updated start-discover-prompt.md (v1.1.0) — added Steps 5-7 with full Crystallization + Review Loop + Finalization guidance. Agents now know to check available skills and use `/adf-review:artifact` for mandatory review. Real-world tested on pike-ace project initialization. |
 | 2026-02-03 | Stage transition artifact cleanup system complete. Created `.claude/rules/archive.md` (write-only access for agents). Created 3 transition prompts with cleanup checklists (discover-to-design, design-to-develop, develop-to-deliver). Added "Artifact Lifecycle" section to ADF-STAGES-SPEC.md (deliverable vs working artifacts per stage). Added Stage Handoff Template to ADF-STAGES-SPEC.md (canonical structure for status.md handoffs). Renamed `_archive/` → `.archive/` for consistency with `.claude/` naming (updated all specs, rules, prompts). Updated ADF MCP server (orchestration.ts transition prompt paths, project.ts structure validation). Updated adf-env plugin (4 files: project-init.md, audit.md, reset.md, setup.md). All changes committed and pushed. Framework now has complete stage transition discipline with artifact lifecycle governance. |
 | 2026-02-03 | Review orchestration unification complete. Created adf-review skill at `/Users/jessepike/code/_shared/adf/skills/adf-review/` as unified entry point for all ADF artifact reviews. Skill orchestrates two-phase review process: internal (Ralph Loop) + external (multi-model via external-review MCP). Includes SKILL.md (orchestration guide), 3 references/ (review-spec, issue-severity, stage-reviews), 3 examples/ (full/internal/external workflows), 2 scripts/ (check-review-status, validate-issue-log). Updated `.claude/rules/review-process.md` to use adf-review skill with trigger phrases and immediate execution rules. Updated `.claude/CLAUDE.md` resources table. Validated by validator agent (resolved 2 blocking issues: stale acm-review references, missing referenced files). Applied to Knowledge Base project: ran full external review (Gemini, GPT-5, Kimi) on design.md, found 6 High + 8 Medium issues. Updated KB design.md v0.1→v0.2 (draft→reviewed) addressing all 14 issues with transactional safety, tokenizer specs, schema enhancements. Updated KB plan.md External Review section marking all issues resolved with design.md cross-references. Review process now fully unified across ADF ecosystem. `/adf-env:init` tested on pike-ace with user feedback received. |
+| 2026-02-04 | Session discipline enforcement session. Audited status.md management chain (spec → rules → CLAUDE.md → hooks). Found gap: project CLAUDE.md missing "Agent Session Protocol" section that stubs and spec define. Fixed: (1) Added Agent Session Protocol to global ~/.claude/CLAUDE.md (affects all projects), (2) Added to ADF project .claude/CLAUDE.md. Enhanced adf-env plugin: status command now validates status.md freshness/structure/session-log-currency, audit command has new "Session Discipline" section (#8). Documented ADF/registry relationship: added "ADF Components and Capabilities Registry" section to ADF-ARCHITECTURE-SPEC v2.1.0 — clarifies that ADF owns implementation, registry owns discovery. Registered all ADF components in capabilities registry: adf-env, adf-review (plugin+skill), adf-workflow, adf-server, external-review. Inventory: 39→44 capabilities. Renamed acm-env→adf-env in registry. All changes pushed to both repos. |
 
 ## Decisions
 
