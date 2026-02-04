@@ -1,14 +1,11 @@
 ---
-type: "tasks"
-description: "Atomic task list for {BACKLOG_ID}: {TITLE}"
-version: "1.0.0"
-created: "{DATE}"
-updated: "{DATE}"
-backlog_ref: "{BACKLOG_ID}"
-plan_ref: "docs/plan.md"
+project: "[Project Name]"
+stage: "Discover"
+current_phase: "Exploration"
+updated: "YYYY-MM-DD"
 ---
 
-# Tasks: {TITLE}
+# Tasks
 
 ## Handoff
 
@@ -16,11 +13,15 @@ plan_ref: "docs/plan.md"
 |-------|-------|
 | Phase | — |
 | Status | Not started |
-| Next | Phase A: {FIRST_PHASE_NAME} |
+| Next | [First phase] |
 | Blocker | None |
 
-## Phase A: {PHASE_NAME}
+## Active Tasks
 
-| ID | Task | Status | Acceptance Criteria | Depends | Capability |
-|----|------|--------|---------------------|---------|------------|
-| A1 | {task} | pending | {criteria} | — | {capability or —} |
+| ID | Task | Status | Notes |
+|----|------|--------|-------|
+| — | No active tasks | — | — |
+
+## Completed
+
+_No completed tasks yet._

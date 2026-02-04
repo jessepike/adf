@@ -4,7 +4,7 @@ import { callTool } from "../../lib/__tests__/test-helper.js";
 describe("get_artifact_spec", () => {
   const artifacts = [
     "brief", "intent", "status", "readme", "context",
-    "rules", "design", "backlog", "folder_structure",
+    "rules", "design", "backlog", "tasks", "folder_structure",
     "project_types", "stages", "review",
   ];
 
@@ -18,7 +18,7 @@ describe("get_artifact_spec", () => {
 });
 
 describe("get_artifact_stub", () => {
-  for (const artifact of ["brief", "intent", "status", "rules_constraints"]) {
+  for (const artifact of ["brief", "intent", "status", "tasks", "rules_constraints"]) {
     it(`returns stub for ${artifact}`, async () => {
       const result = await callTool("get_artifact_stub", { artifact });
       expect(result.isError).toBeFalsy();

@@ -29,9 +29,9 @@ const PROMPT_MAP = {
     },
 };
 const TRANSITION_FILES = {
-    discover_to_design: "prompts/start-design-prompt.md",
-    design_to_develop: "prompts/start-develop-prompt.md",
-    develop_to_deliver: "prompts/start-deliver-prompt.md",
+    discover_to_design: "prompts/discover-to-design-transition.md",
+    design_to_develop: "prompts/design-to-develop-transition.md",
+    develop_to_deliver: "prompts/develop-to-deliver-transition.md",
 };
 export function registerOrchestrationTools(server) {
     server.tool("get_stage", "Get ADF stage requirements and workflow. Use when an agent needs to understand what a stage involves, its phases, entry/exit criteria, and expected outputs. Do NOT use for transition guidance (use get_transition_prompt instead).", {

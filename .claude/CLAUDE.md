@@ -1,8 +1,8 @@
 ---
 type: "context"
 description: "ADF project context — the agentic context management framework"
-version: "2.0.0"
-updated: "2026-02-01"
+version: "2.0.1"
+updated: "2026-02-04"
 scope: "project"
 lifecycle: "reference"
 location: ".claude/CLAUDE.md"
@@ -40,7 +40,7 @@ Each stage follows: **Work → Review → Update → Validate → Close out → 
 | Resource | Type | Use For |
 |----------|------|---------|
 | ADF MCP server | MCP | Stage details, artifact specs, review prompts, project health |
-| acm-env plugin | Plugin | Environment management, status, audit |
+| adf-env plugin | Plugin | Environment management, status, audit |
 | adf-review skill | Skill | Artifact review orchestration (default: full review with internal + external phases) |
 | capabilities-registry | Repo | `~/code/_shared/capabilities-registry/INVENTORY.md` |
 
@@ -50,7 +50,7 @@ Each stage follows: **Work → Review → Update → Validate → Close out → 
 |------|----------|
 | capabilities-registry | `~/code/_shared/capabilities-registry/` |
 | link-triage-pipeline | `~/code/_shared/link-triage-pipeline/` |
-| acm-env plugin | `~/.claude/plugins/acm-plugins/plugins/acm-env/` |
+| adf-env plugin | `~/.claude/plugins/adf-plugins/plugins/adf-env/` |
 
 ## Working Norms
 

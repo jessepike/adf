@@ -38,7 +38,9 @@ project-root/
 ├── docs/                      # Main folder for markdown/context/reference
 │   ├── intent.md              # North Star (from Discover)
 │   ├── brief.md               # Detailed scope (from Discover)
-│   ├── acm/                   # Stage planning artifacts (workspace)
+│   ├── status.md              # Session state (all stages)
+│   ├── tasks.md               # Task tracking (all stages, minimal early, full later)
+│   ├── adf/                   # Stage planning artifacts (workspace)
 │   │   └── archive/           # Completed planning artifacts
 │   └── inbox/                 # Triage zone (new/unprocessed items)
 ├── .archive/                  # Inactive artifacts (not deleted, not active)
@@ -183,6 +185,8 @@ project-root/
 | `docs/adf/archive/` | Completed planning artifacts | Archived | Agent |
 | `docs/intent.md` | North Star | Reference (protected) | Human |
 | `docs/brief.md` | Scope and criteria | Reference | Human + Agent |
+| `docs/status.md` | Session state | Reference | Agent |
+| `docs/tasks.md` | Task tracking with handoff | Reference | Agent |
 | `.archive/` | Inactive artifacts (write-only for agents) | Archived | Agent (write), Human (read/write) |
 | `src/` | Source code (Software) | Deliverable | Agent |
 | `tests/` | Test code (Software) | Deliverable | Agent |
@@ -244,6 +248,8 @@ Before exiting Project Init:
 - [ ] `.claude/CLAUDE.md` exists (can be stub)
 - [ ] `docs/intent.md` exists (can be stub)
 - [ ] `docs/brief.md` exists (can be stub)
+- [ ] `docs/status.md` exists (can be stub)
+- [ ] `docs/tasks.md` exists (can be stub)
 - [ ] `docs/inbox/` exists
 - [ ] `docs/adf/archive/` exists
 - [ ] `.archive/` exists

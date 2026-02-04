@@ -190,6 +190,11 @@ sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
     "$ACM_DIR/stubs/status.md" > "$TARGET_PATH/docs/status.md"
 
+echo "Creating docs/tasks.md..."
+sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+    -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
+    "$ACM_DIR/stubs/tasks.md" > "$TARGET_PATH/docs/tasks.md"
+
 # Type-specific structure and CLAUDE.md
 case $PROJECT_TYPE in
     app)
@@ -267,6 +272,7 @@ echo "  .claude/CLAUDE.md     - Project context (agents read this first)"
 echo "  docs/intent.md        - North Star (define your why)"
 echo "  docs/discover-brief.md - Project contract (define what)"
 echo "  docs/status.md        - Session state (tracks progress)"
+echo "  docs/tasks.md         - Task tracking (with phase handoff)"
 echo "  README.md             - Project overview"
 echo ""
 echo -e "${YELLOW}Next steps:${NC}"

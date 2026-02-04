@@ -1,8 +1,8 @@
 ---
 type: "tracking"
 description: "ADF backlog — prioritized queue of potential work items"
-version: "2.1.0"
-updated: "2026-02-02"
+version: "2.2.0"
+updated: "2026-02-04"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/BACKLOG.md"
@@ -29,6 +29,12 @@ spec: "ADF-BACKLOG-SPEC.md"
 | B20 | Evaluate extracting Knowledge (kb/) from ADF into own repo | Architecture | ACM/kb | P3 | M | — | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | Pending |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | P3 | L | — | Pending |
+| B68 | stop-check.sh writes to stdout not stderr — hook framework expects stderr for error messages | Bug | adf-env | P1 | XS | — | Pending |
+| B69 | execute-plan plugin still installed — removal was incomplete (deleted source, didn't uninstall plugin) | Bug | adf-plugins | P1 | XS | — | Pending |
+| B70 | Frontmatter spec doesn't distinguish ephemeral artifacts — audit over-applies to docs/adf/ working docs | Spec gap | specs | P2 | S | — | Pending |
+| B71 | User CLAUDE.md has stale "acm-env" reference — incomplete ACM→ADF rename | Bug | environment | P1 | XS | — | Pending |
+| B72 | Project CLAUDE.md 1 line over 55-line limit | Hygiene | environment | P2 | XS | — | Pending |
+| B73 | ADF-CONTEXT-ARTIFACT-SPEC references "acm-env" (line 250-251) — incomplete rename | Bug | specs | P1 | XS | — | Pending |
 
 ---
 

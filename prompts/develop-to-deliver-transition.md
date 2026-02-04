@@ -35,13 +35,15 @@ These artifacts carry forward to Deliver:
 
 ### Working Artifacts (Archive)
 Move these to `_archive/` with naming `_archive/YYYY-MM-DD-<name>.md`:
-- Planning documents from `docs/adf/` (plan.md, tasks.md, manifest.md)
+- Planning documents from `docs/adf/` (plan.md, manifest.md, capabilities.md)
 - Development notes
 - Implementation spike reports
 - Debugging logs
 - Draft documentation versions
 
-**Action:** Execute cleanup before updating status.md. Archive entire `docs/adf/` directory if planning artifacts are no longer needed.
+**Note:** `docs/tasks.md` is a cross-stage artifact (per ADF-TASKS-SPEC.md). Reset its Active/Upcoming sections for Deliver rather than archiving. The Completed section accumulates for traceability.
+
+**Action:** Execute cleanup before updating status.md. Archive planning artifacts from `docs/adf/` directory if no longer needed.
 
 ---
 
@@ -55,8 +57,9 @@ Update `status.md` with:
    - Test coverage (if applicable)
 
 2. **What was archived**
-   - List of archived artifacts (especially `docs/adf/` contents)
-   - Rationale for each
+   - List of archived artifacts from `docs/adf/` (plan.md, manifest.md, capabilities.md)
+   - Note: tasks.md is cross-stage — Completed section carries forward
+   - Rationale for each archived artifact
 
 3. **Success criteria status**
    - Reference brief.md criteria

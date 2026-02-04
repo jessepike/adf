@@ -11,7 +11,7 @@ const STRUCTURE_ITEMS = [
     "docs/intent.md",
     "docs/brief.md",
     "docs/inbox/",
-    "_archive/",
+    ".archive/",
     "README.md",
 ];
 // Per design.md — check_project_health required sections

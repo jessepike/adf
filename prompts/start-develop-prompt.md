@@ -136,7 +136,7 @@ Only after human confirms understanding:
 4. Present capability assessment for approval
 5. Then proceed to Planning phase (plan.md + tasks.md)
 
-All planning artifacts go in `docs/adf/` per ADF-FOLDER-STRUCTURE-SPEC.md.
+Planning artifacts go in `docs/adf/` per ADF-FOLDER-STRUCTURE-SPEC.md, except `tasks.md` which may be at `docs/tasks.md` (cross-stage) per ADF-TASKS-SPEC.md.
 
 ## Step 6: Proceed to Review & Approval (Phase 4)
 

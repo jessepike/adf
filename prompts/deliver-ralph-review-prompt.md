@@ -45,7 +45,7 @@ This is Phase 1 of the two-phase review process:
 ## Files
 
 - Plan: docs/adf/plan.md
-- Tasks: docs/adf/tasks.md
+- Tasks: docs/tasks.md (cross-stage per ADF-TASKS-SPEC.md)
 - Manifest: docs/adf/manifest.md
 - Capabilities: docs/adf/capabilities.md
 - Design: docs/design.md (cross-stage, stays in docs/)

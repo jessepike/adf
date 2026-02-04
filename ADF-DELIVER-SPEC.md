@@ -175,7 +175,7 @@ What Deliver produces:
 | `manifest.md` | Deployment dependencies (hosting, DNS, CI/CD tools) | `docs/adf/manifest.md` |
 | `capabilities.md` | Skills, tools for deployment/testing | `docs/adf/capabilities.md` |
 | `plan.md` | Deployment plan — phases, testing strategy, rollout | `docs/adf/plan.md` |
-| `tasks.md` | Atomic delivery task list with status tracking | `docs/adf/tasks.md` |
+| `tasks.md` | Atomic delivery task list with status tracking | `docs/tasks.md` (cross-stage) or `docs/adf/tasks.md` |
 | Deployed artifact | Live, accessible deliverable in target environment | Target-specific |
 | Access documentation | URLs, credentials, access instructions | README or docs/ACCESS.md |
 | Test results | Validation evidence (automated, browser, manual) | docs/adf/test-results.md |
@@ -337,54 +337,19 @@ If the testing strategy section is missing or incomplete, Phase 3 is incomplete.
 
 #### tasks.md — Handoff + Atomic Task List
 
-**Structure:** Handoff block first, then phase tables with progressive disclosure.
+**See ADF-TASKS-SPEC.md for full specification.**
 
-```markdown
----
-current_phase: "Phase 5: Infrastructure Setup"
----
+In Deliver, tasks.md uses the **full structure** with:
+- Handoff block (overwritten at each phase boundary)
+- Active Tasks table with all columns (ID, Task, Status, Acceptance Criteria, Testing, Depends, Capability)
+- Upcoming section for next phase planning
+- Completed section for traceability
 
-## Handoff
-[Current phase handoff — overwritten each boundary]
-
-## Active Tasks
-[Current phase tasks — what the agent works on]
-
-## Upcoming
-[Next phase(s) — planning reference]
-
-## Completed
-[Previous phases — kept for traceability, agents skip unless investigating]
-```
-
-**Progressive disclosure rules:**
-- Agent reads Handoff + Active Tasks. Start from Handoff, work Active Tasks. Skip Completed unless investigating history.
-- When phase completes: move tasks to Completed, promote next to Active
-- `current_phase` in frontmatter tells agent where to start
-
-**Task format (table with status):**
-
-```markdown
-## Active Tasks
-
-| ID | Task | Status | Acceptance Criteria | Testing | Depends | Capability |
-|----|------|--------|---------------------|---------|---------|------------|
-| 5.1 | Create Railway project | pending | Railway project exists | Manual: project accessible | — | Railway skill |
-| 5.2 | Configure env vars | pending | All vars set in Railway | Manual: deployment succeeds | 5.1 | Railway skill |
-| 5.3 | Set up custom domain | pending | Domain points to Railway | Browser: domain loads | 5.1 | DNS tools |
-```
-
-**Status values:** `pending`, `in-progress`, `done`, `blocked`
-
-**Testing column:** What tests cover this task. Links task to testing strategy.
-
-**Capability column:** Links task to required capability from capabilities.md. Validates agent has what it needs.
-
-**Task granularity:** Small enough that one agent can:
-1. Read the task
-2. Complete the work
-3. Verify acceptance criteria
-4. Mark complete and sign off
+**Key Deliver requirements:**
+- Every task has acceptance criteria and testing approach
+- Capability column links to capabilities.md entries (deployment skills, testing tools)
+- Progressive disclosure: read Handoff + Active, skip Completed unless investigating
+- Task granularity: one agent, one session, verifiable completion
 
 **Exit signal:** Plan and tasks drafted. Ready for review.
 
@@ -845,7 +810,7 @@ Per ADF-STAGES-SPEC.md:
 | discover-brief.md | Deliver stage | Success criteria reference |
 | design.md | Deliver stage (validation) | Technical specification |
 | docs/adf/plan.md | Deliver stage (after created) | Deployment guide |
-| docs/adf/tasks.md | Deliver stage (after created) | Task tracking |
+| docs/tasks.md | Deliver stage (after created) | Task tracking (per ADF-TASKS-SPEC.md) |
 | ADF-DELIVER-SPEC.md | Deliver stage (reference) | Stage workflow |
 ```
 
@@ -986,6 +951,7 @@ Deliver may use sub-agents for parallelization, though less common than in Devel
 ## References
 
 - ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-TASKS-SPEC.md (tasks.md structure, handoff format, progressive disclosure)
 - ADF-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
 - ADF-DEVELOP-SPEC.md (Develop is primary input)
 - ADF-DESIGN-SPEC.md (Design referenced for validation)

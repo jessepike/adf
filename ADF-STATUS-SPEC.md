@@ -33,7 +33,7 @@ Define `status.md` — a lightweight document that captures session state for co
 |----------|------|-----------------|
 | **CLAUDE.md** | Context manifest — points to status.md | All stages |
 | **status.md** | Lightweight session state | All stages (environment-layer) |
-| **tasks.md** | Comprehensive task planning with milestones | Develop, Deliver (supplements status.md) |
+| **tasks.md** | Task tracking with phase handoff | All stages (minimal in Discover/Design, full in Develop/Deliver) |
 
 **Environment-layer artifact:** Status.md is always present, always loaded, always updated. It tracks session continuity regardless of stage.
 

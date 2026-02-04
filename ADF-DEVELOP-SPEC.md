@@ -173,7 +173,7 @@ What Develop produces:
 | `manifest.md` | Software dependencies, libraries, packages | `docs/adf/manifest.md` |
 | `capabilities.md` | Skills, tools, sub-agents, MCP servers | `docs/adf/capabilities.md` |
 | `plan.md` | Implementation plan — phases, milestones, approach | `docs/adf/plan.md` |
-| `tasks.md` | Atomic task list with status tracking | `docs/adf/tasks.md` |
+| `tasks.md` | Atomic task list with status tracking | `docs/tasks.md` (cross-stage) or `docs/adf/tasks.md` |
 | Updated design docs | If gaps found during validation | `docs/design*.md` |
 | The deliverable | Code, artifact, or workflow | Type-specific location |
 | Documentation | README, API docs, usage guides | Project root + type-specific |
@@ -328,54 +328,19 @@ If the testing strategy section is missing or incomplete, Phase 3 is incomplete.
 
 #### tasks.md — Handoff + Atomic Task List
 
-**Structure:** Handoff block first, then phase tables with progressive disclosure.
+**See ADF-TASKS-SPEC.md for full specification.**
 
-```markdown
----
-current_phase: "Phase 1: Core Structure"
----
+In Develop, tasks.md uses the **full structure** with:
+- Handoff block (overwritten at each phase boundary)
+- Active Tasks table with all columns (ID, Task, Status, Acceptance Criteria, Testing, Depends, Capability)
+- Upcoming section for next phase planning
+- Completed section for traceability
 
-## Handoff
-[Current phase handoff — overwritten each boundary]
-
-## Active Tasks
-[Current phase tasks — what the agent works on]
-
-## Upcoming
-[Next phase(s) — planning reference]
-
-## Completed
-[Previous phases — kept for traceability, agents skip unless investigating]
-```
-
-**Progressive disclosure rules:**
-- Agent reads Handoff + Active Tasks. Start from Handoff, work Active Tasks. Skip Completed unless investigating history.
-- When phase completes: move tasks to Completed, promote next to Active
-- `current_phase` in frontmatter tells agent where to start
-
-**Task format (table with status):**
-
-```markdown
-## Active Tasks
-
-| ID | Task | Status | Acceptance Criteria | Testing | Depends | Capability |
-|----|------|--------|---------------------|---------|---------|------------|
-| 1.1 | Set up Next.js project | pending | `npm run dev` starts | Unit: project loads | — | npm CLI |
-| 1.2 | Configure Tailwind CSS | pending | Tailwind classes apply | Unit: class resolution | 1.1 | frontend-design |
-| 1.3 | Create base layout | pending | Layout renders with slots | Unit: render test | 1.2 | — |
-```
-
-**Status values:** `pending`, `in-progress`, `done`, `blocked`
-
-**Testing column:** What tests cover this task. Links task to testing strategy.
-
-**Capability column:** Links task to required capability from capabilities.md. Validates agent has what it needs.
-
-**Task granularity:** Small enough that one agent can:
-1. Read the task
-2. Complete the work
-3. Verify acceptance criteria
-4. Mark complete and sign off
+**Key Develop requirements:**
+- Every task has acceptance criteria and testing approach
+- Capability column links to capabilities.md entries
+- Progressive disclosure: read Handoff + Active, skip Completed unless investigating
+- Task granularity: one agent, one session, verifiable completion
 
 **Exit signal:** Plan and tasks drafted. Ready for review.
 
@@ -740,7 +705,7 @@ Per ADF-STAGES-SPEC.md:
 | intent.md | Always | North Star |
 | design.md | Develop stage | Primary input |
 | docs/adf/plan.md | Develop stage (after created) | Implementation guide |
-| docs/adf/tasks.md | Develop stage (after created) | Task tracking |
+| docs/tasks.md | Develop stage (after created) | Task tracking (per ADF-TASKS-SPEC.md) |
 | ADF-DEVELOP-SPEC.md | Develop stage (reference) | Stage workflow |
 ```
 
@@ -886,6 +851,7 @@ Develop makes heavy use of sub-agents for parallelization.
 ## References
 
 - ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
+- ADF-TASKS-SPEC.md (tasks.md structure, handoff format, progressive disclosure)
 - ADF-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
 - ADF-DESIGN-SPEC.md (Design is primary input)
 - ADF-BRIEF-SPEC.md (Success criteria reference)

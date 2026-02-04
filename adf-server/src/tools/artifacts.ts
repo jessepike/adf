@@ -15,6 +15,7 @@ const SPEC_MAP: Record<string, string> = {
   rules: "ADF-RULES-SPEC.md",
   design: "ADF-DESIGN-SPEC.md",
   backlog: "ADF-BACKLOG-SPEC.md",
+  tasks: "ADF-TASKS-SPEC.md",
   folder_structure: "ADF-FOLDER-STRUCTURE-SPEC.md",
   project_types: "ADF-PROJECT-TYPES-SPEC.md",
   stages: "ADF-STAGES-SPEC.md",
@@ -25,6 +26,7 @@ const STUB_MAP: Record<string, string> = {
   brief: "stubs/brief.md",
   intent: "stubs/intent.md",
   status: "stubs/status.md",
+  tasks: "stubs/tasks.md",
   rules_constraints: "stubs/rules-constraints.md",
   // claude_md handled separately
 };
@@ -36,7 +38,7 @@ export function registerArtifactTools(server: McpServer): void {
     {
       artifact: z.enum([
         "brief", "intent", "status", "readme", "context",
-        "rules", "design", "backlog", "folder_structure",
+        "rules", "design", "backlog", "tasks", "folder_structure",
         "project_types", "stages", "review",
       ]).describe("Artifact type"),
     },
@@ -57,7 +59,7 @@ export function registerArtifactTools(server: McpServer): void {
     "Get a starter template for an ADF artifact. Use when initializing a new project or creating a new artifact. Returns the template with placeholder values ready to fill in.",
     {
       artifact: z.enum([
-        "brief", "intent", "status", "rules_constraints", "claude_md",
+        "brief", "intent", "status", "tasks", "rules_constraints", "claude_md",
       ]).describe("Artifact to get stub for"),
       project_type: z.enum(["app", "workflow", "artifact"]).optional().describe("Project type — used to select the correct claude_md stub. Defaults to 'app'. Ignored for non-claude_md artifacts."),
     },

@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines artifact structure, frontmatter schema, progressive disclosure, and lifecycle"
-version: "1.0.0"
-updated: "2026-01-24"
+version: "1.0.1"
+updated: "2026-02-04"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-CONTEXT-ARTIFACT-SPEC.md"
@@ -245,18 +245,18 @@ For any governed artifact:
 
 ---
 
-## Meta-Maintenance: acm-env
+## Meta-Maintenance: adf-env
 
-Artifact validation and context pruning are handled by the **acm-env** plugin (`~/.claude/plugins/acm-env/`).
+Artifact validation and context pruning are handled by the **adf-env** plugin (`~/.claude/plugins/adf-plugins/plugins/adf-env/`).
 
-acm-env absorbs the previously deferred `acm-validate` and `acm-prune` concepts into a single environment management plugin:
+adf-env absorbs the previously deferred `acm-validate` and `acm-prune` concepts into a single environment management plugin:
 
-| Capability | acm-env Skill | Description |
+| Capability | adf-env Skill | Description |
 |------------|-----------------|-------------|
-| **Validation** | `/acm-env:audit` | Check artifacts against specs — frontmatter, structure, lifecycle compliance, drift detection |
-| **Pruning** | `/acm-env:audit` + `/acm-env:reset` | Identify stale context, clean CLAUDE.md dynamic sections, archive ephemeral artifacts |
+| **Validation** | `/adf-env:audit` | Check artifacts against specs — frontmatter, structure, lifecycle compliance, drift detection |
+| **Pruning** | `/adf-env:audit` + `/adf-env:reset` | Identify stale context, clean CLAUDE.md dynamic sections, archive ephemeral artifacts |
 | **Drift detection** | SessionStart hook | Lightweight file-existence checks on every session start |
-| **Baseline enforcement** | `/acm-env:status` | Compare current state against machine-parseable baseline |
+| **Baseline enforcement** | `/adf-env:status` | Compare current state against machine-parseable baseline |
 
 See: `ADF-ENV-PLUGIN-SPEC.md` for full specification.
 
