@@ -15,9 +15,6 @@ updated: "2026-02-04"
 - [ ] B15: Deliver stage validation on real project
 - [ ] Status.md pruning automation in adf-env
 
-## Blockers
-- None
-
 ## Session Log
 
 | Date | Summary |
@@ -28,5 +25,4 @@ updated: "2026-02-04"
 | 2026-02-02 | ACM→ADF rename complete. adf-env:init command. Deliver spec. |
 
 ## Notes
-- Historical sessions and completed work archived to `status-archive.md`
-- See `BACKLOG.md` for full work item tracking
+- Historical sessions archived to `status-archive.md`. See `BACKLOG.md` for work items.
