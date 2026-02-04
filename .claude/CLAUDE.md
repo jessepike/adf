@@ -24,6 +24,11 @@ ADF (Agentic Development Framework) is the framework that defines how agentic pr
 2. `status.md` — Current state, session log, next steps
 3. `BACKLOG.md` — All tracked work items
 
+## Agent Session Protocol
+
+1. **Session Start:** Read status.md first. Understand current state, last session, next steps.
+2. **Session End:** Update status.md before closing — log what was done, update next steps. Do not ask, just update.
+
 ## Stage Flow
 
 Stages: Discover → Design → Develop → Deliver
