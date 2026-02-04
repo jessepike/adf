@@ -23,10 +23,7 @@ Discover
 | docs/status.md | Always | Session state — review at start, update at end |
 | docs/discover-brief.md | Discover, Design | Project contract |
 
-## Agent Session Protocol
-
-1. **Session Start:** Read status.md first. Understand current state, last session, next steps.
-2. **Session End:** Update status.md before closing. Log what was done, update next steps.
+<!-- Agent Session Protocol inherited from global ~/.claude/CLAUDE.md -->
 
 ---
 

@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines content and purpose of Global CLAUDE.md"
-version: "1.1.0"
-updated: "2026-02-01"
+version: "1.2.0"
+updated: "2026-02-04"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-GLOBAL-CLAUDE-MD-SPEC.md"
@@ -62,7 +62,26 @@ Governance boundary between human and agent authority.
 |------|-----------|
 | Never modify `.claude/rules/` without explicit human approval | Governance — rules are human-controlled |
 
-### 5. Available Resources (optional)
+### 5. Agent Session Protocol
+
+Universal session discipline that applies to ALL projects.
+
+```markdown
+## Agent Session Protocol
+
+1. **Session Start:** Read status.md first. Understand current state, last session, next steps.
+2. **Session End:** Update status.md before closing — log what was done, update next steps. Do not ask, just update.
+```
+
+| Behavior | Rationale |
+|----------|-----------|
+| Read status.md at session start | Continuity — pick up where last session left off |
+| Update status.md at session end | Handoff — next session knows current state |
+| "Do not ask, just update" | Efficiency — session discipline is non-negotiable |
+
+**This belongs in global, not project.** Every project needs session discipline. Project CLAUDE.md should NOT duplicate this section.
+
+### 6. Available Resources (optional)
 
 Cross-project resources agents should know about. Keep to a brief list — not detailed usage instructions.
 

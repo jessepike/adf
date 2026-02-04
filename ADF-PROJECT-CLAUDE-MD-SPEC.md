@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines content and purpose of Project-level CLAUDE.md"
-version: "1.1.0"
-updated: "2026-01-27"
+version: "1.2.0"
+updated: "2026-02-04"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-PROJECT-CLAUDE-MD-SPEC.md"
@@ -23,6 +23,33 @@ Define what belongs in `.claude/CLAUDE.md` — the project-level context that su
 
 Global = safety rails that never change.
 Project = context that helps agents work effectively on THIS project.
+
+### Inheritance from Global (Do Not Duplicate)
+
+Project CLAUDE.md **inherits** the following from global. Do NOT duplicate these sections:
+
+| Section | In Global | Project Should |
+|---------|-----------|----------------|
+| `<constraints>` | ✓ Security, governance, safety | NOT duplicate — inherited automatically |
+| Agent Session Protocol | ✓ Read/update status.md | NOT duplicate — inherited automatically |
+| Commit Standards | ✓ Format, verification | NOT duplicate — inherited automatically |
+| Communication norms | ✓ Concise, flag blockers | NOT duplicate — inherited automatically |
+| ADF Resources | ✓ MCP server, plugins, registry | NOT duplicate — inherited automatically |
+
+**Anti-duplication rule:** If content exists in global CLAUDE.md, do not repeat it in project CLAUDE.md. Agents receive both files — duplication wastes tokens and risks divergence.
+
+### Project-Specific Only
+
+Project CLAUDE.md should contain ONLY:
+
+| Section | Purpose | Example |
+|---------|---------|---------|
+| Project identity | What this project is | "Link Triage Pipeline" |
+| Current stage | Where we are | "Develop" |
+| Orientation | Project-specific files | `.claude/rules/`, `status.md`, `BACKLOG.md` |
+| Context Map | What to load when | Stage-specific artifact loading |
+| Stack/Commands | How to build/run | `npm test`, `make dev` |
+| Related repos | Project ecosystem | Sibling projects, dependencies |
 
 ---
 
@@ -59,10 +86,7 @@ Every project CLAUDE.md includes:
 | docs/design-architecture.md | Design, Develop | Technical approach |
 | [stage-specific files] | [stage] | [purpose] |
 
-## Agent Session Protocol
-
-1. **Session Start:** Read status.md first. Understand current state, last session, next steps.
-2. **Session End:** Update status.md before closing. Log what was done, update next steps.
+<!-- Agent Session Protocol inherited from global CLAUDE.md — do not duplicate -->
 ```
 
 ---
