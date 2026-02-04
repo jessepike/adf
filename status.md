@@ -18,6 +18,7 @@ updated: "2026-02-04"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-04 | Added intent.md validation (Section 9) to adf-env audit — existence, frontmatter, sections, word count, placeholders, CLAUDE.md xref. Enhanced baseline.yaml. |
 | 2026-02-04 | Quick wins: B69 (uninstall execute-plan), complete ACM→ADF rename in 13 files (specs, kb, prompts, server). |
 | 2026-02-04 | Completed CLAUDE.md inheritance: adf-env:status size checks, baseline.yaml v2.2.0 with duplication validation and status.md limits. |
 | 2026-02-04 | Global/Project CLAUDE.md alignment: Updated specs (v1.2.0), removed Agent Session Protocol from all stubs, added duplication detection to adf-env audit. |
