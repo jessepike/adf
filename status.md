@@ -1,7 +1,7 @@
 ---
 project: "ADF (Agentic Development Framework)"
 stage: "Develop"
-updated: "2026-02-04"
+updated: "2026-02-07"
 ---
 
 # Status
@@ -18,6 +18,7 @@ updated: "2026-02-04"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-07 | Registry audit: added kb-manager, link-triage, knowledge-base, doc-mgr to capabilities-registry (44→48). |
 | 2026-02-04 | Added intent.md validation (Section 9) to adf-env audit — existence, frontmatter, sections, word count, placeholders, CLAUDE.md xref. Enhanced baseline.yaml. |
 | 2026-02-04 | Quick wins: B69 (uninstall execute-plan), complete ACM→ADF rename in 13 files (specs, kb, prompts, server). |
 | 2026-02-04 | Completed CLAUDE.md inheritance: adf-env:status size checks, baseline.yaml v2.2.0 with duplication validation and status.md limits. |
