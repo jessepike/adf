@@ -18,6 +18,7 @@ updated: "2026-02-07"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-07 | Ecosystem synthesis continued: analyzed alignment of inbox docs against ADF-ARCHITECTURE-SPEC, identified gap (spec is inward-facing, missing ecosystem-level view). Proposed docs/ecosystem-architecture.md artifact to capture macro system map, layer model, integration points, and build dependencies. |
 | 2026-02-07 | Ecosystem synthesis: reviewed inbox docs (Krypton brief v1, Work OS brief v5, memory layer research), mapped full project stack and inter-project dependencies (ADF → Work OS → Krypton). |
 | 2026-02-07 | Registry audit: added kb-manager, link-triage, knowledge-base, doc-mgr to capabilities-registry (44→48). |
 | 2026-02-04 | Added intent.md validation (Section 9) to adf-env audit — existence, frontmatter, sections, word count, placeholders, CLAUDE.md xref. Enhanced baseline.yaml. |
