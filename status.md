@@ -12,7 +12,7 @@ updated: "2026-02-09"
 
 ## Next Steps
 - [x] Build ADR skill — ADF-native Architecture Decision Records (first custom skill from marketplace research)
-- [ ] Build Project Health Auditor skill — code-level health metrics complementing adf-env:audit
+- [x] Build Project Health Auditor skill — code-level health metrics complementing adf-env:audit
 - [ ] Build Security Review skill — proactive review-pipeline-aware security checks
 - [ ] B75: Standardize status enum values (in-progress vs in_progress) — blocks Work OS connector
 - [ ] B76-B77: Spec cleanup (ACM remnant, status.md format drift)
@@ -21,6 +21,7 @@ updated: "2026-02-09"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-09 | **Project Health Auditor skill v1.0.0 built + registered.** Created `skills/project-health/SKILL.md` (6 check categories, stage awareness, backlog filing) and `skills/project-health/references/check-catalog.md` (19 checks with per-language commands for Python/TS/Go/Rust). Registered in capabilities-registry (55→56 total). Verified MCP discoverability via `query_capabilities("project-health")`. |
 | 2026-02-09 | **ADR skill v1.0.0 built + registered.** Created `skills/adr/SKILL.md` and `skills/adr/references/adr-template.md`. Four workflows: create, list, update-status, link. Registered in capabilities-registry (50→55 total, including 4 previously untracked agents). Verified MCP discoverability via `query_capabilities("adr")`. |
 | 2026-02-09 | **Capability deep-dive planning.** Reviewed Tier 1 capabilities (Trail of Bits security skills, Project Health Auditor, ADR, Compliance Checker) against ADF needs. Decision: build custom ADF-native skills inspired by marketplace patterns rather than importing — tighter integration with ADF governance, stage flow, and review pipeline. Prioritized build order: (1) ADR skill, (2) Project Health Auditor skill, (3) Security Review skill. Approach: use marketplace as design brief, build purpose-built skills with Opus 4.6. |
 | 2026-02-09 | **Marketplace research synthesis & KB capture.** Continued from prior session's 5-agent parallel research. Collected final outputs from all research agents (SkillsLLM: 1020 skills, SkillsMP/VoltAgent/ClaudeCodePlugins detailed). Captured comprehensive findings to KB (`2186aefe`). Produced prioritized shortlist: Tier 1 direct-fit (Trail of Bits 23+ security skills, Project Health Auditor, ADR skill, Compliance Checker), Tier 2 pattern-mining (Sprint plugin, planning-with-files, rulebook-ai, claude-flow), Tier 3 utility (cclsp LSP bridge, Skill_Seekers). Cross-referenced against registry (50 capabilities) — identified gaps in security review, ADR, compliance, code health metrics. |
