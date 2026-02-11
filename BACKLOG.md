@@ -1,8 +1,8 @@
 ---
 type: "tracking"
 description: "ADF backlog — prioritized queue of potential work items"
-version: "2.3.0"
-updated: "2026-02-07"
+version: "2.5.0"
+updated: "2026-02-10"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/BACKLOG.md"
@@ -11,22 +11,29 @@ spec: "ADF-BACKLOG-SPEC.md"
 
 # ADF Backlog
 
+> Note: Any `ACM`/`acm-*` mentions in historical entries refer to legacy ADF naming (pre-rename), not the separate Agentic Content Manager project.
+
 ## Queue
 
 | ID | Item | Type | Component | Pri | Size | Stage | Status |
 |----|------|------|-----------|-----|------|-------|--------|
+| B84 | **Cross-client memory integration spec** — Add memory sections to ADF-CODEX-COMPAT-SPEC and ADF-GEMINI-COMPAT-SPEC: (1) map each client's local memory (Claude auto-memory MEMORY.md, Gemini `/memory add`, Codex session transcripts) vs Memory Layer MCP, (2) define routing heuristic in ADF-STAGES-SPEC session boundary protocol, (3) ensure AGENTS.md and CLAUDE.md templates both reference memory routing convention. Depends on memory-layer POST-01 (routing heuristic doc). See `~/code/_shared/memory/docs/memory-routing.md`. | Spec update | specs + compat | P1 | M | — | Pending |
+| B85 | **Retire B18/B19** — memory layer is built and delivered at `~/code/_shared/memory/`. B18 (MEMORY-SPEC.md) and B19 (scaffold memory repo) are stale. Archive both. | Hygiene | backlog | P3 | XS | — | Pending |
+| B83 | Implement Codex 90-day execution quality roadmap from `docs/inbox/adf-codex-90-day-roadmap-2026-02-10.md` (Phase 1 first, non-breaking only) | Planning | ADF | P1 | L | Develop | Pending |
+| B81 | Codex compatibility Phase 2 — add non-breaking MCP alias for `claude_md` (for example `context_md`) while preserving existing schema and migration window | Enhancement | adf-server | P2 | S | Develop | Pending |
+| B82 | Codex compatibility Phase 2 — add neutralized context/governance naming aliases while keeping `get_context_spec` and existing tool contracts stable | Enhancement | adf-server | P2 | S | Develop | Pending |
 | B59 | Review function tuning sprint — run 10-20 reviews, log observations in KB, tune prompts/config. Tracking: `kb/EXTERNAL-REVIEW-MODEL-RELIABILITY.md` | Enhancement | Review | P1 | M | Develop | In Progress |
-| B67 | Agent capabilities — blocked on capabilities-registry CR-1 (populate agents from 3 sources). ADF framework value depends on robust agent ecosystem. Tracking: `~/code/_shared/capabilities-registry/BACKLOG.md#CR-1` | Dependency | ACM | P1 | — | — | Blocked |
-| B44 | Standardize brief frontmatter `status` field to use stage-based values (`discover-complete`, `design-in-progress`, etc.) — let ADF MCP server surface pipeline position via `check_project_health` | Enhancement | ACM | P2 | M | — | Pending |
-| B45 | Stage transition cleanup process — when a sub-project completes a stage or the docs/ workspace shifts to a new sub-project, archive previous stage artifacts to `_archive/{project-name}/`. Define convention in ADF-STAGES-SPEC or ADF-FOLDER-STRUCTURE-SPEC. | Enhancement | ACM | P2 | S | — | Pending |
+| B67 | Agent capabilities — blocked on capabilities-registry CR-1 (populate agents from 3 sources). ADF framework value depends on robust agent ecosystem. Tracking: `~/code/_shared/capabilities-registry/BACKLOG.md#CR-1` | Dependency | ADF | P1 | — | — | Blocked |
+| B44 | Standardize brief frontmatter `status` field to use stage-based values (`discover-complete`, `design-in-progress`, etc.) — let ADF MCP server surface pipeline position via `check_project_health` | Enhancement | ADF | P2 | M | — | Pending |
+| B45 | Stage transition cleanup process — when a sub-project completes a stage or the docs/ workspace shifts to a new sub-project, archive previous stage artifacts to `_archive/{project-name}/`. Define convention in ADF-STAGES-SPEC or ADF-FOLDER-STRUCTURE-SPEC. | Enhancement | ADF | P2 | S | — | Pending |
 | B18 | Design memory layer spec (MEMORY-SPEC.md) | New spec | memory | P2 | L | — | Pending |
 | B19 | Scaffold memory repo at `~/code/_shared/memory/` | Setup | memory | P2 | S | — | Pending |
-| B41 | Move ADF-*-SPEC.md + ADF-TAXONOMY.md into docs/specs/ — update all 40+ file references | Refactor | ACM | P2 | M | — | Pending |
-| B48 | Create hooks for phase boundary commit + tasks.md enforcement | Enhancement | acm-env | P2 | M | — | Pending |
-| B36 | ADF MCP server — maintenance primitive not addressed in tool surface | Enhancement | acm-server | P3 | S | — | Pending |
-| B38 | Connect self-improvement loop to MCP server brief — document which steps are covered vs deferred to memory/KB | Docs | ACM | P3 | S | — | Pending |
-| B58 | Add revision history section to all stage specs (DISCOVER, DESIGN, STAGES, ARCHITECTURE) for consistency with DEVELOP | Enhancement | ACM | P3 | S | — | Pending |
-| B20 | Evaluate extracting Knowledge (kb/) from ADF into own repo | Architecture | ACM/kb | P3 | M | — | Pending |
+| B41 | Move ADF-*-SPEC.md + ADF-TAXONOMY.md into docs/specs/ — update all 40+ file references | Refactor | ADF | P2 | M | — | Pending |
+| B48 | Create hooks for phase boundary commit + tasks.md enforcement | Enhancement | adf-env | P2 | M | — | Pending |
+| B36 | ADF MCP server — maintenance primitive not addressed in tool surface | Enhancement | adf-server | P3 | S | — | Pending |
+| B38 | Connect self-improvement loop to MCP server brief — document which steps are covered vs deferred to memory/KB | Docs | ADF | P3 | S | — | Pending |
+| B58 | Add revision history section to all stage specs (DISCOVER, DESIGN, STAGES, ARCHITECTURE) for consistency with DEVELOP | Enhancement | ADF | P3 | S | — | Pending |
+| B20 | Evaluate extracting Knowledge (kb/) from ADF into own repo | Architecture | ADF/kb | P3 | M | — | Pending |
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | Pending |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | P3 | L | — | Pending |
 | B68 | stop-check.sh writes to stdout not stderr — hook framework expects stderr for error messages | Bug | adf-env | P1 | XS | — | Pending |
@@ -34,14 +41,15 @@ spec: "ADF-BACKLOG-SPEC.md"
 | B70 | Frontmatter spec doesn't distinguish ephemeral artifacts — audit over-applies to docs/adf/ working docs | Spec gap | specs | P2 | S | — | Pending |
 | B71 | User CLAUDE.md has stale "acm-env" reference — incomplete ACM→ADF rename | Bug | environment | P1 | XS | — | Pending |
 | B72 | Project CLAUDE.md 1 line over 55-line limit | Hygiene | environment | P2 | XS | — | Pending |
-| B73 | ADF-CONTEXT-ARTIFACT-SPEC references "acm-env" (line 250-251) — incomplete rename | Bug | specs | P1 | XS | — | Pending |
 | B74 | **Context harness alignment audit** — Create `/adf-env:harness-audit` command or skill that validates the full 9-layer support harness: checks CLAUDE.md (global + project) for duplication/staleness, verifies status.md freshness, validates rules/ alignment with design.md, checks MEMORY.md references (e.g., stale KB entry IDs), verifies BACKLOG.md ↔ status.md sync, flags conflicts across layers. Output: structured report with actionable fixes. See KB entries: `9631c0de` (harness map), `1b556a4e` (ADF + auto-memory integration). | New feature | environment | P2 | M | — | Pending |
 | B75 | **Standardize status enum values across ADF specs and Work OS brief** — `in-progress` (ADF-TASKS-SPEC) vs `in_progress` (Work OS) vs `In Progress` (ADF-BACKLOG-SPEC). Pick one canonical form before building ADF→Work OS connector. See: ecosystem alignment report 2026-02-07, finding 2.1. | Spec update | specs | P1 | S | — | Pending |
-| B76 | **Fix ACM remnant in ADF-BACKLOG-SPEC** — Line 41 still references "Standard ACM frontmatter". Should be "Standard ADF frontmatter". | Bug | specs | P1 | XS | — | Pending |
 | B77 | **Update ADF-STATUS-SPEC to match actual Session Log practice** — Spec prescribes single "Last Session" format but all ADF projects use rolling Session Log table. Work OS connector strict parsing will fail on actual status.md files. See: ecosystem alignment report 2026-02-07, finding 6.1. | Spec update | specs | P2 | S | — | Pending |
 | B78 | **Add ecosystem vocabulary section to ecosystem-architecture.md** — Standardize: Connector (data integration), Adapter (protocol/channel translation), Skill (modular capability), Context (Tier 1 file state), Memory (Tier 2 persistent knowledge), Knowledge (reference KB). Resolves terminology collisions across Work OS and Krypton briefs. | Enhancement | ecosystem | P2 | S | — | Pending |
 | B79 | **Define Krypton→Work OS observation mechanism** — Krypton brief says "notices via connectors" but Work OS connectors are inbound-only. Define how Krypton detects Work OS state changes (polling, webhooks, event stream). See: ecosystem alignment report 2026-02-07, finding 2.5. | Design gap | ecosystem | P2 | M | — | Pending |
 | B80 | **Add KB repo location to ecosystem-architecture.md** — `~/code/_shared/knowledge-base/` exists as standalone repo (393 tests) but System Map doesn't list its location. | Docs | ecosystem | P3 | XS | — | Pending |
+| B87 | **"Operate & Learn" stage spec** — ADF lacks a 5th stage for living tools/systems post-Deliver. Deliver answers "is this shipped?" but not "is this working well? what's next?" Operate & Learn covers: usage observation, friction logging, pattern capture, signal accumulation, and triggering the next Discover cycle. Observed gap during Krypton Deliver. Draft Krypton-local convention first, then generalize to ADF-OPERATE-SPEC.md. | New spec | ADF | P2 | L | — | Pending |
+| B88 | **Add "intention alignment" step to Deliver closeout** — Deliver Phase 8 has success criteria gate but no structured "did what shipped match the original intent?" step. Should map deliverable back to intent.md (not just brief.md success criteria) to catch scope drift and validate the spirit of the project was preserved. Observed during Krypton Deliver. | Enhancement | specs | P2 | S | — | Pending |
+| B89 | **Deliver spec: ensure user-facing documentation is a closeout requirement** — Current Deliver Phase 8 has access docs (URLs, credentials) but no explicit requirement for README, usage guide, or configuration reference. For tools/plugins, user-facing docs are as critical as the deployment itself. | Enhancement | specs | P2 | S | — | Pending |
 
 ---
 
@@ -49,6 +57,8 @@ spec: "ADF-BACKLOG-SPEC.md"
 
 | ID | Item | Completed | Notes |
 |----|------|-----------|-------|
+| B73 | ADF-CONTEXT-ARTIFACT-SPEC remnant cleanup | 2026-02-10 | Replaced remaining `acm-validate`/`acm-prune` references with `adf-validate`/`adf-prune`. |
+| B76 | **Fix ACM remnant in ADF-BACKLOG-SPEC** | 2026-02-10 | Updated ADF-BACKLOG-SPEC.md to "Standard ADF frontmatter". |
 | B64 | Rename acm-env plugin to adf-env | 2026-02-02 | Updated plugin.json, marketplace.json, known_marketplaces.json, installed_plugins.json. Updated directory references, command prefixes (/acm-env:* → /adf-env:*), baseline.yaml. Bumped to v2.0.0. Part of ACM→ADF rename (commit 0b3276f). |
 | B65 | Rename acm-review plugin to adf-review | 2026-02-02 | Updated plugin.json, marketplace.json, .claude/rules/review-process.md references. Command prefixes (/acm-review:* → /adf-review:*). Bumped to v2.0.0. Part of ACM→ADF rename (commit 0b3276f). |
 | B66 | Update consumer projects after plugin renames | 2026-02-02 | No active consumers identified requiring updates. Plugin system fully functional with adf-plugins marketplace and adf-env/adf-review plugins. |
