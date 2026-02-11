@@ -16,7 +16,7 @@ usage: "Use with Ralph Loop plugin for automated Brief iteration"
 /ralph-loop:ralph-loop "$(cat ~/code/_shared/adf/prompts/ralph-review-prompt.md)" --max-iterations 10 --completion-promise "INTERNAL_REVIEW_COMPLETE"
 ```
 
-Run from the project root directory. The prompt references files relative to `$PWD` (project) and `~/code/_shared/acm` (ACM).
+Run from the project root directory. The prompt references files relative to `$PWD` (project) and `~/code/_shared/adf` (ADF).
 
 ---
 

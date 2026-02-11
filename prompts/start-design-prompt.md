@@ -78,6 +78,6 @@ When you have enough to proceed, confirm: "I have what I need to draft the desig
 
 ## Notes
 
-- Intent.md is already loaded via CLAUDE.md — no need to explicitly read it
+- Intent.md is already loaded via Context File (CLAUDE.md/AGENTS.md) — no need to explicitly read it
 - This prompt replaces the need for a shell script — validation is semantic (agent work)
 - After intake is complete, agent moves to Technical Design phase

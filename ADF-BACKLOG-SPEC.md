@@ -38,7 +38,7 @@ BACKLOG.md
 
 ### Frontmatter
 
-Standard ACM frontmatter with `type: "tracking"`.
+Standard ADF frontmatter with `type: "tracking"`.
 
 ### Queue
 

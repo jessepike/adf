@@ -18,7 +18,7 @@ arguments:
 
 You are executing a single cycle of Phase 2 external review. External LLM models review the artifact and you synthesize their feedback.
 
-**Preferred invocation:** Use `/acm-review:artifact-external` (or `/acm-review:artifact` for full review) which handles iteration via Ralph Loop automatically. This skill is the single-cycle engine called within that loop.
+**Preferred invocation:** Use `/adf-review:artifact-external` (or `/adf-review:artifact` for full review) which handles iteration via Ralph Loop automatically. This skill is the single-cycle engine called within that loop.
 
 ## Step 1: Resolve Configuration (if invoked standalone)
 
@@ -38,7 +38,7 @@ If invoked directly (not via Ralph Loop), resolve configuration:
 3. Resolve path relative to project root
 
 ### Prompt Resolution
-1. Try ADF MCP server: `acm-server.get_review_prompt(stage, "external")`
+1. Try ADF MCP server: `adf.get_review_prompt(stage, "external")`
 2. Fallback: read directly from `config.yaml` prompt path (relative to skill dir)
 
 ### Model Resolution
@@ -93,7 +93,7 @@ Use this synthesis prompt internally:
 
 ### 3c. Classify
 
-Assign severity and complexity per ACM-REVIEW-SPEC definitions:
+Assign severity and complexity per ADF-REVIEW-SPEC definitions:
 
 **Severity:**
 - **Critical**: Must resolve. Blocks next stage or fundamentally flawed.

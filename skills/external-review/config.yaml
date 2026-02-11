@@ -2,9 +2,9 @@
 # Versioned with skill — safe to commit
 
 version: "1.0.0"
-implements: "ACM-REVIEW-SPEC v1.2.0"
+implements: "ADF-REVIEW-SPEC v1.2.0"
 
-# Stage → prompt mapping (relative to acm/)
+# Stage → prompt mapping (relative to adf/)
 prompts:
   discover: "../prompts/external-review-prompt.md"
   design: "../prompts/design-external-review-prompt.md"
@@ -21,7 +21,7 @@ default_models:
   - kimi-k2
   - gemini
 
-# Cycle rules (from ACM-REVIEW-SPEC v1.2.0)
+# Cycle rules (from ADF-REVIEW-SPEC v1.2.0)
 cycles:
   min: 1
   max: 10

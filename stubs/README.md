@@ -10,6 +10,7 @@ Minimal starter files for `init-project.sh`. These are NOT templates — they're
 | brief.md | Brief stub | ADF-BRIEF-SPEC.md |
 | status.md | Status stub | ADF-STATUS-SPEC.md |
 | claude-md/ | CLAUDE.md stubs by type | ADF-PROJECT-CLAUDE-MD-SPEC.md |
+| agents/ | AGENTS.md stubs by type | ADF-CODEX-COMPAT-SPEC.md |
 | rules-constraints.md | Rules stub (→ `.claude/rules/constraints.md`) | ADF-RULES-SPEC.md |
 
 ## Usage
@@ -18,4 +19,4 @@ These files are copied by `init-project.sh` during project initialization. Agent
 
 ## Note
 
-Per ACM design decision: Agents generate content from specs, not templates. These stubs provide minimal structure; specs define requirements.
+Per ADF design decision: Agents generate content from specs, not templates. These stubs provide minimal structure; specs define requirements.

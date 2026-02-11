@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 from dotenv import load_dotenv
 
-# Load .env from ACM project root (two levels up from server/)
+# Load .env from ADF project root (two levels up from server/)
 _env_path = Path(__file__).resolve().parent.parent.parent.parent / ".env"
 load_dotenv(_env_path, override=True)
 

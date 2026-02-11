@@ -15,7 +15,7 @@ Use this prompt with an image generation tool or diagramming AI to create an arc
 
 ## Prompt
 
-Create a clean, modern software architecture diagram for "ACM — Discover Stage" showing the complete workflow for transforming raw ideas into a validated Brief.
+Create a clean, modern software architecture diagram for "ADF — Discover Stage" showing the complete workflow for transforming raw ideas into a validated Brief.
 
 **Layout:** Flow-based, left-to-right primary flow with review loop shown prominently
 
@@ -23,7 +23,7 @@ Create a clean, modern software architecture diagram for "ACM — Discover Stage
 
 ### 1. Title & Context (Top)
 
-- **Title:** "ACM — Discover Stage"
+- **Title:** "ADF — Discover Stage"
 - **Subtitle:** "From raw idea to validated Brief"
 - **Stage Question:** "What are we trying to accomplish?"
 
@@ -35,7 +35,7 @@ Box labeled "Inputs" containing:
 
 - **Raw Idea** — "Initial concept (may be vague)"
 - **Domain Context** — "Background, constraints, prior art"
-- **ACM Specs** — "Brief spec, Intent spec, Project Types"
+- **ADF Specs** — "Brief spec, Intent spec, Project Types"
 
 Arrow flows RIGHT into the Phase Workflow.
 
@@ -213,6 +213,6 @@ Agent Context:
 
 ---
 
-**Title:** "ACM — Discover Stage"
+**Title:** "ADF — Discover Stage"
 
 **Subtitle:** "From raw idea to validated Brief"

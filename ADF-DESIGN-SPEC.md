@@ -438,7 +438,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 The agent working through Design needs context on:
 
-1. **ACM Framework** — What is ACM, what stage are we in
+1. **ADF Framework** — What is ADF, what stage are we in
 2. **Stage Workflow** — This spec (phases, activities, exit criteria)
 3. **Project Artifacts** — Intent (always), Brief (consumed), existing project state
 4. **Project Types** — Classification system (determines required outputs)

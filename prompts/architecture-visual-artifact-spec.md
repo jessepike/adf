@@ -67,7 +67,7 @@ Create a clean, modern architecture diagram depicting the high-level structure o
 - Add implementation details not in the spec
 - Over-complicate with too many visual elements
 
-**Title:** Use the artifact name (e.g., "ACM Brief Specification for brief.md")
+**Title:** Use the artifact name (e.g., "ADF Brief Specification for brief.md")
 
 **Subtitle:** Brief description of artifact purpose
 

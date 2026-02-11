@@ -208,7 +208,7 @@ If you do not have explicit human approval, STOP and ask for it.
 2. Update status.md with phase completion summary
 3. Commit all changes
 4. Run `/clear` to reset context
-5. Re-read: CLAUDE.md → status.md → tasks.md (handoff block first) → plan.md
+5. Re-read: Context (CLAUDE.md/AGENTS.md) → status.md → tasks.md (handoff block first) → plan.md
 6. Confirm: "Phase N complete. Starting Phase N+1. Here's what I see: [summary from handoff]"
 
 Execution phases:
@@ -219,7 +219,7 @@ Execution phases:
 
 **Testing model (three-tier):**
 - **Tier 1: Automated** — API tests, integration tests, E2E tests in production. Run first. 95%+ pass rate required.
-- **Tier 2: Browser/Agent** — Interactive testing via Claude in Chrome, MCP Inspector. Run after Tier 1 passes.
+- **Tier 2: Browser/Agent** — Interactive testing via browser automation tool (runtime-specific, e.g., Claude in Chrome), MCP Inspector. Run after Tier 1 passes.
 - **Tier 3: Manual** — User acceptance testing. Run after Tier 2 passes. See `kb/MANUAL-TESTING-GUIDE.md`.
 - Document results in `docs/adf/test-results.md`.
 
@@ -254,7 +254,7 @@ Planning and execution are separate workflows — complete all planning first, r
 
 ## Notes
 
-- Intent.md is already loaded via CLAUDE.md
+- Intent.md is already loaded via Context File (CLAUDE.md/AGENTS.md)
 - Deliverable from Develop is primary input (fully loaded and tested)
 - Design is REFERENCED (for validation)
 - Brief is REFERENCED (for success criteria verification)

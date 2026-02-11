@@ -22,12 +22,12 @@ The ADF Discover stage is complete and validated. This document summarizes what'
 
 | Spec | Version | Purpose |
 |------|---------|---------|
-| ACM-DISCOVER-SPEC.md | 1.2.0 | Complete Discover workflow with two-phase review |
-| ACM-BRIEF-SPEC.md | 2.1.0 | Brief structure, type-specific extensions |
-| ACM-INTENT-SPEC.md | - | Intent structure |
-| ACM-PROJECT-TYPES-SPEC.md | 2.0.0 | Type classification system |
-| ACM-STATUS-SPEC.md | 1.1.0 | Session state tracking |
-| ACM-TAXONOMY.md | 1.1.0 | Terms, decisions, artifact tiers |
+| ADF-DISCOVER-SPEC.md | 1.2.0 | Complete Discover workflow with two-phase review |
+| ADF-BRIEF-SPEC.md | 2.1.0 | Brief structure, type-specific extensions |
+| ADF-INTENT-SPEC.md | - | Intent structure |
+| ADF-PROJECT-TYPES-SPEC.md | 2.0.0 | Type classification system |
+| ADF-STATUS-SPEC.md | 1.1.0 | Session state tracking |
+| ADF-TAXONOMY.md | 1.1.0 | Terms, decisions, artifact tiers |
 
 ### Prompts (Ready to Use)
 
@@ -49,7 +49,7 @@ The ADF Discover stage is complete and validated. This document summarizes what'
 
 ### Primary Deliverable
 
-**ACM-DESIGN-SPEC.md** — Define the Design stage workflow
+**ADF-DESIGN-SPEC.md** — Define the Design stage workflow
 
 ### Questions to Answer
 
@@ -111,6 +111,6 @@ Moved to `.archive/`:
 ## Next Steps
 
 1. Start new agent session for Design stage
-2. Review this handoff + ACM-DISCOVER-SPEC.md for patterns
-3. Draft ACM-DESIGN-SPEC.md
+2. Review this handoff + ADF-DISCOVER-SPEC.md for patterns
+3. Draft ADF-DESIGN-SPEC.md
 4. Optionally: Use portfolio project as Design test case (parallel to spec development)

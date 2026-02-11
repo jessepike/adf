@@ -1,9 +1,41 @@
 #!/bin/bash
 
-# ACM Project Initialization Script
+# ADF Project Initialization Script
 # Creates project scaffolding for Discover stage
 
 set -e
+
+RUNTIME_MODE="dual"
+
+usage() {
+    echo "Usage: $0 [--runtime <dual|claude-only|codex-only|gemini-only>]"
+    exit 1
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --runtime)
+            shift
+            if [[ -z "$1" ]]; then
+                usage
+            fi
+            RUNTIME_MODE="$1"
+            shift
+            ;;
+        -h|--help)
+            usage
+            ;;
+        *)
+            echo "Unknown argument: $1"
+            usage
+            ;;
+    esac
+done
+
+if [[ "$RUNTIME_MODE" != "dual" && "$RUNTIME_MODE" != "claude-only" && "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+    echo "Invalid runtime mode: $RUNTIME_MODE"
+    usage
+fi
 
 # Colors
 RED='\033[0;31m'
@@ -12,54 +44,63 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# Get ACM directory (parent of scripts/)
+# Get ADF directory (parent of scripts/)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ACM_DIR="$(dirname "$SCRIPT_DIR")"
+ADF_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo ""
 echo -e "${BLUE}==========================================${NC}"
-echo -e "${BLUE}  ACM Project Initialization${NC}"
+echo -e "${BLUE}  ADF Project Initialization${NC}"
 echo -e "${BLUE}==========================================${NC}"
+echo ""
+echo -e "Runtime mode: ${GREEN}$RUNTIME_MODE${NC}"
 echo ""
 
 # ============================================
-# STEP 1: Check/Update Global CLAUDE.md
+# STEP 1: Check/Update Global CLAUDE.md (Claude runtime only)
 # ============================================
 
-echo -e "${YELLOW}Step 1: Global CLAUDE.md Check${NC}"
-echo "----------------------------------------"
+if [[ "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+    echo -e "${YELLOW}Step 1: Global CLAUDE.md Check${NC}"
+    echo "----------------------------------------"
 
-GLOBAL_DIR="$HOME/.claude"
-GLOBAL_FILE="$GLOBAL_DIR/CLAUDE.md"
-GLOBAL_TEMPLATE="$ACM_DIR/CLAUDE.md"
+    GLOBAL_DIR="$HOME/.claude"
+    GLOBAL_FILE="$GLOBAL_DIR/CLAUDE.md"
+    GLOBAL_TEMPLATE="$ADF_DIR/CLAUDE.md"
 
-if [ ! -f "$GLOBAL_TEMPLATE" ]; then
-    echo -e "${RED}Error: Global template not found at $GLOBAL_TEMPLATE${NC}"
-    exit 1
-fi
-
-if [ -f "$GLOBAL_FILE" ]; then
-    echo -e "Global CLAUDE.md exists at: ${YELLOW}$GLOBAL_FILE${NC}"
-    echo ""
-    read -p "Update from ACM? (y/N): " OVERWRITE_GLOBAL
-
-    if [[ "$OVERWRITE_GLOBAL" =~ ^[Yy]$ ]]; then
-        BACKUP_FILE="$GLOBAL_FILE.backup.$(date +%Y%m%d%H%M%S)"
-        cp "$GLOBAL_FILE" "$BACKUP_FILE"
-        echo -e "${GREEN}Backed up to: $BACKUP_FILE${NC}"
-        cp "$GLOBAL_TEMPLATE" "$GLOBAL_FILE"
-        echo -e "${GREEN}Updated global CLAUDE.md${NC}"
-    else
-        echo "Keeping existing global CLAUDE.md."
+    if [ ! -f "$GLOBAL_TEMPLATE" ]; then
+        echo -e "${RED}Error: Global template not found at $GLOBAL_TEMPLATE${NC}"
+        exit 1
     fi
-else
-    echo "No global CLAUDE.md found."
-    mkdir -p "$GLOBAL_DIR"
-    cp "$GLOBAL_TEMPLATE" "$GLOBAL_FILE"
-    echo -e "${GREEN}Created: $GLOBAL_FILE${NC}"
-fi
 
-echo ""
+    if [ -f "$GLOBAL_FILE" ]; then
+        echo -e "Global CLAUDE.md exists at: ${YELLOW}$GLOBAL_FILE${NC}"
+        echo ""
+        read -p "Update from ADF? (y/N): " OVERWRITE_GLOBAL
+
+        if [[ "$OVERWRITE_GLOBAL" =~ ^[Yy]$ ]]; then
+            BACKUP_FILE="$GLOBAL_FILE.backup.$(date +%Y%m%d%H%M%S)"
+            cp "$GLOBAL_FILE" "$BACKUP_FILE"
+            echo -e "${GREEN}Backed up to: $BACKUP_FILE${NC}"
+            cp "$GLOBAL_TEMPLATE" "$GLOBAL_FILE"
+            echo -e "${GREEN}Updated global CLAUDE.md${NC}"
+        else
+            echo "Keeping existing global CLAUDE.md."
+        fi
+    else
+        echo "No global CLAUDE.md found."
+        mkdir -p "$GLOBAL_DIR"
+        cp "$GLOBAL_TEMPLATE" "$GLOBAL_FILE"
+        echo -e "${GREEN}Created: $GLOBAL_FILE${NC}"
+    fi
+
+    echo ""
+else
+    echo -e "${YELLOW}Step 1: Global CLAUDE.md Check${NC}"
+    echo "----------------------------------------"
+    echo "Skipped for non-Claude runtime mode."
+    echo ""
+fi
 
 # ============================================
 # STEP 2: Select Project Type
@@ -132,7 +173,7 @@ TARGET_PATH="${TARGET_PATH/#\~/$HOME}"
 
 if [ -d "$TARGET_PATH" ]; then
     echo -e "${YELLOW}Warning: Directory already exists.${NC}"
-    read -p "Continue and add ACM scaffolding? (y/N): " CONTINUE
+    read -p "Continue and add ADF scaffolding? (y/N): " CONTINUE
     if [[ ! "$CONTINUE" =~ ^[Yy]$ ]]; then
         echo "Aborted."
         exit 0
@@ -172,55 +213,76 @@ mkdir -p "$TARGET_PATH/_archive"
 # Copy stubs and populate project name/date
 echo "Creating .claude/rules/constraints.md..."
 sed -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
-    "$ACM_DIR/stubs/rules-constraints.md" > "$TARGET_PATH/.claude/rules/constraints.md"
+    "$ADF_DIR/stubs/rules-constraints.md" > "$TARGET_PATH/.claude/rules/constraints.md"
 
 echo "Creating docs/intent.md..."
 sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
-    "$ACM_DIR/stubs/intent.md" > "$TARGET_PATH/docs/intent.md"
+    "$ADF_DIR/stubs/intent.md" > "$TARGET_PATH/docs/intent.md"
 
 echo "Creating docs/discover-brief.md..."
 sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
     -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
-    "$ACM_DIR/stubs/brief.md" > "$TARGET_PATH/docs/discover-brief.md"
+    "$ADF_DIR/stubs/brief.md" > "$TARGET_PATH/docs/discover-brief.md"
 
 echo "Creating docs/status.md..."
 sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
-    "$ACM_DIR/stubs/status.md" > "$TARGET_PATH/docs/status.md"
+    "$ADF_DIR/stubs/status.md" > "$TARGET_PATH/docs/status.md"
 
 echo "Creating docs/tasks.md..."
 sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
     -e "s/YYYY-MM-DD/$CURRENT_DATE/g" \
-    "$ACM_DIR/stubs/tasks.md" > "$TARGET_PATH/docs/tasks.md"
+    "$ADF_DIR/stubs/tasks.md" > "$TARGET_PATH/docs/tasks.md"
 
-# Type-specific structure and CLAUDE.md
+# Type-specific structure and runtime instruction files
 case $PROJECT_TYPE in
     app)
         mkdir -p "$TARGET_PATH/src"
         mkdir -p "$TARGET_PATH/tests"
         mkdir -p "$TARGET_PATH/config"
-        sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
-            -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
-            "$ACM_DIR/stubs/claude-md/app.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        if [[ "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/claude-md/app.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        fi
+        if [[ "$RUNTIME_MODE" != "claude-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/agents/app.md" > "$TARGET_PATH/AGENTS.md"
+        fi
         echo "  Created: src/, tests/, config/"
         ;;
     artifact)
         mkdir -p "$TARGET_PATH/assets"
         mkdir -p "$TARGET_PATH/output"
         mkdir -p "$TARGET_PATH/docs/research"
-        sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
-            -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
-            "$ACM_DIR/stubs/claude-md/artifact.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        if [[ "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/claude-md/artifact.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        fi
+        if [[ "$RUNTIME_MODE" != "claude-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/agents/artifact.md" > "$TARGET_PATH/AGENTS.md"
+        fi
         echo "  Created: assets/, output/, docs/research/"
         ;;
     workflow)
         mkdir -p "$TARGET_PATH/workflows"
         mkdir -p "$TARGET_PATH/scripts"
-        sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
-            -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
-            "$ACM_DIR/stubs/claude-md/workflow.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        if [[ "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/claude-md/workflow.md" > "$TARGET_PATH/.claude/CLAUDE.md"
+        fi
+        if [[ "$RUNTIME_MODE" != "claude-only" ]]; then
+            sed -e "s/\[Project Name\]/$PROJECT_NAME/g" \
+                -e "s/\[personal | shared | community | commercial\]/$SCALE/g" \
+                "$ADF_DIR/stubs/agents/workflow.md" > "$TARGET_PATH/AGENTS.md"
+        fi
         echo "  Created: workflows/, scripts/"
         ;;
 esac
@@ -248,10 +310,16 @@ See [docs/status.md](docs/status.md) for current state.
 
 ---
 
-*Managed with [ACM](https://github.com/your-org/acm)*
+*Managed with [ADF](https://github.com/your-org/acm)*
 EOF
 
-echo "  Created: .claude/, docs/, _archive/, README.md"
+if [[ "$RUNTIME_MODE" == "dual" ]]; then
+    echo "  Created: .claude/, AGENTS.md, docs/, _archive/, README.md"
+elif [[ "$RUNTIME_MODE" == "claude-only" ]]; then
+    echo "  Created: .claude/, docs/, _archive/, README.md"
+else
+    echo "  Created: .claude/rules/, AGENTS.md, docs/, _archive/, README.md"
+fi
 echo ""
 
 # ============================================
@@ -268,7 +336,12 @@ echo "Scale: $SCALE"
 echo ""
 echo "Files created:"
 echo "  .claude/rules/        - Hard constraints (human-controlled)"
-echo "  .claude/CLAUDE.md     - Project context (agents read this first)"
+if [[ "$RUNTIME_MODE" != "codex-only" && "$RUNTIME_MODE" != "gemini-only" ]]; then
+    echo "  .claude/CLAUDE.md     - Claude runtime context"
+fi
+if [[ "$RUNTIME_MODE" != "claude-only" ]]; then
+    echo "  AGENTS.md             - Codex runtime context"
+fi
 echo "  docs/intent.md        - North Star (define your why)"
 echo "  docs/discover-brief.md - Project contract (define what)"
 echo "  docs/status.md        - Session state (tracks progress)"

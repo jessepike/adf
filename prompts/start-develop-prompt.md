@@ -175,7 +175,7 @@ If you do not have explicit human approval, STOP and ask for it.
 2. Update status.md with phase completion summary
 3. Commit all changes
 4. Run `/clear` to reset context
-5. Re-read: CLAUDE.md → status.md → tasks.md (handoff block first) → plan.md
+5. Re-read: Context (CLAUDE.md/AGENTS.md) → status.md → tasks.md (handoff block first) → plan.md
 6. Confirm: "Phase N complete. Starting Phase N+1. Here's what I see: [summary from handoff]"
 
 Execution phases:
@@ -221,7 +221,7 @@ Planning and execution are separate workflows — complete all planning first.
 
 ## Notes
 
-- Intent.md is already loaded via CLAUDE.md
+- Intent.md is already loaded via Context File (CLAUDE.md/AGENTS.md)
 - Design is CONSUMED in Develop (fully loaded and processed)
 - Brief is REFERENCED (for success criteria verification)
 - Updates to design docs during Develop: document and move on, no re-review needed

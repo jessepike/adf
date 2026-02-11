@@ -249,7 +249,7 @@ For any governed artifact:
 
 Artifact validation and context pruning are handled by the **adf-env** plugin (`~/.claude/plugins/adf-plugins/plugins/adf-env/`).
 
-adf-env absorbs the previously deferred `acm-validate` and `acm-prune` concepts into a single environment management plugin:
+adf-env absorbs the previously deferred `adf-validate` and `adf-prune` concepts into a single environment management plugin:
 
 | Capability | adf-env Skill | Description |
 |------------|-----------------|-------------|

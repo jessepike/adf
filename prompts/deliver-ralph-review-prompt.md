@@ -81,7 +81,7 @@ This is Phase 1 of the two-phase review process:
 **Capabilities Coverage**
 - Are all needed deployment skills identified?
 - Are required testing tools listed?
-  - Browser testing tools (Claude in Chrome for Apps)
+  - Browser testing tools (browser automation tool (runtime-specific, e.g., Claude in Chrome) for Apps)
   - E2E testing tools (Playwright, Cypress)
   - Validation tools (health checks, curl)
 - Are CLIs and tools specified?
@@ -91,7 +91,7 @@ This is Phase 1 of the two-phase review process:
 - Are deployment phases logical and well-sequenced?
 - Is the testing strategy adequate? (3-tier coverage)
   - Tier 1: Automated tests in production/target environment
-  - Tier 2: Browser/agent testing (Claude in Chrome, MCP Inspector)
+  - Tier 2: Browser/agent testing (browser automation tool (runtime-specific, e.g., Claude in Chrome), MCP Inspector)
   - Tier 3: Manual user validation
 - Is the rollback plan viable?
 - Is user access clearly defined?

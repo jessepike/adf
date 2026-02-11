@@ -664,7 +664,7 @@ The registry doesn't duplicate ADF content — it provides searchable metadata t
 | 1.3.0 | 2026-01-31 | MCP server interface layer section |
 | 2.0.0 | 2026-02-01 | Elevated to master framework spec — added spec map, framework diagram, stages overview, artifact flow, interface map, spec index |
 | 2.0.1 | 2026-02-01 | Review pass — marked memory as planned (B18-B19), clarified artifact flow is consumer-project scoped, corrected spec index primitive assignments (STATUS→Orchestration, README→Orchestration), clarified registry coupling, added self-improvement loop implementation status |
-| 2.1.0 | 2026-02-04 | Added "ADF Components and the Capabilities Registry" section — documents relationship between ADF runtime components (plugins, MCP server, skills) and the capabilities registry. Fixed remaining ACM→ADF terminology. Added design principle: source of truth separation. |
+| 2.1.0 | 2026-02-04 | Added "ADF Components and the Capabilities Registry" section — documents relationship between ADF runtime components (plugins, MCP server, skills) and the capabilities registry. Fixed remaining legacy terminology. Added design principle: source of truth separation. |
 | 2.2.0 | 2026-02-09 | Added System Context section positioning ADF within Agentic Work System Architecture. Updated "How to Read ADF" table with system architecture and planning spec references. Updated spec index to include ADF-PLANNING-SPEC. Updated taxonomy reference to system-level `_shared/TAXONOMY.md`. |
 
 ---

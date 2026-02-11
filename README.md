@@ -1,8 +1,8 @@
 ---
 type: "documentation"
 description: "ADF package overview and quick start"
-version: "2.0.0"
-updated: "2026-01-27"
+version: "2.1.0"
+updated: "2026-02-10"
 lifecycle: "reference"
 location: "adf/README.md"
 ---
@@ -15,25 +15,26 @@ Minimal primitives for managed agentic workflows. A lightweight scaffolding syst
 
 ## Quick Start
 
-### 1. Deploy Global CLAUDE.md
+### 1. Deploy Claude Runtime Context (optional for `codex-only`)
 
 ```bash
 mkdir -p ~/.claude
-cp /path/to/acm/CLAUDE.md ~/.claude/CLAUDE.md
+cp /path/to/adf/CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
 ### 2. Initialize a New Project
 
 ```bash
 # Run the interactive init script
-/path/to/acm/scripts/init-project.sh
+/path/to/adf/scripts/init-project.sh
 ```
 
 The script will:
-- Check/update your global CLAUDE.md
+- Use runtime mode `dual` by default (`--runtime dual|claude-only|codex-only`)
+- Check/update your global CLAUDE.md when Claude runtime is enabled
 - Ask for project type (app, artifact, workflow)
 - Ask for scale (personal, shared, community, commercial)
-- Create project scaffolding with all required files
+- Create project scaffolding with all required files (`AGENTS.md` and/or `.claude/CLAUDE.md`)
 
 ### 3. Start Discover Stage
 
@@ -71,6 +72,7 @@ cd your-project
 | [ADF-GLOBAL-CLAUDE-MD-SPEC](ADF-GLOBAL-CLAUDE-MD-SPEC.md) | Global CLAUDE.md content |
 | [ADF-PROJECT-CLAUDE-MD-SPEC](ADF-PROJECT-CLAUDE-MD-SPEC.md) | Project CLAUDE.md by type |
 | [ADF-CONTEXT-ARTIFACT-SPEC](ADF-CONTEXT-ARTIFACT-SPEC.md) | Frontmatter schema, progressive disclosure |
+| [ADF-CODEX-COMPAT-SPEC](ADF-CODEX-COMPAT-SPEC.md) | Codex coexistence model and runtime mapping |
 
 ### Stage Specs
 
@@ -121,7 +123,8 @@ cd your-project
 | Artifact | Purpose | Maintenance |
 |----------|---------|-------------|
 | `status.md` | Session state | Every session |
-| `CLAUDE.md` | Context manifest | Stage changes |
+| `.claude/CLAUDE.md` | Claude runtime context manifest | Stage changes |
+| `AGENTS.md` | Codex runtime context manifest | Stage changes |
 | `intent.md` | North Star | Rarely |
 | `brief.md` | Project contract | Discover stage |
 
@@ -131,6 +134,7 @@ cd your-project
 
 ```
 project/
+├── AGENTS.md              # Codex runtime context (dual/codex-only modes)
 ├── .claude/
 │   ├── CLAUDE.md          # Project context (auto-loaded)
 │   └── rules/             # Governing rules
@@ -157,7 +161,15 @@ Every agent session:
 2. **Work:** Align to intent, stay in scope
 3. **End:** Update status.md → Log what was done, next steps
 
-See [AGENT-INSTRUCTIONS](AGENT-INSTRUCTIONS.md) for detailed guidance.
+See [AGENTS.md](AGENTS.md) for Codex runtime guidance.
+
+---
+
+## Coexistence Guarantees
+
+- No changes to `.claude/rules/` governance semantics.
+- No changes to ADF MCP server read-only behavior or tool API names in this phase.
+- Existing Claude workflows continue to operate without migration.
 
 ---
 
@@ -195,7 +207,7 @@ See [AGENT-INSTRUCTIONS](AGENT-INSTRUCTIONS.md) for detailed guidance.
 
 | Script | Purpose |
 |--------|---------|
-| [init-project.sh](scripts/init-project.sh) | Initialize new project with ACM scaffolding |
+| [init-project.sh](scripts/init-project.sh) | Initialize new project with ADF scaffolding |
 
 ---
 
@@ -218,5 +230,5 @@ Research and learnings captured for reuse:
 
 ## References
 
-- [AGENT-INSTRUCTIONS](AGENT-INSTRUCTIONS.md) — Detailed agent guidance
+- [AGENTS.md](AGENTS.md) — Codex runtime guidance
 - [ADF-TAXONOMY](ADF-TAXONOMY.md) — All terminology and design decisions

@@ -28,7 +28,7 @@ Add to your project's `.mcp.json`:
 }
 ```
 
-Optionally reference the companion skill in your `.claude/CLAUDE.md`:
+Optionally reference the companion skill in your runtime context file (`.claude/CLAUDE.md` or `AGENTS.md`):
 
 ```markdown
 ## ADF Integration

@@ -16,7 +16,7 @@ Use this prompt with an image generation tool or diagramming AI to create an arc
 
 ## Prompt
 
-Create a clean, modern architecture diagram for "ACM Develop Stage" showing the eight-phase workflow with clear PLANNING → REVIEW + HARD GATE → EXECUTION structure.
+Create a clean, modern architecture diagram for "ADF Develop Stage" showing the eight-phase workflow with clear PLANNING → REVIEW + HARD GATE → EXECUTION structure.
 
 **Layout:** Left-to-right flow with three distinct sections (Planning, Review/Gate, Execution)
 
@@ -24,7 +24,7 @@ Create a clean, modern architecture diagram for "ACM Develop Stage" showing the 
 
 ### 1. Title & Context (Top)
 
-- **Title:** "ACM — Develop Stage"
+- **Title:** "ADF — Develop Stage"
 - **Subtitle:** "From design to working deliverable"
 - **Stage Question:** "Are we building it correctly?"
 
@@ -185,7 +185,7 @@ Show as timeline or sequential flow.
               ↓
 ┌─────────────────────────────────────┐
 │  TIER 2: Real-world (After Tier 1)  │
-│  • Claude in Chrome (Apps)          │
+│  • browser automation tool (runtime-specific, e.g., Claude in Chrome) (Apps)          │
 │  • MCP Inspector (MCP servers)      │
 │  • Human validation                 │
 └─────────────────────────────────────┘
@@ -280,6 +280,6 @@ Exit Criteria:
 
 ---
 
-**Title:** "ACM — Develop Stage"
+**Title:** "ADF — Develop Stage"
 
 **Subtitle:** "From design to working deliverable"

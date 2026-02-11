@@ -31,7 +31,7 @@ An automated iterative review. The reviewing agent reads the artifact, finds iss
 
 **Tool requirement:** MUST use the Ralph Loop plugin (`/ralph-loop:ralph-loop`).
 
-**Prompt assembly:** The Ralph Loop is invoked with the stage-specific review prompt from `acm/prompts/`. The prompt contains the review dimensions; this spec defines the mechanism the prompt operates within.
+**Prompt assembly:** The Ralph Loop is invoked with the stage-specific review prompt from `adf/prompts/`. The prompt contains the review dimensions; this spec defines the mechanism the prompt operates within.
 
 **Invocation pattern:**
 ```bash
@@ -307,7 +307,7 @@ After receiving Phase 2 feedback:
 
 ## Stage-Specific Prompt Structure
 
-Each stage has two prompts in `acm/prompts/`:
+Each stage has two prompts in `adf/prompts/`:
 
 | Stage | Internal Prompt | External Prompt |
 |-------|-----------------|-----------------|

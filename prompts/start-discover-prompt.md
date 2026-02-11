@@ -25,7 +25,7 @@ You are starting the Discover stage for a new project.
 Verify basic project structure exists:
 - Project directory created
 - `status.md` exists (may be minimal/stub)
-- `CLAUDE.md` exists (may be minimal/stub)
+- `CLAUDE.md` OR `AGENTS.md` exists (context file)
 
 If missing:
 - STOP

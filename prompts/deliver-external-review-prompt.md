@@ -116,7 +116,7 @@ Additional checks for Apps:
 - **First-Time Setup** — Is infrastructure setup (Railway, domain, DB) complete for MVPs?
 - **Environment Variables** — Are all required env vars and secrets identified?
 - **CI/CD** — Is deployment automation appropriate? Manual okay for MVP.
-- **Browser Testing** — Is Tier 2 browser testing via Claude in Chrome planned?
+- **Browser Testing** — Is Tier 2 browser testing via browser automation tool (runtime-specific, e.g., Claude in Chrome) planned?
 - **Health Checks** — Are basic health/status endpoints defined?
 - **Rollback** — Can deployment be undone if production fails?
 ```
@@ -169,7 +169,7 @@ The 3-tier testing model should be appropriate:
 | Tier | What to Check |
 |------|---------------|
 | **Tier 1: Automated** | Are API tests, integration tests, E2E tests specified? Will they run in production? |
-| **Tier 2: Browser/Agent** | For Apps: Is Claude in Chrome testing planned? For MCP Workflows: Is MCP Inspector testing planned? |
+| **Tier 2: Browser/Agent** | For Apps: Is browser automation tool (runtime-specific, e.g., Claude in Chrome) testing planned? For MCP Workflows: Is MCP Inspector testing planned? |
 | **Tier 3: Manual** | Are user acceptance scenarios defined? Is success criteria clear? |
 
 If testing is missing or insufficient for project type, flag it.

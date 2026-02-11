@@ -16,7 +16,7 @@ Use this prompt with an image generation tool or diagramming AI to create an arc
 
 ## Prompt
 
-Create a clean, modern architecture diagram for "ACM Design Stage" showing the workflow, inputs, outputs, and phase progression.
+Create a clean, modern architecture diagram for "ADF Design Stage" showing the workflow, inputs, outputs, and phase progression.
 
 **Layout:** Left-to-right flow with vertical sections for each phase
 
@@ -29,7 +29,7 @@ Create a clean, modern architecture diagram for "ACM Design Stage" showing the w
 - discover-brief.md (Contract) — green, document icon
 - status.md (State) — gray, small
 
-**From ACM Environment Layer:**
+**From ADF Environment Layer:**
 - ADF-DESIGN-SPEC.md
 - Project Type classification
 
@@ -173,6 +173,6 @@ Show prompt files used:
 
 ---
 
-**Title:** "ACM Design Stage: Brief → Technical Specification"
+**Title:** "ADF Design Stage: Brief → Technical Specification"
 
 **Subtitle:** "How will we build this?"

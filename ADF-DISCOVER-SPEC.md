@@ -265,7 +265,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 The agent working through Discover needs context on:
 
-1. **ACM Framework** — What is ACM, what stage are we in, how does it work
+1. **ADF Framework** — What is ADF, what stage are we in, how does it work
 2. **Stage Workflow** — This spec (phases, activities, exit criteria)
 3. **Artifact Specs** — Brief spec, Intent spec
 4. **Project Types** — Classification system
@@ -316,7 +316,7 @@ Used with Ralph Loop plugin for Phase 1 (internal review).
 Used with GPT, Gemini, other external models for Phase 2.
 
 **Structure:**
-1. Context: ACM framework, Discover stage, this Brief has passed internal review
+1. Context: ADF framework, Discover stage, this Brief has passed internal review
 2. Input: Brief + Intent (both artifacts)
 3. Task: Comprehensive review — find what the internal reviewer missed
 4. Focus: Diverse perspective, blind spots, cross-artifact alignment

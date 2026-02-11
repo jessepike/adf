@@ -188,7 +188,7 @@ These are non-negotiable rules. Claude must not creatively reinterpret or work a
 
 ### Frontmatter
 
-Rules files use the standard ACM frontmatter with `type: "rule"`:
+Rules files use the standard ADF frontmatter with `type: "rule"`:
 
 ```yaml
 ---

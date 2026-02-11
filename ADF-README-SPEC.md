@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines README requirements for ADF package and projects"
-version: "1.0.0"
-updated: "2026-01-27"
+version: "1.1.0"
+updated: "2026-02-10"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-README-SPEC.md"
@@ -20,19 +20,19 @@ Define what README files must contain and when they must be updated. READMEs are
 
 | README | Location | Purpose |
 |--------|----------|---------|
-| **ACM README** | `/acm/README.md` | Package overview, quick start, spec index |
+| **ADF README** | `/adf/README.md` | Package overview, quick start, spec index |
 | **Project README** | `{project}/README.md` | Project overview, intent link, status link |
 
 ---
 
 ## ADF README Requirements
 
-The ACM package README (`/acm/README.md`) must contain:
+The ADF package README (`/adf/README.md`) must contain:
 
 ### Required Sections
 
-1. **Title & Description** — What ACM is (1-2 sentences)
-2. **Quick Start** — How to deploy global CLAUDE.md and init a project
+1. **Title & Description** — What ADF is (1-2 sentences)
+2. **Quick Start** — How to initialize runtime context (`.claude/CLAUDE.md` and/or `AGENTS.md`) and init a project
 3. **Spec Index** — Table of all specs with brief descriptions
 4. **Core Concepts** — Project types, stages, key artifacts
 5. **Folder Structure** — What a project looks like
@@ -44,14 +44,15 @@ The ACM package README (`/acm/README.md`) must contain:
 |---------|-----------------|
 | New spec created | Add to Spec Index |
 | Spec renamed/removed | Update Spec Index |
-| Init script changes | Update Quick Start |
+| Init script changes | Update Quick Start (including runtime mode flags) |
+| Runtime contract changes (`AGENTS.md`, `.claude/CLAUDE.md`) | Update Quick Start + Core Concepts |
 | Core concept changes | Update Core Concepts |
 | Folder structure changes | Update Folder Structure |
 
 ### Validation Criteria
 
 - [ ] All current specs listed in Spec Index
-- [ ] Quick Start instructions are accurate and work
+- [ ] Quick Start instructions are accurate and work for configured runtime modes
 - [ ] Version/date in frontmatter is current
 - [ ] No dead links
 
@@ -87,7 +88,7 @@ Each project's README (`{project}/README.md`) must contain:
 ### Validation Criteria
 
 - [ ] Links to intent.md and status.md work
-- [ ] Classification matches CLAUDE.md
+- [ ] Classification matches runtime context file (`.claude/CLAUDE.md` or `AGENTS.md`)
 - [ ] No stale information
 
 ---
@@ -104,7 +105,7 @@ version: "X.Y.Z"
 updated: "YYYY-MM-DD"
 ---
 
-# ACM — Agentic Development Framework
+# ADF — Agentic Development Framework
 
 [1-2 sentence description]
 
@@ -162,7 +163,7 @@ README is one of several artifacts that must stay current. See ADF-TAXONOMY.md f
 
 | Tier | Artifacts | Update Frequency |
 |------|-----------|------------------|
-| **Tier 1: Always** | status.md, CLAUDE.md | Every session |
+| **Tier 1: Always** | status.md, `.claude/CLAUDE.md` and/or `AGENTS.md` | Every session |
 | **Tier 2: Stage-Critical** | intent.md, brief, README | Stage boundaries, milestones |
 | **Tier 3: Reference** | Architecture, decisions | When relevant |
 
@@ -176,7 +177,7 @@ README maintenance is the responsibility of:
 2. **Humans** — Review at stage boundaries
 3. **Init script** — Creates initial README
 
-No automated validation currently. Future: `acm-validate` could check README compliance.
+No automated validation currently. Future: `adf-validate` could check README compliance.
 
 ---
 
@@ -184,4 +185,5 @@ No automated validation currently. Future: `acm-validate` could check README com
 
 - ADF-TAXONOMY.md (Artifact maintenance tiers)
 - ADF-STATUS-SPEC.md (Status tracking)
-- ADF-PROJECT-CLAUDE-MD-SPEC.md (CLAUDE.md structure)
+- ADF-PROJECT-CLAUDE-MD-SPEC.md (Claude runtime context structure)
+- ADF-CODEX-COMPAT-SPEC.md (Codex coexistence model)
