@@ -1,7 +1,7 @@
 ---
 project: "ADF (Agentic Development Framework)"
 stage: "Develop"
-updated: "2026-02-10"
+updated: "2026-02-11"
 ---
 
 # Status
@@ -21,6 +21,8 @@ updated: "2026-02-10"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-11 | **KB capture: ecosystem synthesis.** Pushed 3 learnings to KB: three-layer ecosystem model (`ff3683fa`), first audit findings & drift patterns (`1663d6af`), ecosystem steward agent pattern (`716285a5`). All active, sourced from ADF. |
+| 2026-02-10 | **ADF Gemini Compatibility.** Added first-class support for Gemini runtime alongside Claude and Codex. Created `ADF-GEMINI-COMPAT-SPEC.md`. Updated `init-project.sh` to support `--runtime gemini-only`. Generalized `AGENTS.md` stubs and all Start Stage prompts (`start-*.md`) to be model-agnostic (referencing "Context File" instead of `CLAUDE.md`). Verified with `gemini-only` test project. |
 | 2026-02-10 | **Capability gap analysis across full project ecosystem.** Explored all 10 active projects under ~/code (adf, capabilities-registry, knowledge-base, link-triage-pipeline, pike-acm, ai-risk-tools, dowell-therapy-portal, dowell-automation, papa-dogs-website, vet-books) plus 3 planned (krypton, work-management, memory). Cross-referenced project needs against 57-capability registry. Key gaps identified: (1) Prisma/DB migration safety (ai-risk-tools, 13+ tables), (2) RLS/auth policy auditing (50+ Supabase policies), (3) monorepo management (pnpm workspace), (4) content pipeline orchestration (pike-acm patterns not reusable). Also noted pike-acm's 3 agents untracked in registry. |
 | 2026-02-09 | **Security Review skill v1.0.0 built + registered.** Created `skills/security-review/SKILL.md` (5 check categories, 22 checks, two dimensions: code + design, stage awareness, backlog filing) and `skills/security-review/references/security-checks.md` (22 checks with per-language Grep patterns for Python/TS/Go/Rust). Covers OWASP patterns (injection, XSS, SSRF, path traversal), cryptography (weak hashing, insecure randomness, hardcoded crypto material, TLS), unsafe operations (deserialization, file upload, TOCTOU, info leakage, prototype pollution), supply chain (lockfile integrity, typosquatting, post-install scripts, pinning), and design security posture (threat model, auth strategy, data classification, input validation). No duplication with project-health (secrets, CVEs) or security-guidance (8 runtime patterns). Registered in capabilities-registry (56→57 total). |
 | 2026-02-09 | **Project Health Auditor skill v1.0.0 built + registered.** Created `skills/project-health/SKILL.md` (6 check categories, stage awareness, backlog filing) and `skills/project-health/references/check-catalog.md` (19 checks with per-language commands for Python/TS/Go/Rust). Registered in capabilities-registry (55→56 total). Verified MCP discoverability via `query_capabilities("project-health")`. |
