@@ -21,6 +21,7 @@ updated: "2026-02-11"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-11 | **CR-4 + CR-5: Registry schema updates.** REGISTRY-SPEC v1.3.0 — plugin as packaging layer (cross-ref fields: bundled_in, delegates_to, requires_tools), clients compatibility block (per-client objects), documented agent_definition. Updated generate-inventory.sh with clients extraction and by_client summary. Resolved Decision #1 in cross-agent plan. Next: CR-6 (audit all 60 capabilities for client enablement). |
 | 2026-02-11 | **Security Review skill + gap analysis + KB capture.** Built security-review skill v1.0.0 (22 checks, 5 categories, OWASP patterns). Ran capability gap analysis across 10 projects vs 57-capability registry — identified 4 key gaps (Prisma/DB migrations, RLS policy auditing, monorepo management, content pipeline orchestration). Captured gap analysis to KB (`ad90c4b7`). |
 | 2026-02-11 | Committed and pushed pending multi-runtime changes (Gemini/Codex compat, model-agnostic prompts, agent stubs). 28 commits pushed to origin/main. |
 | 2026-02-11 | **Capabilities Registry gap analysis + backlog update.** Reviewed registry inventory (60 caps), backlog (CR-1–4), and cross-agent plan. Identified 5 gaps: no per-client enablement tracking, thin agent coverage (6/60), low-use skill noise, quality=0 tool stubs, no usage data. Wrote CR-5–CR-9 into registry backlog. Recommended `clients` compatibility block schema for capability.yaml. Top 3 priorities: CR-5+CR-4 (schema), CR-6 (client audit), CR-1 (agent deep dive). |
