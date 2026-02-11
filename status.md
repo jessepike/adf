@@ -14,6 +14,7 @@ updated: "2026-02-11"
 - [x] Build ADR skill — ADF-native Architecture Decision Records (first custom skill from marketplace research)
 - [x] Build Project Health Auditor skill — code-level health metrics complementing adf-env:audit
 - [x] Build Security Review skill — proactive review-pipeline-aware security checks
+- [ ] CR-6: Audit all 60 capabilities for client enablement (uses new clients block from CR-4+CR-5)
 - [ ] B75: Standardize status enum values (in-progress vs in_progress) — blocks Work OS connector
 - [ ] B76-B77: Spec cleanup (ACM remnant, status.md format drift)
 
