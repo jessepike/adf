@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines the ADF stage workflow model and environment layer"
-version: "1.2.0"
-updated: "2026-02-01"
+version: "1.3.0"
+updated: "2026-02-11"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-STAGES-SPEC.md"
@@ -59,10 +59,25 @@ Some artifacts persist across all stages:
 | `tasks.md` | Task tracking and phase handoff | Minimal in Discover/Design, full in Develop/Deliver |
 | `CLAUDE.md` | Context manifest — what to load | Evolves with project, references status.md |
 | `docs/adf/` | Stage planning workspace | Created in Develop, archived at stage completion |
+| Memory MCP | Cross-project learnings (ecosystem service) | Queried at session start, written at session end |
+| KB MCP | Curated reference knowledge (ecosystem service) | Queried when task domain has relevant entries |
 
 **Agent Session Protocol:**
-1. Session start: Read CLAUDE.md → Read status.md → Understand state
-2. Session end: Update status.md → Capture what was done, next steps
+
+Session start:
+1. Read CLAUDE.md → Read status.md → Understand current state
+2. Read backlog → Identify next work item
+3. Query Memory MCP (`search_memories` or `get_session_context`) for relevant cross-project context
+4. Query KB MCP (`search_knowledge`) if the task involves a domain with curated knowledge
+
+Session end:
+1. Update status.md — log what was done, update next steps
+2. Update backlog — mark completed items, note blockers
+3. Call `write_memory` for any cross-project learnings (see routing heuristic below)
+4. Commit tested work (atomic commits, `type(scope): description`)
+5. Brief user summary of session outcomes
+
+**Memory routing heuristic:** Only write to Memory MCP if the knowledge matters beyond the current project AND current client. Project-local conventions go in project instructions files. Session state goes in status.md. Structured research goes to KB. Full reference: `~/code/_shared/memory/docs/memory-routing.md`.
 
 ### Project Init (Boot Sequence)
 
