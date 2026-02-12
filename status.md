@@ -11,9 +11,9 @@ updated: "2026-02-11"
 - **Focus:** Registry schema + client enablement, spec compliance
 
 ## Next Steps
-- [ ] B77: Update ADF-STATUS-SPEC to match actual Session Log practice
-- [ ] B72: Project CLAUDE.md 1 line over 55-line limit (XS)
-- [ ] B80: Add KB repo location to ecosystem-architecture.md (XS)
+- [x] B77: Update ADF-STATUS-SPEC — Session Log as primary format
+- [x] B72: Project CLAUDE.md line limit — already under, closed
+- [x] B80: KB + Memory Layer locations in ecosystem-architecture.md
 - [ ] B86: Codify multi-system session protocol (P1, M)
 - [ ] B84: Cross-client memory integration spec (P1, M)
 
@@ -21,6 +21,7 @@ updated: "2026-02-11"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-11 | **Quick wins batch 2.** Closed B72 (CLAUDE.md at 50 lines — under limit, no-op), B80 (added KB + Memory Layer repo paths to ecosystem-architecture.md System Map), B77 (ADF-STATUS-SPEC v1.3.0 — Session Log table as primary format, removed "Last Session" single-entry). BACKLOG v2.7.0, 26 items remaining. |
 | 2026-02-11 | **CR-6: Client enablement audit.** Added `clients` blocks to all 71 capability.yaml files. Results: claude-code 71/71, claude-desktop 9/71 (MCP tools), codex 7/71 (stdio only), gemini 8/71 (stdio+http). Inventory regenerated with Client Enablement table. Actual registry count is 71 (not 60 as previously logged). |
 | 2026-02-11 | **P1 quick wins batch.** Closed 5 backlog items: B68 (stop-check.sh stderr fix + ACM→ADF in hooks.json), B69 (removed execute-plan plugin dir + marketplace entry), B71 (already fixed, closed as no-op), B85 (retired stale B18/B19 — memory layer delivered), B75 (standardized status enums to snake_case: `in_progress` across ADF-TASKS-SPEC, ADF-BACKLOG-SPEC, BACKLOG.md, prompt). BACKLOG v2.6.0, 29 items remaining. |
 | 2026-02-11 | **CR-4 + CR-5: Registry schema updates.** REGISTRY-SPEC v1.3.0 — plugin as packaging layer (cross-ref fields: bundled_in, delegates_to, requires_tools), clients compatibility block (per-client objects), documented agent_definition. Updated generate-inventory.sh with clients extraction and by_client summary. Resolved Decision #1 in cross-agent plan. Next: CR-6 (audit all 60 capabilities for client enablement). |

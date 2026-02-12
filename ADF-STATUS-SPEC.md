@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines status.md — lightweight session state tracking across all stages"
-version: "1.2.0"
-updated: "2026-02-04"
+version: "1.3.0"
+updated: "2026-02-11"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-STATUS-SPEC.md"
@@ -58,9 +58,11 @@ updated: "YYYY-MM-DD"
 - **Phase:** [Current phase within stage]
 - **Focus:** [What we're working on right now]
 
-## Last Session
-- **Date:** YYYY-MM-DD
-- **Completed:** [What was accomplished]
+## Session Log
+
+| Date | Summary |
+|------|---------|
+| YYYY-MM-DD | [What was accomplished] |
 
 ## Next Steps
 - [ ] [Immediate action 1]
@@ -101,7 +103,7 @@ Status.md keeps a rolling history of recent sessions. To prevent unbounded growt
 | 2026-01-25 | Drafted initial Brief v0.1 |
 ```
 
-This replaces the single "Last Session" section when multiple sessions accumulate. Keep it concise — one line per session.
+Session Log is the primary session tracking format. Use it from session 1. Keep it concise — one line per session.
 
 ---
 
@@ -171,7 +173,7 @@ Historical session logs and completed work archived from status.md.
 **Critical:** Agent must close the loop before session ends.
 
 1. Agent updates status.md:
-   - Update "Last Session" with date and what was completed
+   - Add entry to Session Log with date and what was completed
    - Update "Next Steps" with remaining work
    - Note any new blockers or pending decisions
 2. If stage completed, update stage field
@@ -218,7 +220,7 @@ When moving between stages:
 1. Update status.md `stage` field
 2. Clear completed items from "Next Steps"
 3. Add stage-specific next steps
-4. Archive or reset "Last Session" section
+4. Prune Session Log if needed (keep last 5)
 
 ### Discover → Design Example
 
@@ -227,9 +229,11 @@ When moving between stages:
 - **Phase:** Handoff complete
 - **Focus:** Beginning Design stage
 
-## Last Session
-- **Date:** 2026-01-27
-- **Completed:** Finalized Brief, passed exit criteria, human sign-off
+## Session Log
+
+| Date | Summary |
+|------|---------|
+| 2026-01-27 | Finalized Brief, passed exit criteria, human sign-off |
 
 ## Next Steps
 - [ ] Review Brief for Design inputs
@@ -285,7 +289,7 @@ No stage prefix needed — there's only one status.md per project.
 A well-formed status.md:
 
 - [ ] Has current stage and phase
-- [ ] Has "Last Session" with date and summary
+- [ ] Has Session Log table with date and summary
 - [ ] Has actionable "Next Steps" (not vague)
 - [ ] Under 30 lines
 - [ ] Updated at end of each session
@@ -299,6 +303,7 @@ A well-formed status.md:
 | 1.0.0 | 2026-01-26 | Initial spec |
 | 1.1.0 | 2026-01-27 | Added session log format, pruning guidance |
 | 1.2.0 | 2026-02-04 | Added explicit "Pruning Rules (Mandatory)" section — defines what/when/how to prune, agent responsibility, archive file format |
+| 1.3.0 | 2026-02-11 | Session Log table is now the primary format from session 1. Removed "Last Session" single-entry format. Aligns spec with actual practice across all ADF projects. |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 type: "tracking"
 description: "ADF backlog — prioritized queue of potential work items"
-version: "2.6.0"
+version: "2.7.0"
 updated: "2026-02-11"
 scope: "adf"
 lifecycle: "reference"
@@ -35,12 +35,9 @@ spec: "ADF-BACKLOG-SPEC.md"
 | B21 | Automated self-improvement loop (capture → distill → apply) | Architecture | memory + kb | P3 | L | — | pending |
 | B22 | Community knowledge ingestion pipeline | Architecture | kb | P3 | L | — | pending |
 | B70 | Frontmatter spec doesn't distinguish ephemeral artifacts — audit over-applies to docs/adf/ working docs | Spec gap | specs | P2 | S | — | pending |
-| B72 | Project CLAUDE.md 1 line over 55-line limit | Hygiene | environment | P2 | XS | — | pending |
 | B74 | **Context harness alignment audit** — Create `/adf-env:harness-audit` command or skill that validates the full 9-layer support harness: checks CLAUDE.md (global + project) for duplication/staleness, verifies status.md freshness, validates rules/ alignment with design.md, checks MEMORY.md references (e.g., stale KB entry IDs), verifies BACKLOG.md ↔ status.md sync, flags conflicts across layers. Output: structured report with actionable fixes. See KB entries: `9631c0de` (harness map), `1b556a4e` (ADF + auto-memory integration). | New feature | environment | P2 | M | — | pending |
-| B77 | **Update ADF-STATUS-SPEC to match actual Session Log practice** — Spec prescribes single "Last Session" format but all ADF projects use rolling Session Log table. Work OS connector strict parsing will fail on actual status.md files. See: ecosystem alignment report 2026-02-07, finding 6.1. | Spec update | specs | P2 | S | — | pending |
 | B78 | **Add ecosystem vocabulary section to ecosystem-architecture.md** — Standardize: Connector (data integration), Adapter (protocol/channel translation), Skill (modular capability), Context (Tier 1 file state), Memory (Tier 2 persistent knowledge), Knowledge (reference KB). Resolves terminology collisions across Work OS and Krypton briefs. | Enhancement | ecosystem | P2 | S | — | pending |
 | B79 | **Define Krypton→Work OS observation mechanism** — Krypton brief says "notices via connectors" but Work OS connectors are inbound-only. Define how Krypton detects Work OS state changes (polling, webhooks, event stream). See: ecosystem alignment report 2026-02-07, finding 2.5. | Design gap | ecosystem | P2 | M | — | pending |
-| B80 | **Add KB repo location to ecosystem-architecture.md** — `~/code/_shared/knowledge-base/` exists as standalone repo (393 tests) but System Map doesn't list its location. | Docs | ecosystem | P3 | XS | — | pending |
 | B87 | **"Operate & Learn" stage spec** — ADF lacks a 5th stage for living tools/systems post-Deliver. Deliver answers "is this shipped?" but not "is this working well? what's next?" Operate & Learn covers: usage observation, friction logging, pattern capture, signal accumulation, and triggering the next Discover cycle. Observed gap during Krypton Deliver. Draft Krypton-local convention first, then generalize to ADF-OPERATE-SPEC.md. | New spec | ADF | P2 | L | — | pending |
 | B88 | **Add "intention alignment" step to Deliver closeout** — Deliver Phase 8 has success criteria gate but no structured "did what shipped match the original intent?" step. Should map deliverable back to intent.md (not just brief.md success criteria) to catch scope drift and validate the spirit of the project was preserved. Observed during Krypton Deliver. | Enhancement | specs | P2 | S | — | pending |
 | B89 | **Deliver spec: ensure user-facing documentation is a closeout requirement** — Current Deliver Phase 8 has access docs (URLs, credentials) but no explicit requirement for README, usage guide, or configuration reference. For tools/plugins, user-facing docs are as critical as the deployment itself. | Enhancement | specs | P2 | S | — | pending |
@@ -51,6 +48,9 @@ spec: "ADF-BACKLOG-SPEC.md"
 
 | ID | Item | Completed | Notes |
 |----|------|-----------|-------|
+| B72 | Project CLAUDE.md line limit | 2026-02-11 | Verified at 50 lines (under 55-line limit). Closed as no-op. |
+| B80 | Add KB repo location to ecosystem-architecture.md | 2026-02-11 | Added `~/code/_shared/knowledge-base/` to System Map. Also updated Memory Layer status to Built with actual path. |
+| B77 | Update ADF-STATUS-SPEC Session Log format | 2026-02-11 | Made Session Log table the primary format. Removed "Last Session" single-entry format. Version bump to 1.3.0. |
 | B75 | Standardize status enum values | 2026-02-11 | Canonical form: lowercase snake_case (`pending`, `in_progress`, `done`, `blocked`). Updated ADF-TASKS-SPEC, ADF-BACKLOG-SPEC, BACKLOG.md, develop-artifact-correction-prompt. Aligns with Work OS entity model. |
 | B68 | stop-check.sh stdout/stderr fix | 2026-02-11 | Added stderr echo for terminal visibility, kept JSON on stdout for hook framework. Also fixed stale "ACM" reference in hooks.json. |
 | B69 | Remove execute-plan plugin | 2026-02-11 | Removed plugin directory and marketplace.json entry. Was not enabled in settings but files remained. |

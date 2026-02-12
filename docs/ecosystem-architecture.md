@@ -75,8 +75,8 @@ These are standalone systems consumed by multiple platform layers. They are not 
 
 | System | Role | Status | Location | Consumers |
 |--------|------|--------|----------|-----------|
-| **Knowledge Base** | Reference knowledge — learnings, ideas, notes, research | Built | KB MCP server | ADF agents, Krypton (future) |
-| **Memory Layer** | Contextual knowledge — decisions, preferences, patterns, session history | Research done | — (planned: `~/code/_shared/memory/`) | ADF agents, Krypton (future) |
+| **Knowledge Base** | Reference knowledge — learnings, ideas, notes, research | Built | `~/code/_shared/knowledge-base/` | ADF agents, Krypton (future) |
+| **Memory Layer** | Contextual knowledge — decisions, preferences, patterns, session history | Built | `~/code/_shared/memory/` | ADF agents, Krypton (future) |
 | **Capabilities Registry** | Catalog of available skills, tools, agents, plugins | Built | `~/code/_shared/capabilities-registry/` | ADF agents, Krypton (future) |
 | **Link Triage Pipeline** | Content ingestion — URL capture, extraction, routing to KB | Built | `~/code/_shared/link-triage-pipeline/` | KB (target), Krypton (future trigger) |
 
