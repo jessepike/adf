@@ -14,7 +14,7 @@ updated: "2026-02-11"
 - [x] Build ADR skill — ADF-native Architecture Decision Records (first custom skill from marketplace research)
 - [x] Build Project Health Auditor skill — code-level health metrics complementing adf-env:audit
 - [x] Build Security Review skill — proactive review-pipeline-aware security checks
-- [ ] CR-6: Audit all 60 capabilities for client enablement (uses new clients block from CR-4+CR-5)
+- [x] CR-6: Audit all 71 capabilities for client enablement
 - [ ] B75: Standardize status enum values (in-progress vs in_progress) — blocks Work OS connector
 - [ ] B76-B77: Spec cleanup (ACM remnant, status.md format drift)
 
@@ -22,6 +22,7 @@ updated: "2026-02-11"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-11 | **CR-6: Client enablement audit.** Added `clients` blocks to all 71 capability.yaml files. Results: claude-code 71/71, claude-desktop 9/71 (MCP tools), codex 7/71 (stdio only), gemini 8/71 (stdio+http). Inventory regenerated with Client Enablement table. Actual registry count is 71 (not 60 as previously logged). |
 | 2026-02-11 | **Backlog review.** Read and summarized full ADF backlog (35 items: 1 in progress, 1 blocked, 33 pending). Identified P1 quick wins (B68, B69, B71 — all XS). |
 | 2026-02-11 | **CR-4 + CR-5: Registry schema updates.** REGISTRY-SPEC v1.3.0 — plugin as packaging layer (cross-ref fields: bundled_in, delegates_to, requires_tools), clients compatibility block (per-client objects), documented agent_definition. Updated generate-inventory.sh with clients extraction and by_client summary. Resolved Decision #1 in cross-agent plan. Next: CR-6 (audit all 60 capabilities for client enablement). |
 | 2026-02-11 | **Security Review skill + gap analysis + KB capture.** Built security-review skill v1.0.0 (22 checks, 5 categories, OWASP patterns). Ran capability gap analysis across 10 projects vs 57-capability registry — identified 4 key gaps (Prisma/DB migrations, RLS policy auditing, monorepo management, content pipeline orchestration). Captured gap analysis to KB (`ad90c4b7`). |
