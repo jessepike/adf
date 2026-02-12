@@ -11,12 +11,11 @@ updated: "2026-02-11"
 - **Focus:** Session discipline enforcement, spec compliance
 
 ## Next Steps
-- [x] Build ADR skill — ADF-native Architecture Decision Records (first custom skill from marketplace research)
-- [x] Build Project Health Auditor skill — code-level health metrics complementing adf-env:audit
-- [x] Build Security Review skill — proactive review-pipeline-aware security checks
-- [x] CR-6: Audit all 71 capabilities for client enablement
-- [x] B75: Standardize status enum values → `in_progress` (snake_case canonical)
 - [ ] B77: Update ADF-STATUS-SPEC to match actual Session Log practice
+- [ ] B72: Project CLAUDE.md 1 line over 55-line limit (XS)
+- [ ] B80: Add KB repo location to ecosystem-architecture.md (XS)
+- [ ] B86: Codify multi-system session protocol (P1, M)
+- [ ] B84: Cross-client memory integration spec (P1, M)
 
 ## Session Log
 
