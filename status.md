@@ -14,7 +14,7 @@ updated: "2026-02-11"
 - [x] B77: Update ADF-STATUS-SPEC — Session Log as primary format
 - [x] B72: Project CLAUDE.md line limit — already under, closed
 - [x] B80: KB + Memory Layer locations in ecosystem-architecture.md
-- [ ] B86: Codify multi-system session protocol (P1, M)
+- [x] B86: Codify multi-system session protocol (P1, M)
 - [ ] B84: Cross-client memory integration spec (P1, M)
 
 ## Session Log
