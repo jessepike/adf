@@ -150,7 +150,7 @@ updated: "YYYY-MM-DD"
 | Value | Meaning | When to Use |
 |-------|---------|-------------|
 | `pending` | Ready to pick up | Task defined, dependencies met |
-| `in-progress` | Actively being worked | Agent has started work |
+| `in_progress` | Actively being worked | Agent has started work |
 | `done` | Completed successfully | Acceptance criteria met |
 | `blocked` | Cannot proceed | Waiting on dependency or decision |
 
@@ -420,7 +420,7 @@ A well-formed tasks.md:
 - [ ] Has Active Tasks section (even if empty)
 - [ ] Has Completed section (even if empty)
 - [ ] Task IDs are unique within file
-- [ ] Status values are valid (pending, in-progress, done, blocked)
+- [ ] Status values are valid (pending, in_progress, done, blocked)
 - [ ] Dependencies reference valid task IDs
 - [ ] Updated at end of each session
 - [ ] Handoff block updated at phase boundaries

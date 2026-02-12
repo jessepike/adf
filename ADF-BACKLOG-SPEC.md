@@ -52,7 +52,7 @@ The **only section you need to read** for "what's next?". Contains all incomplet
 | Component | Yes | Which part of the system this touches |
 | Pri | Yes | Priority: `P1`, `P2`, `P3` |
 | Size | Yes | Complexity: `S`, `M`, `L` |
-| Status | Yes | `Pending`, `In Progress`, or `Blocked` |
+| Status | Yes | `pending`, `in_progress`, or `blocked` |
 
 ### Archive
 
@@ -101,11 +101,11 @@ Common values (not exhaustive):
 
 | Value | Meaning |
 |-------|---------|
-| `Pending` | Ready to pick up |
-| `In Progress` | Actively being worked |
-| `Blocked` | Waiting on something (note what in Item or a comment) |
+| `pending` | Ready to pick up |
+| `in_progress` | Actively being worked |
+| `blocked` | Waiting on something (note what in Item or a comment) |
 
-Items with status `Done` do not appear in the Queue — they move to Archive.
+Items with status `done` do not appear in the Queue — they move to Archive.
 
 ---
 

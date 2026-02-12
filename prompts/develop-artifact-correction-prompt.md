@@ -77,7 +77,7 @@ Tasks need a status column to track completion.
 |----|------|--------|---------------------|---------|
 | 1.1 | [task] | pending | [criteria] | [deps] |
 
-**Status values:** `pending`, `in-progress`, `done`, `blocked`
+**Status values:** `pending`, `in_progress`, `done`, `blocked`
 
 ---
 
