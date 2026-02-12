@@ -8,7 +8,7 @@ updated: "2026-02-11"
 
 ## Current State
 - **Phase:** Build (framework quality improvements)
-- **Focus:** Session discipline enforcement, spec compliance
+- **Focus:** Registry schema + client enablement, spec compliance
 
 ## Next Steps
 - [ ] B77: Update ADF-STATUS-SPEC to match actual Session Log practice
