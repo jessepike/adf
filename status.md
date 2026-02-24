@@ -1,17 +1,17 @@
 ---
 project: "ADF (Agentic Development Framework)"
 stage: "Develop"
-updated: "2026-02-23"
+updated: "2026-02-24"
 ---
 
 # Status
 
 ## Current State
 - **Phase:** Build (framework quality improvements)
-- **Focus:** Stage model completeness — Operate & Learn spec drafted
+- **Focus:** Stage model completeness — Operate & Learn spec reviewed
 
 ## Next Steps
-- [ ] B87: Operate & Learn spec — drafted v0.1.0, needs review + ADF-STAGES-SPEC.md update
+- [ ] B87: ADF-STAGES-SPEC.md update to reflect v0.4.0 spec (review complete, spec at full-complete)
 - [ ] B84: Cross-client memory integration spec (P1, M)
 - [ ] B88: Intention alignment step in Deliver closeout (addressed in Operate Activation phase)
 - [ ] B89: User-facing docs as Deliver closeout requirement
@@ -20,6 +20,7 @@ updated: "2026-02-23"
 
 | Date | Summary |
 |------|---------|
+| 2026-02-24 | **B87: ADF-OPERATE-SPEC.md full review — v0.4.0.** Internal (2 cycles) + external (gemini/gpt/kimi). 10 issues fixed: living system gate, severity rubric, heuristic tie-breakers, Fix-in-place multi-cluster, observation continuity. |
 | 2026-02-23 | **B87: Operate & Learn spec v0.2.0.** Loop closure mechanism (not 5th stage) — Assumption Mode (Discover→Deliver) + Evidence Mode. Lifecycle diagrams generated. Maps to Build-Measure-Learn. |
 | 2026-02-11 | **Quick wins batch 2.** Closed B72 (CLAUDE.md at 50 lines — under limit, no-op), B80 (added KB + Memory Layer repo paths to ecosystem-architecture.md System Map), B77 (ADF-STATUS-SPEC v1.3.0 — Session Log table as primary format, removed "Last Session" single-entry). BACKLOG v2.7.0, 26 items remaining. |
 | 2026-02-11 | **CR-6: Client enablement audit.** Added `clients` blocks to all 71 capability.yaml files. Results: claude-code 71/71, claude-desktop 9/71 (MCP tools), codex 7/71 (stdio only), gemini 8/71 (stdio+http). Inventory regenerated with Client Enablement table. Actual registry count is 71 (not 60 as previously logged). |
