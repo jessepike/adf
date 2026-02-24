@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines the ADF stage workflow model and environment layer"
-version: "1.3.0"
-updated: "2026-02-11"
+version: "1.4.0"
+updated: "2026-02-23"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-STAGES-SPEC.md"
@@ -16,19 +16,33 @@ Define the minimal stage workflow for agentic projects — applicable to softwar
 
 ## Model Overview
 
+ADF operates in two modes that form a continuous cycle:
+
 ```
-┌─────────────────────────────────────────────────────┐
-│  ENVIRONMENT LAYER (Ambient Capabilities)            │
-│  Skills, Tools, Templates, Rules, Prompts           │
-│                                                     │
-│  ┌──────────┐  ┌────────┐  ┌─────────┐  ┌─────────┐│
-│  │ Discover │→ │ Design │→ │ Develop │→ │ Deliver ││
-│  └──────────┘  └────────┘  └─────────┘  └─────────┘│
-│       ↑            ↑            ↑            ↑     │
-│       └────────────┴────────────┴────────────┘     │
-│                 Pull from shelf                    │
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────── ENVIRONMENT LAYER ───────────────────────────────┐
+│  Skills, Tools, Templates, Rules, Prompts (ambient — pull from shelf)       │
+│                                                                             │
+│  ┌──────── ASSUMPTION MODE ────────────────────────────┐                   │
+│  │  Building on what we think is true                  │                   │
+│  │                                                     │                   │
+│  │  ┌──────────┐ ┌────────┐ ┌─────────┐ ┌─────────┐   │                   │
+│  │  │ Discover │→│ Design │→│ Develop │→│ Deliver │───┼──→ ship it        │
+│  │  └──────────┘ └────────┘ └─────────┘ └─────────┘   │                   │
+│  │       ↑                                             │        │          │
+│  └───────┼─────────────────────────────────────────────┘        │          │
+│          │  real-world evidence seeds next cycle                 ↓          │
+│          │                                           ┌─────────────────┐   │
+│          └───────────────────────────────────────────│ Operate & Learn │   │
+│                                                      │  (Evidence Mode)│   │
+│                                                      └─────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Assumption Mode** (Discover → Deliver): building from a model of the world — what we think the problem is, how we think it should be solved.
+
+**Evidence Mode** (Operate & Learn): activated by shipping. Real use generates evidence about which assumptions held and what wasn't anticipated. That evidence seeds the next cycle.
+
+The loop is continuous for living systems. One-shot artifacts (presentations, reports) complete at Deliver.
 
 ---
 
@@ -114,6 +128,7 @@ Each stage produces artifacts that fall into three categories:
 | **Design** | `design.md`, `BACKLOG.md`, decision records | Draft designs, spike reports, exploration notes |
 | **Develop** | Implementation (code/artifacts), tests | Planning documents from `docs/adf/` |
 | **Deliver** | Deployment artifacts, handoff docs | Deployment notes, validation reports |
+| **Operate & Learn** | `docs/operate/observations.md`, synthesis reports | N/A — all outputs are persistent signals or backlog entries |
 
 ### Stage Transition Cleanup Protocol
 
@@ -189,7 +204,24 @@ See `.claude/rules/archive.md` for archive access rules.
 | **Outputs** | Usable, accessible deliverable |
 | **Exit criteria** | User can access/use it; MVP loop closes |
 
-**Milestone-based.** Deliver marks completion of an increment, not necessarily end of project.
+**Milestone-based.** Deliver marks completion of an increment, not necessarily end of project. For living systems, shipping activates the Operate & Learn loop.
+
+---
+
+### OPERATE & LEARN
+
+> **"Is this working well, and what should change?"**
+
+| Aspect | Description |
+|--------|-------------|
+| **Inputs** | Delivered system in real use, `intent.md`, `discover-brief.md` |
+| **Mode** | Evidence Mode — activated by shipping, runs continuously |
+| **Outputs** | Signal log, synthesis reports, BACKLOG.md entries, cycle decision |
+| **Loop trigger** | Synthesis + Cycle Decision → continue, fix in place, new Discover, or retire |
+
+**Not a sequential stage** — a loop closure mechanism. Shipping activates it; real-world evidence seeds the next Discover cycle. Applies to living systems only (apps, MCP servers, workflows, agents). One-shot artifacts complete at Deliver.
+
+See `ADF-OPERATE-SPEC.md` for full specification.
 
 ---
 
@@ -203,6 +235,8 @@ Each transition requires the completing stage to execute the **Stage Boundary Ha
 | Discover → Design | Handoff protocol, verify intent clarity, prep decision frameworks |
 | Design → Develop | Handoff protocol, environment ready, tools installed, plan created |
 | Develop → Deliver | Handoff protocol, deployment config, documentation |
+| Deliver → Operate & Learn | Milestone seal complete; create `docs/operate/observations.md`; run Activation phase (intent alignment check + observation targets) |
+| Operate & Learn → Discover | Cycle Decision: new Discover triggered; synthesis seeds updated `discover-brief.md` |
 
 ---
 
@@ -290,9 +324,12 @@ When updating status.md at stage transition, use this structure for the handoff 
 
 **Minimal gates:** Exit criteria are clarity checks, not bureaucratic approvals.
 
+**Cycles, not versions:** For living systems, Deliver is not the end — it's the beginning of the evidence phase. Each cycle produces a stronger next cycle because it starts from observed reality rather than assumptions.
+
 ---
 
 ## References
 
 - ADF-GLOBAL-PRIMITIVES-v0.1.md
 - ADF-GLOBAL-CLAUDE-MD-SPEC.md
+- ADF-OPERATE-SPEC.md (Operate & Learn full specification)
