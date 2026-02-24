@@ -1,8 +1,9 @@
 ---
 type: "specification"
 description: "Detailed specification for the Operate & Learn loop closure mechanism"
-version: "0.2.0"
-updated: "2026-02-23"
+version: "0.4.0"
+updated: "2026-02-24"
+review_status: "full-complete"
 scope: "adf"
 lifecycle: "draft"
 location: "adf/ADF-OPERATE-SPEC.md"
@@ -112,6 +113,18 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 
 **Purpose:** Ground-truth calibration before the observation window opens. Happens once at Deliver completion.
 
+#### 1.0 Living System Gate (mandatory, before anything else)
+
+Verify that the delivered artifact qualifies as a living system before activating Operate & Learn.
+
+A living system has at least two of the following:
+- Runs continuously or is invoked repeatedly in production
+- Accepts live input (user actions, triggers, API calls)
+- Maintains state that evolves over time
+- Is expected to change in response to observed usage
+
+If the artifact fails this check (e.g., a one-time report, a static document, a single-run script), seal `status.md` as `Complete` and do not activate Operate & Learn.
+
 #### 1.1 Intention Alignment Check (mandatory)
 
 The first act of Operate & Learn is looking back: did what shipped match what was intended?
@@ -144,6 +157,8 @@ Document chosen targets in `docs/operate/observations.md` as the header section.
 | Low-traffic tool or workflow | Monthly |
 | Background MCP server | After 10+ observations accumulate |
 
+**Observation unit (for threshold cadence):** One observation = one distinct signal entry in `observations.md`. For automated systems that generate many similar events (e.g., repeated tool call errors), batch into a single entry: log once with count ("N occurrences in 24h") rather than repeating identical rows.
+
 **Exit signal:** Intent alignment check documented, observation targets defined, cadence set.
 
 ---
@@ -171,7 +186,16 @@ Document chosen targets in `docs/operate/observations.md` as the header section.
 | YYYY-MM-DD | Friction | [Brief description] | [When/where observed] | Low/Med/High |
 ```
 
+**Severity rubric:**
+
+| Severity | Criteria |
+|----------|----------|
+| **High** | System unusable for key use case; data loss or corruption; core intent blocked |
+| **Med** | Recurring friction with a workaround; capability gap affecting multiple sessions |
+| **Low** | One-off confusion; cosmetic issue; minor inconsistency |
+
 **Rules:**
+- Capture all signals regardless of whether they align to defined Observation Targets — targets guide synthesis focus, not capture scope. Emergent signals outside targets are often the most valuable.
 - Capture immediately — don't batch observations in your head
 - Flag High severity items in status.md; don't wait for synthesis cadence
 - Do NOT convert observations to backlog items — that's synthesis work. Raw signal has more value unprocessed.
@@ -252,22 +276,58 @@ For each cluster that warrants action:
 | Decision | When | What Happens |
 |----------|------|-------------|
 | **Continue observing** | Alignment Strong/Adequate, no High clusters | Return to Observation phase |
-| **Fix in place** | Isolated improvements, no intent revision needed | Mini Develop sprint; re-enter Operate & Learn after |
+| **Fix in place** | Isolated improvements, no intent revision needed | Lightweight Develop sprint scoped to the fix; re-enter Observation phase after |
 | **Launch new Discover** | Alignment degrading, usage evolved, major new need | Synthesis seeds new `discover-brief.md`; full cycle restarts |
 | **Retire** | System obsolete, superseded, or out-of-scope | Archive/decommission; status.md sealed |
 
 **Decision heuristic:**
 
 ```
-Alignment Broken           → New Discover or Retire
-3+ High severity clusters  → New Discover or Fix in place
+Alignment Broken             → New Discover or Retire
+3+ High severity clusters    → New Discover or Fix in place (see tie-breaker below)
 Intent fundamentally shifted → New Discover
 Improvements are incremental → Fix in place
-No longer in active use    → Retire
-Otherwise                  → Continue observing
+No longer in active use      → Retire
+Otherwise                    → Continue observing
 ```
 
-**Agent role:** Present synthesis summary and recommendation. The decision belongs to the human.
+**Tie-breaker: "New Discover vs Fix in place"**
+Choose Fix in place if:
+- Clusters are isolated to specific components (not spanning architectural layers)
+- Intent alignment is Adequate or Strong
+- All target clusters can be scoped to a single minimal sprint
+
+Choose New Discover if:
+- Clusters span multiple architectural layers or indicate structural mismatch
+- Intent alignment is Degrading (and has not improved across 2+ synthesis cycles)
+- Usage patterns show the system is being used for something it was not designed for
+
+**Tie-breaker: "New Discover vs Retire"**
+Choose Retire if:
+- No active usage observed for a full synthesis period
+- System has been superseded by another artifact that covers the same need
+- Maintenance cost clearly exceeds benefit given current usage
+
+Otherwise, default to New Discover.
+
+**Agent role:** Present synthesis summary and recommendation. The decision belongs to the human. After the human responds:
+
+1. Log the decision in status.md (see format below)
+2. Take the first action of the chosen path:
+   - **Continue observing:** Note the decision; return to Observation phase
+   - **Fix in place:** Identify the target cluster(s) to address. File remaining clusters to BACKLOG.md as deferred items (re-evaluated in the next synthesis cycle). Observation continues on the live system during the fix sprint — tag new observations `[pre-fix]` or `[post-fix]` to distinguish signal context. Scope a minimal `plan.md` for the target cluster(s) using ADF-DEVELOP-SPEC.md task patterns. If the fix reveals deeper issues that require architectural changes, escalate to New Discover rather than expanding the sprint scope. Return to Observation phase when fix is deployed.
+   - **Launch new Discover:** Create seeded `discover-brief.md` (see below); run Stage Boundary Handoff Protocol; enter Discover. Observation on the current live system may continue in parallel until the new Discover cycle produces a replacement.
+   - **Retire:** Archive `docs/operate/`; update status.md with retirement seal; done
+
+**Seeding a new Discover brief (Launch new Discover path):**
+
+Copy `discover-brief.md` from the most recent version. Replace the following sections with evidence-grounded content from the synthesis report:
+- **Problem statement** → dominant friction/gap patterns from synthesis
+- **Success criteria** → what actually mattered in real use (not what was originally guessed)
+- **Scope** → bounded by what usage revealed, not what was originally planned
+- **Context** → intent alignment rating + key observations summary
+
+Label the seeded brief: `Evidence-seeded from: docs/operate/synthesis-YYYY-MM-DD.md`.
 
 **Log in status.md:**
 
@@ -315,7 +375,7 @@ Operate & Learn sessions are lighter than Develop/Deliver.
 **Session end:**
 - Commit new observations / synthesis reports
 - Update status.md with observation state
-- Standard Memory/KB end protocol per ADF-STAGES-SPEC.md
+- Run `/handoff` to persist session context and write cross-project learnings
 
 ---
 
@@ -339,6 +399,8 @@ Operate & Learn sessions are lighter than Develop/Deliver.
 |---------|------|---------|
 | 0.1.0 | 2026-02-23 | Initial draft — 4 phases, signal log format, intent alignment check, cycle decision framework. |
 | 0.2.0 | 2026-02-23 | Reframed as loop closure mechanism, not a 5th sequential stage. Added two-mode model (Assumption / Evidence). Updated relationship diagram. Added "How New Discover Cycles Differ" section. Removed stage-framing language throughout. |
+| 0.3.0 | 2026-02-24 | Internal review fixes: Phase 4 agent behavior after human decision now specified; "Fix in place" grounded with Develop pattern reference; "Launch new Discover" seeding instructions added; dangling Memory/KB protocol reference replaced with `/handoff`. |
+| 0.4.0 | 2026-02-24 | External review fixes: living system gate check added (Phase 1.0); observation unit defined for threshold cadence; severity rubric added to Phase 2; observation targets clarified as synthesis filter not capture filter; heuristic tie-breakers added (Fix in place vs New Discover, New Discover vs Retire); multi-cluster Fix-in-place guidance added (deferred clusters to BACKLOG); observation continuity during Fix-in-place sprint specified. |
 
 ---
 
