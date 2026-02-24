@@ -20,7 +20,7 @@ updated: "2026-02-23"
 
 | Date | Summary |
 |------|---------|
-| 2026-02-23 | **B87: Operate & Learn spec v0.1.0 drafted.** Created ADF-OPERATE-SPEC.md — 5th stage for living systems post-Deliver. 4 phases: Activation (intent alignment check), Observation (signal log), Synthesis (pattern clustering → backlog), Cycle Decision (continue/fix/new Discover/retire). Addresses B87 + partially B88. |
+| 2026-02-23 | **B87: Operate & Learn spec v0.2.0.** Loop closure mechanism (not 5th stage) — Assumption Mode (Discover→Deliver) + Evidence Mode. Lifecycle diagrams generated. Maps to Build-Measure-Learn. |
 | 2026-02-11 | **Quick wins batch 2.** Closed B72 (CLAUDE.md at 50 lines — under limit, no-op), B80 (added KB + Memory Layer repo paths to ecosystem-architecture.md System Map), B77 (ADF-STATUS-SPEC v1.3.0 — Session Log table as primary format, removed "Last Session" single-entry). BACKLOG v2.7.0, 26 items remaining. |
 | 2026-02-11 | **CR-6: Client enablement audit.** Added `clients` blocks to all 71 capability.yaml files. Results: claude-code 71/71, claude-desktop 9/71 (MCP tools), codex 7/71 (stdio only), gemini 8/71 (stdio+http). Inventory regenerated with Client Enablement table. Actual registry count is 71 (not 60 as previously logged). |
 | 2026-02-11 | **P1 quick wins batch.** Closed 5 backlog items: B68 (stop-check.sh stderr fix + ACM→ADF in hooks.json), B69 (removed execute-plan plugin dir + marketplace entry), B71 (already fixed, closed as no-op), B85 (retired stale B18/B19 — memory layer delivered), B75 (standardized status enums to snake_case: `in_progress` across ADF-TASKS-SPEC, ADF-BACKLOG-SPEC, BACKLOG.md, prompt). BACKLOG v2.6.0, 29 items remaining. |
