@@ -1,11 +1,12 @@
 ---
 type: "specification"
 description: "Detailed specification for the Design stage workflow"
-version: "1.2.0"
-updated: "2026-02-03"
+version: "2.0.0"
+updated: "2026-03-23"
+supersedes: "ADF-DESIGN-SPEC.md (v1.2.0)"
 scope: "adf"
-lifecycle: "reference"
-location: "adf/ADF-DESIGN-SPEC.md"
+lifecycle: "active"
+location: "docs/active/ADF-DESIGN-SPEC-v2.md"
 ---
 
 # ADF Design Stage Specification
@@ -26,9 +27,9 @@ Design transforms a validated Brief into actionable technical decisions. The age
 - `design.md` — Technical specification covering architecture, interface, data, and capabilities
 
 **Supporting Deliverables (when complexity requires):**
-- `architecture.md` — System architecture (Apps, complex Workflows)
-- `data-model.md` — Data structures and persistence
-- `interface-spec.md` — UI/UX or format specification
+- `design-architecture.md` — System architecture (Apps, complex Workflows)
+- `design-data-model.md` — Data structures and persistence
+- `design-interface.md` — UI/UX or format specification
 - Individual ADRs for significant decisions
 
 ---
@@ -39,7 +40,7 @@ Design transforms a validated Brief into actionable technical decisions. The age
 |-------|-------------|-------------------|-------------------|
 | **Intake & Clarification** | Understand Brief, resolve ambiguities, surface decisions | High (answering questions, making choices) | High (structured questioning, probing) |
 | **Technical Design** | Produce design artifacts based on decisions | Low-Medium (review, feedback) | High (drafting, iterating) |
-| **Review Loop** | Validate decisions through internal and external review | Medium (orchestrating external, deciding on feedback) | High (Ralph Loop, integrating feedback) |
+| **Review Loop** | Validate decisions through internal and external review | Medium (orchestrating external, deciding on feedback) | High (integrating feedback) |
 | **Finalization** | Exit criteria check, handoff prep | Medium (sign-off) | High (validation checks) |
 
 ---
@@ -51,7 +52,7 @@ What enters the Design stage:
 | Input | Source | Description |
 |-------|--------|-------------|
 | `intent.md` | Discover | North Star — loaded for alignment |
-| `discover-brief.md` | Discover | Detailed contract — primary input, fully consumed |
+| `product-brief.md` | Discover | Detailed contract — primary input, fully consumed |
 | Project classification | Brief | Type + modifiers determine required outputs |
 | ADF specs | Environment layer | Design spec, Project Types spec |
 | Current state | `status.md` | Where we left off (if resuming) |
@@ -67,7 +68,7 @@ What Design produces:
 | `design.md` | Primary technical specification | `/docs/design.md` |
 | Supporting specs | Architecture, data model, interface (if >500 lines) | `/docs/design-*.md` |
 | Updated decision log | Key decisions with rationale | Section in design.md or `/docs/decisions.md` |
-| Updated backlog | Implementation ideas, deferred features | Section in design.md or `/docs/backlog.md` |
+| Updated backlog | Implementation ideas, deferred features | Section in design.md or `/BACKLOG.md` |
 
 All artifacts must pass exit criteria before handoff to Develop.
 
@@ -107,7 +108,7 @@ Child documents each stay under 500 lines:
 - Clarify technical preferences and constraints
 - Identify recommended capabilities (tools, skills, sub-agents)
 
-**Agent role:** Active interviewer. Use structured questioning (AskUserQuestion pattern) to probe deeply. Challenge assumptions. Surface non-obvious considerations. Recommend approaches where appropriate.
+**Agent role:** Active interviewer. Use structured questioning to probe deeply. Challenge assumptions. Surface non-obvious considerations. Recommend approaches where appropriate.
 
 **Human role:** Answer questions, make decisions, provide domain context. This phase is highly interactive.
 
@@ -153,22 +154,7 @@ Child documents each stay under 500 lines:
 
 ### 3. Review Loop
 
-**Purpose:** Validate design decisions through structured review — first internally, then with external models.
-
-**Two-Phase Review Model:**
-
-| Phase | Reviewer | Mechanism | Value |
-|-------|----------|-----------|-------|
-| **Phase 1: Internal** | Primary agent (Claude) | Ralph Loop | Fast iteration, catches inconsistencies, validates against Brief |
-| **Phase 2: External** | Other models (GPT, Gemini) | Manual submission | Diverse perspectives, catches blind spots, validates technical choices |
-
----
-
-#### Phase 1: Internal Review (Ralph Loop)
-
-**Purpose:** Thorough self-review. Get design.md as strong as possible before external review.
-
-**Mechanism:** Ralph Loop with Claude — iterates until no P1 issues remain.
+**Purpose:** Validate design decisions through structured review.
 
 **Review scope:**
 
@@ -182,49 +168,7 @@ Child documents each stay under 500 lines:
 - **Decision quality** — Rationale documented? Options considered?
 - **Downstream usability** — Can Develop start from this?
 
-**Exit signal:** No P1 issues remain. Design is as strong as self-review can make it.
-
-**Typical iterations:** 2-4
-
----
-
-#### Phase 2: External Review (Multiple Models)
-
-**Purpose:** Get perspectives the internal reviewer missed. Different models catch different things.
-
-**Mechanism:** Submit design.md + Brief + Intent to external models. Manual orchestration.
-
-**Review scope:**
-
-- What internal reviewer might have missed
-- Technical soundness of architecture decisions
-- Technology/stack appropriateness
-- Scalability and maintainability concerns
-- Security considerations
-- Alternative approaches worth considering
-- Blind spots in interface/UX design
-
-**Process:**
-1. Submit design.md + Brief + Intent to 2+ external models
-2. Collect feedback, extract discrete issues
-3. Log issues with source attribution
-4. Prioritize: High-impact issues from multiple reviewers = P1
-5. Address P1s, assess P2s
-6. Re-submit if major issues found
-
-**Exit signal:** External reviewers find no new P1 issues. Cross-reviewer consensus on core decisions.
-
-**Typical cycles:** 1-2
-
----
-
-#### Review Focus by Project Type
-
-| Type | Primary Review Focus |
-|------|---------------------|
-| **Artifact** | Format appropriateness, audience fit, capability coverage, clarity |
-| **App** | Architecture soundness, tech stack fit, interface usability, data model, scalability |
-| **Workflow** | Integration points, orchestration logic, error handling, data flow, trigger reliability |
+**Review mechanism:** Review follows ADF-REVIEW-SPEC. Internal review is mandatory. External review is risk-driven, user-triggered.
 
 ---
 
@@ -234,10 +178,11 @@ Child documents each stay under 500 lines:
 
 **Activities:**
 - Run exit criteria checklist
-- Ensure all P1 issues resolved
+- Ensure all critical issues resolved
 - Verify capabilities inventory is complete (Develop can add more if needed)
 - Confirm decision log captures key choices
 - Update backlog with any deferred items
+- Prepare Develop Handoff section (see below)
 - Update status.md to stage: complete
 - Human sign-off
 
@@ -263,7 +208,7 @@ Design outputs vary by project type. Use this as guidance, not rigid requirement
 | **Decision Log** | Key decisions with rationale |
 | **Backlog** | Deferred items for future consideration |
 | **Open Questions** | Anything unresolved (should be minimal) |
-| **Issue Log** | Issues found during review with severity, complexity, and resolution |
+| **Issue Log** | Issues found during review with severity and resolution |
 | **Develop Handoff** | Stage transition document — summary, decisions, capabilities, open questions, success criteria, implementation guidance |
 | **Review Log** | Chronological record of review phases, findings, and actions taken |
 | **Revision History** | Version history with dates and changes |
@@ -344,12 +289,6 @@ Design outputs vary by project type. Use this as guidance, not rigid requirement
 - Point to Intent, Brief, Design
 - Specify read order
 
-**Why this matters:**
-- Develop stage often starts in a new session or by a different person
-- Handoff prevents context loss at stage transitions
-- Makes design decisions actionable
-- Reduces time to productive implementation
-
 ---
 
 ## Exit Criteria
@@ -360,7 +299,7 @@ Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
-- [ ] Alignment verified with intent.md and brief.md
+- [ ] Alignment verified with intent.md and product-brief.md
 - [ ] All work committed (atomic commits, no uncommitted changes)
 - [ ] Documentation appropriate to deliverable exists
 - [ ] Workspace cleanup complete (no transients, .gitignore current)
@@ -404,12 +343,6 @@ Per ADF-STAGES-SPEC.md:
 - [ ] No assumptions marked "to be validated during implementation"
 - [ ] No critical dependencies on unproven technology or unvalidated claims
 
-**Example failures that should block HARD GATE approval:**
-- ❌ "Will save 40-50% time through parallelization" (unvalidated claim)
-- ❌ "Ralph-loop quality gates at phase boundaries" (underspecified - what does it review?)
-- ❌ "Automates existing spec" (duplicates existing capability without proving manual is painful)
-- ❌ "Validation deferred to first real-world use" (can't measure success without baseline)
-
 ### Type-Specific Criteria
 
 **For Apps/Workflows (additional):**
@@ -424,7 +357,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
    - **What was produced** — design.md summary + key decisions
-   - **Success criteria status** — from brief.md
+   - **Success criteria status** — from product-brief.md
    - **Known limitations / deferred items**
    - **Read order for next stage agent**
 3. Commit with `chore(design): stage complete — {summary}`
@@ -452,9 +385,9 @@ The agent working through Design needs context on:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| discover-brief.md | Design stage | Primary input — fully consumed |
+| product-brief.md | Design stage | Primary input — fully consumed |
 | design.md | Design stage (after created) | Working design spec |
-| ADF-DESIGN-SPEC.md | Design stage (reference) | Stage workflow |
+| ADF-DESIGN-SPEC-v2.md | Design stage (reference) | Stage workflow |
 | ADF-PROJECT-TYPES-SPEC.md | Design stage (reference) | Output requirements by type |
 ```
 
@@ -476,114 +409,13 @@ Design's capabilities list is a starting point, not a constraint.
 
 ---
 
-## Supporting Artifacts
-
-### Prompts
-
-Three prompts support the Design stage:
-
-| Prompt | Location | Purpose |
-|--------|----------|---------|
-| Design Intake Prompt | `/prompts/design-intake-prompt.md` | Structured clarification interview |
-| Design Ralph Review Prompt | `/prompts/design-ralph-review-prompt.md` | Phase 1 internal iteration |
-| Design External Review Prompt | `/prompts/design-external-review-prompt.md` | Phase 2 external review |
-
----
-
-## Workflow Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         DESIGN STAGE                             │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌──────────────────────┐                                       │
-│  │  INTAKE &            │  Human: High | Agent: High            │
-│  │  CLARIFICATION       │                                       │
-│  │  - Read Brief/Intent │                                       │
-│  │  - Structured Q&A    │                                       │
-│  │  - Surface decisions │                                       │
-│  │  - ID capabilities   │                                       │
-│  └──────┬───────────────┘                                       │
-│         │ "You have what you need"                              │
-│         ▼                                                       │
-│  ┌──────────────────────┐                                       │
-│  │  TECHNICAL DESIGN    │  Human: Low-Med | Agent: High         │
-│  │  - Draft design.md   │                                       │
-│  │  - Architecture      │                                       │
-│  │  - Interface spec    │                                       │
-│  │  - Data model        │                                       │
-│  │  - Capabilities      │                                       │
-│  └──────┬───────────────┘                                       │
-│         │ Draft ready                                           │
-│         ▼                                                       │
-│  ┌────────────────────────────────────────────────────────┐     │
-│  │                    REVIEW LOOP                          │     │
-│  │  ┌─────────────────┐       ┌─────────────────────────┐ │     │
-│  │  │ PHASE 1:        │       │ PHASE 2:                │ │     │
-│  │  │ INTERNAL        │       │ EXTERNAL                │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ Ralph Loop      │  ───► │ GPT, Gemini, etc.       │ │     │
-│  │  │ (Claude)        │       │                         │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ Brief alignment │       │ Technical soundness     │ │     │
-│  │  │ Completeness    │       │ Architecture review     │ │     │
-│  │  │ Consistency     │       │ Blind spots             │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ 2-4 iterations  │       │ 1-2 cycles              │ │     │
-│  │  └─────────────────┘       └─────────────────────────┘ │     │
-│  └────────────────────────────────────────────────────────┘     │
-│         │ Convergence reached                                   │
-│         ▼                                                       │
-│  ┌──────────────────────┐                                       │
-│  │   FINALIZATION       │  Human: Med | Agent: High             │
-│  │  - Exit criteria     │                                       │
-│  │  - Decision log      │                                       │
-│  │  - Sign-off          │                                       │
-│  └──────┬───────────────┘                                       │
-│         │                                                       │
-│         ▼                                                       │
-│  ┌──────────────────────────────────────┐                       │
-│  │  OUTPUTS: design.md + supporting specs │                     │
-│  └──────────────────────────────────────┘                       │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                        DEVELOP STAGE
-```
-
----
-
-## Session Continuity
-
-Design may span multiple sessions. To maintain continuity:
-
-1. **status.md** tracks current phase, last action, next steps
-2. **Issue Log** in design.md tracks feedback and resolution status
-3. **Decision Log** in design.md tracks choices made
-
-New session workflow:
-1. Agent reads CLAUDE.md (loads context map)
-2. Agent reads status.md (gets current state)
-3. Agent reads design.md (if exists) or Brief (if starting)
-4. Agent picks up where previous session left off
-5. At session end, agent updates status.md
-
----
-
-## Planning Artifacts Convention
-
-When Design produces working artifacts beyond design.md (e.g., architecture explorations, decision analysis), place them in `docs/adf/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
-
----
-
 ## References
 
 - ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
 - ADF-BRIEF-SPEC.md (Brief is primary input)
 - ADF-INTENT-SPEC.md (Intent is North Star)
 - ADF-PROJECT-TYPES-SPEC.md (Determines required outputs)
-- ADF-DISCOVER-SPEC.md (Discover stage outputs Brief)
-- ADF-FOLDER-STRUCTURE-SPEC.md (docs/adf/ convention)
+- ADF-DISCOVER-SPEC-v2.md (Discover stage outputs Brief)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/active/ convention)
 - ADF-TAXONOMY.md (Terminology definitions)
+- ADF-REVIEW-SPEC.md (Review mechanism)

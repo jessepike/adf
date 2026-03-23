@@ -1,11 +1,12 @@
 ---
 type: "specification"
 description: "Detailed specification for the Discover stage workflow"
-version: "1.3.0"
-updated: "2026-02-01"
+version: "2.0.0"
+updated: "2026-03-23"
+supersedes: "ADF-DISCOVER-SPEC.md (v1.3.0)"
 scope: "adf"
-lifecycle: "reference"
-location: "adf/ADF-DISCOVER-SPEC.md"
+lifecycle: "active"
+location: "docs/active/ADF-DISCOVER-SPEC-v2.md"
 ---
 
 # ADF Discover Stage Specification
@@ -24,7 +25,7 @@ Discover transforms a rough concept into a structured, reviewed Brief. The prima
 
 **Deliverables:**
 - `intent.md` — North Star (stable, universal)
-- `discover-brief.md` — Detailed contract (evolves through review)
+- `product-brief.md` — Detailed contract (evolves through review)
 
 ---
 
@@ -59,7 +60,7 @@ What Discover produces:
 | Output | Description | Location |
 |--------|-------------|----------|
 | `intent.md` | Stable North Star — problem, outcome, why it matters | `/docs/intent.md` |
-| `discover-brief.md` | Detailed contract with all required sections | `/docs/discover-brief.md` |
+| `product-brief.md` | Detailed contract with all required sections | `/docs/product-brief.md` |
 
 Both artifacts must pass exit criteria before handoff to Design.
 
@@ -91,7 +92,7 @@ Both artifacts must pass exit criteria before handoff to Design.
 
 **Activities:**
 - Draft `intent.md` — distill to problem, outcome, why it matters
-- Draft `discover-brief.md` — structure per Brief spec
+- Draft `product-brief.md` — structure per Brief spec
 - Assign project classification (type + modifiers)
 - Identify initial scope boundaries
 - Capture open questions
@@ -106,26 +107,7 @@ Both artifacts must pass exit criteria before handoff to Design.
 
 ### 3. Review Loop
 
-**Purpose:** Stress-test the Brief through thorough review — first with the primary agent (internal), then with external models for diverse perspectives.
-
-**Two-Phase Review Model:**
-
-The review loop has two phases based on *who* reviews, not *what kind* of review:
-
-| Phase | Reviewer | Mechanism | Value |
-|-------|----------|-----------|-------|
-| **Phase 1: Internal** | Primary agent (Claude) | Ralph Loop — automated iteration | Fast iteration, handles the grind, gets Brief to solid baseline |
-| **Phase 2: External** | Other models (GPT, Gemini) | Manual submission | Diverse perspectives, catches blind spots, cross-checks assumptions |
-
-**Why two phases:** Single-model review, no matter how thorough, has blind spots. External models bring different training, different biases, different strengths. The combination produces higher quality than either alone.
-
----
-
-#### Phase 1: Internal Review (Ralph Loop)
-
-**Purpose:** Thorough self-review and iteration. Get the Brief as strong as possible before external eyes see it.
-
-**Mechanism:** Ralph Loop plugin with Claude — iterates until no P1 issues remain.
+**Purpose:** Stress-test the Brief through thorough review.
 
 **Review scope:** Comprehensive. The internal reviewer should challenge everything:
 
@@ -140,61 +122,13 @@ The review loop has two phases based on *who* reviews, not *what kind* of review
 - **Assumption risk** — Unstated assumptions? Risky dependencies?
 - **Feasibility** — Red flags? Unrealistic expectations?
 
-**The goal is not a checklist — it's a thorough, critical review.** Find real issues, not cosmetic ones.
+**Review mechanism:** Review follows ADF-REVIEW-SPEC. Internal review is mandatory. External review is risk-driven, user-triggered.
 
-**Exit signal:** No P1 issues remain. The Brief is as strong as single-model review can make it.
-
-**Typical iterations:** 2-5
-
----
-
-#### Phase 2: External Review (Multiple Models)
-
-**Purpose:** Get perspectives the internal reviewer missed. Different models catch different things.
-
-**Mechanism:** Submit Brief + Intent to external models (GPT, Gemini, others). Manual orchestration.
-
-**Review scope:** Also comprehensive, but with emphasis on:
-
-- What the internal reviewer might have missed or been too lenient on
-- Cross-artifact alignment (Intent vs Brief coherence)
-- Domain-specific blind spots
-- Assumptions that seem reasonable to one model but questionable to another
-- Edge cases and failure modes
-- Audience/market considerations
-
-**Process:**
-1. Submit Brief + Intent to 2+ external models
-2. Collect feedback, extract discrete issues
-3. Log issues with source attribution
-4. Prioritize: High-impact issues from multiple reviewers = P1
-5. Address P1s, assess P2s
-6. Re-submit if major issues found
-
-**Exit signal:** External reviewers find no new P1 issues. Cross-reviewer consensus on core elements.
-
-**Typical cycles:** 1-2
-
----
-
-#### Review Cycle Guidance by Type
-
-| Type + Scale | Phase 1 (Internal) | Phase 2 (External) | Total Cycles |
-|--------------|---------------------|---------------------|--------------|
-| Artifact | 1-2 | 1 | 2-3 |
-| App (personal) | 2-3 | 1 | 3-4 |
-| App (shared/community) | 2-4 | 1-2 | 3-6 |
-| App (commercial) | 3-5 | 2-3 | 5-8 |
-| Workflow | 2-3 | 1-2 | 3-5 |
-
----
-
-#### Convergence Signals
-
+**Convergence signals:**
 - Issue count decreasing across cycles
 - Cross-reviewer consensus on core elements
 - Diminishing returns on new feedback
-- No P1 issues remaining
+- No Critical/High issues remaining
 - External reviewers validate rather than challenge
 
 ---
@@ -205,7 +139,7 @@ The review loop has two phases based on *who* reviews, not *what kind* of review
 
 **Activities:**
 - Run exit criteria checklist
-- Ensure all P1 issues resolved
+- Ensure all critical issues resolved
 - Confirm open questions are resolved or explicitly deferred
 - Add/verify constraints section (resources, timeline, dependencies)
 - Update Session State to phase: complete
@@ -237,7 +171,7 @@ Per ADF-STAGES-SPEC.md:
 ### Discover-Specific Criteria
 
 - [ ] `intent.md` exists and passes Intent spec validation
-- [ ] `discover-brief.md` exists with all required sections (core + type-specific)
+- [ ] `product-brief.md` exists with all required sections (core + type-specific)
 - [ ] Project classification assigned (type + modifiers)
 - [ ] Scope boundaries clear (in/out explicit)
 - [ ] Success criteria are verifiable (not vague)
@@ -250,7 +184,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
-   - **What was produced** — intent.md + discover-brief.md summary
+   - **What was produced** — intent.md + product-brief.md summary
    - **Success criteria status** — from brief.md
    - **Known limitations / deferred items**
    - **Read order for next stage agent**
@@ -279,52 +213,14 @@ The agent working through Discover needs context on:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| discover-brief.md | Discover stage | Working Brief |
-| ADF-DISCOVER-SPEC.md | Discover stage (reference) | Stage workflow |
+| product-brief.md | Discover stage | Working Brief |
+| ADF-DISCOVER-SPEC-v2.md | Discover stage (reference) | Stage workflow |
 | ADF-BRIEF-SPEC.md | Discover stage (reference) | Brief structure |
 | ADF-INTENT-SPEC.md | Discover stage (reference) | Intent structure |
 | ADF-PROJECT-TYPES-SPEC.md | Discover stage (reference) | Classification |
 ```
 
 Specs are reference documents — load on demand, not into every context.
-
----
-
-## Supporting Artifacts
-
-### Review Prompts
-
-Two prompts support the two-phase review model:
-
-| Prompt | Location | Purpose |
-|--------|----------|---------|
-| Ralph Review Prompt | `/prompts/ralph-review-prompt.md` | Phase 1 internal iteration |
-| External Review Prompt | `/prompts/external-review-prompt.md` | Phase 2 external review |
-
-#### Ralph Review Prompt
-
-Used with Ralph Loop plugin for Phase 1 (internal review).
-
-**Structure:**
-1. Task: Thorough review and iteration until no P1 issues remain
-2. Scope: Comprehensive — challenge everything, find real issues
-3. Process: Read → Review → Log issues → Fix P1s → Re-review → Repeat
-4. Completion: Output promise when Brief is as strong as self-review can make it
-
-#### External Review Prompt
-
-Used with GPT, Gemini, other external models for Phase 2.
-
-**Structure:**
-1. Context: ADF framework, Discover stage, this Brief has passed internal review
-2. Input: Brief + Intent (both artifacts)
-3. Task: Comprehensive review — find what the internal reviewer missed
-4. Focus: Diverse perspective, blind spots, cross-artifact alignment
-5. Format: Issues with impact, rationale, suggestion
-
-### Type-Specific Review Modules
-
-For commercial apps, workflows, etc. — additional review focus areas appended to external review prompt. See `/prompts/external-review-prompt.md` for modules.
 
 ---
 
@@ -353,19 +249,11 @@ For commercial apps, workflows, etc. — additional review focus areas appended 
 │         ▼                                                       │
 │  ┌────────────────────────────────────────────────────────┐     │
 │  │                    REVIEW LOOP                          │     │
-│  │  ┌─────────────────┐       ┌─────────────────────────┐ │     │
-│  │  │ PHASE 1:        │       │ PHASE 2:                │ │     │
-│  │  │ INTERNAL        │       │ EXTERNAL                │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ Ralph Loop      │  ───► │ GPT, Gemini, etc.       │ │     │
-│  │  │ (Claude)        │       │                         │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ Thorough self-  │       │ Diverse perspectives    │ │     │
-│  │  │ review and      │       │ catch blind spots       │ │     │
-│  │  │ iteration       │       │ and assumptions         │ │     │
-│  │  │                 │       │                         │ │     │
-│  │  │ 2-5 iterations  │       │ 1-2 cycles              │ │     │
-│  │  └─────────────────┘       └─────────────────────────┘ │     │
+│  │                                                        │     │
+│  │  Internal review: mandatory                            │     │
+│  │  External review: risk-driven, user-triggered         │     │
+│  │                                                        │     │
+│  │  Iterate until no Critical/High issues remain         │     │
 │  └────────────────────────────────────────────────────────┘     │
 │         │ Convergence reached                                   │
 │         ▼                                                       │
@@ -378,7 +266,7 @@ For commercial apps, workflows, etc. — additional review focus areas appended 
 │         │                                                       │
 │         ▼                                                       │
 │  ┌──────────────────────────────────────┐                       │
-│  │  OUTPUTS: intent.md, discover-brief.md │                     │
+│  │  OUTPUTS: intent.md, product-brief.md │                      │
 │  └──────────────────────────────────────┘                       │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
@@ -399,49 +287,15 @@ Discover may span multiple sessions. To maintain continuity:
 
 New session workflow:
 1. Agent reads CLAUDE.md (loads context map)
-2. Agent reads `discover-brief.md` (gets Session State)
+2. Agent reads `product-brief.md` (gets Session State)
 3. Agent picks up where previous session left off
 4. At session end, agent updates Session State
 
 ---
 
-## Capabilities Required
-
-### Current State (Manual)
-
-| Capability | How It Works |
-|------------|--------------|
-| Document creation | File system, markdown |
-| LLM access (review) | Manual copy/paste to different model UIs |
-| Issue tracking | In-document table |
-| Orchestration | Human coordinates |
-
-### Future State (Automated)
-
-| Capability | How It Would Work |
-|------------|-------------------|
-| Document creation | Same (works fine) |
-| LLM access (review) | Automated multi-model orchestration |
-| Issue tracking | Automated parsing/prioritization |
-| Orchestration | Automated review loops, LLM-as-judge patterns |
-
----
-
-## Visual Architecture
-
-See `prompts/architecture-visual-discover.md` for the diagram generation prompt.
-
-The Discover stage diagram shows:
-- Four-phase workflow (Exploration → Crystallization → Review Loop → Finalization)
-- Two-phase review model (Internal/Ralph + External/GPT,Gemini)
-- YAGNI principle prominence
-- Inputs, outputs, and exit criteria
-
----
-
 ## Planning Artifacts Convention
 
-When Discover produces working artifacts beyond intent.md and discover-brief.md (e.g., research notes, exploration logs), place them in `docs/adf/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+When Discover produces working artifacts beyond intent.md and product-brief.md (e.g., research notes, exploration logs), place them in `docs/active/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
 
 ---
 
@@ -451,6 +305,6 @@ When Discover produces working artifacts beyond intent.md and discover-brief.md 
 - ADF-BRIEF-SPEC.md (Brief structure and requirements)
 - ADF-INTENT-SPEC.md (Intent structure and requirements)
 - ADF-PROJECT-TYPES-SPEC.md (Classification system)
-- ADF-FOLDER-STRUCTURE-SPEC.md (docs/adf/ convention)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/active/ convention)
 - ADF-TAXONOMY.md (Terminology definitions)
-- prompts/architecture-visual-discover.md (Diagram prompt)
+- ADF-REVIEW-SPEC.md (Review mechanism)

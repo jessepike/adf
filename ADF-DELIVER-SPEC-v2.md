@@ -1,11 +1,12 @@
 ---
 type: "specification"
 description: "Detailed specification for the Deliver stage workflow"
-version: "1.0.0"
-updated: "2026-02-02"
+version: "2.0.0"
+updated: "2026-03-23"
+supersedes: "ADF-DELIVER-SPEC.md (v1.0.0)"
 scope: "adf"
-lifecycle: "reference"
-location: "adf/ADF-DELIVER-SPEC.md"
+lifecycle: "active"
+location: "docs/active/ADF-DELIVER-SPEC-v2.md"
 ---
 
 # ADF Deliver Stage Specification
@@ -29,7 +30,7 @@ Deliver transforms a built deliverable into an operational, accessible artifact 
 | 1 | `manifest.md` | Deployment dependencies to install | What deployment needs |
 | 2 | `capabilities.md` | Skills, tools for deployment/testing | What agent infrastructure is needed |
 | 3 | `plan.md` | Deployment plan with phases/testing strategy | How to deliver it |
-| 4 | `tasks.md` | Atomic delivery task list with status tracking | What to do |
+| 4 | `BACKLOG.md` | Atomic delivery task list with status tracking | What to do |
 | 5 | Deployed/distributed artifact | Accessible in target environment | The thing, live |
 | 6 | Access documentation | URLs, credentials, usage instructions | How users access it |
 
@@ -45,7 +46,7 @@ Deliver transforms a built deliverable into an operational, accessible artifact 
 |-------|-------------|-----------|-----------|
 | **1. Intake & Readiness Check** | Verify Develop outputs, understand delivery scope | Agent confirms readiness | — |
 | **2. Delivery Capability Assessment** | Identify deployment target and required capabilities | Agent approves manifest + capabilities | manifest.md, capabilities.md |
-| **3. Delivery Planning** | Create deployment plan and task breakdown | Agent approves plan + tasks | plan.md, tasks.md |
+| **3. Delivery Planning** | Create deployment plan and task breakdown | Agent approves plan + tasks | plan.md, BACKLOG.md |
 
 **REVIEW + HARD GATE (Phase 4):** Validate plan, then get human approval.
 
@@ -62,23 +63,6 @@ Deliver transforms a built deliverable into an operational, accessible artifact 
 | **7. Validation & Testing** | 3-tier validation (automated, browser, manual) | Confirmed usable | Test results |
 | **8. Milestone Closeout** | Cleanup, seal, mark increment complete | All criteria met, status.md sealed | — |
 
-### Concrete Actions at Each Phase
-
-**What gets installed/executed when:**
-
-| Phase | What Gets Installed/Executed | Approval Needed |
-|-------|------------------------------|-----------------|
-| **1. Intake & Readiness Check** | Nothing — verify Develop outputs present | Human confirms understanding to proceed |
-| **2. Delivery Capability Assessment** | Nothing — document deployment needs in manifest.md + capabilities.md | Human approves capability list to proceed |
-| **3. Delivery Planning** | Nothing — create plan.md + tasks.md | Not yet (wait for Review + HARD GATE) |
-| **4. Review Loop & Approval** | Review artifacts (Ralph Loop + external) | **Human approves ALL planning artifacts after review** |
-| **5. Infrastructure Setup** | ✅ Create hosting projects<br>✅ Configure environments<br>✅ Set up CI/CD | Already approved at HARD GATE |
-| **6. Deployment Execution** | ✅ Deploy to target<br>✅ Trigger CI/CD<br>✅ Distribute artifact | Already approved at HARD GATE |
-| **7. Validation & Testing** | ✅ Run automated tests<br>✅ Browser testing<br>✅ Manual validation | Already approved at HARD GATE |
-| **8. Milestone Closeout** | ✅ Cleanup, archive, status seal | Already approved at HARD GATE |
-
-**Key insight:** Phase 4 is the combined review + approval gate. Agents review the plan thoroughly, THEN present polished artifacts to human for approval.
-
 ---
 
 ## Phase Boundary Protocol
@@ -88,22 +72,20 @@ Every phase transition requires context clearing to prevent accumulated drift an
 **Protocol (agent-driven):**
 
 1. Agent completes phase work
-2. Agent updates the **Handoff** block in `tasks.md` (see format below)
+2. Agent updates the **Handoff** block in `BACKLOG.md` (see format below)
 3. Agent updates `status.md` with phase completion summary
 4. **Agent commits all changes** (mandatory — not optional)
-5. Agent updates `current_phase` in `tasks.md` frontmatter
-6. Agent moves completed tasks to Completed section in `tasks.md`
+5. Agent updates `current_phase` in `BACKLOG.md` frontmatter
+6. Agent moves completed tasks to Completed section in `BACKLOG.md`
 7. Agent runs `/clear`
-8. Agent re-reads artifacts fresh: `CLAUDE.md` → `status.md` → `tasks.md` → `plan.md`
+8. Agent re-reads artifacts fresh: `CLAUDE.md` → `status.md` → `BACKLOG.md` → `plan.md`
 9. Agent confirms: **"Phase N complete. Starting Phase N+1. Here's what I see: [brief summary from handoff block]"**
 
 **Why:** Multi-phase execution accumulates stale context. Agents carry assumptions forward that may no longer apply. Clearing context and re-reading from artifacts ensures each phase starts from ground truth, not memory.
 
-**Stage boundary** uses the heavier protocol defined in ADF-STAGES-SPEC.md (Stage Boundary Handoff Protocol). Phase boundary is internal to a stage; stage boundary transitions between stages.
-
 ### Handoff Block
 
-The Handoff section lives at the top of `tasks.md` (after frontmatter, before phase tables). It is **overwritten** at each phase boundary — only the current handoff matters.
+The Handoff section lives at the top of `BACKLOG.md` (after frontmatter, before phase tables). It is **overwritten** at each phase boundary — only the current handoff matters.
 
 **Required format:**
 
@@ -132,20 +114,6 @@ The Handoff section lives at the top of `tasks.md` (after frontmatter, before ph
 - **Overwrite, don't append.** Each boundary replaces the previous handoff block.
 - **Keep it short.** 10-20 lines max. This is orientation, not a journal.
 - **Deployment notes are optional.** Omit the section if there's nothing worth noting.
-- **Phase field uses the phase name**, not just a number (e.g., "Phase 5: Infrastructure Setup", not "5").
-
-**What carries across phases (via artifacts, not memory):**
-- `tasks.md` — handoff block + task status (primary orientation artifact)
-- `status.md` — current state, session-level summary
-- `plan.md` — deployment plan, decision log
-- `manifest.md` / `capabilities.md` — dependencies and capabilities
-
-**What does NOT carry across:**
-- In-context assumptions from previous phase work
-- Intermediate reasoning or exploration
-- Abandoned approaches or discarded options
-
-**Human involvement:** Human intervenes at the HARD GATE (Phase 4, after review). Context clearing between other phases is agent-driven and automatic.
 
 ---
 
@@ -159,7 +127,7 @@ What enters the Deliver stage:
 | Documentation | Develop | README, API docs, usage guides |
 | Test suite | Develop | Automated tests (95%+ passing) |
 | `design.md` | Design | Technical specification (referenced for validation) |
-| `discover-brief.md` | Discover | Contract — referenced for success criteria |
+| `product-brief.md` | Discover | Contract — referenced for success criteria |
 | `intent.md` | Discover | North Star — referenced throughout |
 | Project classification | Brief | Type + modifiers determine delivery approach |
 | ADF specs | Environment layer | Deliver spec, Project Types spec |
@@ -172,13 +140,13 @@ What Deliver produces:
 
 | Output | Description | Location |
 |--------|-------------|----------|
-| `manifest.md` | Deployment dependencies (hosting, DNS, CI/CD tools) | `docs/adf/manifest.md` |
-| `capabilities.md` | Skills, tools for deployment/testing | `docs/adf/capabilities.md` |
-| `plan.md` | Deployment plan — phases, testing strategy, rollout | `docs/adf/plan.md` |
-| `tasks.md` | Atomic delivery task list with status tracking | `docs/tasks.md` (cross-stage) or `docs/adf/tasks.md` |
+| `manifest.md` | Deployment dependencies (hosting, DNS, CI/CD tools) | `docs/active/manifest.md` |
+| `capabilities.md` | Skills, tools for deployment/testing | `docs/active/capabilities.md` |
+| `plan.md` | Deployment plan — phases, testing strategy, rollout | `docs/active/plan.md` |
+| `BACKLOG.md` | Atomic delivery task list with status tracking | `BACKLOG.md` (cross-stage) or `docs/active/BACKLOG.md` |
 | Deployed artifact | Live, accessible deliverable in target environment | Target-specific |
 | Access documentation | URLs, credentials, access instructions | README or docs/ACCESS.md |
-| Test results | Validation evidence (automated, browser, manual) | docs/adf/test-results.md |
+| Test results | Validation evidence (automated, browser, manual) | docs/active/test-results.md |
 
 ---
 
@@ -204,11 +172,9 @@ What Deliver produces:
   - **App MVP:** First-time infrastructure setup + deployment
   - **Workflow:** Installation/activation in target environment
 
-**This is NOT a full review.** Develop already did exhaustive validation. This is a handoff verification: "I have what I need to proceed."
+**This is NOT a full review.** Develop already did exhaustive validation. This is a handoff verification.
 
 **Agent role:** Verifier. Checklist validation. Flag blockers if deliverable incomplete.
-
-**Human role:** Answer questions if gaps found.
 
 **Key questions to resolve:**
 - "What's the delivery target?" (Railway, Vercel, local, export, etc.)
@@ -248,13 +214,7 @@ What the agent team needs to execute delivery. **Required sections:**
 | **CLIs & Tools** | External command-line tools | Railway CLI, Vercel CLI, gh, npm |
 | **MCP Servers** | External integrations for deployment | Railway MCP, GitHub MCP |
 
-**Testing capabilities MUST be identified in Phase 2.** The deployment agent needs to know upfront:
-- Browser testing tools (Claude in Chrome for Apps)
-- E2E testing tools (Playwright, Cypress)
-- Validation tools (curl, health check scripts)
-- Manual testing approach
-
-If testing tools are missing from capabilities.md, Phase 2 is incomplete.
+**Testing capabilities MUST be identified in Phase 2.** If missing, Phase 2 is incomplete.
 
 **Registry Query Step (mandatory):**
 
@@ -266,42 +226,7 @@ Before documenting capabilities, query available resources:
 4. **Document source** — For each capability, note: registry path OR manual specification
 5. **Write Registry Summary** — Include as the first section of capabilities.md
 
-**Why mandatory:** Without the summary, the reviewer cannot verify the registry was consulted. A missing or empty Registry Summary section means Phase 2 is incomplete.
-
-Example capabilities.md structure:
-
-```markdown
-## Registry Summary
-
-- **Registry consulted:** ~/code/_shared/capabilities-registry/INVENTORY.md
-- **Total available:** 39 capabilities (16 skills, 4 tools, 15 plugins, 4 MCP servers)
-- **Matched:** 2 (Railway skill, Claude in Chrome)
-- **Gaps:** 1 (custom health-check script — not in registry)
-
-## Deployment Skills
-
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| Railway skill | Deploy to Railway | registry: active/skill/@anthropic/railway |
-
-## Testing Tools
-
-| Tool | Purpose | Source |
-|------|---------|--------|
-| Claude in Chrome | Browser testing | Built-in |
-| Health check script | API validation | Manual (custom script) |
-
-## CLIs & Tools
-
-| Tool | Purpose | Install |
-|------|---------|---------|
-| Railway CLI | Deploy via CLI | npm install -g @railway/cli |
-| gh | GitHub operations | Homebrew |
-
-## MCP Servers
-
-None required for this deployment.
-```
+Without the summary, Phase 2 is incomplete.
 
 **Agent role:** Query registry, research deployment requirements from README/docs, document comprehensively with sources.
 
@@ -335,11 +260,9 @@ None required for this deployment.
 
 If the testing strategy section is missing or incomplete, Phase 3 is incomplete.
 
-#### tasks.md — Handoff + Atomic Task List
+#### BACKLOG.md — Handoff + Atomic Task List
 
-**See ADF-TASKS-SPEC.md for full specification.**
-
-In Deliver, tasks.md uses the **full structure** with:
+In Deliver, BACKLOG.md uses the **full structure** with:
 - Handoff block (overwritten at each phase boundary)
 - Active Tasks table with all columns (ID, Task, Status, Acceptance Criteria, Testing, Depends, Capability)
 - Upcoming section for next phase planning
@@ -347,7 +270,7 @@ In Deliver, tasks.md uses the **full structure** with:
 
 **Key Deliver requirements:**
 - Every task has acceptance criteria and testing approach
-- Capability column links to capabilities.md entries (deployment skills, testing tools)
+- Capability column links to capabilities.md entries
 - Progressive disclosure: read Handoff + Active, skip Completed unless investigating
 - Task granularity: one agent, one session, verifiable completion
 
@@ -363,13 +286,13 @@ In Deliver, tasks.md uses the **full structure** with:
 
 #### Step 1: Review Loop
 
-Invoke review per ADF-REVIEW-SPEC.md. Use `get_review_prompt('deliver', phase)` from ADF MCP server.
+Invoke review per ADF-REVIEW-SPEC.md.
 
 **What gets reviewed:**
 - manifest.md
 - capabilities.md
 - plan.md
-- tasks.md
+- BACKLOG.md
 
 All artifacts reviewed together — they must align.
 
@@ -382,12 +305,7 @@ All artifacts reviewed together — they must align.
 - Are there deployment risks not addressed?
 - Is user access clearly defined?
 
-**Review phases:**
-
-| Phase | Reviewer | Mechanism | Value |
-|-------|----------|-----------|-------|
-| **Phase 1: Internal** | Primary agent (Claude) | Ralph Loop — automated iteration | Fast iteration, gets plan to solid baseline |
-| **Phase 2: External** | Other models (GPT, Gemini) | Manual submission (user-driven) | Diverse perspectives, catches blind spots |
+**Review mechanism:** Review follows ADF-REVIEW-SPEC. Internal review is mandatory. External review is risk-driven, user-triggered.
 
 **Exit condition (Step 1):** No Critical/High issues. Plan is executable.
 
@@ -399,7 +317,7 @@ After review completes, present all planning artifacts to human for approval.
 - manifest.md (deployment dependencies)
 - capabilities.md (skills/tools needed)
 - plan.md (deployment approach + testing strategy)
-- tasks.md (delivery tasks)
+- BACKLOG.md (delivery tasks)
 - Review summary (issues resolved, reviewer feedback)
 
 **Human evaluates:**
@@ -409,8 +327,6 @@ After review completes, present all planning artifacts to human for approval.
 - Any concerns or changes needed?
 
 **Exit condition (Step 2):** Human approves: "Proceed with execution."
-
-**If design gaps found:** Update design artifacts (document and move on — no re-review of design).
 
 ---
 
@@ -444,8 +360,6 @@ After review completes, present all planning artifacts to human for approval.
 - **Skip this phase** — no infrastructure needed
 
 **Agent role:** Execute setup per plan, verify each step.
-
-**Human role:** Minimal — provide credentials if needed, troubleshoot if issues arise.
 
 **Verification:**
 - All infrastructure components created
@@ -482,7 +396,7 @@ After review completes, present all planning artifacts to human for approval.
 - Generate distribution package (if needed)
 - Upload to sharing platform (if applicable)
 
-**Skills-based execution:** Use deployment skills from capabilities.md (Railway skill, deployment tools, etc.)
+**Skills-based execution:** Use deployment skills from capabilities.md
 
 **Deployment verification:**
 - Deployment completed without errors
@@ -512,14 +426,14 @@ Testing depth varies by project type:
 
 | Type | Tier 1 (Automated) | Tier 2 (Browser/Agent) | Tier 3 (Manual) |
 |------|-------------------|----------------------|----------------|
-| **App (MVP)** | API tests, integration tests, E2E tests in production | Full user flows via Claude in Chrome | User acceptance testing — core scenarios |
+| **App (MVP)** | API tests, integration tests, E2E tests in production | Full user flows via Claude in Chrome | User acceptance testing |
 | **App (feature)** | Feature-specific tests in production | Feature validation via browser | Smoke test by human |
 | **Workflow** | Unit + integration tests in target environment | MCP Inspector (if MCP-based) | Manual trigger test |
 | **Artifact** | Format validation, smoke test | None (unless interactive) | Visual inspection, content review |
 
 ### Tier 1: Automated Testing
 
-Run automated tests **in the production/target environment** (not just locally):
+Run automated tests **in the production/target environment**:
 
 **For Apps:**
 - API endpoint tests (health checks, auth, core endpoints)
@@ -538,9 +452,7 @@ Run automated tests **in the production/target environment** (not just locally):
 - Content validation (required sections present)
 - Export/import tests
 
-**Pass criteria:** 95%+ pass rate minimum.
-
-**If Tier 1 fails:** Fix issues, re-deploy, re-test. Do NOT proceed to Tier 2 with failing automated tests.
+**Pass criteria:** 95%+ pass rate minimum. If Tier 1 fails: Fix issues, re-deploy, re-test. Do NOT proceed to Tier 2.
 
 ### Tier 2: Browser/Agent Testing
 
@@ -553,7 +465,6 @@ Real-world interactive testing via browser agent:
 - Verify UI renders correctly
 - Test error handling
 - Validate accessibility
-- Test mobile responsiveness (if applicable)
 
 **For MCP-based Workflows:**
 - Test tools via MCP Inspector
@@ -565,14 +476,7 @@ Real-world interactive testing via browser agent:
 - Interact with elements
 - Verify functionality
 
-**Testing approach:**
-- Use Claude in Chrome for web apps
-- Use MCP Inspector for MCP servers
-- Document each test scenario and result
-
-**Pass criteria:** All key user flows complete successfully. No critical bugs.
-
-**If Tier 2 fails:** Fix issues, re-deploy if needed, re-test.
+**Pass criteria:** All key user flows complete successfully. No critical bugs. If Tier 2 fails: Fix issues, re-deploy if needed, re-test.
 
 ### Tier 3: Manual User Validation
 
@@ -582,7 +486,7 @@ Human testing for subjective validation and edge cases:
 - Walk through core user scenarios manually
 - Test edge cases not covered by automation
 - Subjective assessment (UX, performance feel)
-- Verify non-functional requirements (speed, responsiveness)
+- Verify non-functional requirements
 
 **For Features:**
 - Smoke test the feature
@@ -599,16 +503,9 @@ Human testing for subjective validation and edge cases:
 
 **Pass criteria:** Human confirms: "This works and meets success criteria."
 
-### Smoke Tests
-
-Quick sanity checks run throughout validation:
-- Artifact is accessible (URL loads, file opens)
-- Core functionality works (login, key action, primary use case)
-- No obvious broken elements
-
 ### Documentation of Test Results
 
-Create `docs/adf/test-results.md` with:
+Create `docs/active/test-results.md` with:
 - Tier 1 results (test framework output)
 - Tier 2 results (browser test scenarios + outcomes)
 - Tier 3 results (manual validation notes)
@@ -621,26 +518,23 @@ Create `docs/adf/test-results.md` with:
 
 ### 8. Milestone Closeout
 
-**Purpose:** Structured verification, cleanup, and seal. This is not a formality — it's the quality gate.
+**Purpose:** Structured verification, cleanup, and seal.
 
 **Ordered checklist:**
 
 #### 8.1 Cleanup
-
 - [ ] .gitignore updated (deployment artifacts, temp files)
 - [ ] Transient files deleted (deployment logs, temp configs)
 - [ ] No secrets in repo
 - [ ] No commented-out code blocks
 
 #### 8.2 Success Criteria Gate
-
-- [ ] Load discover-brief.md → success criteria
+- [ ] Load product-brief.md → success criteria
 - [ ] Map each criterion to evidence (feature live, URL, test result)
 - [ ] Mark each: met / partial (with explanation) / not met (BLOCKS completion)
 - [ ] Document mapping in status.md
 
 #### 8.3 Access Documentation
-
 - [ ] URLs documented (production URL, admin panel, etc.)
 - [ ] Access instructions written (how users access the artifact)
 - [ ] Credentials documented (if applicable — use secure method)
@@ -652,18 +546,15 @@ Update README or create `docs/ACCESS.md` with:
 - Who to contact for access issues
 
 #### 8.4 Artifact Lifecycle
-
-- Keep in `docs/`: intent.md, discover-brief.md, design.md (cross-stage reference)
-- Archive to `docs/adf/archive/`: plan.md, tasks.md, manifest.md, capabilities.md, test-results.md
+- Keep in `docs/`: intent.md, product-brief.md, design.md (cross-stage reference)
+- Archive to `docs/archive/`: plan.md, BACKLOG.md, manifest.md, capabilities.md, test-results.md
 - Keep in project: deliverable, tests, documentation, deployment configs
 
 #### 8.5 Commit Verification
-
 - [ ] No uncommitted changes
 - [ ] Commit history shows atomic commits (not one giant commit)
 
 #### 8.6 status.md Update (THE SEAL)
-
 - Mark milestone complete
 - Include structured stage handoff (per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol)
 - Document what was delivered and where
@@ -687,23 +578,6 @@ Testing is not optional. It's core to Deliver.
   - What manual validation scenarios?
   - Who performs manual testing?
 
-### Three-Tier Testing Model
-
-| Tier | Focus | Tools | When |
-|------|-------|-------|------|
-| **Tier 1: Automated** | Programmatic validation | Test frameworks | First — must pass 95%+ |
-| **Tier 2: Browser/Agent** | Real-world interactive testing | Claude in Chrome, MCP Inspector | After Tier 1 passes |
-| **Tier 3: Manual** | User acceptance, subjective validation | Human testing | After Tier 2 passes |
-
-### Testing by Project Type
-
-| Type | Automated Focus | Browser Testing? | Manual Testing? |
-|------|-----------------|------------------|----------------|
-| **App (MVP)** | API, integration, E2E, accessibility | Yes (full flows via Claude in Chrome) | Yes (user acceptance) |
-| **App (feature)** | Feature-specific tests in production | Yes (feature validation) | Yes (smoke test) |
-| **Workflow** | Unit, integration, error handling | If MCP-based (MCP Inspector) | Yes (trigger test) |
-| **Artifact** | Format, content validation | If interactive | Yes (visual inspection) |
-
 ### Progressive Testing
 
 Test results feed into each other:
@@ -711,14 +585,7 @@ Test results feed into each other:
 2. Tier 2 must pass before Tier 3 begins
 3. Issues found in later tiers trigger fixes and re-testing from Tier 1
 
-### Critical Rule
-
-Do NOT mark validation complete until:
-- All three tiers complete
-- All critical issues fixed
-- Human confirms usability
-
-See `kb/MANUAL-TESTING-GUIDE.md` for Tier 3 manual testing procedures.
+**Critical rule:** Do NOT mark validation complete until all three tiers complete with human confirmation.
 
 ---
 
@@ -730,26 +597,6 @@ See `kb/MANUAL-TESTING-GUIDE.md` for Tier 3 manual testing procedures.
 - Commit before requesting human input
 - Conventional format: `type(scope): description`
 
-**Anti-patterns:**
-- One giant commit at the end
-- "wip" commit messages
-- Uncommitted work across sessions
-- Skipping commits between phases
-
----
-
-## Artifact Maintenance
-
-During Deliver, these artifacts require ongoing updates:
-
-| Artifact | Updated By | Frequency | Content |
-|----------|------------|-----------|---------|
-| `tasks.md` | Any agent completing tasks | Per task | Task status, completion notes |
-| `status.md` | Primary orchestrating agent only | Regular checkpoints | Phase progress, blockers, next steps |
-| Decision log (in plan.md) | Any agent | As decisions made | Key deployment choices with rationale |
-
-**Critical:** Sub-agents do NOT update status.md. Only the primary orchestrating agent maintains session state.
-
 ---
 
 ## Exit Criteria
@@ -760,7 +607,7 @@ Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
-- [ ] Alignment verified with intent.md and discover-brief.md
+- [ ] Alignment verified with intent.md and product-brief.md
 - [ ] All work committed (atomic commits, no uncommitted changes)
 - [ ] Documentation appropriate to deliverable exists
 - [ ] Workspace cleanup complete (no transients, .gitignore current)
@@ -772,7 +619,7 @@ Per ADF-STAGES-SPEC.md:
 - [ ] Artifact deployed/distributed to target environment
 - [ ] Three-tier testing complete (automated + browser + manual)
 - [ ] Access documentation exists (URLs, credentials, instructions)
-- [ ] Success criteria from discover-brief mapped to evidence (all met)
+- [ ] Success criteria from product-brief mapped to evidence (all met)
 - [ ] Rollback plan tested or documented
 
 ### Type-Specific Criteria
@@ -807,11 +654,11 @@ Per ADF-STAGES-SPEC.md:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| discover-brief.md | Deliver stage | Success criteria reference |
+| product-brief.md | Deliver stage | Success criteria reference |
 | design.md | Deliver stage (validation) | Technical specification |
-| docs/adf/plan.md | Deliver stage (after created) | Deployment guide |
-| docs/tasks.md | Deliver stage (after created) | Task tracking (per ADF-TASKS-SPEC.md) |
-| ADF-DELIVER-SPEC.md | Deliver stage (reference) | Stage workflow |
+| docs/active/plan.md | Deliver stage (after created) | Deployment guide |
+| BACKLOG.md | Deliver stage (after created) | Task tracking |
+| ADF-DELIVER-SPEC-v2.md | Deliver stage (reference) | Stage workflow |
 ```
 
 ---
@@ -832,7 +679,7 @@ Deliver may use sub-agents for parallelization, though less common than in Devel
 
 - Execute assigned deployment tasks
 - Verify task completion
-- Mark tasks complete in tasks.md
+- Mark tasks complete in BACKLOG.md
 - Report blockers to primary agent
 - Do NOT update status.md
 
@@ -845,118 +692,14 @@ Deliver may use sub-agents for parallelization, though less common than in Devel
 
 ---
 
-## Supporting Artifacts
-
-### Prompts
-
-| Prompt | Location | Purpose |
-|--------|----------|---------|
-| Start Deliver Prompt | `/prompts/start-deliver-prompt.md` | Stage transition + intake validation |
-| Deliver Ralph Review Prompt | `/prompts/deliver-ralph-review-prompt.md` | Internal review |
-| Deliver External Review Prompt | `/prompts/deliver-external-review-prompt.md` | External review |
-
----
-
-## Workflow Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                          DELIVER STAGE                               │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│  ┌──────────────────────┐                                           │
-│  │ INTAKE & READINESS   │  Human: Med | Agent: High                 │
-│  │  - Verify outputs    │                                           │
-│  │  - Understand scope  │                                           │
-│  │  - Determine target  │                                           │
-│  └──────┬───────────────┘                                           │
-│         │ "Outputs verified, scope understood"                      │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │ DELIVERY CAPABILITY  │  Human: Low | Agent: High                 │
-│  │  - manifest.md       │  (deployment dependencies)                │
-│  │  - capabilities.md   │  (skills, tools, testing)                 │
-│  └──────┬───────────────┘                                           │
-│         │ "Capabilities documented"                                 │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │  DELIVERY PLANNING   │  Human: Low-Med | Agent: High             │
-│  │  - plan.md           │  (deployment phases, testing strategy)    │
-│  │  - tasks.md          │  (atomic tasks with testing)              │
-│  └──────┬───────────────┘                                           │
-│         │ "Plan drafted"                                            │
-│         ▼                                                           │
-│  ┌────────────────────────────────────────────────────────┐         │
-│  │              REVIEW LOOP & APPROVAL                     │         │
-│  │  Internal (Ralph Loop) then External (user-driven)      │         │
-│  │  THEN Human approves all planning artifacts            │         │
-│  └────────────────────────────────────────────────────────┘         │
-│         │ "No Critical/High issues + Human approval"                │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │ INFRASTRUCTURE SETUP │  Human: Low | Agent: High                 │
-│  │  - Create projects   │  (Skip for simple Artifacts)              │
-│  │  - Configure envs    │                                           │
-│  │  - Set up CI/CD      │                                           │
-│  └──────┬───────────────┘                                           │
-│         │ "Infrastructure ready"                                    │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │ DEPLOYMENT EXECUTION │  Human: Low | Agent: High                 │
-│  │  - Deploy to target  │                                           │
-│  │  - Trigger CI/CD     │                                           │
-│  │  - Verify deployment │                                           │
-│  └──────┬───────────────┘                                           │
-│         │ "Successfully deployed"                                   │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │ VALIDATION & TESTING │  Human: Med-High | Agent: High            │
-│  │  Tier 1: Automated   │  (95%+ pass rate)                         │
-│  │  Tier 2: Browser     │  (Claude in Chrome, MCP Inspector)        │
-│  │  Tier 3: Manual      │  (User acceptance)                        │
-│  └──────┬───────────────┘                                           │
-│         │ "All tiers pass, human confirms usability"                │
-│         ▼                                                           │
-│  ┌──────────────────────┐                                           │
-│  │ MILESTONE CLOSEOUT   │  Human: Low | Agent: High                 │
-│  │  - Cleanup           │                                           │
-│  │  - Success criteria  │                                           │
-│  │  - Access docs       │                                           │
-│  │  - Archive artifacts │                                           │
-│  │  - THE SEAL          │                                           │
-│  └──────┬───────────────┘                                           │
-│         │ "Milestone complete"                                      │
-│         ▼                                                           │
-│  ┌──────────────────────────────────────┐                           │
-│  │  OUTPUTS: Live artifact + access docs │                          │
-│  └──────────────────────────────────────┘                           │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-                    Milestone sealed, artifact live
-              (May loop back to Discover for next increment)
-```
-
----
-
-## Revision History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2026-02-02 | Initial specification — 8 phases with Review → HARD GATE → Execution pattern, 3-tier testing model (automated, browser, manual), project-type specific guidance, deployment focus, progressive disclosure in tasks.md |
-
----
-
 ## References
 
 - ADF-STAGES-SPEC.md (Universal exit criteria, stage boundary handoff)
-- ADF-TASKS-SPEC.md (tasks.md structure, handoff format, progressive disclosure)
 - ADF-REVIEW-SPEC.md (Review mechanism — cycles, severity, stop conditions)
-- ADF-DEVELOP-SPEC.md (Develop is primary input)
-- ADF-DESIGN-SPEC.md (Design referenced for validation)
+- ADF-DEVELOP-SPEC-v2.md (Develop is primary input)
+- ADF-DESIGN-SPEC-v2.md (Design referenced for validation)
 - ADF-BRIEF-SPEC.md (Success criteria reference)
 - ADF-INTENT-SPEC.md (North Star reference)
 - ADF-PROJECT-TYPES-SPEC.md (Deliverable shape and delivery approach)
-- ADF-FOLDER-STRUCTURE-SPEC.md (docs/adf/ convention)
+- ADF-FOLDER-STRUCTURE-SPEC.md (docs/active/ convention)
 - ADF-TAXONOMY.md (Terminology)

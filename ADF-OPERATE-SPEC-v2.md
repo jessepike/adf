@@ -1,12 +1,12 @@
 ---
 type: "specification"
 description: "Detailed specification for the Operate & Learn loop closure mechanism"
-version: "0.4.0"
-updated: "2026-02-24"
-review_status: "full-complete"
+version: "2.0.0"
+updated: "2026-03-23"
+supersedes: "ADF-OPERATE-SPEC.md (v0.4.0)"
 scope: "adf"
-lifecycle: "draft"
-location: "adf/ADF-OPERATE-SPEC.md"
+lifecycle: "active"
+location: "docs/active/ADF-OPERATE-SPEC-v2.md"
 ---
 
 # ADF Operate & Learn Specification
@@ -41,7 +41,7 @@ ADF operates in two modes:
                             Discover (next cycle)
 ```
 
-**Assumption Mode** (Discover → Design → Develop → Deliver) works from a model of the world: what we think the problem is, how we think it should be solved, how we think it should be built. Every artifact produced in these stages — intent.md, brief, design, plan — is an assumption made explicit.
+**Assumption Mode** (Discover → Design → Develop → Deliver) works from a model of the world: what we think the problem is, how we think it should be solved, how we think it should be built. Every artifact produced in these stages is an assumption made explicit.
 
 **Evidence Mode** (Operate & Learn) is what happens when the delivered system meets real use. The act of using what was built immediately generates evidence about which assumptions were right, which were wrong, and what wasn't anticipated at all. This evidence — not speculation — seeds the next Discover cycle.
 
@@ -76,7 +76,7 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 
 | Phase | Description | Cadence |
 |-------|-------------|---------|
-| **1. Activation** | One-time setup at Deliver completion. Verify intent alignment. Define what "working well" means for this system. | Once (at loop entry) |
+| **1. Activation** | One-time setup at Deliver completion. Verify intent alignment. Define what "working well" means. | Once (at loop entry) |
 | **2. Observation** | Ongoing. Log signals as they arise during real use. Low ceremony — just capture. | Every session |
 | **3. Synthesis** | Periodic. Cluster observations, assess intent alignment, feed actionable items to backlog, write synthesis report. | Weekly / monthly / threshold |
 | **4. Cycle Decision** | Human decision point. What happens based on the synthesis? | After each Synthesis |
@@ -89,7 +89,7 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 |-------|--------|-------------|
 | Delivered system | Deliver | The live artifact in real use |
 | `intent.md` | Discover | North Star — what this system is supposed to do |
-| `discover-brief.md` | Discover | Original success criteria (reference for intent alignment) |
+| `product-brief.md` | Discover | Original success criteria (reference for intent alignment) |
 | Deliver milestone seal | Deliver | Structured stage handoff in status.md |
 | Usage context | Real-world operation | How the system is actually being used |
 
@@ -103,7 +103,7 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 | `docs/operate/synthesis-YYYY-MM-DD.md` | Periodic synthesis — clustered patterns, intent alignment rating, backlog refs | `docs/operate/` |
 | BACKLOG.md entries | Actionable items from synthesis clusters | `BACKLOG.md` |
 | Cycle decision record | Decision + reasoning logged in status.md | `status.md` |
-| Seeded `discover-brief.md` | If new cycle triggered — brief updated with evidence from synthesis | `docs/discover-brief.md` |
+| Seeded `product-brief.md` | If new cycle triggered — brief updated with evidence from synthesis | `docs/product-brief.md` |
 
 ---
 
@@ -130,7 +130,7 @@ If the artifact fails this check (e.g., a one-time report, a static document, a 
 The first act of Operate & Learn is looking back: did what shipped match what was intended?
 
 - Read `intent.md` — problem, outcome, why it matters
-- Read `discover-brief.md` — original success criteria
+- Read `product-brief.md` — original success criteria
 - Map each criterion to the delivered system: met / partial / not met
 - Document any gaps in `observations.md` as the opening entries
 
@@ -156,8 +156,6 @@ Document chosen targets in `docs/operate/observations.md` as the header section.
 | Actively used app / MVP | Weekly |
 | Low-traffic tool or workflow | Monthly |
 | Background MCP server | After 10+ observations accumulate |
-
-**Observation unit (for threshold cadence):** One observation = one distinct signal entry in `observations.md`. For automated systems that generate many similar events (e.g., repeated tool call errors), batch into a single entry: log once with count ("N occurrences in 24h") rather than repeating identical rows.
 
 **Exit signal:** Intent alignment check documented, observation targets defined, cadence set.
 
@@ -195,7 +193,7 @@ Document chosen targets in `docs/operate/observations.md` as the header section.
 | **Low** | One-off confusion; cosmetic issue; minor inconsistency |
 
 **Rules:**
-- Capture all signals regardless of whether they align to defined Observation Targets — targets guide synthesis focus, not capture scope. Emergent signals outside targets are often the most valuable.
+- Capture all signals regardless of whether they align to defined Observation Targets
 - Capture immediately — don't batch observations in your head
 - Flag High severity items in status.md; don't wait for synthesis cadence
 - Do NOT convert observations to backlog items — that's synthesis work. Raw signal has more value unprocessed.
@@ -277,14 +275,14 @@ For each cluster that warrants action:
 |----------|------|-------------|
 | **Continue observing** | Alignment Strong/Adequate, no High clusters | Return to Observation phase |
 | **Fix in place** | Isolated improvements, no intent revision needed | Lightweight Develop sprint scoped to the fix; re-enter Observation phase after |
-| **Launch new Discover** | Alignment degrading, usage evolved, major new need | Synthesis seeds new `discover-brief.md`; full cycle restarts |
+| **Launch new Discover** | Alignment degrading, usage evolved, major new need | Synthesis seeds new `product-brief.md`; full cycle restarts |
 | **Retire** | System obsolete, superseded, or out-of-scope | Archive/decommission; status.md sealed |
 
 **Decision heuristic:**
 
 ```
 Alignment Broken             → New Discover or Retire
-3+ High severity clusters    → New Discover or Fix in place (see tie-breaker below)
+3+ High severity clusters    → New Discover or Fix in place
 Intent fundamentally shifted → New Discover
 Improvements are incremental → Fix in place
 No longer in active use      → Retire
@@ -293,38 +291,38 @@ Otherwise                    → Continue observing
 
 **Tie-breaker: "New Discover vs Fix in place"**
 Choose Fix in place if:
-- Clusters are isolated to specific components (not spanning architectural layers)
+- Clusters are isolated to specific components
 - Intent alignment is Adequate or Strong
 - All target clusters can be scoped to a single minimal sprint
 
 Choose New Discover if:
-- Clusters span multiple architectural layers or indicate structural mismatch
-- Intent alignment is Degrading (and has not improved across 2+ synthesis cycles)
+- Clusters span multiple architectural layers
+- Intent alignment is Degrading
 - Usage patterns show the system is being used for something it was not designed for
 
 **Tie-breaker: "New Discover vs Retire"**
 Choose Retire if:
 - No active usage observed for a full synthesis period
-- System has been superseded by another artifact that covers the same need
-- Maintenance cost clearly exceeds benefit given current usage
+- System has been superseded by another artifact
+- Maintenance cost clearly exceeds benefit
 
 Otherwise, default to New Discover.
 
 **Agent role:** Present synthesis summary and recommendation. The decision belongs to the human. After the human responds:
 
-1. Log the decision in status.md (see format below)
+1. Log the decision in status.md
 2. Take the first action of the chosen path:
    - **Continue observing:** Note the decision; return to Observation phase
-   - **Fix in place:** Identify the target cluster(s) to address. File remaining clusters to BACKLOG.md as deferred items (re-evaluated in the next synthesis cycle). Observation continues on the live system during the fix sprint — tag new observations `[pre-fix]` or `[post-fix]` to distinguish signal context. Scope a minimal `plan.md` for the target cluster(s) using ADF-DEVELOP-SPEC.md task patterns. If the fix reveals deeper issues that require architectural changes, escalate to New Discover rather than expanding the sprint scope. Return to Observation phase when fix is deployed.
-   - **Launch new Discover:** Create seeded `discover-brief.md` (see below); run Stage Boundary Handoff Protocol; enter Discover. Observation on the current live system may continue in parallel until the new Discover cycle produces a replacement.
+   - **Fix in place:** Scope a minimal plan for target cluster(s) using ADF-DEVELOP-SPEC-v2.md task patterns. File remaining clusters to BACKLOG.md as deferred. Return to Observation phase when fix deployed.
+   - **Launch new Discover:** Create seeded `product-brief.md` with evidence-grounded content from synthesis report; enter Discover. Observation on the current live system may continue in parallel.
    - **Retire:** Archive `docs/operate/`; update status.md with retirement seal; done
 
 **Seeding a new Discover brief (Launch new Discover path):**
 
-Copy `discover-brief.md` from the most recent version. Replace the following sections with evidence-grounded content from the synthesis report:
+Copy `product-brief.md` from the most recent version. Replace the following sections with evidence-grounded content from the synthesis report:
 - **Problem statement** → dominant friction/gap patterns from synthesis
-- **Success criteria** → what actually mattered in real use (not what was originally guessed)
-- **Scope** → bounded by what usage revealed, not what was originally planned
+- **Success criteria** → what actually mattered in real use
+- **Scope** → bounded by what usage revealed
 - **Context** → intent alignment rating + key observations summary
 
 Label the seeded brief: `Evidence-seeded from: docs/operate/synthesis-YYYY-MM-DD.md`.
@@ -353,7 +351,7 @@ When Operate & Learn triggers a new Discover cycle, that cycle starts with **evi
 | Scope is estimated | Scope is bounded by what usage revealed |
 | intent.md is aspirational | intent.md is updated to reflect evolved understanding |
 
-The synthesis report becomes the primary input to the new brief. Observations don't start from scratch — they carry forward, clustered and prioritized, as the opening context for the next Discover phase.
+The synthesis report becomes the primary input to the new brief. Observations carry forward, clustered and prioritized, as the opening context for the next Discover phase.
 
 ---
 
@@ -393,22 +391,11 @@ Operate & Learn sessions are lighter than Develop/Deliver.
 
 ---
 
-## Revision History
-
-| Version | Date | Changes |
-|---------|------|---------|
-| 0.1.0 | 2026-02-23 | Initial draft — 4 phases, signal log format, intent alignment check, cycle decision framework. |
-| 0.2.0 | 2026-02-23 | Reframed as loop closure mechanism, not a 5th sequential stage. Added two-mode model (Assumption / Evidence). Updated relationship diagram. Added "How New Discover Cycles Differ" section. Removed stage-framing language throughout. |
-| 0.3.0 | 2026-02-24 | Internal review fixes: Phase 4 agent behavior after human decision now specified; "Fix in place" grounded with Develop pattern reference; "Launch new Discover" seeding instructions added; dangling Memory/KB protocol reference replaced with `/handoff`. |
-| 0.4.0 | 2026-02-24 | External review fixes: living system gate check added (Phase 1.0); observation unit defined for threshold cadence; severity rubric added to Phase 2; observation targets clarified as synthesis filter not capture filter; heuristic tie-breakers added (Fix in place vs New Discover, New Discover vs Retire); multi-cluster Fix-in-place guidance added (deferred clusters to BACKLOG); observation continuity during Fix-in-place sprint specified. |
-
----
-
 ## References
 
 - ADF-STAGES-SPEC.md (Stage boundary handoff, session protocol)
-- ADF-DISCOVER-SPEC.md (New cycle entry point — seeded by synthesis)
-- ADF-DELIVER-SPEC.md (Deliver is the loop entry trigger)
-- ADF-BACKLOG-SPEC.md (Backlog item format — synthesis output)
+- ADF-DISCOVER-SPEC-v2.md (New cycle entry point — seeded by synthesis)
+- ADF-DELIVER-SPEC-v2.md (Deliver is the loop entry trigger)
+- ADF-TASK-LIFECYCLE-SPEC.md (Backlog item format — synthesis output)
 - ADF-STATUS-SPEC.md (Cycle decision logging)
 - ADF-INTENT-SPEC.md (Intent alignment reference)
