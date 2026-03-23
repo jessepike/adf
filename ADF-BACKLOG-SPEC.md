@@ -1,8 +1,8 @@
 ---
 type: "specification"
 description: "Defines BACKLOG.md — prioritized queue of potential work items for a project"
-version: "1.0.0"
-updated: "2026-01-30"
+version: "1.1.0"
+updated: "2026-02-24"
 scope: "adf"
 lifecycle: "reference"
 location: "adf/ADF-BACKLOG-SPEC.md"
@@ -24,6 +24,8 @@ Define `BACKLOG.md` — a running, prioritized list of potential next work items
 | Progressive disclosure | Queue (actionable) on top, Archive (historical) on bottom |
 | Token-efficient | Completed items compress into a minimal archive row |
 | Low ceremony | Add items freely; triage and prioritize periodically |
+| Intent-anchored | Every item states its Why — prevents building for building's sake |
+| Value-closing | Every completed item states Realized? — closes the feedback loop on whether the hypothesis was right |
 
 ---
 
@@ -53,17 +55,18 @@ The **only section you need to read** for "what's next?". Contains all incomplet
 | Pri | Yes | Priority: `P1`, `P2`, `P3` |
 | Size | Yes | Complexity: `S`, `M`, `L` |
 | Status | Yes | `pending`, `in_progress`, or `blocked` |
+| Why | Yes | What friction this removes or what decision/outcome it enables. One sentence. Prevents work-for-work's-sake. |
 
 ### Archive
 
-Completed items moved here with date and optional notes. Reverse chronological (most recent first).
+Completed items moved here with date and outcome note. Reverse chronological (most recent first).
 
 | Column | Required | Description |
 |--------|----------|-------------|
 | ID | Yes | Original ID from queue |
 | Item | Yes | Brief description |
 | Completed | Yes | Date completed (YYYY-MM-DD) |
-| Notes | No | Brief outcome or context |
+| Realized? | Yes | Did it deliver the stated Why? One sentence. Use "Partial" if incompletely delivered. |
 
 ---
 
@@ -111,8 +114,8 @@ Items with status `done` do not appear in the Queue — they move to Archive.
 
 ## Maintenance Rules
 
-1. **Adding items:** Append to Queue with next available ID. Default status: `Pending`. Assign priority and size.
-2. **Completing items:** Remove row from Queue, add row to Archive with completion date and optional notes.
+1. **Adding items:** Append to Queue with next available ID. Default status: `Pending`. Assign priority, size, and **Why**.
+2. **Completing items:** Remove row from Queue, add row to Archive with completion date and **Realized?** outcome.
 3. **Reprioritizing:** Change the `Pri` column and re-sort the table (P1 → P2 → P3, then by ID within each priority).
 4. **Periodic triage:** Review Queue occasionally to reprioritize, remove stale items, or split large items.
 5. **ID stability:** IDs are permanent. Never reuse or renumber. Gaps are fine.
