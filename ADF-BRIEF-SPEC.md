@@ -412,7 +412,7 @@ Briefs live in the project's `/docs/` directory with stage prefix:
 /project-root/
   docs/
     intent.md
-    discover-brief.md
+    brief.md
   CLAUDE.md
   README.md
 ```

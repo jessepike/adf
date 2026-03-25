@@ -113,7 +113,7 @@ The loop is continuous for living systems. One-shot artifacts (presentations, re
 
 | Aspect | Description |
 |--------|-------------|
-| **Inputs** | Delivered system in real use, `intent.md`, `product-brief.md` |
+| **Inputs** | Delivered system in real use, `intent.md`, `brief.md` |
 | **Mode** | Evidence Mode — activated by shipping, runs continuously |
 | **Outputs** | Signal log, synthesis reports, BACKLOG.md entries, cycle decision |
 | **Loop trigger** | Synthesis + Cycle Decision → continue, fix in place, new Discover, or retire |
@@ -182,7 +182,7 @@ Each transition requires the completing stage to execute the **Stage Boundary Ha
 | Design → Develop | Handoff protocol, environment ready, tools installed, plan created |
 | Develop → Deliver | Handoff protocol, deployment config, documentation |
 | Deliver → Operate & Learn | Milestone seal complete; create `docs/operate/observations.md`; run Activation phase (intent alignment check + observation targets) |
-| Operate & Learn → Discover | Cycle Decision: new Discover triggered; synthesis seeds updated `product-brief.md` |
+| Operate & Learn → Discover | Cycle Decision: new Discover triggered; synthesis seeds updated `brief.md` |
 
 ---
 

@@ -89,7 +89,7 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 |-------|--------|-------------|
 | Delivered system | Deliver | The live artifact in real use |
 | `intent.md` | Discover | North Star — what this system is supposed to do |
-| `product-brief.md` | Discover | Original success criteria (reference for intent alignment) |
+| `brief.md` | Discover | Original success criteria (reference for intent alignment) |
 | Deliver milestone seal | Deliver | Structured stage handoff in status.md |
 | Usage context | Real-world operation | How the system is actually being used |
 
@@ -103,7 +103,7 @@ Operate & Learn is **continuous and cyclical**, not a bounded sprint. Phases 2 a
 | `docs/operate/synthesis-YYYY-MM-DD.md` | Periodic synthesis — clustered patterns, intent alignment rating, backlog refs | `docs/operate/` |
 | BACKLOG.md entries | Actionable items from synthesis clusters | `BACKLOG.md` |
 | Cycle decision record | Decision + reasoning logged in status.md | `status.md` |
-| Seeded `product-brief.md` | If new cycle triggered — brief updated with evidence from synthesis | `docs/product-brief.md` |
+| Seeded `brief.md` | If new cycle triggered — brief updated with evidence from synthesis | `docs/brief.md` |
 
 ---
 
@@ -130,7 +130,7 @@ If the artifact fails this check (e.g., a one-time report, a static document, a 
 The first act of Operate & Learn is looking back: did what shipped match what was intended?
 
 - Read `intent.md` — problem, outcome, why it matters
-- Read `product-brief.md` — original success criteria
+- Read `brief.md` — original success criteria
 - Map each criterion to the delivered system: met / partial / not met
 - Document any gaps in `observations.md` as the opening entries
 
@@ -275,7 +275,7 @@ For each cluster that warrants action:
 |----------|------|-------------|
 | **Continue observing** | Alignment Strong/Adequate, no High clusters | Return to Observation phase |
 | **Fix in place** | Isolated improvements, no intent revision needed | Lightweight Develop sprint scoped to the fix; re-enter Observation phase after |
-| **Launch new Discover** | Alignment degrading, usage evolved, major new need | Synthesis seeds new `product-brief.md`; full cycle restarts |
+| **Launch new Discover** | Alignment degrading, usage evolved, major new need | Synthesis seeds new `brief.md`; full cycle restarts |
 | **Retire** | System obsolete, superseded, or out-of-scope | Archive/decommission; status.md sealed |
 
 **Decision heuristic:**
@@ -314,12 +314,12 @@ Otherwise, default to New Discover.
 2. Take the first action of the chosen path:
    - **Continue observing:** Note the decision; return to Observation phase
    - **Fix in place:** Scope a minimal plan for target cluster(s) using ADF-DEVELOP-SPEC-v2.md task patterns. File remaining clusters to BACKLOG.md as deferred. Return to Observation phase when fix deployed.
-   - **Launch new Discover:** Create seeded `product-brief.md` with evidence-grounded content from synthesis report; enter Discover. Observation on the current live system may continue in parallel.
+   - **Launch new Discover:** Create seeded `brief.md` with evidence-grounded content from synthesis report; enter Discover. Observation on the current live system may continue in parallel.
    - **Retire:** Archive `docs/operate/`; update status.md with retirement seal; done
 
 **Seeding a new Discover brief (Launch new Discover path):**
 
-Copy `product-brief.md` from the most recent version. Replace the following sections with evidence-grounded content from the synthesis report:
+Copy `brief.md` from the most recent version. Replace the following sections with evidence-grounded content from the synthesis report:
 - **Problem statement** → dominant friction/gap patterns from synthesis
 - **Success criteria** → what actually mattered in real use
 - **Scope** → bounded by what usage revealed

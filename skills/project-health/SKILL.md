@@ -5,7 +5,7 @@ version: 1.0.0
 user_invocable: true
 arguments:
   - name: scope
-    description: "Check scope: all, tests, deps, hygiene, secrets, design-drift, docs (default: all)"
+    description: "Check scope: all, tests, deps, hygiene, secrets, design-drift, docs, freshness (default: all)"
     required: false
   - name: file-backlog
     description: "Auto-append Critical/High findings to BACKLOG.md (default: false)"
@@ -57,7 +57,7 @@ If missing, skip that specific check and note it in the report as SKIPPED.
 
 ## Check Categories
 
-Six categories, 19 total checks. Details and exact commands in `references/check-catalog.md`.
+Seven categories, 22 total checks. Details and exact commands in `references/check-catalog.md`.
 
 ### 1. Test Health
 
@@ -110,17 +110,43 @@ Skip this entire category if `docs/design.md` does not exist.
 | Dead internal links | Markdown links pointing to nonexistent files | Any = MEDIUM |
 | Version references | Doc version strings vs package version | Mismatch = LOW |
 
+### 7. Doc Freshness (ADF projects only)
+
+| Check | What | Severity Threshold |
+|-------|------|-------------------|
+| Stale docs (covers) | Doc has `covers:` frontmatter, covered code paths have commits newer than doc's `updated:` date | Code changed significantly = HIGH, minor changes = MEDIUM |
+| Stale docs (age) | Doc has `updated:` but no `covers:` — pure age check | >30 days = MEDIUM, >60 days = HIGH |
+| Missing freshness metadata | Doc in `docs/active/` or root artifact has no `updated:` field | Any = LOW |
+
+**How it works:** Docs declare which code paths they cover via `covers:` frontmatter. The check compares `git log --since <updated_date> -- <covered_paths>` to detect when code moved but docs didn't.
+
+**Example frontmatter:**
+```yaml
+---
+type: "design"
+updated: "2026-03-24"
+covers: ["src/api/", "src/models/", "config/"]
+---
+```
+
+**Which docs are checked:**
+- Root artifacts: `intent.md`, `brief.md` (from `docs/active/`), `design.md` (from `docs/active/`), `README.md`
+- All docs in `docs/active/` with `updated:` frontmatter
+- `AGENTS.md` and `CLAUDE.md` are excluded (instruction files, not project docs)
+
+Skip this category if no ADF project structure is detected.
+
 ## Stage Awareness
 
 Check categories vary by project stage:
 
 | Stage | Categories Run |
 |-------|---------------|
-| **Develop** | All 6 categories |
-| **Deliver** | Secrets, Deps, Docs (deployment readiness focus) |
-| **Design / Discover** | Secrets, Deps baseline only |
+| **Develop** | All 7 categories |
+| **Deliver** | Secrets, Deps, Docs, Doc Freshness (deployment readiness focus) |
+| **Design / Discover** | Secrets, Deps baseline, Doc Freshness |
 
-If no stage is detected (non-ADF project), run all 6 categories.
+If no stage is detected (non-ADF project), run all 7 categories (skip Doc Freshness if no ADF structure).
 
 ## Execution Order
 
@@ -153,6 +179,7 @@ Output a structured report with this format:
 | Secrets & Config | PASS | 0 | 0 | 0 | 0 |
 | Design Drift | SKIP | - | - | - | - |
 | Documentation Sync | PASS | 0 | 0 | 0 | 0 |
+| Doc Freshness | WARN | 0 | 1 | 0 | 0 |
 
 **Overall: WARN** (1 Critical, 1 High, 2 Medium, 1 Low)
 
@@ -235,6 +262,7 @@ When `--file-backlog` is set:
 - `/project-health --scope secrets` — secrets & config only
 - `/project-health --scope design-drift` — design drift only
 - `/project-health --scope docs` — documentation sync only
+- `/project-health --scope freshness` — doc freshness only
 
 **Severity scale:** Critical > High > Medium > Low
 

@@ -508,3 +508,88 @@ Exclude: `*.example`, `*.template`, `*.md`, `*.test.*`, test fixtures with obvio
 - LOW: Version mismatch in docs (misleading but not harmful)
 
 **Remediation:** Update version references to match current package version, or clarify that the version refers to something else (a dependency, a spec, etc.).
+
+---
+
+## 7. Doc Freshness
+
+> These checks run for ADF projects. They use frontmatter metadata to detect when documentation has fallen behind code changes.
+
+### 7.1 Stale Docs (covers-based)
+
+**What:** Docs with `covers:` frontmatter that haven't been updated since the code paths they cover changed. This is the highest-signal staleness check — it pairs specific docs to specific code and detects drift.
+
+**How:**
+
+1. Find all `.md` files in `docs/active/` and root artifacts (`intent.md`, `README.md`)
+2. For each file, parse YAML frontmatter for `updated:` and `covers:` fields
+3. If both exist, run:
+   ```bash
+   git log --oneline --since="<updated_date>" -- <covers_path_1> <covers_path_2> ...
+   ```
+4. Count the commits returned. This is the "drift distance."
+
+**Parse:** For each doc with `covers:`, report:
+- Doc name and `updated:` date
+- Covered paths
+- Number of commits to covered paths since last update
+- Most recent commit summary (first line of `git log`)
+
+**Severity:**
+- HIGH: >10 commits to covered paths since doc update (significant drift)
+- MEDIUM: 1-10 commits to covered paths since doc update (some drift)
+- PASS: 0 commits to covered paths (doc is current)
+
+**Remediation:** Review the commits to covered paths and update the doc to reflect current state. Update the `updated:` date in frontmatter after review. If the commits are trivial (formatting, comments), the doc may still be current — use judgment.
+
+**Example:**
+```
+[HIGH] design.md is stale
+  Updated: 2026-03-10
+  Covers: src/api/, src/models/, config/
+  Drift: 14 commits since last update
+  Latest: "refactor(api): switch from REST to GraphQL"
+  → design.md likely no longer reflects the API architecture
+```
+
+---
+
+### 7.2 Stale Docs (age-based)
+
+**What:** Docs with `updated:` but no `covers:` field — a fallback age check. Less precise than covers-based (no code path pairing) but still useful for catching neglected docs.
+
+**How:**
+
+1. Find all `.md` files in `docs/active/` and root artifacts with `updated:` frontmatter but no `covers:` field
+2. Calculate days since `updated:` date:
+   ```bash
+   # In the agent's context, compare updated date to today
+   ```
+
+**Parse:** Doc name, `updated:` date, days elapsed.
+
+**Severity:**
+- HIGH: >60 days since last update
+- MEDIUM: 30-60 days since last update
+- PASS: <30 days
+
+**Remediation:** Review the doc for accuracy. If still current, update the `updated:` date. If stale, revise content and update date. Consider adding `covers:` frontmatter to enable more precise tracking.
+
+---
+
+### 7.3 Missing Freshness Metadata
+
+**What:** Docs in `docs/active/` or root artifacts that have no `updated:` field at all. Without metadata, freshness can't be tracked.
+
+**How:**
+
+1. Find all `.md` files in `docs/active/` and root artifacts (`intent.md`, `README.md`, `BACKLOG.md`, `status.md`, `decisions.md`)
+2. Parse frontmatter — check for `updated:` field
+3. Exclude: `AGENTS.md`, `CLAUDE.md` (instruction files, not project docs), `.ctx/` (ephemeral)
+
+**Parse:** List of docs missing `updated:` in frontmatter.
+
+**Severity:**
+- LOW: Missing `updated:` field (can't track freshness, but not blocking)
+
+**Remediation:** Add YAML frontmatter with at minimum `updated: "YYYY-MM-DD"`. Optionally add `covers:` for code-paired tracking.

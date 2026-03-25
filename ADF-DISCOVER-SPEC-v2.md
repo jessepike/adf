@@ -25,7 +25,7 @@ Discover transforms a rough concept into a structured, reviewed Brief. The prima
 
 **Deliverables:**
 - `intent.md` — North Star (stable, universal)
-- `product-brief.md` — Detailed contract (evolves through review)
+- `brief.md` — Detailed contract (evolves through review)
 
 ---
 
@@ -60,7 +60,7 @@ What Discover produces:
 | Output | Description | Location |
 |--------|-------------|----------|
 | `intent.md` | Stable North Star — problem, outcome, why it matters | `/docs/intent.md` |
-| `product-brief.md` | Detailed contract with all required sections | `/docs/product-brief.md` |
+| `brief.md` | Detailed contract with all required sections | `/docs/brief.md` |
 
 Both artifacts must pass exit criteria before handoff to Design.
 
@@ -92,7 +92,7 @@ Both artifacts must pass exit criteria before handoff to Design.
 
 **Activities:**
 - Draft `intent.md` — distill to problem, outcome, why it matters
-- Draft `product-brief.md` — structure per Brief spec
+- Draft `brief.md` — structure per Brief spec
 - Assign project classification (type + modifiers)
 - Identify initial scope boundaries
 - Capture open questions
@@ -171,7 +171,7 @@ Per ADF-STAGES-SPEC.md:
 ### Discover-Specific Criteria
 
 - [ ] `intent.md` exists and passes Intent spec validation
-- [ ] `product-brief.md` exists with all required sections (core + type-specific)
+- [ ] `brief.md` exists with all required sections (core + type-specific)
 - [ ] Project classification assigned (type + modifiers)
 - [ ] Scope boundaries clear (in/out explicit)
 - [ ] Success criteria are verifiable (not vague)
@@ -184,7 +184,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
-   - **What was produced** — intent.md + product-brief.md summary
+   - **What was produced** — intent.md + brief.md summary
    - **Success criteria status** — from brief.md
    - **Known limitations / deferred items**
    - **Read order for next stage agent**
@@ -213,7 +213,7 @@ The agent working through Discover needs context on:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| product-brief.md | Discover stage | Working Brief |
+| brief.md | Discover stage | Working Brief |
 | ADF-DISCOVER-SPEC-v2.md | Discover stage (reference) | Stage workflow |
 | ADF-BRIEF-SPEC.md | Discover stage (reference) | Brief structure |
 | ADF-INTENT-SPEC.md | Discover stage (reference) | Intent structure |
@@ -266,7 +266,7 @@ Specs are reference documents — load on demand, not into every context.
 │         │                                                       │
 │         ▼                                                       │
 │  ┌──────────────────────────────────────┐                       │
-│  │  OUTPUTS: intent.md, product-brief.md │                      │
+│  │  OUTPUTS: intent.md, brief.md │                      │
 │  └──────────────────────────────────────┘                       │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
@@ -287,7 +287,7 @@ Discover may span multiple sessions. To maintain continuity:
 
 New session workflow:
 1. Agent reads CLAUDE.md (loads context map)
-2. Agent reads `product-brief.md` (gets Session State)
+2. Agent reads `brief.md` (gets Session State)
 3. Agent picks up where previous session left off
 4. At session end, agent updates Session State
 
@@ -295,7 +295,7 @@ New session workflow:
 
 ## Planning Artifacts Convention
 
-When Discover produces working artifacts beyond intent.md and product-brief.md (e.g., research notes, exploration logs), place them in `docs/active/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
+When Discover produces working artifacts beyond intent.md and brief.md (e.g., research notes, exploration logs), place them in `docs/active/` per ADF-FOLDER-STRUCTURE-SPEC.md. These are stage-scoped and archived at stage completion.
 
 ---
 

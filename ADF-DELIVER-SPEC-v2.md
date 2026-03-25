@@ -127,7 +127,7 @@ What enters the Deliver stage:
 | Documentation | Develop | README, API docs, usage guides |
 | Test suite | Develop | Automated tests (95%+ passing) |
 | `design.md` | Design | Technical specification (referenced for validation) |
-| `product-brief.md` | Discover | Contract — referenced for success criteria |
+| `brief.md` | Discover | Contract — referenced for success criteria |
 | `intent.md` | Discover | North Star — referenced throughout |
 | Project classification | Brief | Type + modifiers determine delivery approach |
 | ADF specs | Environment layer | Deliver spec, Project Types spec |
@@ -529,7 +529,7 @@ Create `docs/active/test-results.md` with:
 - [ ] No commented-out code blocks
 
 #### 8.2 Success Criteria Gate
-- [ ] Load product-brief.md → success criteria
+- [ ] Load brief.md → success criteria
 - [ ] Map each criterion to evidence (feature live, URL, test result)
 - [ ] Mark each: met / partial (with explanation) / not met (BLOCKS completion)
 - [ ] Document mapping in status.md
@@ -546,7 +546,7 @@ Update README or create `docs/ACCESS.md` with:
 - Who to contact for access issues
 
 #### 8.4 Artifact Lifecycle
-- Keep in `docs/`: intent.md, product-brief.md, design.md (cross-stage reference)
+- Keep in `docs/`: intent.md, brief.md, design.md (cross-stage reference)
 - Archive to `docs/archive/`: plan.md, BACKLOG.md, manifest.md, capabilities.md, test-results.md
 - Keep in project: deliverable, tests, documentation, deployment configs
 
@@ -607,7 +607,7 @@ Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
-- [ ] Alignment verified with intent.md and product-brief.md
+- [ ] Alignment verified with intent.md and brief.md
 - [ ] All work committed (atomic commits, no uncommitted changes)
 - [ ] Documentation appropriate to deliverable exists
 - [ ] Workspace cleanup complete (no transients, .gitignore current)
@@ -619,7 +619,7 @@ Per ADF-STAGES-SPEC.md:
 - [ ] Artifact deployed/distributed to target environment
 - [ ] Three-tier testing complete (automated + browser + manual)
 - [ ] Access documentation exists (URLs, credentials, instructions)
-- [ ] Success criteria from product-brief mapped to evidence (all met)
+- [ ] Success criteria from brief.md mapped to evidence (all met)
 - [ ] Rollback plan tested or documented
 
 ### Type-Specific Criteria
@@ -654,7 +654,7 @@ Per ADF-STAGES-SPEC.md:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| product-brief.md | Deliver stage | Success criteria reference |
+| brief.md | Deliver stage | Success criteria reference |
 | design.md | Deliver stage (validation) | Technical specification |
 | docs/active/plan.md | Deliver stage (after created) | Deployment guide |
 | BACKLOG.md | Deliver stage (after created) | Task tracking |

@@ -126,7 +126,7 @@ What enters the Develop stage:
 | `design.md` | Design | Primary input — technical specification (consumed) |
 | Supporting design docs | Design | architecture.md, data-model.md, etc. if >500 lines |
 | `intent.md` | Discover | North Star — referenced throughout |
-| `product-brief.md` | Discover | Contract — referenced for success criteria |
+| `brief.md` | Discover | Contract — referenced for success criteria |
 | Project classification | Brief | Type + modifiers determine deliverable shape |
 | ADF specs | Environment layer | Develop spec, testing requirements |
 
@@ -417,13 +417,13 @@ Not a full audit. A structured sanity check: "did we build what we designed?"
 - [ ] No commented-out code blocks
 
 #### 8.2 Success Criteria Gate
-- [ ] Load product-brief.md → success criteria
+- [ ] Load brief.md → success criteria
 - [ ] Map each criterion to evidence (code location, test result, feature)
 - [ ] Mark each: met / partial (with explanation) / not met (BLOCKS completion)
 - [ ] Document mapping in status.md
 
 #### 8.3 Artifact Lifecycle
-- Keep in `docs/`: intent.md, product-brief.md, design.md (cross-stage reference)
+- Keep in `docs/`: intent.md, brief.md, design.md (cross-stage reference)
 - Archive to `docs/archive/`: plan.md, BACKLOG.md, manifest.md, capabilities.md
 - Keep in project: deliverable, tests, documentation
 
@@ -488,7 +488,7 @@ Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
-- [ ] Alignment verified with intent.md and product-brief.md
+- [ ] Alignment verified with intent.md and brief.md
 - [ ] All work committed (atomic commits, no uncommitted changes)
 - [ ] Documentation appropriate to deliverable exists
 - [ ] Workspace cleanup complete (no transients, .gitignore current)

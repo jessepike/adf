@@ -52,7 +52,7 @@ What enters the Design stage:
 | Input | Source | Description |
 |-------|--------|-------------|
 | `intent.md` | Discover | North Star — loaded for alignment |
-| `product-brief.md` | Discover | Detailed contract — primary input, fully consumed |
+| `brief.md` | Discover | Detailed contract — primary input, fully consumed |
 | Project classification | Brief | Type + modifiers determine required outputs |
 | ADF specs | Environment layer | Design spec, Project Types spec |
 | Current state | `status.md` | Where we left off (if resuming) |
@@ -299,7 +299,7 @@ Per ADF-STAGES-SPEC.md:
 
 - [ ] Primary deliverable(s) exist with required content
 - [ ] No Critical or High issues open (post-review)
-- [ ] Alignment verified with intent.md and product-brief.md
+- [ ] Alignment verified with intent.md and brief.md
 - [ ] All work committed (atomic commits, no uncommitted changes)
 - [ ] Documentation appropriate to deliverable exists
 - [ ] Workspace cleanup complete (no transients, .gitignore current)
@@ -357,7 +357,7 @@ Per ADF-STAGES-SPEC.md Stage Boundary Handoff Protocol:
 1. Complete all exit criteria above
 2. Update status.md with structured handoff:
    - **What was produced** — design.md summary + key decisions
-   - **Success criteria status** — from product-brief.md
+   - **Success criteria status** — from brief.md
    - **Known limitations / deferred items**
    - **Read order for next stage agent**
 3. Commit with `chore(design): stage complete — {summary}`
@@ -385,7 +385,7 @@ The agent working through Design needs context on:
 | File | Load When | Purpose |
 |------|-----------|---------|
 | intent.md | Always | North Star |
-| product-brief.md | Design stage | Primary input — fully consumed |
+| brief.md | Design stage | Primary input — fully consumed |
 | design.md | Design stage (after created) | Working design spec |
 | ADF-DESIGN-SPEC-v2.md | Design stage (reference) | Stage workflow |
 | ADF-PROJECT-TYPES-SPEC.md | Design stage (reference) | Output requirements by type |

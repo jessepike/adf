@@ -34,7 +34,8 @@ Three-tier context model for agentic projects. First-class artifacts at root (al
 
 ```
 project-root/
-├── CLAUDE.md                     # Agent context + context map
+├── AGENTS.md                     # Shared instructions (all runtimes)
+├── CLAUDE.md                     # Claude wrapper (@AGENTS.md import + Claude-specific)
 ├── intent.md                     # North Star — immutable without permission
 ├── BACKLOG.md                    # Canonical work items
 ├── status.md                     # Current project state
@@ -51,7 +52,7 @@ project-root/
 └── .gitignore
 ```
 
-**Root artifacts (6):** Always visible. These are the project's vital signs.
+**Root artifacts (7):** Always visible. These are the project's vital signs.
 
 **docs/ (4 lifecycle folders):** Where all project documentation lives, organized by lifecycle state.
 
@@ -63,7 +64,8 @@ project-root/
 
 | File | Purpose | Who Writes | Protection |
 |------|---------|------------|------------|
-| `CLAUDE.md` | Agent context, context map, progressive disclosure index | Agent + Human | Agent-writable |
+| `AGENTS.md` | Shared project instructions for all runtimes (Claude, Codex, Gemini) | Human + Agent | Agent-writable |
+| `CLAUDE.md` | Claude-specific wrapper — `@AGENTS.md` import + context map | Agent + Human | Agent-writable |
 | `intent.md` | North Star — overarching intent and outcomes | Human only | **Immutable** — agents CANNOT modify without explicit permission |
 | `BACKLOG.md` | Canonical list of work items, priorities | Human + Agent | Agent-writable |
 | `status.md` | Current state — what's happening, what stage, blockers | Agent | Agent-writable |
@@ -104,8 +106,8 @@ When an agent needs to find or create a project document, it goes to `docs/activ
 ### What Lives Where
 
 **`docs/active/` (current work):**
-- `product-brief.md` — scope, success criteria, constraints
-- `technical-design.md` — architecture, component design
+- `brief.md` — scope, success criteria, constraints
+- `design.md` — architecture, component design
 - `implementation-plan.md` — how we're building it
 - `feature-*.md` — individual feature specs
 - `research-*.md` — active research/analysis
@@ -215,10 +217,10 @@ Example context map section in CLAUDE.md:
 
 **Document names describe WHAT, not WHICH STAGE.**
 
-- ✅ `product-brief.md` — describes what it is
+- ✅ `brief.md` — describes what it is
 - ❌ `discover-brief.md` — couples name to stage
-- ✅ `technical-design.md`
-- ❌ `design-technical-design.md`
+- ✅ `design.md` (splits to `design-architecture.md`, `design-frontend.md`, etc. at 500+ lines)
+- ❌ `design-stage-design.md`
 - ✅ `implementation-plan.md`
 - ❌ `develop-plan.md`
 
@@ -238,7 +240,7 @@ created: 2026-03-23
 | v1 | v2 | Change |
 |----|-----|--------|
 | `docs/intent.md` | `intent.md` (root) | Promoted to root — always visible |
-| `docs/brief.md` | `docs/active/product-brief.md` | Renamed, moved to lifecycle folder |
+| `docs/brief.md` | `docs/active/brief.md` | Renamed, moved to lifecycle folder |
 | `docs/status.md` | `status.md` (root) | Promoted to root |
 | `docs/tasks.md` | `BACKLOG.md` (root) | Renamed, promoted to root |
 | `docs/adf/` | `.ctx/` | Replaced — ephemeral scratch is now gitignored |
@@ -255,8 +257,8 @@ created: 2026-03-23
 
 ```bash
 # Base (all projects)
-mkdir -p .claude/rules docs/inbox docs/active docs/reference docs/archive .ctx/scratch
-touch CLAUDE.md intent.md BACKLOG.md status.md decisions.md README.md .gitignore
+mkdir -p .claude/rules docs/inbox docs/active docs/reference docs/archive .ctx/scratch .ctx/plans .ctx/research
+touch AGENTS.md CLAUDE.md intent.md BACKLOG.md status.md decisions.md README.md .gitignore
 
 # Add to .gitignore
 echo ".ctx/" >> .gitignore
